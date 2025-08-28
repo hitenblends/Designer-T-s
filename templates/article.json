@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "featured-image": {
+      "type": "main-article-featured-image",
+      "disabled": true,
+      "settings": {
+        "style": "full",
+        "height": "pt-two-thirds-screen-height",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "b03f3dc7-1919-454d-8e22-773167ada359": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "quaternary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "b03f3dc7-1919-454d-8e22-773167ada359"
+      ],
+      "custom_css": [
+        "#s-f0585317-4f58-4846-b08f-ad2da3fd55a9 {padding-left: 0; padding-right: 0;}",
+        ".related-articles img {border-radius: 10px !important;}",
+        ".shg-box {padding-left: 10px !important; padding-right: 10px !important;}"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "show_image": true,
+        "show_author": false,
+        "show_date": true,
+        "show_share_links": false,
+        "show_tags": false,
+        "show_next_previous_links": false,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "featured-image",
+    "main"
+  ]
+}

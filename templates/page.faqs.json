@@ -1,0 +1,122 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "faq_DiBMEk": {
+      "type": "faq",
+      "blocks": {
+        "question_ftrWM6": {
+          "type": "question",
+          "settings": {
+            "question": "What type of design files or art do you need?",
+            "answer": "<p>We accept high-resolution files in the following formats: AI, EPS, PDF, and PSD.</p>"
+          }
+        },
+        "question_KYAjyp": {
+          "type": "question",
+          "settings": {
+            "question": "What is the cost to create a design or get my logo ready for printing?",
+            "answer": "<p>Design services range from $50 to $250, depending on complexity and requirements.</p>"
+          }
+        },
+        "question_Ey4VCB": {
+          "type": "question",
+          "settings": {
+            "question": "What products do you offer?",
+            "answer": "<p>We offer a wide range of products including apparel (t-shirts, hoodies, polos, hats) and promotional items (coolers, water bottles, koozies, key chains, bags, and more).</p>"
+          }
+        },
+        "question_44m8Kr": {
+          "type": "question",
+          "settings": {
+            "question": "Do you have accessories or just apparel?",
+            "answer": "<p>We carry promotional items and accessories in addition to apparel.</p>"
+          }
+        },
+        "question_4d6eUm": {
+          "type": "question",
+          "settings": {
+            "question": "What brands do you have access to?",
+            "answer": "<p>We partner with premium brands including Nike, Adidas, Peter Millar, Gildan, and many more. Check out our complete selection on our <a href=\"/pages/apparel-promotional-brand-partners\" title=\"Apparel & Promotional Brand Partners\">brands page</a>.</p>"
+          }
+        },
+        "question_faMdwC": {
+          "type": "question",
+          "settings": {
+            "question": "Is Designer T's a PSST partner with any major suppliers?",
+            "answer": "<p>Yes, Designer T's is an Exclusive Decorator for Sanmar via the PSST Program & SS activewear as part of their contract Decorator network. Offering Freight benefits to all mutual Customers. <br/><strong>SAGE Distributor #:</strong>224767<br/><strong>PPAI Distributor #:</strong>712511<br/><strong>Sage Deco #:</strong>53416</p>"
+          }
+        },
+        "question_zgFRei": {
+          "type": "question",
+          "settings": {
+            "question": "Can I bring in my own apparel to be decorated?",
+            "answer": "<p>For approved customers, Yes, we're happy to decorate items you provide.</p>"
+          }
+        },
+        "question_LcpjcP": {
+          "type": "question",
+          "settings": {
+            "question": "What do you need to provide a quote?",
+            "answer": "<p>To provide an accurate quote, we need:</p><ul><li>Your contact information</li><li>Order details (garment or promotional item type)</li><li>Brand & style preferences</li><li>Color and size requirements</li><li>Decoration details</li></ul><p>Our simple quote form includes all the fields to get you started quickly.</p>"
+          }
+        },
+        "question_ntXgyG": {
+          "type": "question",
+          "settings": {
+            "question": "What is the minimum order?",
+            "answer": "<p>DTF (1 unit), Screen Printing (12 units), Embroidery (24 units)</p>"
+          }
+        },
+        "question_9pBCLN": {
+          "type": "question",
+          "settings": {
+            "question": "What is the turnaround time?",
+            "answer": "<p>We're known for our fast turnaround times—typically 7 days from production approval. We also accommodate rush orders, so please reach out if you have tight deadlines. We offer both shipping and pickup options from our facility in Brooklawn, NJ.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_ftrWM6",
+        "question_KYAjyp",
+        "question_Ey4VCB",
+        "question_44m8Kr",
+        "question_4d6eUm",
+        "question_faMdwC",
+        "question_zgFRei",
+        "question_LcpjcP",
+        "question_ntXgyG",
+        "question_9pBCLN"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "heading_text_style": "body",
+        "two_columns_desktop": false,
+        "title": "FAQ",
+        "richtext": "",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_DiBMEk"
+  ]
+}

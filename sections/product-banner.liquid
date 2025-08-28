@@ -1,0 +1,469 @@
+{% liquid
+    assign style = section.settings.style
+    assign height = section.settings.height
+    if height == 'natural'
+        assign crop = 'object-wrapper-none'
+    else
+        assign crop = 'object-wrapper banner-section-content--pt ' | append: height
+    endif
+
+    assign product_metafields = product.metafields.funday
+
+    if product_metafields.product_banner != blank
+        assign product_image = product_metafields.product_banner.value
+    else
+        assign product_image = ''
+    endif
+
+    assign product_mobile_image = product_image
+    if product_metafields.mobile_banner != blank
+      assign product_mobile_image = product_metafields.mobile_banner.value
+    endif
+
+    if section.settings.cta_text
+        assign cta_text = section.settings.cta_text
+    else
+        assign cta_text = 'shop now'
+    endif
+
+    assign product_main_collection = product_metafields.primary_collection.value
+    if product_main_collection == blank
+        for collection in product.collections
+            if collection.title != 'All' or collection.title != 'all'
+                assign product_main_collection = collection
+                break
+            endif
+        endfor
+    endif
+
+    assign richtext = 'Shop now!'
+    if product_main_collection
+        assign richtext = 'Shop our ' | append: product_main_collection.title | append: '!'
+    endif
+%}
+
+{% if product_image != blank %}
+    <section
+            class="product-banner text-scheme-text bg-scheme-background overflow-hidden {% unless style == 'inset' %}full-bleed-section{% endunless %}"
+            data-color-scheme="{{ section.settings.color_scheme }}"
+    >
+
+        <div class="section-content  {% if style == 'inset' %}py-section-vertical-spacing{% endif %}">
+            {% render 'image-with-text-overlay',
+                    image: product_image,
+                    image_mobile: product_mobile_image,
+                    place_content: section.settings.place_content,
+                    text_align: section.settings.text_align,
+                    color_scheme: section.settings.color_scheme,
+                    text_overlay_color: section.settings.text_overlay_color,
+                    title: section.settings.title,
+                    richtext: richtext,
+                    richtext_as_heading: true,
+                    hide_headings_on_mobile: true,
+                    cta_url: '#',
+                    cta_text: cta_text,
+                    style: style,
+                    crop: crop,
+                    slideshow_height: height,
+                    display_content_below_image_on_mobile: false,
+                    heading_size: section.settings.heading_size
+            %}
+        </div>
+    </section>
+{% endif %}
+{%- liquid
+    assign shape_dividers = section.blocks | where: "type", "shape_divider"
+    assign no_padding = true
+    if style == 'inset'
+        assign no_padding = false
+    endif
+
+    for shape_divider in shape_dividers
+        render 'block-shape-divider' with block: shape_divider, section: section, no_padding: no_padding
+    endfor
+-%}
+
+{% schema %}
+{
+  "name": "Product Banner",
+  "class": "banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:common.settings.header_layout"
+    },
+    {
+      "type": "radio",
+      "id": "style",
+      "label": "t:common.settings.style.label",
+      "default": "full",
+      "options": [
+        {
+          "value": "inset",
+          "label": "t:common.options.inset.label"
+        },
+        {
+          "value": "full",
+          "label": "t:common.options.full_width.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "t:sections.image_with_text_overlay.settings.height.label",
+      "options": [
+        {
+          "value": "natural",
+          "label": "t:common.options.natural.label"
+        },
+        {
+          "value": "pt-screen-height",
+          "label": "t:common.options.screen_height.label"
+        },
+        {
+          "value": "pt-three-quarters-screen-height",
+          "label": "t:common.options.three_quarters_screen_height.label"
+        },
+        {
+          "value": "pt-two-thirds-screen-height",
+          "label": "t:common.options.two_thirds_screen_height.label"
+        },
+        {
+          "value": "pt-half-screen-height",
+          "label": "t:common.options.half_screen_height.label"
+        },
+        {
+          "value": "pt-600",
+          "label": "t:common.options.600px.label"
+        },
+        {
+          "value": "pt-700",
+          "label": "t:common.options.700px.label"
+        },
+        {
+          "value": "pt-800",
+          "label": "t:common.options.800px.label"
+        }
+      ],
+      "default": "natural"
+    },
+    {
+      "type": "select",
+      "id": "place_content",
+      "label": "t:common.settings.place_content.label",
+      "options": [
+        {
+          "value": "place-content-start-start",
+          "label": "t:common.options.top_left.label"
+        },
+        {
+          "value": "place-content-start-center",
+          "label": "t:common.options.top_center.label"
+        },
+        {
+          "value": "place-content-start-end",
+          "label": "t:common.options.top_right.label"
+        },
+        {
+          "value": "place-content-center-start",
+          "label": "t:common.options.middle_left.label"
+        },
+        {
+          "value": "place-content-center-center",
+          "label": "t:common.options.middle_center.label"
+        },
+        {
+          "value": "place-content-center-end",
+          "label": "t:common.options.middle_right.label"
+        },
+        {
+          "value": "place-content-end-start",
+          "label": "t:common.options.bottom_left.label"
+        },
+        {
+          "value": "place-content-end-center",
+          "label": "t:common.options.bottom_center.label"
+        },
+        {
+          "value": "place-content-end-end",
+          "label": "t:common.options.bottom_right.label"
+        }
+      ],
+      "default": "place-content-center-center"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:common.settings.text_align.label",
+      "options": [
+        {
+          "value": "text-left",
+          "label": "t:common.options.left.label"
+        },
+        {
+          "value": "text-center",
+          "label": "t:common.options.center.label"
+        },
+        {
+          "value": "text-right",
+          "label": "t:common.options.right.label"
+        }
+      ],
+      "default": "text-center"
+    },
+    {
+      "type": "header",
+      "content": "t:common.settings.header_content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.image_with_text_overlay.settings.title.label",
+      "default": "Image with text overlay"
+    },
+    {
+      "type": "radio",
+      "id": "heading_size",
+      "label": "t:common.settings.heading_size.label",
+      "options": [
+        {
+          "value": "heading-standard",
+          "label": "t:common.options.standard.label"
+        },
+        {
+          "value": "heading-feature",
+          "label": "t:common.options.feature.label"
+        }
+      ],
+      "default": "heading-standard"
+    },
+    {
+      "type": "richtext",
+      "id": "richtext",
+      "label": "t:common.settings.richtext.label"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "t:common.settings.cta_url.label"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "t:common.settings.cta_text.label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "header",
+      "content": "t:common.settings.header_color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.settings.color_scheme.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_overlay_color",
+      "label": "t:common.settings.text_overlay_color.label",
+      "default": "same_as_section",
+      "options": [
+        {
+          "value": "same_as_section",
+          "label": "t:common.options.follow_color_scheme.label"
+        },
+        {
+          "value": "white",
+          "label": "t:common.options.white.label"
+        },
+        {
+          "value": "black",
+          "label": "t:common.options.black.label"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:common.blocks.shape_divider.name",
+      "type": "shape_divider",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "radio",
+          "label": "t:common.blocks.shape_divider.settings.target_section.label",
+          "id": "target_section",
+          "default": "above",
+          "options": [
+            {
+              "value": "above",
+              "label": "t:common.blocks.shape_divider.settings.target_section.options.section_above.label"
+            },
+            {
+              "value": "below",
+              "label": "t:common.blocks.shape_divider.settings.target_section.options.section_below.label"
+            }
+          ],
+          "info": "t:common.blocks.shape_divider.settings.target_section.info"
+        },
+        {
+          "type": "select",
+          "label": "t:common.blocks.shape_divider.settings.target_section_color_scheme.label",
+          "id": "target_section_color_scheme",
+          "default": "secondary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:common.options.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:common.options.secondary.label"
+            },
+            {
+              "value": "tertiary",
+              "label": "t:common.options.tertiary.label"
+            },
+            {
+              "value": "quaternary",
+              "label": "t:common.options.quaternary.label"
+            }
+          ],
+          "info": "t:common.blocks.shape_divider.settings.target_section_color_scheme.info"
+        },
+        {
+          "type": "select",
+          "label": "t:common.blocks.shape_divider.settings.style.label",
+          "id": "style",
+          "default": "large-waves_1200x84",
+          "options": [
+            {
+              "value": "large-waves_1200x84",
+              "label": "t:common.blocks.shape_divider.settings.style.options.large_waves.label",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "medium-waves_1200x43",
+              "label": "t:common.blocks.shape_divider.settings.style.options.medium_waves.label",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "small-waves_1200x20",
+              "label": "t:common.blocks.shape_divider.settings.style.options.small_waves.label",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "large-zig-zag_1200x65",
+              "label": "t:common.blocks.shape_divider.settings.style.options.large_zig_zag.label",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "medium-zig-zag_1200x37",
+              "label": "t:common.blocks.shape_divider.settings.style.options.medium_zig_zag.label",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "small-zig-zag_1200x21",
+              "label": "t:common.blocks.shape_divider.settings.style.options.small_zig_zag.label",
+              "group": "Symmetrical"
+            },
+            {
+              "value": "waves-1-asymmetrical_1440x261",
+              "label": "t:common.blocks.shape_divider.settings.style.options.waves_1.label",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "waves-2-asymmetrical_1440x330",
+              "label": "t:common.blocks.shape_divider.settings.style.options.waves_2.label",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "tilt-1-asymmetrical_1440x101",
+              "label": "t:common.blocks.shape_divider.settings.style.options.tilt_1.label",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "tilt-2-asymmetrical_1440x293",
+              "label": "t:common.blocks.shape_divider.settings.style.options.tilt_2.label",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "mountains-1-asymmetrical_1440x293",
+              "label": "t:common.blocks.shape_divider.settings.style.options.mountains_1.label",
+              "group": "Asymmetrical"
+            },
+            {
+              "value": "mountains-2-asymmetrical_1440x325",
+              "label": "t:common.blocks.shape_divider.settings.style.options.mountains_2.label",
+              "group": "Asymmetrical"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "flip_horizontal",
+          "label": "t:common.blocks.shape_divider.settings.flip_horizontal.label"
+        },
+        {
+          "type": "header",
+          "content": "t:common.settings.header_animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_animation",
+          "label": "t:common.blocks.shape_divider.settings.enable_animation.label",
+          "info": "t:common.blocks.shape_divider.settings.enable_animation.info"
+        },
+        {
+          "type": "radio",
+          "id": "animation_direction",
+          "label": "t:common.blocks.shape_divider.settings.animation_direction.label",
+          "options": [
+            {
+              "value": "",
+              "label": "t:common.options.right_to_left.label"
+            },
+            {
+              "value": "reverse",
+              "label": "t:common.options.left_to_right.label"
+            }
+          ],
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product banner",
+      "category": "ADVANCED LAYOUT"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "aside"
+    ]
+  }
+}
+{% endschema %}

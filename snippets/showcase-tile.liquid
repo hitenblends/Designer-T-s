@@ -1,0 +1,18 @@
+<div>
+  <a class="collection-subnav-shop" href="{{ object.url }}">
+    <div class="rectangle-container">
+      {%- if object.featured_image != blank -%}
+        <div class="{% unless crop == '' or crop == blank %}object-wrapper {{ crop }}{% endunless %}">
+          {{ object.featured_image | image_url: width: 700 | image_tag: class: 'media-style' }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="mt-2 text-center">
+        {% if title != blank %}
+            {{ title }}
+        {% else %}
+            {{ object.title }}
+        {% endif %}
+    </div>
+  </a>
+</div>

@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div.main-blog",
+  "sections": {
+    "3c57243a-237a-408d-83d1-29f7feaa1909": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        "h2 {padding-bottom: 5rem !important;}",
+        ".handsugar-block {height: 100% !important;}",
+        "@media (max-width: 768px) {h2 {padding-bottom: -30% !important; font-size: 28px !important; }}",
+        ".lg\\:bg-transparent.h-full {background-color: #b77fb4;}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Group_181_39cf773c-239a-41ab-8e0a-fe4fa8817330.png",
+        "image_mobile": "shopify:\/\/shop_images\/Group_182_38bd6ec7-236a-43bc-9dc8-c66dd4f3b491.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "natural",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Lolly literature",
+        "heading_size": "heading-standard",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "blocks": {
+        "de3a23be-6e4a-4ed5-85b8-c3b4b51703d0": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "quaternary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "de3a23be-6e4a-4ed5-85b8-c3b4b51703d0"
+      ],
+      "custom_css": [
+        ".custom-blog.card {border-color: #ffffff !important;}",
+        ".py-section-vertical-spacing {background-color: #b77fb4; padding-bottom: 2%; padding-top: 2%;}",
+        "section.text-scheme-text.bg-scheme-background {background-color: #b77fb4;}",
+        "section > div.py-section-vertical-spacing {padding-top: 0;}",
+        "ul li {height: auto; display: flex;}",
+        "h2 {margin-top: 20px !important;}",
+        ".text-base {color: gray !important;}",
+        ".datetime {color:gray;}"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "show_blog_title": false,
+        "show_tags": false,
+        "crop": "aspect-w-4 aspect-h-3",
+        "image_shape": "default",
+        "blog_show_author": false,
+        "blog_show_date": true,
+        "show_post_excerpt": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "3c57243a-237a-408d-83d1-29f7feaa1909",
+    "main"
+  ]
+}

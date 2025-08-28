@@ -1,0 +1,23 @@
+<div>
+  <a class="page-subnav-learn" href="{{ object.url }}">
+    <div class="rectangle-container">
+      {%- if object.url=="/blogs/news" %}
+        <div class=" image-wrap-slide">
+        {% assign image = images['blog-image.png'] %}
+        {{ image | image_url: width: 700 | image_tag: class: 'media-style' }}
+        </div>
+    {%- elsif object.metafields.custom.featured_image != blank -%}
+      <div class="{% unless crop == '' or crop == blank %}object-wrapper {{ crop }}{% endunless %} image-wrap-slide">
+        {{ object.metafields.custom.featured_image | image_url: width: 700 | image_tag: class: 'media-style' }}
+      </div>
+    {%- endif -%}
+    </div>
+    <div class="mt-2 text-center">
+        {% if title != blank %}
+            {{ title }}
+        {% else %}
+            {{ object.title }}
+        {% endif %}
+    </div>
+  </a>
+</div>

@@ -1,0 +1,354 @@
+.keepintouchpara {
+    padding-top: 0.4rem;
+    padding-bottom: 0.7rem;
+}
+
+.main-collection-banner-image img {
+  object-fit:cover;
+
+}
+
+#menu1 .subnav-shopall-btn {
+  display:none;
+}
+
+footer div.section-content {
+  max-width:1450px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 991px) {
+  .sidebar-nav {
+    padding-top: 60px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+  .sidebar-nav button.block {
+    display: flex;
+    background: black; /* width: 10.769px; */ /* height: 10.769px; */
+    padding: 18px;
+    border-radius: 100%;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-nav button.block svg {
+    /* width: 10.769px; */
+    color: white;
+    /* height: 10.769px; */
+  }
+
+  .sidebar-nav button.block span {
+    width: 10px;
+    height: 10px;
+  }
+ .sidebar-nav .relative.flex.items-center.justify-between.pb-5 {
+    padding: 0 18px;
+  }
+  .sidebar-nav
+    button.w-full.flex.flex-row.justify-between.items-center.font-heading.py-2\.5.text-left,
+  .sidebar-nav .mt-5.space-y-5,
+  .sidebar-nav a.block.font-heading.py-2\.5,
+  .sidebar-nav .relative.flex.items-center.justify-between.pb-5 {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+ .sidebar-nav .mt-5.space-y-5 {
+    margin-top: 17px;
+  }
+ .sidebar-nav button.w-full.flex.flex-row.justify-between.items-center.font-heading.py-2\.5.text-left
+    span,
+ .sidebar-nav a.block.font-heading.py-2\.5, ul.space-y-1\.5 a {
+    color: #000;
+    /* font-family: Sofia Pro; */
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 128%; /* 25.6px */
+    letter-spacing: -0.4px;
+  }
+
+ .sidebar-nav a.block.font-heading.py-2\.5 {
+  }
+
+ .sidebar-nav .mt-5.space-y-5 {
+    margin-top: 17px;
+  }
+  
+.sidebar-navspan.inline-block.w-5.h-5.mr-4 {
+  width: 47px;
+  height: 48px;
+  background-color: transparent !important;
+  background: url("https://cdn.shopify.com/s/files/1/0525/8287/5332/files/Vector_24.png?v=1694064487");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-navspan.inline-block.w-5.h-5.mr-4 svg {
+  width: 36px;
+  height: 36px;
+  mix-blend-mode: darken;
+}
+
+.sidebar-navul.flex.flex-wrap.-mx-2.-mt-2.justify-start {
+     margin-top: auto;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.sidebar-nav button.w-full.flex.flex-row.justify-between.items-center.font-heading.py-2\.5.text-left, .sidebar-nav .mt-5.space-y-5, .sidebar-nav a.block.font-heading.py-2\.5, .sidebar-nav .relative.flex.items-center.justify-between.pb-5, .sidebar-nav ul.mb-5.nav-item.grid.gap-5.grid-cols-1 {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.sidebar-navli.text-base.mobile-subnav a {
+  color: #000;
+  /* font-family: Sofia Pro; */
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 167.5%;
+  letter-spacing: -0.36px;
+}
+ .sidebar-nav ul.mb-5.nav-item.grid.gap-5.grid-cols-1 {
+    gap: 5px;
+}
+.sidebar-nav  li.my-3.text-base.mobile-subnav {
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+.sidebar-nav  li.mx-2.mt-2 {
+    border-bottom: 0 !important;
+}
+}
+
+div.slider-rectangle-contaier1 {
+  position: relative !important;
+  width: 100% !important;
+  /* Set the aspect ratio here (e.g., 4:3 or 16:9) */
+  padding-top: 120% !important; /* 4:3 aspect ratio (75% = 3/4) */
+  overflow: hidden !important;
+}
+
+div#shopify-section-template--15938786459844__product-grid .active-filters {
+  padding-bottom: 1.5rem;
+}
+
+#facets-results .aspect-h-4 {
+    --tw-aspect-h: 0;
+}
+
+.drawer-transition-host li a, .drawer-transition-host li button span, .drawer-transition-host li #customer_login_link, .drawer-transition-host li customer_register_link {
+  font-family: 'sofia-pro';
+}
+
+.yotpo a.text-m {
+  font-size:1rem;
+  font-family:'sofia-pro';
+}
+
+#shopify-section-template--15938786754756__165089147572b58f85 .yotpo a.text-m, .yotpo a.text-m {
+  margin-left:0.5rem;
+}
+
+.yotpo .yotpo-bottomline .yotpo-icon-star, .yotpo.bottomLine .yotpo-bottomline .yotpo-icon-star {
+  color: #F2AB38;
+}
+
+#shopify-section-template--15938786754756__165089147572b58f85 img {
+  object-position: top;
+}
+
+.yotpo.bottomLine .yotpo-bottomline span.yotpo-icon-star {
+  font-size:20px;
+}
+
+.yotpo-stars .rating-star {
+  margin-right:1px;
+}
+
+div.slider-rectangle-contaier1 img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Ensures the image covers the entire container */
+}
+
+#shopify-section-template--15938786754756__1650891358fef95dd4 .yotpo .standalone-bottomline.star-clickable, .yotpo .standalone-bottomline .star-clickable{
+  display:inline;
+}
+
+.yotpo .text-m {
+  color:black !important;
+}
+
+
+
+#shopify-section-template--15938786754756__1650891358fef95dd4 .yotpo div {
+  text-align:center; margin: 0 auto;
+} 
+
+#shopify-section-template--15938786754756__1650891358fef95dd4 .yotpo .pull-left {
+  float:none;
+}
+
+#shopify-section-template--15938786754756__1650891358fef95dd4 .slider-moving h3.font-body.text-base, #shopify-section-template--15938786459844__product-grid h3.font-body.text-base {
+  font-weight:500;
+  margin: .5rem 0 .2rem 0;
+}
+
+@media (min-width: 990px) {
+   #shopify-section-template--15938786754756__1650891358fef95dd4 .slider-moving .media-style-container, #shopify-section-template--15938786754756__1650891358fef95dd4 .slider-moving .media-style-container img {
+      min-height: auto;
+  }
+}
+
+/* added  by Ashish  start*/
+
+a > span {
+  padding: 15px 30px !important;
+}
+#shop-our-range-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+@media (min-width: 480px) {
+  #shop-our-range-wrapper {
+    flex-direction: row;
+    justify-content: start;
+  }
+}
+.yotpo div {
+  margin: 0 !important;
+}
+.yotpo-display-wrapper .standalone-bottomline {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: 10px;
+  flex-wrap: wrap;
+}
+.collectionlist-block {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.mobile-filter-form {
+  margin-bottom: 20px;
+}
+.fill-FFDA8C svg path:first-child {
+  fill: #ffda8c;
+}
+.product-tile h3 {
+  padding-block: 5px;
+}
+
+.shopify-section-template--15938786918596__1692020174ea02361c{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .product-tile h3 {
+    font-size: 18px !important;
+  }
+}
+.main-widget.yotpo-display-wrapper {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+.yotpo.yotpo-main-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-card-title {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.icon-list-subscribe-section {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  margin-block: 30px;
+}
+
+.main-collection-banner-text{
+   font-size: 28px; 
+}
+
+.main-collection-banner-text-wrapper{
+  padding-top: 115px;
+}
+
+@media (min-width: 480px) {
+  .icon-list-subscribe-section {
+    gap: 40px;
+  }
+  .collection-description {
+    font-size: 18px;
+  }
+  .main-collection-banner-text{
+   font-size: 50px; 
+  }
+  .main-collection-banner-text-wrapper{
+  padding-top: 260px;
+  }
+}
+
+@media (min-width: 999px){
+ .main-collection-banner-text-wrapper{
+  padding-top: 0;
+  align-items: center;
+}
+}
+
+.icon-list-subscribe-section > div {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.active-collection-type {
+  background-color: black;
+  color: white;
+}
+
+.collection-description {
+  font-size: 16px;
+}
+
+#collection-container {
+  padding-top: 0 !important;
+}
+
+#select-mobile-filters{
+  width: 100%;
+  padding: 25px 40px;
+}
+
+.px-10{
+  padding-inline: 10px;
+}
+/* added by Ashish end  */

@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": false,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "6ed13e32-0c4d-4651-9c07-1b87583ec795": {
+      "type": "rich-text",
+      "blocks": {
+        "ba367861-8937-4dc8-bde7-42f4047a3404": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "primary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "ba367861-8937-4dc8-bde7-42f4047a3404"
+      ],
+      "custom_css": [
+
+      ],
+      "settings": {
+        "title": "{{ page.title }}",
+        "heading_size": "heading-feature",
+        "rich_text": "",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-2\/3",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "tertiary",
+        "background_override": "#f7bcab",
+        "use_gradient_background": false
+      }
+    },
+    "868c0b0b-8083-40fc-88c4-e6fe96e848de": {
+      "type": "page-policy",
+      "blocks": {
+        "e4f5b43d-c96c-4306-8191-38ccccb38a90": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "quaternary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "e4f5b43d-c96c-4306-8191-38ccccb38a90"
+      ],
+      "settings": {
+        "show_side": true,
+        "side_title": "Have a question?",
+        "side_text": "hello@fundaysweets.com",
+        "side_image": "shopify:\/\/shop_images\/subscription_benefits_2_5.png"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "6ed13e32-0c4d-4651-9c07-1b87583ec795",
+    "868c0b0b-8083-40fc-88c4-e6fe96e848de"
+  ]
+}

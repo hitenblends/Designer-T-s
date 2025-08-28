@@ -1,0 +1,46 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "dtf_vs_screen_printing_calculator_PMTcmr": {
+      "type": "dtf-vs-screen-printing-calculator",
+      "blocks": {
+        "variant_picker_XBAj3c": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_mode": "block",
+            "color_mode": "color",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector_gKtfJW": {
+          "type": "quantity_selector",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "variant_picker_XBAj3c",
+        "quantity_selector_gKtfJW"
+      ],
+      "name": "Calculator",
+      "settings": {
+        "product": "order-by-size-and-quantity-variants",
+        "image": "shopify://shop_images/Screen-Printing.webp",
+        "heading": "Difference in Price Between DTF and Screen Printing",
+        "text": "<p>DTF printing offers a cost-effective and high-quality alternative to traditional screen printing, particularly for detailed and multicolor designs. Click Peel's DTF transfers, priced at just $0.03 per square inch, provide a more affordable solution compared to screen printing, which often involves high setup costs, especially for complex designs requiring multiple screens.</p>"
+      }
+    }
+  },
+  "order": [
+    "dtf_vs_screen_printing_calculator_PMTcmr"
+  ]
+}

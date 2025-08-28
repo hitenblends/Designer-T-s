@@ -1,0 +1,380 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_overlay_Gyd68x": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_367005237.jpg",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "style": "inset",
+        "height": "pt-half-screen-height",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "EMBROIDERY SERVICES",
+        "heading_size": "heading-feature",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "text_columns_with_images_8QLKUE": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "column_PABNh3": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/AdobeStock_246987969.jpg",
+            "title": "Apparel",
+            "text": "<p>Elevate polos, shirts, jackets, and more with exquisite embroidered logos, monograms, and custom designs.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_cnN6wC": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/AdobeStock_1108966511.jpg",
+            "title": "Uniforms & Workwear",
+            "text": "<p>Create professional and long-lasting uniforms for your team with custom embroidered logos, names, and badges.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_JLUxTU": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/AdobeStock_246987969.jpg",
+            "title": "Corporate Apparel",
+            "text": "<p>Enhance your corporate identity with high-quality embroidered logos on employee apparel.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_dfUVB3": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/AdobeStock_367005237.jpg",
+            "title": "Accessories",
+            "text": "<p>Add a touch of luxury to hats, caps, bags, and other accessories with custom embroidery.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "column_PABNh3",
+        "column_cnN6wC",
+        "column_JLUxTU",
+        "column_dfUVB3"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "slideshow_on_mobile": false,
+        "title": "Applications",
+        "crop": "",
+        "image_shape": "blob",
+        "show_index_on_blocks": true,
+        "index_shape": "star_1",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_JJYAid": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Where Art Meets Apparel",
+        "heading_size": "heading-feature",
+        "rich_text": "<p>At Designer T's, we elevate embroidery to an art form, transforming your brand into a masterpiece. Our skilled artisans utilize state-of-the-art embroidery machines and the finest quality threads to create stunning, long-lasting designs that will leave a lasting impression.</p><p>We understand that every stitch matters. Our experienced embroiderers possess a keen eye for detail and a passion for perfection, ensuring that each design is meticulously crafted to your exact specifications.<br/><br/><strong>Why Choose Designer T's for Embroidery?<br/><br/>Unmatched Craftsmanship:</strong> Our skilled artisans possess years of experience and a deep understanding of embroidery techniques.<br/><br/><strong>Premium Quality:</strong> We utilize only the finest quality threads, ensuring vibrant colors, exceptional durability, and a luxurious feel.<br/><br/><strong>Intricate Designs:</strong> From intricate logos and monograms to complex, multi-layered designs, we can bring your vision to life with stunning detail.<br/><br/><strong>Wide Range of Applications:</strong> Our embroidery services are perfect for a wide range of applications, including apparel, accessories, and promotional items.</p>",
+        "display_on_card": true,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "primary",
+        "background_override": "rgba(0,0,0,0)",
+        "use_gradient_background": false
+      }
+    },
+    "shape_slideshow_hXUhY9": {
+      "type": "shape-slideshow",
+      "blocks": {
+        "image_Vnmdj9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_367005237_6c87524e-2900-4e8d-b261-d6e9b1373fec.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_4zjwKU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_307451527.jpg",
+            "image_shape": "diamond",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_9L86QK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_1108966511.jpg",
+            "image_shape": "hexagon",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_e8meJ7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_483908319.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_xzW66J": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_552139015.jpg",
+            "image_shape": "zig_zag_tear",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_dMeFVa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_246987969.jpg",
+            "image_shape": "parallelogram",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "shape_divider_wpgPRt": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "secondary",
+            "style": "small-waves_1200x20",
+            "flip_horizontal": false,
+            "enable_animation": true,
+            "animation_direction": ""
+          }
+        },
+        "shape_divider_GpBKGj": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "secondary",
+            "style": "small-waves_1200x20",
+            "flip_horizontal": true,
+            "enable_animation": true,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_Vnmdj9",
+        "image_4zjwKU",
+        "image_9L86QK",
+        "image_e8meJ7",
+        "image_xzW66J",
+        "image_dMeFVa",
+        "shape_divider_wpgPRt",
+        "shape_divider_GpBKGj"
+      ],
+      "custom_css": [
+        ".splide__arrows.flex.justify-between.items-center.mt-5.px-section.splide__arrows--ltr {display: none;}"
+      ],
+      "settings": {
+        "title": "",
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 15,
+        "autoscroll_mode": "1",
+        "crop": "aspect-w-4 aspect-h-3",
+        "button_style": "push-btn-surface",
+        "show_buttons_on_mobile": false,
+        "only_show_button_on_hover": true,
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "hero_slideshow_d9gNnF": {
+      "type": "hero-slideshow",
+      "blocks": {
+        "slide_3gpqAQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/em1.jpg",
+            "title": "",
+            "richtext": "",
+            "cta_url": "",
+            "cta_text": "Shop Now",
+            "place_content": "inherit",
+            "text_align": "inherit",
+            "text_overlay_color": "same_as_section"
+          }
+        },
+        "slide_hUmYGq": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/emb3.jpg",
+            "title": "",
+            "richtext": "",
+            "cta_url": "",
+            "cta_text": "Shop Now",
+            "place_content": "inherit",
+            "text_align": "inherit",
+            "text_overlay_color": "same_as_section"
+          }
+        },
+        "slide_KPfXbB": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/emb4.jpg",
+            "title": "",
+            "richtext": "",
+            "cta_url": "",
+            "cta_text": "Shop Now",
+            "place_content": "inherit",
+            "text_align": "inherit",
+            "text_overlay_color": "same_as_section"
+          }
+        },
+        "slide_iir46y": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/emb2.jpg",
+            "title": "",
+            "richtext": "",
+            "cta_url": "",
+            "cta_text": "Shop Now",
+            "place_content": "inherit",
+            "text_align": "inherit",
+            "text_overlay_color": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "slide_3gpqAQ",
+        "slide_hUmYGq",
+        "slide_KPfXbB",
+        "slide_iir46y"
+      ],
+      "settings": {
+        "style": "inset",
+        "height": "pt-half-screen-height",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "auto_rotate": true,
+        "slide_speed": "5000",
+        "place_content": "place-content-center-start",
+        "text_align": "text-left",
+        "heading_size": "heading-feature",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_UtJJmX": {
+      "type": "rich-text",
+      "disabled": true,
+      "settings": {
+        "title": "What is a Stitch Count?",
+        "heading_size": "heading-feature",
+        "rich_text": "<p><strong>A stitch count refers to the total number of individual stitches used to create an embroidered design. It's a key factor in determining the complexity, size, and cost of an embroidery project. A higher stitch count often signifies a more intricate design or a larger design area, which may require more time and resources to complete. Stitch counts are vital for estimating thread usage, production time, and overall project cost. They also play a crucial role in selecting the right machine settings and ensuring the design fits perfectly on the chosen fabric or garment.</strong></p>",
+        "display_on_card": true,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "primary",
+        "background_override": "rgba(0,0,0,0)",
+        "use_gradient_background": false
+      }
+    },
+    "video_with_text_overlay_MPBDgf": {
+      "type": "video-with-text-overlay",
+      "disabled": true,
+      "settings": {
+        "video": "shopify://files/videos/AdobeStock_308284061_Video_HD_Preview.mov",
+        "video_url": "",
+        "crop": "cinematic",
+        "crop_desktop": "same",
+        "display_on_card": false,
+        "style": "inset",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "",
+        "heading_size": "heading-standard",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "rich_text_wnNBjE": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Experience the Designer T's Difference",
+        "heading_size": "heading-feature",
+        "rich_text": "<p>Contact us today for a free consultation. Our team will work closely with you to understand your vision and translate it into stunning, high-quality embroidery that elevates your brand.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "#",
+        "button_label": "Get a Free Quote",
+        "color_scheme": "tertiary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_Gyd68x",
+    "rich_text_JJYAid",
+    "text_columns_with_images_8QLKUE",
+    "shape_slideshow_hXUhY9",
+    "hero_slideshow_d9gNnF",
+    "rich_text_UtJJmX",
+    "video_with_text_overlay_MPBDgf",
+    "rich_text_wnNBjE"
+  ]
+}

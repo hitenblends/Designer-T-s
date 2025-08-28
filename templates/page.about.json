@@ -1,0 +1,483 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_overlay_HWMdnV": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        ".banner-section {margin-bottom: 32px;}"
+      ],
+      "settings": {
+        "container": false,
+        "image": "shopify://shop_images/background-new-one.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "pt-500",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Our Story",
+        "heading_tag": "h1",
+        "heading_size": "heading-standard",
+        "richtext": "<p>For over 40 years, Designer T's has provided unmatched custom printing and decoration services. From our humble beginnings as a small, manual press shop to a high-volume production facility, we’ve always focused on quality craftsmanship, attention to detail, and exceptional customer service. As a family-owned and operated business, we remain committed to excellence and community involvement.</p>",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "rich_text_KaFjdH": {
+      "type": "rich-text",
+      "settings": {
+        "title": "40 Years of Impact",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>Celebrating decades of innovation, quality, and excellence in the industry.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "quaternary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "feature_text_columns_agnWdR": {
+      "type": "feature-text-columns",
+      "blocks": {
+        "column_Bk8qTd": {
+          "type": "column",
+          "settings": {
+            "title": "40",
+            "subheading": "<p>years in business </p>"
+          }
+        },
+        "column_xiLjGn": {
+          "type": "column",
+          "settings": {
+            "title": "3000+",
+            "subheading": "<p>Customers Supported</p>"
+          }
+        },
+        "column_bM8wzK": {
+          "type": "column",
+          "settings": {
+            "title": "250+",
+            "subheading": "<p>Promotional-Product Distributor Partnerships</p>"
+          }
+        },
+        "column_nE43Fc": {
+          "type": "column",
+          "settings": {
+            "title": "50 M",
+            "subheading": "<p>Garments created </p>"
+          }
+        },
+        "column_6afPx4": {
+          "type": "column",
+          "settings": {
+            "title": "$20K",
+            "subheading": "<p>Donated annually to support local communities </p>"
+          }
+        },
+        "column_P8eEVE": {
+          "type": "column",
+          "settings": {
+            "title": "42",
+            "subheading": "<p>Intern's in the <a href=\"https://brighthorizons9.com/about\" title=\"https://brighthorizons9.com/about\">Bright Horizons</a> mentorship program</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_Bk8qTd",
+        "column_xiLjGn",
+        "column_bM8wzK",
+        "column_nE43Fc",
+        "column_6afPx4",
+        "column_P8eEVE"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "title": "",
+        "heading_size": "heading-secondary",
+        "subheading_font": "body",
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_XE4TgC": {
+      "type": "rich-text",
+      "disabled": true,
+      "settings": {
+        "title": "Our Story",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>For over 40 years, Designer T's has provided unmatched custom printing and decoration services. From our humble beginnings as a small, manual press shop to a high-volume production facility, we’ve always focused on quality craftsmanship, attention to detail, and exceptional customer service. As a family-owned and operated business, we remain committed to excellence and community involvement.</p>",
+        "display_on_card": true,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "primary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_rN7ytK": {
+      "type": "image-with-text",
+      "settings": {
+        "display_on_card": false,
+        "image": "shopify://shop_images/jim_and_Shar.png",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "left",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "Our Legacy",
+        "heading_size": "heading-standard",
+        "richtext": "<p>\"At the heart of our company is a legacy built on Family. For two generations, we’ve treated every project, partnership, and colleague like an extension of just that, our own family. These values along with an unwavering dedication to the details, has ensured that every interaction is crafted with care. This foundation, laid by our founders Jim and Sharon Kelly (Mom & Dad), continues to inspire everything we do today, and shapes where we’re headed tomorrow.\"</p><p>Tim Kelly </p><p>President</p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "timeline_process_xFT7Qg": {
+      "type": "timeline-process",
+      "blocks": {
+        "event_iqMdKt": {
+          "type": "event",
+          "settings": {
+            "year": "1985",
+            "image": "shopify://shop_images/IMG_5414.heic",
+            "desc": "<p>Jim and Sharon incorporate Designer T's, With one Small manual press, a dryer and Dream.</p>"
+          }
+        },
+        "event_YD9azR": {
+          "type": "event",
+          "settings": {
+            "year": "1994",
+            "image": "shopify://shop_images/Unknown.png",
+            "desc": "<p>Designer T's purchases it's first small shop which we share with another local start up KRB printing.</p>"
+          }
+        },
+        "event_hjfbdP": {
+          "type": "event",
+          "settings": {
+            "year": "1999",
+            "image": "shopify://shop_images/ray_image_800x_c94017d3-b13f-4f45-a12a-f183d69700a0.png",
+            "desc": "<p>Around 1999 we move into Our Second Unit in Cherry Hill. Ray Jewusiak and Steven Wiggs join the team, Catapulting our evolution into a Premier Contract Decorator.</p>"
+          }
+        },
+        "event_Xk7fkR": {
+          "type": "event",
+          "settings": {
+            "year": "2011",
+            "image": "shopify://shop_images/IMG_2338.jpg",
+            "desc": "<p>Fast forward to 2011 and own a total of three buildings in Cherry Hill, with five Total Automatics Presses and an increasingly growing need to expand Capacity.</p>"
+          }
+        },
+        "event_ceNFFa": {
+          "type": "event",
+          "settings": {
+            "year": "2020",
+            "image": "shopify://shop_images/Unknown-9.jpg",
+            "desc": "<p>2020 was a big year. We Relocated to Brooklawn, NJ, added two new 14-head presses and significant capacity. Bringing our operation under one roof for the first time since 2007.</p>"
+          }
+        },
+        "event_j3dDdd": {
+          "type": "event",
+          "settings": {
+            "year": "2024",
+            "image": "shopify://shop_images/gangsheetcollage2_720_4d75a119-d5fb-4224-8530-59f4557f68bd.jpg",
+            "desc": "<p>Blends DTF is born with the purchase of our first Direct to film Printer.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "event_iqMdKt",
+        "event_YD9azR",
+        "event_hjfbdP",
+        "event_Xk7fkR",
+        "event_ceNFFa",
+        "event_j3dDdd"
+      ],
+      "custom_css": [],
+      "settings": {
+        "heading": "OUR HISTORY"
+      }
+    },
+    "image_with_text_slideshow_pFP8Va": {
+      "type": "image-with-text-slideshow",
+      "blocks": {
+        "slide_YURQeB": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Images.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "image_position": "right",
+            "title": "1985",
+            "richtext": "<p>Jim and Sharon incorporate Designer T's. With one Small manual press, a dryer and Dream. </p>",
+            "text_alignment": "text-left",
+            "button_link": "",
+            "button_label": "Shop Now"
+          }
+        },
+        "slide_7TiHNA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Ray_dribbles.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "image_position": "right",
+            "title": "1994",
+            "richtext": "<p>We Purchase our first 4000 feet which we Share with another local Start up KRB printing.</p>",
+            "text_alignment": "text-left",
+            "button_link": "",
+            "button_label": "Shop Now"
+          }
+        },
+        "slide_A9H4Tk": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/ray_image_800x_c94017d3-b13f-4f45-a12a-f183d69700a0.png",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "image_position": "right",
+            "title": "1999",
+            "richtext": "<p>We move into Our Second Unit in Cherry Hill. Ray Jewusiak Joins the team and catapults our evolution into a Premier Contract Decorator.</p>",
+            "text_alignment": "text-left",
+            "button_link": "",
+            "button_label": "Shop Now"
+          }
+        },
+        "slide_PLdyi3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2338.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "image_position": "right",
+            "title": "2011",
+            "richtext": "<p>Fast forward to 2011 and own a total of Three buildings in Cherry Hill, with five Total Automatics Presses and an increasingly growing need to expand Capacity.</p>",
+            "text_alignment": "text-left",
+            "button_link": "",
+            "button_label": "Shop Now"
+          }
+        },
+        "slide_gqcznr": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Unknown-9.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "image_position": "right",
+            "title": "2020",
+            "richtext": "<p>Relocated to Brooklawn, NJ. Added two new 14-head presses, extra capacity and have our entire operation under one roof. </p>",
+            "text_alignment": "text-left",
+            "button_link": "",
+            "button_label": "Shop Now"
+          }
+        },
+        "slide_tjcAMN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gangsheetcollage2_720_4d75a119-d5fb-4224-8530-59f4557f68bd.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "image_position": "right",
+            "title": "2024",
+            "richtext": "<p>Blends DTF is born with the purchase of our first Direct to film Printer.</p>",
+            "text_alignment": "text-left",
+            "button_link": "",
+            "button_label": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "slide_YURQeB",
+        "slide_7TiHNA",
+        "slide_A9H4Tk",
+        "slide_PLdyi3",
+        "slide_gqcznr",
+        "slide_tjcAMN"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "image_size": "half",
+        "crop": "aspect-w-1 aspect-h-1",
+        "heading_size": "heading-standard",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_dfWf83": {
+      "type": "image-with-text",
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "display_on_card": true,
+        "image": "shopify://shop_images/DSC8974.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "left",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "Production Team: VP of Operations Alex, Chris, Delvy and Shane",
+        "heading_size": "heading-standard",
+        "richtext": "<p>From small runs to major programs, our Production Team delivers consistent quality at scale. With state-of-the-art equipment and deep industry expertise, we bring your orders to life—on time, on spec, and with care in every stitch and print.</p><ul><li>4+ million units produced annually</li><li>24/7 Production Floor</li><li>Screen print, embroidery, and DTF under one roof</li><li>1 team of over 50 creators</li></ul>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_3dyagd": {
+      "type": "image-with-text",
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "display_on_card": true,
+        "image": "shopify://shop_images/DSC_8178.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "right",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "Customer Success Team: Jackie, Karen and Abby ",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Our Customer Success Team is here to guide you every step of the way. From your first quote to final delivery, they ensure every detail is right—fast responses, clear communication, and proactive problem-solving are just part of the experience.</p><ul><li>Friendly real People, able to solve complex problems</li><li>Well versed in identifying potential conflicts</li><li>Handle over 500 Purchase orders weekly</li><li>Available during all business hours.</li></ul>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_trHmFW": {
+      "type": "image-with-text",
+      "name": "t:sections.image_with_text.name",
+      "settings": {
+        "display_on_card": true,
+        "image": "shopify://shop_images/DSC_8165.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "left",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "Art Department: Diane, Steven, Royce, Jay, and Noah",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Our in-house Art Department combines creativity with technical precision. Every design is carefully reviewed, refined, and formatted for flawless production. Whether it’s screen print, embroidery, or DTF, we ensure your artwork looks as good in print as it does on screen.</p><ul><li>10,000+ designs processed per year</li><li>Fast and efficient proofing process</li><li>Over 100 years of combined industry specific experience</li><li>Full Service: Simple updates to full scale image creation</li></ul>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "text_columns_with_images_qmjJrg": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "column_PCyETg": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Untitled-2.png",
+            "enable_logo": false,
+            "title": "Craftsmanship",
+            "text": "<p>We blend traditional craftsmanship with modern techniques, ensuring every product meets the highest standards of quality. Our experienced team takes great pride in providing a personalized experience for each client, ensuring their designs are brought to life with precision and care.</p>",
+            "newtab": false,
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_CFF8nf": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/DTpicnic.jpg",
+            "enable_logo": false,
+            "title": "Community",
+            "text": "<p>We are deeply committed to giving back to the communities that support us. Through local sponsorships, charitable partnerships, and active community involvement, we strive to make a positive impact. Our dedication extends beyond our products—we believe in building lasting connections and supporting the people who inspire us every day.</p>",
+            "newtab": false,
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_7tg883": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/DSC8935.jpg",
+            "enable_logo": false,
+            "title": "Creativity",
+            "text": "<p>Our Art Department is powered by elite artists using the latest hardware and software. We stay ahead of the curve by constantly evolving our design techniques, ensuring our work not only meets but exceeds industry standards. Creativity drives us to innovate, inspire, and push the boundaries of what's possible.</p>",
+            "newtab": false,
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "column_PCyETg",
+        "column_CFF8nf",
+        "column_7tg883"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "slideshow_on_mobile": true,
+        "title": "Our Commitments",
+        "subtitle": "",
+        "crop": "aspect-w-1 aspect-h-1",
+        "image_shape": "default",
+        "show_index_on_blocks": true,
+        "index_shape": "scalloped_circle_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_HWMdnV",
+    "rich_text_KaFjdH",
+    "feature_text_columns_agnWdR",
+    "rich_text_XE4TgC",
+    "image_with_text_rN7ytK",
+    "timeline_process_xFT7Qg",
+    "image_with_text_slideshow_pFP8Va",
+    "image_with_text_dfWf83",
+    "image_with_text_3dyagd",
+    "image_with_text_trHmFW",
+    "text_columns_with_images_qmjJrg"
+  ]
+}

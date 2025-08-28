@@ -1,0 +1,225 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div.community-page",
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "f25a654b-ac9c-4b10-9420-47d0262a7492": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        "p {padding-bottom: 8rem !important;}",
+        ".handsugar-block {height: 100% !important;}",
+        "@media (max-width: 990px) {h2 {padding-top: 8rem !important; padding-bottom: 0rem !important; font-size: 28px !important; } p {margin-bottom: 10rem !important; font-size: 16px; }}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Community.png",
+        "image_mobile": "shopify:\/\/shop_images\/Group_183_81ccb8ea-1938-4e7b-99a4-80cfe1fe04dd.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "natural",
+        "place_content": "place-content-center-start",
+        "text_align": "text-left",
+        "title": "Community",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Doing our best for you and the planet!<\/p>",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "77e8b680-95f9-48bd-9500-b704453b7e10": {
+      "type": "rich-text",
+      "blocks": {
+        "c8aa645e-e9c8-436d-8e68-2a767010615b": {
+          "type": "background_shape",
+          "settings": {
+            "shape": "oval",
+            "blob_type": 1,
+            "size": 100,
+            "opacity": 100,
+            "blur": 0,
+            "horizontal_position": 50,
+            "vertical_position": 50,
+            "rotate": 0,
+            "enable_parallax": false,
+            "parallax_speed": 3,
+            "color": "accent-1",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "c8aa645e-e9c8-436d-8e68-2a767010615b"
+      ],
+      "custom_css": [
+        ".py-section-vertical-spacing {padding: 60px 0px 60px; background-color: #e3efd5;}",
+        "h2 {max-width: 450px; margin: 0px auto; font-size: 50px; color: #000; letter-spacing: -1.5px;}",
+        "@media (max-width: 768px) {h2 {font-size: 28px; letter-spacing: -0.84px; max-width: 250px; }}",
+        "p {font-family: Sofia Pro !important; font-weight: 400; font-size: 16px; margin-left: 1.5rem; margin-right: 1.5rem;}"
+      ],
+      "settings": {
+        "title": "Sustainability",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>Everything we craft is made with one goal in mind: to create the best-est lollies in the biz that are good for you and good for the planet. We’re not 100% there yet, but hey! No one’s perfect right? Sustainability is a journey – not a destination, and we’re continuously workin’ hard to do our bit by reducing, reusing and recycling. The journey to being better is a long one, and we’re just getting started!<\/p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-2\/3",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "primary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "7e8000cc-559d-4079-9ade-84d5a980192d": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "template--15938523562180__7e8000cc-559d-4079-9ade-84d5a980192d-column-1": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/Group_21.png",
+            "title": "Carbon neutral manufacturing",
+            "text": "<p>Since the get-go our manufacturing process has been 100% carbon neutral (sweet right!)<\/p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "template--15938523562180__7e8000cc-559d-4079-9ade-84d5a980192d-column-2": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/Sour_Box_2_1.png",
+            "title": "Renewable energy",
+            "text": "<p>We proudly use renewable sources to generate the majority of electricity used during our manufacturing process.<\/p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "template--15938523562180__7e8000cc-559d-4079-9ade-84d5a980192d-column-3": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/Untitled_Artwork-4_3_3_1.png",
+            "title": "Reusable waste",
+            "text": "<p>As a company who makes things, waste is inevitable. But! All edible waste that can, goes into pet food. The rest, is collected and reused to create heat.<\/p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "template--15938523562180__7e8000cc-559d-4079-9ade-84d5a980192d-column-1",
+        "template--15938523562180__7e8000cc-559d-4079-9ade-84d5a980192d-column-2",
+        "template--15938523562180__7e8000cc-559d-4079-9ade-84d5a980192d-column-3"
+      ],
+      "custom_css": [
+        ".py-section-vertical-spacing {background-color: #e3efd5;}",
+        "h2 {margin: 0px auto; font-size: 50px; color: #000; letter-spacing: -1.5px;}",
+        "h3 {font-size: 22px; font-family: \"Sofia Pro\" !important; color: #000;}",
+        "p {font-size: 15px;}",
+        ".media-style-container {width: 200px; margin-left: auto; margin-right: auto;}",
+        "@media (max-width: 768px) {h2 {font-size: 28px; padding-left: 10% !important; padding-right: 10% !important; } h3 {font-size: 18px !important; font-family: \"Sofia Pro\" !important; color: #000; } p {font-size: 14px; }}"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "slideshow_on_mobile": false,
+        "title": "Where we’re at now",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "45dab91a-24f9-48b0-9723-c98604ab6d35": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "p {font-family: Sofia Pro !important; font-weight: 400; font-size: 18px;}",
+        "@media (max-width: 768px) {h2 {font-size: 28px; letter-spacing: -0.84px; text-align: center !important; } .push-btn-surface {display: flex; flex-direction: column; padding: 0.75rem 4rem !important; max-width: 400px !important; }}",
+        "p {font-family: Sofia Pro !important; font-weight: 400; font-size: 16px; margin-left: 1.5rem; margin-right: 1.5rem;}"
+      ],
+      "settings": {
+        "title": "Our contribution",
+        "custom_liquid": "<div class=\"font-main mt-5 leading-snug mx-auto rte\">\n    <p class=\"contribution text-center max-w-site mx-auto lg:w-2\\\/3\">\n        We believe in a world where you can eat your sweets and have em’ too!To create the best-est sweets in the biz we work best suppliers in the world so we can serve you lollies made from the best quality ingredients that have been sourced ethically.\n    <\/p>\n<\/div>\n\n<div class=\"our-buttons\">\n    <div class=\"mt-5\">\n        <a href=\"#ourIngredients\" class=\"push-btn\">\n            <span class=\"push-btn-surface\" data-hash=\"#ourIngredients\">Our ingredients<\/span>\n        <\/a>\n    <\/div>\n    \n    <div class=\"mt-5\">\n        <a href=\"#ourHeadquarters\" class=\"push-btn\">\n            <span class=\"push-btn-surface\" data-hash=\"#ourHeadquarters\">Our headquarters<\/span>\n        <\/a> \n    <\/div>\n    \n    <div class=\"mt-5\">\n        <a href=\"#ourPackaging\" class=\"push-btn\">\n            <span class=\"push-btn-surface\" data-hash=\"#ourPackaging\">Our packaging<\/span>\n        <\/a>\n    <\/div>\n<\/div>\n\n<section id=\"ourIngredients\" class=\"page text-scheme-text bg-scheme-background relative overflow-hidden\">\n    <div class=\"section-content relative z-10 py-section-vertical-spacing\">\n        <div class=\"px-section relative z-10 max-w-site mx-auto\">\n            <div>\n                <div class=\" section-content mx-auto relative z-10 text_alignment\">\n                    <div class=\"grid grid-cols-1 lg:grid-cols-12 grid-flow-row-dense gap-10\">\n                        <div class=\"lg:col-span-6\">\n                            <div class=\"media-style-container media-no-shadow default\">\n                                <div class=\" media-content\">\n                                    <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/ingredients.png?v=1693079960\" class=\"media-style\" loading=\"lazy\" alt=\"laptop\">\n                                <\/div>\n                            <\/div>\n                        <\/div>\n\n                        <div class=\"flex items-center lg:col-span-6\">\n                            <div class=\"text-left\">\n                                <h2 class=\"heading-feature heading-style none\">Ingredients<\/h2>\n                                <div class=\"rte mt-5 max-w-2xl\">\n                                    <p>To create the best-est sweets in the biz we work best suppliers in the world so we can serve you lollies made from the best quality ingredients that have been sourced ethically. One of the most important ingredients we use is carnauba wax, it's the good stuff that coats all our lollies. Our FUNDAY fam carnauba wax supplier is a member of the ‘Initiative for Responsible Carnauba’ - an ethical organisation that works to promote responsible carnauba wax production by improving working conditions and preserving biodiversity.<p>\n                                <\/div>\n                            <\/div>\n                        <\/div>\n                    <\/div>\n                <\/div>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/section>\n\n<section id=\"ourHeadquarters\" class=\"page\">\n    <div class=\"section-content relative z-10 py-section-vertical-spacing\">\n        <div class=\"px-section relative z-10 max-w-site mx-auto\">\n            <div>\n                <div class=\"section-content mx-auto relative z-10 text_alignment\">\n                    <div class=\"grid grid-cols-1 lg:grid-cols-12 grid-flow-row-dense gap-10\">\n                        <div class=\"lg:col-span-6\">\n                            <div class=\"media-style-container media-no-shadow default\">\n                                <div class=\"media-content\">\n                                    <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/Community_138db6a8-def2-4a05-ac12-880a0825c34a.png?v=1692618367&width=2000\" class=\"media-style\" loading=\"lazy\" alt=\"laptop\">\n                                <\/div>\n                            <\/div>\n                        <\/div>\n                        \n                        <div class=\"flex items-center lg:col-span-6\">\n                            <div class=\"text-left\">\n                                <h2 class=\"heading-feature heading-style none\">Going green at Funday HQ<\/h2>\n                                <div class=\"rte mt-5 max-w-2xl\">\n                                    <p>Your team here at FUNDAY HQ love two things – sweets and sustainability. We’re doing our best on the daily to take steps to being more sustainable.Like offsetting flight emission, reducing travel time through virtual calls rather than meetings in person, encourage public transport or carpooling where possible.<\/p>\n                                <\/div>\n                            <\/div>\n                        <\/div>\n                    <\/div>\n                <\/div>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/section>\n\n<section id=\"ourPackaging\" class=\"page\">\n    <div class=\"section-content relative z-10 py-section-vertical-spacing\">\n        <div class=\"px-section relative z-10 max-w-site mx-auto\">\n            <div>\n                <div class=\" section-content mx-auto relative z-10 text_alignment\">\n                    <div class=\"grid grid-cols-1 lg:grid-cols-12 grid-flow-row-dense gap-10\">\n                        <div class=\"lg:col-span-6\">\n                            <div class=\"media-style-container media-no-shadow default\">\n                                <div class=\"media-content\">\n                                    <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/packaging.png?v=1693079960\" class=\"media-style\" loading=\"lazy\" alt=\"laptop\">\n                                <\/div>\n                            <\/div>\n                        <\/div>\n                        \n                        <div class=\"flex items-center lg:col-span-6\">\n                            <div class=\"text-left\">\n                                <h2 class=\"heading-feature heading-style none\">Packaging<\/h2>\n                                <div class=\"rte mt-5 max-w-2xl\">\n                                    <p>Don't mean to brag but we're the total package! FUNDAY lolly bags are made from curb-side recyclable waste and arrive in fully recyclable shipping cartons. Plus we've scraped plastic fillers or Styrofoam in our packaging and stick to good ol’ kraft paper to protect your sweet essentials.<\/p>\n                                <\/div>\n                            <\/div>\n                        <\/div>\n                    <\/div>\n                <\/div>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/section>\n\n<style>\n    @media screen and (min-width: 768px) {\n        .our-buttons {\n            display: flex;\n            justify-content: center;\n            gap: 1rem;\n        }\n    }\n    \n    .our-buttons {\n        text-align: center;\n    }\n    \n    .page h2 {\n        font-family: Sofia Pro !important;\n        font-weight: 400 !important;\n        font-size: 22px;\n    }\n    \n    .page p {\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n    }\n    \n    #shopify-section-template--15938523562180__50132a09-5cd3-4830-b76d-2c68b0857478 p.contribution {\n        margin: auto;\n    }\n<\/style>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    },
+    "93d42e82-3997-4788-8957-36f9b27f4e3f": {
+      "type": "featured-collection",
+      "custom_css": [
+        "ul li.splide__slide {margin-right: 1.2rem !important;}",
+        "a.inline-block.push-btn.mx-5.mx-5.mt-1.lg\\:mt-0 {width: 194px;}",
+        "h3.font-body.text-base {font-size: 26px;}",
+        "select {display: none;}",
+        ".media-style-container img {object-fit: cover;}",
+        ".push-btn-surface {width: 100%;}",
+        "h3 {min-height: 60px;}",
+        "button span.push-btn-surface {line-height: 28px;}",
+        "@media (min-width: 990px) {.media-style-container, .media-style-container img {min-height: 389px; }}",
+        "@media (max-width: 990px) {.media-style-container {min-height: 200px; }}"
+      ],
+      "settings": {
+        "title": "Shop with purpose",
+        "subheading": "",
+        "collection": "all",
+        "no_products": 18,
+        "show_view_all": true,
+        "enable_quick_buy": true,
+        "display_on_card": false,
+        "layout": "carousel",
+        "view_all_position": "top",
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 40,
+        "autoscroll_mode": "1",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "9c5ddc38-8cf3-4785-8595-495944a1b939": {
+      "type": "custom-liquid",
+      "settings": {
+        "title": "",
+        "custom_liquid": "<\/div>\n<div id=\"shape-divider-07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87\" class=\"shape-divider w-full   pointer-events-none z-20 absolute bottom-0 left-0 w-full\" data-shopify-editor-block=\"{&quot;id&quot;:&quot;07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87&quot;,&quot;type&quot;:&quot;shape_divider&quot;}\">\n  <div class=\"shape-divider-transform-reset\">\n    <div x-ref=\"animation-container\" class=\"shape-divider-svg-container flex relative left-0 min-w-full  -mb-shape-divider\" style=\"padding-top: 7.0%;\"><div class=\" z-0 absolute top-0 left-0 right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background\">\n        <svg class=\"z-0 absolute top-0 left-0  right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background  \" data-color-scheme=\"quaternary\" width=\"100%\" height=\"100%\" viewBox=\"0 0 1200.0 84.0\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path d=\"M600 39.1293C800 84.6351 1000 84.6351 1200 39.1294V84.0001H0L3.48561e-06 39.1293C200 -6.37645 400 -6.37643 600 39.1293Z\" fill=\"currentColor\"><\/path>\n          <path class=\"shape-divider-stroke\" vector-effect=\"non-scaling-stroke\" d=\"M1201 39.1294C1001 84.6351 801 84.6351 601 39.1293C401 -6.37643 201 -6.37645 1 39.1293\" stroke=\"none\"><\/path><\/svg>\n      <\/div><\/div>\n  <\/div>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "f25a654b-ac9c-4b10-9420-47d0262a7492",
+    "77e8b680-95f9-48bd-9500-b704453b7e10",
+    "7e8000cc-559d-4079-9ade-84d5a980192d",
+    "45dab91a-24f9-48b0-9723-c98604ab6d35",
+    "93d42e82-3997-4788-8957-36f9b27f4e3f",
+    "9c5ddc38-8cf3-4785-8595-495944a1b939"
+  ]
+}

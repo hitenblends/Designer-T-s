@@ -1,0 +1,59 @@
+{% liquid
+    if product
+        assign product_name = product.title
+    else
+        assign product_name = 'banner'
+    endif
+
+    if product.metafields.funday.product_takeover != blank
+        assign image_url = product.metafields.funday.product_takeover.value | image_url
+    endif
+%}
+{% if image_url != blank %}
+<section class="text-scheme-text bg-scheme-background overflow-hidden full-bleed-section  " data-color-scheme="primary">
+    <div class="section-content">
+        <div class="relative z-10 lg:bg-transparent h-full">
+            <div class=" ">
+                <div class="object-wrapper-none">
+                    <img src="{{ image_url }}&amp;width=2000"
+                         alt="{{ product_name }}"
+                         srcset="{{ image_url }}&amp;width=352 352w, {{ image_url }}&amp;width=832 832w, {{ image_url }}&amp;width=1200 1200w, {{ image_url }}&amp;width=1920 1920w, {{ image_url }}&amp;width=2000 2000w"
+                         width="2000" height="1090" loading="lazy" sizes="100vw" class="w-full">
+
+                </div>
+            </div>
+            <div class="px-section py-section-vertical-spacing grid absolute inset-0 w-full h-full z-10  text-scheme-text place-content-center-center text-center ">
+                <div class="  ">
+                    <div class="headerslider-title-block   max-w-lg">
+                        <div class="break-words  ">
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endif %}
+{% schema %}
+{
+  "name": "Product Takeover",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product takeover",
+      "category": "ADVANCED LAYOUT"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "aside"
+    ]
+  }
+}
+{% endschema %}

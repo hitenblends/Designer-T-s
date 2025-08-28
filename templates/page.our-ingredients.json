@@ -1,0 +1,317 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div.our-ingredients",
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "1dabd00b-996b-4062-9e3d-14d0eda3dd11": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        ".handsugar-block {height: 100% !important;}",
+        "@media (max-width: 990px) {h2 {font-size: 28px; } p {padding-bottom: 6rem; }}",
+        "}h2 {padding-bottom: 0.5 !important;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Group_154.png",
+        "image_mobile": "shopify://shop_images/Mobile_Hero_image_ingredients.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "natural",
+        "place_content": "place-content-center-start",
+        "text_align": "text-left",
+        "title": "Our ingredients",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Real talk, real ingredients</p>",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "76a3835e-24be-4855-882f-dd00fc4b094d": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "template--15939289612484__76a3835e-24be-4855-882f-dd00fc4b094d-column-1": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Group_119_b18aa7b1-21bb-443c-b03d-e1a322580c19.png",
+            "title": "",
+            "text": "<p>Solube Fibre from Tapioca </p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "template--15939289612484__76a3835e-24be-4855-882f-dd00fc4b094d-column-2": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Ingredient.png",
+            "title": "",
+            "text": "<p>Stevia</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "template--15939289612484__76a3835e-24be-4855-882f-dd00fc4b094d-column-3": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Ingredient_1.png",
+            "title": "",
+            "text": "<p>Natural flavours & colours</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "c376b13c-e5c1-4552-bed0-efb2396928a7": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Ingredient_2.png",
+            "title": "",
+            "text": "<p>Chicory Root Fibre</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "template--15939289612484__76a3835e-24be-4855-882f-dd00fc4b094d-column-1",
+        "template--15939289612484__76a3835e-24be-4855-882f-dd00fc4b094d-column-2",
+        "template--15939289612484__76a3835e-24be-4855-882f-dd00fc4b094d-column-3",
+        "c376b13c-e5c1-4552-bed0-efb2396928a7"
+      ],
+      "custom_css": [
+        "ul {display: grid; grid-template-columns: repeat(2, 1fr) !important;}",
+        "@media screen and (min-width: 768px) {ul {display: grid; grid-template-columns: repeat(4, 1fr) !important; } li.lg\\:col-span-3 {grid-column: unset !important; }}"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "slideshow_on_mobile": false,
+        "title": "Main ingredients",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "1a1b464d-68ee-49f6-bc77-5d8b3c4a38c5": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "h2 {text-align: left; font-size: 50px !important;}",
+        ".all-ingredients {margin-left: 2.5rem; margin-right: 2.5rem; max-block-size: 80% !important;}",
+        "@media screen and (min-width: 768px) {#prod-image {width: 70% !important; margin: auto; } #ingredients-image {margin-top: 0 !important; }}",
+        ".prod-usp {gap: 1rem !important;}",
+        "#ingredients-image {margin-top: 2rem; height: 90%;}"
+      ],
+      "settings": {
+        "title": "The full breakdown",
+        "custom_liquid": "<select id=\"ingredients-select\" onchange=\"ingredientsSelect()\">\n    {% for metaobject in shop.metaobjects.ingredients_of_the_product.values %}\n        <option value=\"{{ metaobject.name }}\" data-usp=\"{{ metaobject.product_image.value }}\">{{ metaobject.name }}</option>\n    {% endfor %}\n</select>\n\n<div class=\"all-ingredients grid\">\n    <div class=\"\">\n        <img id=\"prod-image\" src=\"\">\n        <div class=\"prod-usp flex mt-5\"></div>\n    </div>\n    \n    <div class=\"\">\n        <img id=\"ingredients-image\" src=\"\">\n    </div>\n</div>\n        \n<script type=\"text/javascript\">\n    let selected = document.getElementById('ingredients-select').value\n    let image = document.getElementById('ingredients-image')\n    let prodimage = document.getElementById('prod-image')\n    let section = document.getElementById('ingredients-select').closest('section')\n    let uspSection = document.querySelector('.prod-usp')\n    \n    function loadIngredients() {\n        selected = document.getElementById('ingredients-select').value\n        let uspArr = []\n        \n        {% for metaobject in shop.metaobjects.ingredients_of_the_product.values %}\n            {% assign meta = metaobject.name %}\n            {% assign metaIngredients = metaobject.nutritional_information.value | image_url %}\n            {% assign metaImage = metaobject.product_image.value | image_url %}\n            {% assign metaColor = metaobject.color.value %}\n            \n            var meta = '{{meta}}'\n            var metaIngredients = '{{metaIngredients}}'\n            var metaImage = '{{metaImage}}'\n            var metaColor = '{{metaColor}}'\n            \n            if(meta == selected) {\n                section.style.backgroundColor = `${metaColor}`\n                image.setAttribute('src', metaIngredients)\n                prodimage.setAttribute('src', metaImage)\n                \n                {% assign metaUsp = metaobject.usp.value %}\n\n                {% for badge in metaUsp %}\n                    {% assign uspIcons = badge.usp_icons.value | image_url %}\n                    {% assign uspName = badge.name.value %}\n                    \n                    var uspIcons = '{{uspIcons}}'\n                    var uspName = '{{uspName}}'\n                    \n                    if (!uspArr.includes(uspIcons)) {\n                        uspArr.push({name: uspName, icon: uspIcons});\n                    }\n                {% endfor %}\n            }\n        {% endfor %}\n        \n        uspSection.innerHTML = ''\n        \n        for(i in uspArr) {\n            let div = document.createElement('div');\n            let img = document.createElement('img');\n            let p = document.createElement('p');\n\n            img.setAttribute('src', uspArr[i].icon);\n            p.textContent = uspArr[i].name;\n            div.appendChild(img);\n            div.appendChild(p);\n            uspSection.appendChild(div);\n        }\n    }\n    \n    function ingredientsSelect() {\n        loadIngredients()\n    }\n    \n    loadIngredients()\n    \n</script>\n\n<style>\n    .all-ingredients  {\n        column-gap: 1rem;\n        justify-content: space-between;\n        justify-items: center;\n        margin-top: 4rem;}\n    #ingredients-select {width: 100%;}\n    .prod-usp {\n        flex-flow: wrap;\n        text-align: center;\n        text-align: -webkit-center;\n        row-gap: 1rem;\n        gap: 0.5rem;}\n    .prod-usp div {flex: 1 1 5rem;}\n    .prod-usp img {width: 83px;}\n    .prod-usp div p {\n        font-size: 0.75rem;\n        text-align: center;}\n    #ingredients-image {\n        width: 100%;\n        height: 100%;\n        object-fit: cover;}\n    #prod-image {\n        width: 100%;\n        object-fit: contain;}\n    @media screen and (min-width: 768px) {\n        .all-ingredients {\n            grid-template-columns: repeat(2, 1fr);\n        }\n        #ingredients-select {\n            width: clamp(25%, 10vw, 30%);\n        }\n    }\n</style>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    },
+    "84c72b4f-a0c3-4c45-ba79-79e5b459207d": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "5e869bc4-38a7-408c-8a9d-64f911f1e613": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/No_sugar_added.png",
+            "title": "No sugar added",
+            "text": "<p>We’re sweet enough with the natural fibres in our lollies. We add a touch of stevia to balance things out. This means we’re up to 91% less sugar than your average lolly. Let’s just say there’s nothing average about us.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "f4d737af-b636-4130-9fbb-bcd6c64e47df": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/GMO.png",
+            "title": "GMO free ingredients",
+            "text": "<p>None, zilch, nada! <br/>It's a no from us on GMO.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "2f7a8b03-b4d9-454a-8e09-e8b8f0ceaaf8": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/No_sugar_alcohol.png",
+            "title": "No sugar alcohols",
+            "text": "<p>No way ‘Jose. Stacks of other ‘no sugar’ or ‘sugar free’ lollies have sugar alcohols (ew). Sometimes this means they gotta warn people about their ‘laxative effects’ (double ew). We just wouldn’t do that to you.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "5e869bc4-38a7-408c-8a9d-64f911f1e613",
+        "f4d737af-b636-4130-9fbb-bcd6c64e47df",
+        "2f7a8b03-b4d9-454a-8e09-e8b8f0ceaaf8"
+      ],
+      "custom_css": [
+        ".py-section-vertical-spacing {padding-left: 10%; padding-right: 10%; background-color: #ffda8c;}",
+        "h2 {font-size: 40px; padding-left: 20%; padding-right: 20%;}",
+        "h3 {font-size: 22px; font-family: \"Sofia Pro\" !important; font-weight: 900;}",
+        "p {font-size: 15px;}",
+        ".media-style-container {width: 200px; margin-left: auto; margin-right: auto;}",
+        "@media (max-width: 768px) {h2 {font-size: 28px; padding-left: 10% !important; padding-right: 10% !important; } h3 {font-size: 18px !important; font-family: \"Sofia Pro\" !important; color: #000; } p {font-size: 14px; }}"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "slideshow_on_mobile": false,
+        "title": "More about our ingredients",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "1fe8f9de-e6a7-45eb-839f-ed53adfa109d": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "a0b633ec-8800-4154-93eb-67ad74963f7d": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Natural_colours.png",
+            "title": "Natural colours & Flavours",
+            "text": "<p>Our fruity flavours are extracted from food. Our colours come from things like beetroot, carrot, pumpkin and turmeric. Your read right, nothing artificial up in here!</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "db6f81c4-70b0-4760-939a-e57f7190164c": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Gluten_Free.png",
+            "title": "Gluten Free",
+            "text": "<p>Coeliac’s rejoice!<br/>Gluten-free guaranteed.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "68cc3941-6acb-4cf9-8182-49e724b13e00": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Prebiotic_Fibre.png",
+            "title": "Prebiotic Fibre",
+            "text": "<p>We pack a punch when it comes to fibre. We’ve got a whopping 7g of plant-based goodness in each bag. Prebiotics are the goods that feed the good guys (probiotics) in your gut. What a good news day!</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "a0b633ec-8800-4154-93eb-67ad74963f7d",
+        "db6f81c4-70b0-4760-939a-e57f7190164c",
+        "68cc3941-6acb-4cf9-8182-49e724b13e00"
+      ],
+      "custom_css": [
+        ".py-section-vertical-spacing {padding-left: 10%; padding-right: 10%; background-color: #ffda8c;}",
+        "h2 {font-size: 22px; font-family: \"Sofia Pro\" !important; color: #000;}",
+        "p {font-size: 15px;}",
+        ".media-style-container {width: 200px; margin-left: auto; margin-right: auto;}",
+        "@media (max-width: 768px) {h2 {font-size: 28px; padding-left: 10% !important; padding-right: 10% !important; } h2 {font-size: 18px !important; font-family: \"Sofia Pro\" !important; color: #000; } p {font-size: 14px; }}",
+        "ul li h3 {font-weight: 900;}"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "slideshow_on_mobile": false,
+        "title": "",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "169289435762c887ae": {
+      "type": "apps",
+      "settings": {}
+    },
+    "42f79388-2172-467e-b038-8da93910be89": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Suggested for you",
+        "subheading": "",
+        "collection": "all",
+        "no_products": 4,
+        "show_view_all": true,
+        "enable_quick_buy": true,
+        "display_on_card": false,
+        "layout": "carousel",
+        "view_all_position": "top",
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 40,
+        "autoscroll_mode": "1",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "2011ad55-f322-4010-ad3b-ca7bc2893850": {
+      "type": "custom-liquid",
+      "settings": {
+        "title": "",
+        "custom_liquid": "</div>\n<div id=\"shape-divider-07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87\" class=\"shape-divider w-full   pointer-events-none z-20 absolute bottom-0 left-0 w-full\" data-shopify-editor-block=\"{&quot;id&quot;:&quot;07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87&quot;,&quot;type&quot;:&quot;shape_divider&quot;}\">\n  <div class=\"shape-divider-transform-reset\">\n    <div x-ref=\"animation-container\" class=\"shape-divider-svg-container flex relative left-0 min-w-full  -mb-shape-divider\" style=\"padding-top: 7.0%;\"><div class=\" z-0 absolute top-0 left-0 right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background\">\n        <svg class=\"z-0 absolute top-0 left-0  right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background  \" data-color-scheme=\"quaternary\" width=\"100%\" height=\"100%\" viewBox=\"0 0 1200.0 84.0\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M600 39.1293C800 84.6351 1000 84.6351 1200 39.1294V84.0001H0L3.48561e-06 39.1293C200 -6.37645 400 -6.37643 600 39.1293Z\" fill=\"currentColor\"></path>\n          <path class=\"shape-divider-stroke\" vector-effect=\"non-scaling-stroke\" d=\"M1201 39.1294C1001 84.6351 801 84.6351 601 39.1293C401 -6.37643 201 -6.37645 1 39.1293\" stroke=\"none\"></path></svg>\n      </div></div>\n  </div>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1dabd00b-996b-4062-9e3d-14d0eda3dd11",
+    "76a3835e-24be-4855-882f-dd00fc4b094d",
+    "1a1b464d-68ee-49f6-bc77-5d8b3c4a38c5",
+    "84c72b4f-a0c3-4c45-ba79-79e5b459207d",
+    "1fe8f9de-e6a7-45eb-839f-ed53adfa109d",
+    "169289435762c887ae",
+    "42f79388-2172-467e-b038-8da93910be89",
+    "2011ad55-f322-4010-ad3b-ca7bc2893850"
+  ]
+}

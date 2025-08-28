@@ -1,0 +1,1101 @@
+<div class="color-group" style="display:none">
+    {% assign colors = product.options_by_name['Color'].values %}
+      {% for color in colors %}
+          <select id="{{ color }}" class="size-list" data-color="{{ color }}">
+            {% for variant in product.variants %}
+              {% if variant.option1 == color %}
+                <option 
+                  data-size="{{ variant.option2 }}"
+                  data-price="{{ variant.price | money_without_currency }}"
+                > 
+                </option>
+              {% endif %}
+            {% endfor %}
+          </select>
+      {% endfor %}
+    </div>
+    <div class="quote-box dtf_calc">
+      <h2>Get A Quick Quote</h2>
+        <div class="form-group">
+          <div class="input-section">
+            <label>Enter Qty</label>
+            <div class="qty-inputs">
+              {% assign Sizes = product.options_by_name['Size'].values %}
+                {% for size in Sizes %}
+                  <div class="input-group"><input type="number" data-size="{{ size }}" value="0" min="0" class="size-input"><span>{{ size }}</span></div>
+                {% endfor %}
+            </div>
+          </div>
+          </div>
+        <div class="form-group">
+          <label>Number of Locations</label>
+          <input id="locations" placeholder="Number of Locations" type="number" oninput="generateLocations()" />
+        </div>
+        <div class="form-group">
+          <input id="blankPrice" placeholder="Price of Blank ($)" type="hidden" value="{{ product.price | money }}" /></div>
+       
+        
+        <div class="form-group" style="display:none">
+          <label>Shipping Fee ($)</label>
+          <input id="shippingFee" placeholder="Shipping Fee ($)" type="number" /></div>
+        <div class="form-group" style="display:none">
+          <label>Heat Pressing Fee ($)</label>
+          <input id="heatFee" placeholder="Heat Pressing Fee ($)" type="number" /></div>
+        <div class="form-group">
+            
+        <div class="form-group">
+          <label>Finishing Charges (Per Unit):</label>
+          <div class="upcharges inner-charge">
+            <label><span>Poly Bag ($0.35)</span><span class="radio-charge"><input type="checkbox" id="polybag_charge" /></span></label>
+            <label><span>Size Sticker ($0.15)</span><span class="radio-charge"><input type="checkbox" id="size_sticker_charge" /></span></label>
+            <label><span>Hang Tag ($0.35)</span><span class="radio-charge"><input type="checkbox" id="hangtag_charge" /></span></label>
+          </div>
+        </div>
+          </div>
+        <div class="form-group">
+          <label>Fabric Charges:</label>
+          <div class="upcharges inner-charge">
+            <label><span>Fleece/Hoodie</span><span class="radio-charge"><input type="checkbox" id="fleece_once" /></span> </label>
+            <label><span> 100% Polyester</span><span class="radio-charge"><input type="checkbox" id="polyester_once" /></span></label>
+          </div>
+        </div>
+        <div id="locationContainer" style="display: none;"></div>
+    
+        <div style="margin-top: 20px;"><button onclick="calculateTotal()">Calculate</button></div>
+    
+        <div id="results" class="results" style="display:none;"></div>
+        
+      </div>
+
+<!-- Global Popup Modal -->
+<div id="colorToolModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeColorToolPopup()">&times;</span>
+    <h2>Visual Color Extractor</h2>
+
+    <input type="file" id="colorToolFile" accept="image/*">
+
+    <div id="colorPreview" class="preview-box">
+      <img id="previewImg" alt="Preview will appear here">
+    </div>
+
+    <input type="checkbox" id="bgRemove"> Background removal
+    <canvas id="hiddenCanvas" style="display:none;"></canvas>
+
+
+    <div class="options">
+      <label># Colors:
+        <input type="range" id="numColors" min="2" max="8" value="5">
+        <span id="numColorsVal">5</span>
+      </label>
+    </div>
+
+    <div id="detectedColors" class="detected-colors"></div>
+
+    <div style="margin-top:15px;text-align:right;">
+      <button onclick="applyColorTool()">Apply & Close</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const decimalInputs = ['markup', 'blankPrice', 'taxRate'];
+    
+      decimalInputs.forEach(function (id) {
+        const input = document.getElementById(id);
+        if (input) {
+          input.addEventListener('blur', function () {
+            let cleanedValue = input.value.replace(/\$/g, '');
+            const val = parseFloat(cleanedValue);
+            if (!isNaN(val)) {
+              {% comment %} if (id === 'markup') {
+                input.value =  val.toFixed(2) +' %';
+               } else if (id === 'taxRate') {
+                input.value =  val.toFixed(2) +' %';
+               } else  {% endcomment %}
+               
+               if (id === 'blankPrice') {
+                input.value = '$' + val.toFixed(2);
+              } else {
+                input.value = val.toFixed(2);
+              }
+            }
+          });
+        }
+      });
+    });
+    const fleeceCharge = 0.25;
+    const polyesterCharge = 0.25;
+    const polybagCharge = 0.55;
+      
+    const dtfTable = [
+      [0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.28,0.32,0.35,0.39,0.42,0.46,0.49,0.53],
+      [0.25,0.25,0.28,0.35,0.42,0.49,0.56,0.63,0.70,0.77,0.84,0.91,0.98,1.05,1.05],
+      [0.25,0.30,0.32,0.42,0.53,0.63,0.74,0.84,0.95,1.05,1.16,1.26,1.37,1.47,1.58],
+      [0.25,0.30,0.42,0.56,0.70,0.84,0.98,1.12,1.26,1.40,1.54,1.68,1.82,1.96,2.10],
+      [0.25,0.35,0.53,0.70,0.88,1.05,1.23,1.40,1.58,1.75,1.93,2.10,2.28,2.45,2.63],
+      [0.25,0.42,0.63,0.84,1.05,1.26,1.47,1.68,1.89,2.10,2.31,2.52,2.73,2.94,3.15],
+      [0.25,0.49,0.74,0.98,1.23,1.47,1.72,1.96,2.21,2.45,2.70,2.94,3.19,3.43,3.68],
+      [0.28,0.56,0.84,1.12,1.40,1.68,1.96,2.24,2.52,2.80,3.08,3.36,3.64,3.92,4.20],
+      [0.32,0.63,0.95,1.26,1.58,1.89,2.21,2.52,2.84,3.15,3.47,3.78,4.10,4.41,4.73],
+      [0.35,0.70,1.05,1.40,1.75,2.10,2.45,2.80,3.15,3.50,3.85,4.20,4.55,4.90,5.25],
+      [0.39,0.77,1.16,1.54,1.93,2.31,2.70,3.08,3.47,3.85,4.24,4.62,5.01,5.39,5.78],
+      [0.42,0.84,1.26,1.68,2.10,2.52,2.94,3.36,3.78,4.20,4.62,5.04,5.46,5.88,6.30],
+      [0.46,0.91,1.37,1.82,2.28,2.73,3.19,3.64,4.10,4.55,5.01,5.46,5.92,6.37,6.83],
+      [0.49,0.98,1.47,1.96,2.45,2.94,3.43,3.92,4.41,4.90,5.39,5.88,6.37,6.86,7.35],
+      [0.53,1.05,1.58,2.10,2.63,3.15,3.68,4.20,4.73,5.25,5.78,6.30,6.83,7.35,7.88]
+    ];
+    
+     
+    const qtyRanges = [
+      [12, 23], [24, 48], [49, 96], [97, 144], [145, 432], [433, 720],
+      [721, 1200], [1201, 3000], [3001, 6000], [6001, Infinity]
+    ];
+    
+    function getDTFPrice(width, height) {
+      const w = Math.min(Math.max(Math.floor(width), 1), 15);
+      const h = Math.min(Math.max(Math.floor(height), 1), 15);
+      return dtfTable[h - 1][w - 1];
+    }
+    
+    function generateLocations() {
+    const count = parseInt(document.getElementById('locations').value);
+    const container = document.getElementById('locationContainer');
+    container.innerHTML = '';
+    if (isNaN(count) || count < 1) {
+      container.style.display = 'none';
+      return;
+    }
+    container.style.display = 'block';
+
+    for (let i = 1; i <= count; i++) {
+      const group = document.createElement('div');
+      group.className = 'location-group';
+      group.innerHTML = `
+        <h3>Location ${i}</h3>
+        <div class="form-group">
+          <label>Upload Artwork</label>
+          <button type="button" onclick="openColorToolPopup(${i})">Upload Image</button>
+        </div>
+        <div id="imageData_${i}" style="display:none;">
+          <label>Colors:</label>
+          <select id="colors_${i}">
+            ${[...Array(8)].map((_, c) => `<option value="${c+1}">${c+1} Color</option>`).join('')}
+          </select>
+          <div class="width_input">
+            <label>Width (inches):</label>
+            <input type="number" id="width_${i}">
+          </div>
+          <div class="height_input">
+            <label>Height (inches):</label>
+            <input type="number" id="height_${i}">
+          </div>
+                  <div class="setup_checkbox">
+              <label>
+              
+              <span>
+                Setup Charge (New Order - $25)
+              </span>
+              <span class="radio-charge">
+                <input type="checkbox" id="setup_charge_${i}" />
+              </span>
+              </label>
+            </div>
+          <div id="previewOutput_${i}" class="preview-output"></div>
+        </div>
+
+        <!-- Popup specific to this location -->
+        <div id="colorToolModal_${i}" class="modal" style="display:none;">
+          <div class="modal-content">
+            <span class="close" onclick="closeColorToolPopup(${i})">&times;</span>
+            <h2>Visual Color Extractor - Location ${i}</h2>
+
+            <input type="file" id="colorToolFile_${i}" accept="image/*">
+            <div class="image_preview_main">
+              <div class="image_preview">
+                <div class="preview-box">
+                  <img id="previewImg_${i}" alt="Preview will appear here">
+                </div>
+
+                <div class="checkbox_bg">
+                  <input type="checkbox" id="bgRemove_${i}"> Background removal
+                </div>
+
+                <canvas id="hiddenCanvas_${i}" style="display:none;"></canvas>
+
+                <div class="options">
+                  <label># Colors:
+                    <input type="range" id="numColors_${i}" min="2" max="8" value="5">
+                    <span id="numColorsVal_${i}">5</span>
+                  </label>
+                </div>
+              </div>
+            
+              <div id="detectedColors_${i}" class="detected-colors"></div>
+            </div>
+            <div style="margin-top:15px;text-align:right;">
+              <button onclick="applyColorTool(${i})">Apply & Close</button>
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(group);
+
+      initPopupHandlers(i); // init each popup
+    }
+  }
+
+
+
+    function attachUploadHandler(i) {
+      const uploadInput   = document.getElementById(`upload_${i}`);
+      const uploadBtn     = document.getElementById(`uploadBtn_${i}`);
+      const previewImg    = document.getElementById(`previewImg_${i}`);
+      const previewBox    = document.getElementById(`previewBox_${i}`);
+      const imageDataBox  = document.getElementById(`imageData_${i}`);
+      const colorsDropdown= document.getElementById(`colors_${i}`);
+      const widthInput    = document.getElementById(`width_${i}`);
+      const heightInput   = document.getElementById(`height_${i}`);
+
+      // Button opens file picker
+      uploadBtn.addEventListener("click", () => {
+        uploadInput.click();
+      });
+
+      // Existing change handler (your full preview/color detection logic stays here)
+      uploadInput.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+          alert('Please select a valid image file.');
+          return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          alert('Image file size must be less than 10MB.');
+          return;
+        }
+
+        previewBox.style.display = 'block';
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          previewImg.src = event.target.result;
+
+          // … keep your existing onload + color detection logic here …
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = function () {
+            const DEFAULT_DPI = 300;
+            widthInput.value = Math.round(img.width / DEFAULT_DPI);
+            heightInput.value = Math.round(img.height / DEFAULT_DPI);
+            imageDataBox.style.display = 'block';
+          };
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    
+    
+    
+    function calculateTotal() {
+      const sizeInputs = document.querySelectorAll('.size-input');
+      const qty = Array.from(sizeInputs).reduce((sum, input) => sum + parseInt(input.value || 0), 0);
+      
+      if (qty === 0) {
+        alert('Please enter quantity for at least one size.');
+        return;
+      }
+      
+      const numLocations = parseInt(document.getElementById('locations').value);
+      if (isNaN(numLocations) || numLocations < 1) {
+        alert('Please enter a valid number of locations.');
+        return;
+      }
+      
+      // Validate that all locations have images uploaded
+      for (let i = 1; i <= numLocations; i++) {
+        const previewBox = document.getElementById(`previewOutput_${i}`);
+        if (!previewBox || !previewBox.querySelector("img")) {
+          alert(`Please upload an image for Location ${i}.`);
+          return;
+        }
+        
+        const width = parseFloat(document.getElementById(`width_${i}`).value);
+        const height = parseFloat(document.getElementById(`height_${i}`).value);
+        const colors = parseInt(document.getElementById(`colors_${i}`).value);
+        
+        if (isNaN(width) || isNaN(height) || isNaN(colors)) {
+          alert(`Please ensure all fields are filled for Location ${i}.`);
+          return;
+        }
+      }
+      
+      const blank = parseFloat(document.getElementById('blankPrice').value.replace(/\$/g, ''));
+      const shipping = parseFloat(document.getElementById('shippingFee').value);
+      let dtfTotal = 0;
+      var screenPrintingTotal = 0;
+      let locationDetails = '';
+      let upchargeTotal = 0;
+      let setupChargeTotal = 0;
+
+      const setupChargePerColor = 25;
+    
+      for (let i = 1; i <= numLocations; i++) {
+        const width = parseFloat(document.getElementById(`width_${i}`).value);
+        const height = parseFloat(document.getElementById(`height_${i}`).value);
+        const colors = parseInt(document.getElementById(`colors_${i}`).value);
+    
+        if (width > 15 || height > 15) {
+          alert(`Max size for DTF is 15x15 inches. Please correct Location ${i}.`);
+          return;
+        }
+    
+        const dtfUnitPrice = getDTFPrice(width, height);
+        const dtfLocationCost = dtfUnitPrice * qty;
+    
+    
+      const selectedColor = $(".option-color input[type=radio]:checked").val();
+      const $sizeSelect = $("#" + CSS.escape(selectedColor));
+
+    
+      let total = 0;
+    
+      $(".size-input").each(function () {
+        const size = $(this).data("size");   // e.g. S, M, L, XL
+        const qty = parseInt($(this).val()) || 0;
+
+        if (qty > 0) {
+                   const $opt = $sizeSelect.find(`option[data-size="${size}"]`);
+          const price = parseFloat($opt.data("price"));
+
+     console.log('opt', $opt)
+        console.log('qty', qty, typeof qty, price)
+          if (price) {
+            const lineTotal = qty * price;
+            total += lineTotal;
+    
+            console.log(`Color: ${selectedColor}, Size: ${size}, Qty: ${qty}, Price: ${price}, LineTotal: ${lineTotal}`);
+          }
+        }
+      });
+    
+      console.log("Grand Total:", total.toFixed(2));
+        var screenPrintCost = total;
+    
+        dtfTotal += dtfLocationCost;
+    
+        if (document.getElementById(`setup_charge_${i}`).checked) {
+            const setupCharge = colors * setupChargePerColor;
+            setupChargeTotal += setupCharge;
+        }
+    
+    
+        // Upcharges
+        if (document.getElementById('fleece_once').checked) upchargeTotal += fleeceCharge * qty;
+        if (document.getElementById('polyester_once').checked) upchargeTotal += polyesterCharge * qty;
+        
+        if (document.getElementById('polybag_charge').checked) upchargeTotal += 0.35 * qty;
+        if (document.getElementById('size_sticker_charge').checked) upchargeTotal += 0.15 * qty;
+        if (document.getElementById('hangtag_charge').checked) upchargeTotal += 0.35 * qty;
+        
+       locationDetails += `<tr><td>Location ${i}:</td><td>Screen priniting cost - $${screenPrintCost.toFixed(2)} per piece</td></tr>`;
+      }
+    
+      const uploaddtf = "<div class='dtfbtn'><a target='_blank' class='upload_art' href='/pages/get-a-quote'><img src='https://designerts.com/cdn/shop/files/Designer_T_s-2_no_border-02.png?v=1747840233&width=200'><span>Upload Your ART</span></a></div>";
+      const subtotal =  screenPrintCost + upchargeTotal + setupChargeTotal;
+      const totalPrice = subtotal;
+      const pricePerPiece = totalPrice / qty;
+    
+      document.getElementById('results').innerHTML = `
+        <h2>Results</h2>
+        <table>
+          <tr><td>Quantity:</td><td>${qty}</td></tr>
+          ${locationDetails}
+          <tr><td>Screen Printing Total Cost:</td><td>$${totalPrice.toFixed(2)}</td></tr>
+          <tr><td>Upcharge Total:</td><td>$${upchargeTotal.toFixed(2)}</td></tr>
+          <tr><td>Setup Charges:</td><td>$${setupChargeTotal.toFixed(2)}</td></tr>
+          <tr class='dtfoptiontr'><td>Subtotal:</td> <td class='dtfoptiontd'>$${subtotal.toFixed(2)} ${uploaddtf}</td>      </tr>
+          <tr><td>DTF Total Cost:</td><td>$${dtfTotal.toFixed(2)}<br><div class="dtfbtn"><a target='_blank' class='upload_art' href='https://www.blendsdtf.com/pages/order-by-size-and-quantity'><img src='https://www.blendsdtf.com/cdn/shop/files/blends_logo_1.png?v=1746523961&width=100'><span>Upload Your ART</span></a></div></td></tr>
+        </table>
+      `;
+      document.getElementById('results').style.display = 'block';
+    }
+
+    let allColors = {};
+
+    function extractColors(img, locationId) {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      const colorMap = new Map();
+      const step = 4 * 4; // sample every 4th pixel for performance
+
+      for (let i = 0; i < data.length; i += step) {
+        const r = data[i], g = data[i + 1], b = data[i + 2];
+        const key = `${r},${g},${b}`;
+        colorMap.set(key, (colorMap.get(key) || 0) + 1);
+      }
+
+      // sort by frequency (main color = first)
+      const sorted = [...colorMap.entries()].sort((a, b) => b[1] - a[1]);
+
+      // save ALL colors for this location
+      allColors[locationId] = sorted.map(([rgb]) => {
+        const [r, g, b] = rgb.split(",").map(Number);
+        return "#" + [r, g, b].map(x => x.toString(16).padStart(2, "0")).join("");
+      });
+
+      // draw initial set
+      renderColorSwatches(locationId);
+    }
+
+    function renderColorSwatches(locationId) {
+      const container = document.getElementById(`detectedColors_${locationId}`);
+      const numColors = parseInt(document.getElementById(`numColors_${locationId}`).value);
+
+      container.innerHTML = "";
+
+      if (!allColors[locationId]) return;
+
+      allColors[locationId].slice(0, numColors).forEach(hex => {
+        container.innerHTML += `
+          <div class="detect-color" style="display:inline-block;text-align:center;margin:4px;">
+            <div style="width:40px;height:40px;background:${hex};border:1px solid #aaa;"></div>
+            <small>${hex}</small>
+          </div>`;
+      });
+
+      // update locationData count
+      if (locationData[locationId]) {
+        locationData[locationId].colors = numColors;
+      }
+    }
+
+
+
+      let currentLocation = null;
+      let extractedWidth = 0;
+      let extractedHeight = 0;
+      let extractedColors = 0;
+      let locationData = {}; 
+
+        function openColorToolPopup(i) {
+          document.body.classList.add("overflowhidden");
+          document.getElementById(`colorToolModal_${i}`).style.display = "block";
+        }
+        function closeColorToolPopup(i) {
+          document.body.classList.remove("overflowhidden");
+          document.getElementById(`colorToolModal_${i}`).style.display = "none";
+        }
+       function initPopupHandlers(i) {
+          const fileInput = document.getElementById(`colorToolFile_${i}`);
+          const previewImg = document.getElementById(`previewImg_${i}`);
+          const numColorsInput = document.getElementById(`numColors_${i}`);
+          const numColorsVal = document.getElementById(`numColorsVal_${i}`);
+          const bgRemoveCheckbox = document.getElementById(`bgRemove_${i}`);
+          const hiddenCanvas = document.getElementById(`hiddenCanvas_${i}`);
+
+          let originalSrc = ""; // keep original uploaded image
+
+          // Slider live update
+          numColorsInput.addEventListener("input", () => {
+            numColorsVal.textContent = numColorsInput.value;
+            renderColorSwatches(i);
+          });
+
+          // Upload file
+          fileInput.addEventListener("change", e => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = ev => {
+              originalSrc = ev.target.result;
+              previewImg.src = originalSrc;
+
+              const img = new Image();
+              img.onload = () => {
+                const extractedWidth = Math.round(img.width / 300);
+                const extractedHeight = Math.round(img.height / 300);
+
+                // Extract ALL colors
+                extractColors(img, i);
+
+                locationData[i] = {
+                  width: extractedWidth,
+                  height: extractedHeight,
+                  colors: parseInt(numColorsInput.value),
+                  previewSrc: originalSrc
+                };
+              };
+              img.src = ev.target.result;
+            };
+            reader.readAsDataURL(file);
+          });
+
+          // Background removal toggle
+          bgRemoveCheckbox.addEventListener("change", () => {
+            if (!originalSrc) return;
+
+            if (bgRemoveCheckbox.checked) {
+              removeBackground(originalSrc, hiddenCanvas, previewImg, i);
+            } else {
+              previewImg.src = originalSrc;
+
+              if (!locationData[i]) locationData[i] = {};
+              locationData[i].previewSrc = originalSrc; // reset to original
+            }
+          });
+        }
+
+
+      document.getElementById("numColors").addEventListener("input", e=>{
+        document.getElementById("numColorsVal").textContent = e.target.value;
+      });
+
+      document.getElementById("colorToolFile").addEventListener("change", e => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const previewImg = document.getElementById("previewImg");
+          previewImg.src = ev.target.result;
+
+          // For width/height + color detection
+          const img = new Image();
+          img.onload = () => {
+            extractedWidth  = Math.round(img.width / 300);   // 300 dpi
+            extractedHeight = Math.round(img.height / 300);
+
+            // --- extract colors ---
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            const data = ctx.getImageData(0,0,canvas.width,canvas.height).data;
+            const colorMap = new Map();
+            for (let i=0;i<data.length;i+=16) {
+              const r = data[i], g = data[i+1], b = data[i+2];
+              const key = `${r},${g},${b}`;
+              colorMap.set(key,(colorMap.get(key)||0)+1);
+            }
+
+            const top = [...colorMap.entries()]
+              .sort((a,b)=>b[1]-a[1])
+              .slice(0, parseInt(document.getElementById("numColors").value));
+
+            extractedColors = top.length;
+
+            const container = document.getElementById("detectedColors");
+            container.innerHTML = "";
+            top.forEach(([rgb])=>{
+              const [r,g,b] = rgb.split(",").map(Number);
+              const hex = "#"+[r,g,b].map(x=>x.toString(16).padStart(2,"0")).join("");
+              const div = document.createElement("div");
+              div.innerHTML = `
+                <div style="width:30px;height:30px;margin:auto;background:${hex};border:1px solid #aaa"></div>
+                <small>${hex}</small>`;
+              container.appendChild(div);
+            });
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+
+      function applyColorTool(i) {
+        const data = locationData[i];
+        if (!data) return;
+
+        document.getElementById(`width_${i}`).value  = data.width;
+        document.getElementById(`height_${i}`).value = data.height;
+        document.getElementById(`colors_${i}`).value = data.colors;
+        document.getElementById(`imageData_${i}`).style.display="block";
+
+        document.getElementById(`previewOutput_${i}`).innerHTML = `
+          <div class="preview-wrapper">
+            <img src="${data.previewSrc}" style="max-width:80px;max-height:80px;border:1px solid #ccc;margin-top:5px;">
+            <br>
+            <small>${data.colors} colors, ${data.width}x${data.height} in</small>
+            <br>
+            <button type="button" class="remove-preview" onclick="removePreview(${i})">Remove</button>
+          </div>
+        `;
+
+        closeColorToolPopup(i);
+      }
+
+
+      function removePreview(i) {
+        // Clear preview
+        document.getElementById(`previewOutput_${i}`).innerHTML = "";
+
+        // Reset stored data
+        locationData[i] = null;
+
+        // Optionally reset inputs
+        document.getElementById(`width_${i}`).value = "";
+        document.getElementById(`height_${i}`).value = "";
+        document.getElementById(`colors_${i}`).value = "1";
+
+        // Hide image data block
+        document.getElementById(`imageData_${i}`).style.display = "none";
+      }
+
+      function removeBackground(imgSrc, canvasEl, previewEl, i) {
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = () => {
+          const ctx = canvasEl.getContext("2d");
+          canvasEl.width = img.width;
+          canvasEl.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const imageData = ctx.getImageData(0, 0, img.width, img.height);
+          const data = imageData.data;
+
+          // Top-left pixel = background color
+          const r0 = data[0], g0 = data[1], b0 = data[2];
+
+          for (let p = 0; p < data.length; p += 4) {
+            const r = data[p], g = data[p + 1], b = data[p + 2];
+            const dist = Math.sqrt((r - r0) ** 2 + (g - g0) ** 2 + (b - b0) ** 2);
+            if (dist < 40) {
+              data[p + 3] = 0; // transparent pixel
+            }
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+
+          // Export transparent PNG
+          const transparentSrc = canvasEl.toDataURL("image/png");
+          previewEl.src = transparentSrc;
+
+          // ✅ Save into locationData for final preview
+          if (!locationData[i]) locationData[i] = {};
+          locationData[i].previewSrc = transparentSrc;
+        };
+        img.src = imgSrc;
+      }
+
+
+</script>
+     
+<style>
+.product-recommendations {
+  position: relative;
+  z-index: 1;
+}
+.overflowhidden {
+  overflow: hidden;
+}
+.image_preview_main {
+  display: flex;
+  align-items: self-start;
+  gap: 30px;
+}
+.dtf_calc .checkbox_bg input {
+  width: auto;
+  margin: 0;
+}
+.checkbox_bg {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 31px;
+}
+.checkbox_bg input {
+  width: auto;
+  margin: 0;
+}
+.preview-box img {
+  max-width: 250px;
+}
+#previewImg {
+  max-width: 100%;
+  max-height: 40vh;
+  object-fit: contain;
+  border-radius: 10px;
+  background: transparent;
+}
+/* Background Overlay */
+.modal {
+  display: none; /* set to block via JS */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+}
+
+/* Modal Box */
+.modal-content {
+  background: #fff;
+  margin: 0px auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 600px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  height: 80vh;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+}
+ 
+.overflowhidden #shopify-section-sections--24526126055742__header {
+    z-index: 1;
+}
+/* Close Button */
+.modal .close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #444;
+}
+
+/* Upload Button */
+.upload-btn {
+  display: inline-block;
+  background: #0073e6;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+.upload-btn input {
+  display: none;
+}
+
+/* Preview Image */
+.preview-box {
+  text-align: center;
+  margin: 15px 0;
+}
+.preview-box img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  object-fit: contain;
+}
+
+/* Options (checkbox + slider) */
+.option-row {
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+/* Detected Colors Grid */
+.detected-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 15px 0;
+}
+.detected-colors div {
+  text-align: center;
+  font-size: 12px;
+}
+.detected-colors div div {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  margin-bottom: 4px;
+}
+
+/* Action Buttons */
+.actions {
+  text-align: right;
+  margin-top: 20px;
+}
+.actions button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.actions button:hover {
+  background: #218838;
+}
+
+/* Small animation */
+@keyframes popupFade {
+  from {opacity:0; transform: scale(0.9);}
+  to {opacity:1; transform: scale(1);}
+}
+.option-size {
+  display: none;
+}
+.upcharges label > span {
+  order: 2;
+  font-weight: normal;
+  font-family: Indivisible;
+  font-size: 14px;
+  line-height: 22px;
+}
+.upcharges label > span.radio-charge {
+  order: 1;
+  display: flex;
+  align-items: center;
+  margin-top: -5px;
+}
+.upcharges {
+  margin-left: 10px;
+}
+td.DTFdtfoptiontd {display: flex;align-items: center;gap: 10px;}
+tr.DTFdtfoptiontr {
+  box-shadow: 1px 1px 8px 2px #29ace2;
+}
+.input-group {
+  flex: 0 0 14%;
+}
+.dtf_calc .left, .dtf_calc .right {
+  flex: 1 1 45%;
+}
+.dtf_calc .form-group {
+  margin-bottom: 15px;
+}
+.dtf_calc input, .dtf_calc select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 0;
+  border: 1px solid #000 !important;
+  color: #000;
+}
+.dtf_calc button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #29ace2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.dtf_calc .location-group {
+  background: #fff;
+  padding: 15px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}
+.dtf_calc .results {
+  margin-top: 30px;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.dtf_calc .results table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dtf_calc .results tr td:last-child {
+  border-left: 1px solid #ddd;
+  padding: 8px;
+}
+.dtf_calc .results tr td{
+  padding: 8px;
+  color: #000;
+}
+.dtf_calc .results tr {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+.dtf_calc h2,.results h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  line-height: 1.2;
+  color: #000;
+  font-weight: bold;
+  font-family: var(--heading-font-stack);
+}
+.text {
+  color: #000;
+}
+.height_input,.width_input{
+  margin-top: 15px;
+}
+.dtf_calc td {
+  padding: 10px 0;
+}
+.dtf_calc .form-group label {
+  font-weight: 400;
+  color: #000;
+  font-family: var(--heading-font-stack);
+}
+.upcharges label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+.upcharges.inner-charge label {
+  font-weight: normal;
+}
+.upcharges label input {
+  order: 2;
+}
+.dtf_calc .form-group label {
+  font-weight: 600;
+}
+.dtfbtn {
+  position: relative;
+  background: transparent;
+  color: #000;
+}
+
+.dtfbtn::before {
+  bottom: -5px;
+}
+.dtfbtn::after {
+  top: -5px;
+}
+.dtfbtn::before, .dtfbtn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 10px;
+  border-radius: 10px;
+  transition: all .4s ease-in-out;
+  transition-delay: 0s;
+}
+.dtfbtn:hover a::before {
+  transform: skewX(40deg) translateX(200%);
+}
+.dtfbtn a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255, 255, 255, .5), transparent);
+  transform: skewX(40deg) translateX(0);
+  transition: all .5s ease-out;
+}
+.results a.upload_art {
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(41, 172, 226, .05);
+  box-shadow: 0 3px 14px rgba(41, 172, 226, 0.5);
+  border-top: 1px solid rgba(41, 172, 226, .1);
+  border-bottom: 1px solid rgba(41, 172, 226, .1);
+  z-index: 1;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  backdrop-filter: blur(15px);
+  padding: 5px 0;
+  overflow: hidden;
+  position: relative;
+  flex-wrap: wrap;
+}
+.dtfbtn:hover::after {
+  top: 30px;
+  background: #2bd2ff;
+  box-shadow: 0 0 5px #2bd2ff, 0 0 15px #2bd2ff, 0 0 30px #2bd2ff, 0 0 60px #2bd2ff;
+}
+.dtfbtn:hover::before {
+  bottom: 30px;
+  background: #2bd2ff;
+  box-shadow: 0 0 5px #2bd2ff, 0 0 15px #2bd2ff, 0 0 30px #2bd2ff, 0 0 60px #2bd2ff;
+}
+.dtfbtn:hover::before, .dtfbtn:hover::after {
+  height: 50%;
+  width: 80%;
+  border-radius: 30px;
+  transition-delay: .3s;
+}
+.upcharges.inner-charge label {
+  margin: 7px 0;
+}
+.dtf_calc_outer span {
+  color: #000;
+}
+.dtf_calc_outer label {
+  color: #000;  
+}
+.results a.upload_art span {
+  text-align: center;
+  margin-top: 0;
+  width: 100%;
+}
+.setup_checkbox label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.setup_checkbox {
+  margin-top: 10px;
+}
+.dtf_calc input, .dtf_calc select {
+  margin-top: 5px;
+}
+
+/* Drag and drop styling */
+.dtf_calc .preview-box {
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dtf_calc .preview-box.dragover {
+  border: 2px dashed #29ace2 !important;
+  background-color: rgba(41, 172, 226, 0.05);
+}
+
+/* Color detection results styling */
+.dtf_calc .img-details {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+.dtf_calc .img-details strong {
+  color: #29ace2;
+  font-weight: 600;
+}
+
+/* Loading indicator */
+.dtf_calc .loading {
+  color: #666;
+  font-style: italic;
+}
+
+.dtf_calc .error {
+  color: #d32f2f;
+  font-weight: 500;
+}
+</style>

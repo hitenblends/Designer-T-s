@@ -1,0 +1,181 @@
+{% if section.blocks.size > 0 %}
+  {% style %}
+    #art-department--{{ section.id }} {
+      background-color: {{ section.settings.bg_color }};
+      --section-vertical-spacing: 3rem;
+    }
+  {% endstyle %}
+  <div id="art-department--{{ section.id }}" class="art-department-section py-section-vertical-spacing">
+    <div class="page-width max-w-site mx-auto px-section">
+      {% if section.settings.heading != blank or section.settings.text != blank %}
+        <div class="section-header-wrapper">
+          {% if section.settings.heading != blank %}
+            <h2 class="font-heading text-center heading-standard heading-style full_shadow mb-5">{{ section.settings.heading }}</h2>
+          {% endif %}
+          {% if section.settings.text != blank %}
+            <p class="text text-center">{{ section.settings.text }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="flex-help-wrapper">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'design_ready' %}
+            {% if block.settings.image != blank or block.settings.heading != blank or block.settings.sub_heading != blank or block.settings.text != blank or block.settings.button != blank %}
+              <div class="design-ready">
+                <div class="design-back">
+                  {% if block.settings.image != blank %}
+                    <div class="image">
+                    <img src="{{ block.settings.image | image_url: width: 400, height: 400 }}" alt="{{ block.settings.image.alt }}">
+                    </div>
+                  {% endif %}
+                  {% if block.settings.heading != blank %}
+                    <h2 class="heading font-heading heading-secondary break-words">{{ block.settings.heading }}</h2>
+                  {% endif %}
+                  {% if block.settings.sub_heading != blank %}
+                    <h3 class="sub_heading">{{ block.settings.sub_heading }}</h3>
+                  {% endif %}
+                  {% if block.settings.text != blank %}
+                    <div class="text">{{ block.settings.text }}</div>
+                  {% endif %}
+                  {% if block.settings.button != blank and block.settings.link != blank %}
+                    <a class="button inline-block push-btn mt-5" href="{{ block.settings.link }}"><span class="push-btn-surface">{{ block.settings.button }}</span></a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+             {% when 'design_help' %}
+              {% if block.settings.image != blank or block.settings.heading != blank or block.settings.sub_heading != blank or block.settings.text != blank or block.settings.button != blank %}
+                <div class="design-help">
+                  <div class="design-back">
+                  {% if block.settings.image != blank %}
+                    <div class="image">
+                      <img src="{{ block.settings.image | image_url: width: 400, height: 400 }}" alt="{{ block.settings.image.alt }}">
+                    </div>
+                  {% endif %}
+                  {% if block.settings.heading != blank %}
+                    <h2 class="heading font-heading heading-secondary break-words">{{ block.settings.heading }}</h2>
+                  {% endif %}
+                  {% if block.settings.sub_heading != blank %}
+                    <h3 class="sub_heading">{{ block.settings.sub_heading }}</h3>
+                  {% endif %}
+                  {% if block.settings.text != blank %}
+                    <div class="text">{{ block.settings.text }}</div>
+                  {% endif %}
+                  {% if block.settings.button != blank and block.settings.link != blank %}
+                    <a class="button inline-block push-btn mt-5" href="{{ block.settings.link }}"><span class="push-btn-surface">{{ block.settings.button }}</span></a>
+                  {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Art Department",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "text",
+        "label": "Text"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "design_ready",
+        "name": "Design Ready",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "sub_heading",
+            "label": "Sub Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "button",
+            "label": "Button"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          }
+        ]
+      },
+      {
+        "type": "design_help",
+        "name": "Design Help",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "sub_heading",
+            "label": "Sub Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "text",
+            "id": "button",
+            "label": "Button"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Art Department"
+      }
+    ]
+  }
+{% endschema %}

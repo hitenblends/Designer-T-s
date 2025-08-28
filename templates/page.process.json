@@ -1,0 +1,354 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_overlay_UpJUtU": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        ".banner-section {margin-bottom: 0px;}"
+      ],
+      "settings": {
+        "container": false,
+        "image": "shopify://shop_images/background-new-one.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "pt-600",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Personalized Production Experience",
+        "heading_tag": "h1",
+        "heading_size": "heading-standard",
+        "richtext": "<p>At Designer T's, we offer more than just printing—we build lasting relationships. Whether you're a local business or a national brand, our team works closely with you throughout the process to ensure your design is brought to life exactly as you envision. Because if you’re not happy, we’re not happy.</p>",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "image_with_text_LA9aWR": {
+      "type": "image-with-text",
+      "settings": {
+        "display_on_card": true,
+        "image": "shopify://shop_images/IMG_1430.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "right",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "Industry expertise + Cutting-Edge Technology = Premium Results",
+        "heading_size": "heading-standard",
+        "richtext": "<p>At Designer T’s, we combine decades of industry experience with the latest decoration technology to deliver premium results. Trusted by leading brands who demand quality, consistency, and turnaround they can count on.</p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": false
+      }
+    },
+    "production_YCTNaz": {
+      "type": "production",
+      "blocks": {
+        "left_icon_UkzzLx": {
+          "type": "left_icon",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1.png",
+            "heading": "Human",
+            "text": "Our team walks you through every step, offering expert advice tailored to your unique needs"
+          }
+        },
+        "left_icon_g83EXP": {
+          "type": "left_icon",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_6.png",
+            "heading": "Art Department",
+            "text": "Our skilled artists bring your vision to life, ensuring your design is flawlessly executed\". Designer T’s has an in-house art department"
+          }
+        },
+        "left_icon_FTaUXk": {
+          "type": "left_icon",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_1.png",
+            "heading": "Turn around time",
+            "text": "On-Time Delivery or Local Pick-up. Count on us for reliable, on-time delivery, every time. Designer T’s has the “capacity to produce 30,000+ shirts daily”. Designer T's offers quick turnaround times"
+          }
+        },
+        "right_icon_QzAXQa": {
+          "type": "right_icon",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_4.png",
+            "heading": "Experience",
+            "text": " 40+ years of expertise\". Designer T’s is a local, family-owned business"
+          }
+        },
+        "right_icon_e7tWrN": {
+          "type": "right_icon",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_3.png",
+            "heading": "Details",
+            "text": "Designer T's focuses on quality craftsmanship, attention to detail, and exceptional customer service"
+          }
+        },
+        "right_icon_DfQiPU": {
+          "type": "right_icon",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_2.png",
+            "heading": "Dozens of Exclusive Brand Partnerships",
+            "text": "Designer T's offers custom online stores and branded apparel solutions for seamless partner and client ordering"
+          }
+        }
+      },
+      "block_order": [
+        "left_icon_UkzzLx",
+        "left_icon_g83EXP",
+        "left_icon_FTaUXk",
+        "right_icon_QzAXQa",
+        "right_icon_e7tWrN",
+        "right_icon_DfQiPU"
+      ],
+      "settings": {
+        "bg_color": "#000000",
+        "heading": "Personalized Production Experience",
+        "text": "At Designer T's, we offer more than just printing—we build lasting relationships. Whether you're a local business or a national brand, our team works closely with you throughout the process to ensure your design is brought to life exactly as you envision. Because if you’re not happy, we’re not happy. ",
+        "image": "shopify://shop_images/AdobeStock_307451527.jpg"
+      }
+    },
+    "art_department_p4wNQC": {
+      "type": "art-department",
+      "blocks": {
+        "design_ready_kwH7Cp": {
+          "type": "design_ready",
+          "settings": {
+            "image": "shopify://shop_images/Acadia_Case_Study.jpg",
+            "heading": "ARE YOU DESIGN READY?",
+            "sub_heading": "(You have one of the below items)",
+            "text": "<ul><li>I have vector art (.ai, .eps, .svg)</li><li>I have a raster file (.psd, .jpeg, .png)</li><li>I made sure it is 300dpi at the size I want it</li></ul>",
+            "button": "Request Quote",
+            "link": "shopify://pages/get-a-quote"
+          }
+        },
+        "design_help_gBiYxd": {
+          "type": "design_help",
+          "settings": {
+            "image": "shopify://shop_images/DSC_7723.jpg",
+            "heading": "DO YOU NEED DESIGN HELP?",
+            "sub_heading": "",
+            "text": "<p>Only have a low resolution image? or you need help with a design? That works too. We can redesign your artwork, starting at just for as little as $25.00.</p>",
+            "button": "Work With An Artist",
+            "link": "https://share.hsforms.com/1zwChin72Qki_kPTtnM_nhwswfes"
+          }
+        }
+      },
+      "block_order": [
+        "design_ready_kwH7Cp",
+        "design_help_gBiYxd"
+      ],
+      "settings": {
+        "bg_color": "#ffffff",
+        "heading": "Unmatched Artistry, Cutting-Edge Technology",
+        "text": " Our Art Department is staffed by elite artists using the latest hardware and software. We stay ahead of the curve by constantly evolving our design techniques and ensuring our work exceeds industry standards."
+      }
+    },
+    "text_columns_with_images_qD8Ahg": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "column_hGKAtH": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_3.png",
+            "enable_logo": false,
+            "title": "ARE YOU DESIGN READY?",
+            "text": "<ul><li>I have vector art (.ai, .eps, .svg)</li><li>I have a raster file (.psd, .jpeg, .png)</li><li>I made sure it is 300dpi at the size I want it</li></ul>",
+            "newtab": false,
+            "cta_link": "shopify://pages/get-a-quote",
+            "cta_text": "Request Quote",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_NmwVdT": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_6.png",
+            "enable_logo": false,
+            "title": "DO YOU NEED DESIGN HELP?",
+            "text": "<p>Only have a low resolution image? Or a printed card? That works too.We can redesign your artwork, ranging from $15 - $100. Work with an artist and our team will recreate your art and we’ll guide you from there!</p>",
+            "newtab": false,
+            "cta_link": "shopify://pages/services",
+            "cta_text": "Work With An Artist",
+            "color_scheme": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "column_hGKAtH",
+        "column_NmwVdT"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "slideshow_on_mobile": false,
+        "title": "",
+        "subtitle": "",
+        "crop": "aspect-w-1 aspect-h-1",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_overlay_fDqUMt": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "container": true,
+        "image": "shopify://shop_images/Tshirt1_Layout.jpg",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "style": "inset",
+        "height": "pt-600",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "With thousands of pieces of art created, explore",
+        "heading_tag": "h2",
+        "heading_size": "heading-standard",
+        "richtext": "",
+        "cta_url": "shopify://pages/get-a-quote",
+        "cta_text": "read catalog",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "faq_DiBMEk": {
+      "type": "faq",
+      "blocks": {
+        "question_ftrWM6": {
+          "type": "question",
+          "settings": {
+            "question": "What type of design files or art do you need?",
+            "answer": "<p>We accept high-resolution files in the following formats: AI, EPS, PDF, and PSD.</p>"
+          }
+        },
+        "question_KYAjyp": {
+          "type": "question",
+          "settings": {
+            "question": "What is the cost to create a design or get my logo ready for printing?",
+            "answer": "<p>Design services range from $50 to $250, depending on complexity and requirements.</p>"
+          }
+        },
+        "question_Ey4VCB": {
+          "type": "question",
+          "settings": {
+            "question": "What products do you offer?",
+            "answer": "<p>We offer a wide range of products including apparel (t-shirts, hoodies, polos, hats) and promotional items (coolers, water bottles, koozies, key chains, bags, and more).</p>"
+          }
+        },
+        "question_44m8Kr": {
+          "type": "question",
+          "settings": {
+            "question": "Do you have accessories or just apparel?",
+            "answer": "<p>We carry promotional items and accessories in addition to apparel.</p>"
+          }
+        },
+        "question_4d6eUm": {
+          "type": "question",
+          "settings": {
+            "question": "What brands do you have access to?",
+            "answer": "<p>We partner with premium brands including Nike, Adidas, Peter Millar, Gildan, and many more. Check out our complete selection on our <a href=\"/pages/apparel-promotional-brand-partners\" title=\"Apparel & Promotional Brand Partners\">brands page</a>.</p>"
+          }
+        },
+        "question_faMdwC": {
+          "type": "question",
+          "settings": {
+            "question": "Is Designer T's a PSST partner with any major suppliers?",
+            "answer": "<p>Yes, Designer T's is an Exclusive Decorator for Sanmar & SS and PSST for Sanmar and Impact for SS.<br/><strong>SAGE Distributor #:</strong>224767<br/><strong>PPAI Distributor #:</strong>712511<br/><strong>Sage Deco #:</strong>53416</p>"
+          }
+        },
+        "question_zgFRei": {
+          "type": "question",
+          "settings": {
+            "question": "Can I bring in my own apparel to be decorated?",
+            "answer": "<p>Yes, we're happy to decorate items you provide.</p>"
+          }
+        },
+        "question_LcpjcP": {
+          "type": "question",
+          "settings": {
+            "question": "What do you need to provide a quote?",
+            "answer": "<p>To provide an accurate quote, we need:</p><ul><li>Your contact information</li><li>Order details (garment or promotional item type)</li><li>Brand & style preferences</li><li>Color and size requirements</li><li>Decoration details</li></ul><p>Our simple quote form includes all the fields to get you started quickly.</p>"
+          }
+        },
+        "question_ntXgyG": {
+          "type": "question",
+          "settings": {
+            "question": "What is the minimum order?",
+            "answer": ""
+          }
+        },
+        "question_9pBCLN": {
+          "type": "question",
+          "settings": {
+            "question": "What is the turnaround time?",
+            "answer": "<p>We're known for our fast turnaround times—typically 7 days from production approval. We also accommodate rush orders, so please reach out if you have tight deadlines. We offer both shipping and pickup options from our facility in Brooklawn, NJ.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_ftrWM6",
+        "question_KYAjyp",
+        "question_Ey4VCB",
+        "question_44m8Kr",
+        "question_4d6eUm",
+        "question_faMdwC",
+        "question_zgFRei",
+        "question_LcpjcP",
+        "question_ntXgyG",
+        "question_9pBCLN"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": false,
+        "heading_text_style": "body",
+        "two_columns_desktop": false,
+        "title": "FAQ",
+        "richtext": "",
+        "color_scheme": "secondary",
+        "use_gradient_background": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_UpJUtU",
+    "image_with_text_LA9aWR",
+    "production_YCTNaz",
+    "art_department_p4wNQC",
+    "text_columns_with_images_qD8Ahg",
+    "image_with_text_overlay_fDqUMt",
+    "faq_DiBMEk"
+  ]
+}

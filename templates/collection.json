@@ -1,0 +1,156 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "blocks": {
+        "80465972-f9ee-4495-9397-71aded58baf1": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "primary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": "reverse"
+          }
+        }
+      },
+      "block_order": [
+        "80465972-f9ee-4495-9397-71aded58baf1"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": false,
+        "single_banner_for_all": true,
+        "show_collection_title": false,
+        "overlay_text_to_image": true,
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "collection_image_style": "full",
+        "crop": "aspect-w-10 aspect-h-4",
+        "linklist": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "custom_css": [],
+      "settings": {
+        "no_products": 24,
+        "display_on_card": true,
+        "enable_quick_buy": true,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "enable_filtering": true,
+        "show_filtered": true,
+        "enable_sorting": true,
+        "expand_filters": true,
+        "show_filter_count": false,
+        "enable_color_swatch_filters": true,
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "6bf839be-6e1c-4fc8-a253-f9a755596003": {
+      "type": "rich-text",
+      "disabled": true,
+      "settings": {
+        "title": "Vegan lollies",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>Enjoy mouth-watering, low sugar vegan lollies that contain no artificial nasties or sugar alcohols (no sugar alcohols = no runny tummy). Certified by Vegan Australia are made with nothin’ but top-notch ingredients like natural flavours and colours and prebiotic fibre that love ya gut.</p><p></p><p>If you’re #SWEETFAM, enjoy our Fruity Vegan Bears that are full of real-fruit flavour! For all our #SOURFAM sweeties, treat yo-self to our Sour Vegan Bears that are bursting with delicious sour power! Like sweet AND sour? Try em’ both with our Beary Tasty Box!Whether you’re a vegan, vegetarian or flexitarian, treat yo-self to our sweet selection of tasty vegan lollies.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-2/3",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "primary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "a0a67959-09ae-49e7-b984-db803e16a679": {
+      "type": "faq",
+      "blocks": {
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-1": {
+          "type": "question",
+          "settings": {
+            "question": "HOW IS FUNDAY SO DAMN TASTY IF YOU DON'T ADD ANY SUGAR?",
+            "answer": "<p>We don’t use any sugar to make our lollies, we use real food ingredients like tapioca starch and chicory root fibre that actually give a sweet flavour. We then add a touch of the all-natural stevia leaf to balance things out. This means we’re up to 91% less sugar than your average lolly. We also use delicious natural flavours like peach, raspberry, apple and lemon to give our lollies the yum factor!</p>"
+          }
+        },
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-2": {
+          "type": "question",
+          "settings": {
+            "question": "ARE FUNDAY SWEETS GLUTEN FREE?",
+            "answer": "<p>Coeliac’s rejoice! FUNDAY is gluten-free guaranteed. All FUNDAY sweets are gluten tested by an independent labratory.</p>"
+          }
+        },
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-3": {
+          "type": "question",
+          "settings": {
+            "question": "WHY DON'T FUNDAY ADD SUGAR ALCOHOLS TO THEIR LOLLIES?",
+            "answer": "<p>We believe in using real ingredients to sweeten our lollies such as natural fibres and stevia. Many sugar-free or ‘no sugar added’ brands use sugar alcohols (or polyols) to sweeten their lollies. Some common sugar alcohols are: Maltitol (E965), Sorbitol (E420), Xylitol (E967). When products add sugar alcohols, they sometimes have to state the following: “excess consumption may cause a laxative effect”. That’s because sugar alcohols can be poorly absorbed by our digestive system in certain amounts.</p>"
+          }
+        },
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-4": {
+          "type": "question",
+          "settings": {
+            "question": "ARE YOUR GUMMIES VEGAN?",
+            "answer": "<p>Heck yes we have 2 products that are Australian Certified Vegan! Our Fruity Gummy Bears and our Sour Gummy Bears that each contain 3 tasty flavours inside: Raspberry, Apple and Lemon! What makes the Gummy Bears vegan you ask? Well, instead of using gelatine we use a natural apple pectin, a real food ingredient for a real yummy lolly! It was SUPER important to us that we made our lollies as accessible to everyone including those who follow a more plant-based diet!</p>"
+          }
+        },
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-5": {
+          "type": "question",
+          "settings": {
+            "question": "WHAT KIND OF GELATINE DO YOU USE?",
+            "answer": "<p>Yes they are! All of our gelatine based gummies are made using halal beef gelatine.</p>"
+          }
+        },
+        "f4821e24-5de4-447f-923a-fb5aac26c2b6": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "quaternary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-1",
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-2",
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-3",
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-4",
+        "template--15927458201796__a0a67959-09ae-49e7-b984-db803e16a679-question-5",
+        "f4821e24-5de4-447f-923a-fb5aac26c2b6"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": false,
+        "heading_text_style": "heading",
+        "two_columns_desktop": false,
+        "title": "Frequently asked questions",
+        "richtext": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "6bf839be-6e1c-4fc8-a253-f9a755596003",
+    "a0a67959-09ae-49e7-b984-db803e16a679"
+  ]
+}

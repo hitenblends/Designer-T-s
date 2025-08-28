@@ -1,0 +1,44 @@
+<div class="tab-menu">
+  <div class="px-section relative z-10 max-w-site mx-auto">
+  <ul>
+    {% for block in section.blocks  %}
+      <li class="{% if forloop.first %}active{% endif %}">
+        <a href="{% if block.settings.url != blank %}{{ block.settings.url }}{% else %}/{% endif %}">
+        <img src="{{ block.settings.heading | image_url: width: '500x' }}" alt="{{ block.settings.heading.alt }}">  
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+</div>
+{% schema %}
+{
+    "name": "Tab Menu",
+    "settings": [
+       
+    ],
+  "blocks": [
+      {
+      "type": "Title",
+      "name": "Menu Title",
+      "settings": [
+         {
+          "type": "image_picker",
+          "id": "heading",
+          "label": "t:common.settings.use_gradient_background.label"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tab Menu"
+    }
+  ]
+}
+{% endschema %}

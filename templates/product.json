@@ -1,0 +1,214 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "display_on_card": false,
+            "text_align": "text-left"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "display_on_card": false,
+            "truncate_description": true,
+            "text_align": "text-left"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "display_on_card": true,
+            "option_style": "buttons",
+            "hide_option_labels": false,
+            "enable_color_swatches": true
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "display_on_card": false,
+            "show_price": false,
+            "enable_payment_button": false,
+            "show_pickup_availability": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "product_badges": {
+          "type": "product_badges",
+          "settings": {}
+        },
+        "collapsible_tab_W4djJ7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "display_on_card": false,
+            "icon": "none",
+            "heading": "Product Description",
+            "content": "{{ product.description }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_qRLDYa": {
+          "type": "collapsible_tab",
+          "settings": {
+            "display_on_card": false,
+            "icon": "none",
+            "heading": "Product Details",
+            "content": "{{ product.metafields.custom.product_details | metafield_tag }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_X8XrbF": {
+          "type": "collapsible_tab",
+          "settings": {
+            "display_on_card": false,
+            "icon": "none",
+            "heading": "Inventory",
+            "content": "<p>{{ product.metafields.custom.inventory.value }}</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "description",
+        "variant_picker",
+        "buy_buttons",
+        "product_badges",
+        "collapsible_tab_W4djJ7",
+        "collapsible_tab_qRLDYa",
+        "collapsible_tab_X8XrbF"
+      ],
+      "custom_css": [
+        ".yotpo-display-wrapper .standalone-bottomline {justify-content: start;}"
+      ],
+      "settings": {
+        "crop": "",
+        "image_shape": "default",
+        "desktop_media_width": "lg:col-span-7_lg:col-span-5",
+        "show_slideshow_arrows_on_desktop": true,
+        "enable_image_zoom": false,
+        "enable_video_looping": true,
+        "autoplay_videos_on_desktop": true,
+        "media_mobile_width": "w-full",
+        "thumbnails_position": "left",
+        "thumbnail_crop": "",
+        "thumbnail_shape": "default",
+        "hide_media_shadow": true,
+        "thumbnail_size": "large",
+        "show_thumbnails_on_mobile": false,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "product_recommendations_D6YYbJ": {
+      "type": "product-recommendations",
+      "name": "t:sections.product_recommendations.name",
+      "settings": {
+        "show_product_recommendations": true,
+        "display_on_card": true,
+        "enable_quick_buy": false,
+        "product_recommendations_heading": "You may also like",
+        "max_products": "3",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "product-nutrition-details": {
+      "type": "product-nutrition-details",
+      "disabled": true,
+      "settings": {}
+    },
+    "product-takeover": {
+      "type": "product-takeover",
+      "disabled": true,
+      "settings": {}
+    },
+    "product-faqs": {
+      "type": "product-faqs",
+      "disabled": true,
+      "settings": {
+        "display_on_card": false,
+        "heading_text_style": "heading",
+        "two_columns_desktop": false,
+        "title": "Frequently asked questions",
+        "richtext": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "1692020174ea02361c": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {}
+    },
+    "product-banner": {
+      "type": "product-banner",
+      "blocks": {
+        "63fa8c85-6132-4d24-b967-46aee4cfe35c": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "primary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": true,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        },
+        "ad16bfec-afa2-423a-91f0-86c95d6afa84": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "quaternary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "63fa8c85-6132-4d24-b967-46aee4cfe35c",
+        "ad16bfec-afa2-423a-91f0-86c95d6afa84"
+      ],
+      "disabled": true,
+      "settings": {
+        "style": "full",
+        "height": "natural",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Convinced yet?",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Shop our Vigan Sour Bears!</p>",
+        "cta_url": "#",
+        "cta_text": "Shop Now",
+        "color_scheme": "primary",
+        "text_overlay_color": "same_as_section"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_recommendations_D6YYbJ",
+    "product-nutrition-details",
+    "product-takeover",
+    "product-faqs",
+    "1692020174ea02361c",
+    "product-banner"
+  ]
+}

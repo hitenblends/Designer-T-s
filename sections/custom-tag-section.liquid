@@ -1,0 +1,49 @@
+<div class="brand-list-container container">
+
+    {% for block in section.blocks  %}
+        <div class="brand-column">
+            <h3>{{ block.settings.name }}</h3>
+            <ul>
+              {% for link in linklists[block.settings.link_list].links %}
+                    <li>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+    "name": "Brand List",
+    "settings": [],
+    "blocks": [
+        {
+            "type": "brand",
+            "name": "Brand",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Brand Group (e.g., A-C, D-F, G-I)"
+                },
+                {
+                    "type": "link_list",
+                    "id": "link_list",
+                    "label": "Choose Navigation"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Brand List",
+            "category": "Custom",
+            "blocks": [
+              
+            ]
+        }
+    ]
+}
+{% endschema %}

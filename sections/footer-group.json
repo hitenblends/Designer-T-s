@@ -1,0 +1,82 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "tagline_and_social_links_3qEtAe": {
+          "type": "tagline_and_social_links",
+          "settings": {
+            "tagline": "<p>For over 40 years, Designer T’s has been the go-to production partner for businesses, contract decorators, and organizations nationwide—delivering quality, reliability, and expertise you can count on.</p>",
+            "show_social_icons": true,
+            "logo": "shopify://shop_images/Designer_ts_update-04.png",
+            "logo_max_width": 400
+          }
+        },
+        "menus_HVpz97": {
+          "type": "menus",
+          "settings": {
+            "show_menu_headings": false,
+            "menu_heading_one": "",
+            "linklist_1": "new-footer-menu",
+            "menu_heading_two": "",
+            "linklist_2": ""
+          }
+        },
+        "newsletter_R7ynAB": {
+          "type": "newsletter",
+          "settings": {
+            "newsletter_heading": "Our Newsletter",
+            "newsletter_text": ""
+          }
+        },
+        "custom_logos_9c6FCe": {
+          "type": "custom_logos",
+          "settings": {
+            "logo_heading": "Trade Affiliates:",
+            "logo_image_1": "shopify://shop_images/asi_white.png",
+            "logo_image_2": "shopify://shop_images/SAGE_Decorator_Logoupdated.png",
+            "logo_image_3": "shopify://shop_images/sanmarpsst.png",
+            "logo_image_4": "shopify://shop_images/sscdn.png"
+          }
+        },
+        "map_hEj7P6": {
+          "type": "map",
+          "disabled": true,
+          "settings": {
+            "map": "<iframe style=\"width: 100%;height: 100%;\" src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.984834834397!2d-75.12072239999999!3d39.8741808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6cb504433efb7%3A0x23bd6d680847daae!2sDesigner%20T's!5e1!3m2!1sen!2sin!4v1740573812023!5m2!1sen!2sin\" width=\"600\" height=\"450\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+          }
+        }
+      },
+      "block_order": [
+        "tagline_and_social_links_3qEtAe",
+        "menus_HVpz97",
+        "newsletter_R7ynAB",
+        "custom_logos_9c6FCe",
+        "map_hEj7P6"
+      ],
+      "custom_css": [],
+      "settings": {
+        "logo_max_width": 130,
+        "show_payment_icons": false,
+        "show_country_selector": false,
+        "show_locale_selector": false,
+        "color_scheme": "secondary",
+        "use_gradient_background": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

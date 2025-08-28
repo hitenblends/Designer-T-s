@@ -1,0 +1,699 @@
+
+{%- liquid
+  assign country_selector = false
+  assign locale_selector = false
+
+  if section.settings.show_country_selector and localization.available_countries.size > 1
+    assign country_selector = true
+  endif
+  if section.settings.show_locale_selector and shop.published_locales.size > 1
+    assign locale_selector = true
+  endif
+
+-%}
+<div class="max-w-site mx-auto px-section ">
+<footer class=" relative text-scheme-text bg-scheme-background py-section-vertical-spacing px-section {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %}" data-color-scheme="{{ section.settings.color_scheme | default: 'primary' }}" data-section-id="{{ section.id }}" data-section-type="footer">
+
+  <div class="px-section relative z-10 ">
+
+    {% if section.settings.logo != blank %}
+    <div class="flex items-center justify-center ">
+      <a href="{{ routes.root_url }}" class="footer-logo-image break-words">
+        {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+        {%- assign image_size_2x = image_size | times: 2 -%}
+        <img src="{{ section.settings.logo | image_url: width: image_size }}"
+            srcset="{{ section.settings.logo | image_url: width: image_size }} 1x, {{ section.settings.logo | image_url: width: image_size_2x }} 2x"
+            width="{{ image_size }}"
+            height="auto"
+            loading="lazy"
+            alt="{{ section.settings.logo.alt | default: shop.name }}">
+      </a>
+    </div>
+    {% endif %}
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-theme py-section-vertical-spacing">
+      {%- for block in section.blocks -%}
+      <div class="{% if block.type == 'newsletter' %} lg:col-span-4 {% elsif block.type == 'menus' %} lg:col-span-2 {% elsif block.type == 'social_icon' %} lg:col-span-2 {% else %} lg:col-span-3 {% endif %} space-y-5">
+        {%- case block.type -%}
+          {%- when 'tagline_and_social_links' -%}
+            {%- liquid 
+              if forloop.last
+                assign social_class = 'justify-start lg:justify-end'
+                assign tagline_class = 'text-right'
+              else
+                assign social_class = 'justify-start lg:justify-start'
+              endif
+              assign logo = block.settings.logo
+              assign image_size1 = block.settings.logo_max_width
+              assign image_size_2x = block.settings.logo_max_width | times: 2
+              assign image_size_3x = block.settings.logo_max_width | times: 3
+            -%}
+            {% if block.settings.logo != blank %}
+              <img
+                      src="{{ logo | image_url: width: image_size1 }}"
+                      srcset="
+              {{- logo | image_url: width: image_size | append: ' 1x,' -}}
+              {{- logo | image_url: width: image_size_2x | append: ' 2x,' -}}
+              {{- logo | image_url: width: image_size_3x | append: ' 3x' -}}
+            "
+                      alt="{{ shop.name }}"
+                      width="{{ logo.width }}"
+                      height="{{ logo.height }}"
+                      loading="lazy"
+                      class="text-transparent logo_footer"
+              />
+            {% endif %}
+            {%- if block.settings.tagline != blank -%}
+              <div class="rte {{ tagline_class }}">
+                {{ block.settings.tagline }}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.show_social_icons -%}
+                {%- render 'social-icons', list_class: social_class -%}
+            {%- endif -%}
+          {%- when 'social_icon' -%}
+            <h2 class="font-heading text-base mb-4 break-all">Social Media</h2>
+            {%- if block.settings.show_social_icons -%}
+              {%- render 'social-icons', list_class: social_class -%}
+            {%- endif -%}
+          {%- when 'map' -%}
+             <h2 class="font-heading text-base mb-4 break-all">Directions</h2>
+            <div class="map_footer">
+            {{ block.settings.map }}
+            </div>
+          {%- when 'newsletter' -%}
+            <div>
+              {%- if block.settings.newsletter_heading != blank -%}
+              <h2 class="font-heading text-base mb-4 break-all">{{ block.settings.newsletter_heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.newsletter_text != blank -%}
+              <p class="text-base mb-2 keepintouchpara">{{ block.settings.newsletter_text }}</p>
+              {%- endif -%}
+              
+{% comment %}
+  
+              {% form 'customer', id: "FooterNewsletter" %}
+                {% if form.posted_successfully? %}
+                  <p class="text-theme-basic" id="Newsletter-success--{{ section.id }}">
+                    {{ 'general.newsletter_form.confirmation' | t }}
+                  </p>
+                {% endif %}
+                {% if form.errors %}
+                  <p class="text-theme-basic text-scheme-error" id="Newsletter-error--{{ section.id }}">
+                    {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+                  </p>
+                {% endif %}
+                  <div class="lg:flex items-center justify-center">
+                    <input type="hidden" name="contact[tags]" value="newsletter">
+                    <label for="NewsletterForm-{{ section.id }}" class="sr-only">
+                      {{ 'general.newsletter_form.newsletter_email' | t }}
+                    </label>
+                    <div class=" w-full lg:mr-2 flex-grow">
+                      <input
+                        id="NewsletterForm-{{ section.id }}"
+                        type="email"
+                        name="contact[email]"
+                        class="input--background input-group-field w-full placeholder:text-scheme-text text-scheme-text {% if form.errors %}border-scheme-error{% else %}border-scheme-text{% endif %}"
+                        value="{{ form.email }}"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="email"
+                        {% if form.errors %}
+                          autofocus
+                          aria-invalid="true"
+                          aria-describedby="Newsletter-error--{{ section.id }}"
+                        {% elsif form.posted_successfully? %}
+                          aria-describedby="Newsletter-success--{{ section.id }}"
+                        {% endif %}
+                        placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                        required
+                      >
+                    </div>
+                    <button type="submit" class="push-btn push-btn--pop w-full lg:w-auto mt-2.5 lg:mt-0" name="commit" id="Subscribe-{{ section.id }}">
+                      <span class="push-btn-surface w-full">{{ 'general.newsletter_form.submit' | t }}</span>
+                    </button>
+                  </div>
+              {% endform %}
+
+{% endcomment %}
+              <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+              <script>
+                hbspt.forms.create({
+                  portalId: "48542212",
+                  formId: "6ca1efbe-f153-4322-b451-19987debb7da",
+                  region: "na1"
+                });
+              </script>
+              
+            </div>
+          {%- when 'menus' -%}
+            <div class="flex justify-start gap-10 {% if forloop.last %}lg:justify-end{% else %}{% if forloop.first %}lg:justify-start{% else %}lg:justify-center{% endif %}{% endif %}">
+              {%- if block.settings.linklist_1 != blank %}
+              <div class="grow w-full">
+                {% assign link_list = block.settings.linklist_1 %}
+                {% if block.settings.show_menu_headings %}
+                  <h2 class="font-heading text-base mb-4 break-all">
+                    {% if block.settings.menu_heading_one != blank  %}
+                    {{ block.settings.menu_heading_one }}
+                    {% else %}
+                    {{ linklists[link_list].title }}
+                    {% endif %}
+                  </h2>
+                {% endif %}
+                <ul class="list-none space-y-2.5">
+                  {% for link in linklists[link_list].links %}
+                    <li>
+                      <a href="{{ link.url }}" class="hover:text-scheme-accent-1 break-words">
+                        {{ link.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {%- endif -%}
+              {%- if block.settings.linklist_2 != blank %}
+              <div class="grow w-full">
+                {% assign link_list = block.settings.linklist_2 %}
+                {% if block.settings.show_menu_headings %}
+                  <h2 class="font-heading text-base mb-4 break-all">
+                    {% if block.settings.menu_heading_two != blank  %}
+                    {{ block.settings.menu_heading_two }}
+                    {% else %}
+                    {{ linklists[link_list].title }}
+                    {% endif %}
+                  </h2>
+                {% endif %}
+                <ul class="list-none space-y-2.5">
+                  {% for link in linklists[link_list].links %}
+                    <li>
+                      <a href="{{ link.url }}" class="hover:text-scheme-accent-1">
+                        {{ link.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {%- endif -%}
+            </div>
+          {% when 'custom_logos' %}
+             <div class="footer-logos">
+               {% if block.settings.logo_heading != blank %}
+                <h2 class="font-heading text-base mb-4 break-all">{{ block.settings.logo_heading }}</h2>   
+               {% endif %}
+
+               <div class="logos-main flex flex-wrap -mx-2 ">
+                    {% if block.settings.logo_image_1 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_1 | image_url: height: '45' }}" alt="Logo Image 1">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_2 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_2 | image_url: height: '45' }}" alt="Logo Image 2">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_3 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_3 | image_url: height: '45' }}" alt="Logo Image 3">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_4 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_4 | image_url: height: '45' }}" alt="Logo Image 4">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_5 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_5 | image_url: height: '45' }}" alt="Logo Image 5">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_6 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_6 | image_url: height: '45' }}" alt="Logo Image 6">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_7 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_7 | image_url: height: '45' }}" alt="Logo Image 7">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_8 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_8 | image_url: height: '45' }}" alt="Logo Image 8">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_9 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_9 | image_url: height: '45' }}" alt="Logo Image 9">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_10 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_10 | image_url: height: '45' }}" alt="Logo Image 10">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_11 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_11 | image_url: height: '45' }}" alt="Logo Image 11">
+                      </div>
+                    {% endif %}
+                    
+                    {% if block.settings.logo_image_12 %}
+                      <div class="logo mx-2 mb-4">
+                        <img src="{{ block.settings.logo_image_12 | image_url: height: '45' }}" alt="Logo Image 12">
+                      </div>
+                    {% endif %}
+               </div>
+             </div>
+          {%- endcase -%}
+      </div>
+      {%- endfor -%}
+    </div>
+    {% comment %}
+    <div class="contact-footer">
+      <ul>
+        <li>
+            <span class="svg_icon"><svg width="64" height="65" viewBox="0 0 64 65" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_12392_1471)"> <path d="M32 11.1668C26.3421 11.1668 20.9159 13.4144 16.9151 17.4152C12.9143 21.416 10.6667 26.8422 10.6667 32.5002H18.6667C20.0812 32.5002 21.4377 33.0621 22.4379 34.0623C23.4381 35.0625 24 36.419 24 37.8335V51.1668C24 52.5813 23.4381 53.9379 22.4379 54.9381C21.4377 55.9383 20.0812 56.5002 18.6667 56.5002H10.6667C9.25222 56.5002 7.89566 55.9383 6.89547 54.9381C5.89528 53.9379 5.33337 52.5813 5.33337 51.1668V32.5002C5.33337 17.7722 17.272 5.8335 32 5.8335C46.728 5.8335 58.6667 17.7722 58.6667 32.5002V51.1668C58.6667 52.5813 58.1048 53.9379 57.1046 54.9381C56.1044 55.9383 54.7479 56.5002 53.3334 56.5002H45.3334C43.9189 56.5002 42.5623 55.9383 41.5621 54.9381C40.5619 53.9379 40 52.5813 40 51.1668V37.8335C40 36.419 40.5619 35.0625 41.5621 34.0623C42.5623 33.0621 43.9189 32.5002 45.3334 32.5002H53.3334C53.3334 26.8422 51.0858 21.416 47.085 17.4152C43.0842 13.4144 37.658 11.1668 32 11.1668ZM10.6667 37.8335V51.1668H18.6667V37.8335H10.6667ZM45.3334 37.8335V51.1668H53.3334V37.8335H45.3334Z" fill="#EAEAEA"/> </g> <defs> <clipPath id="clip0_12392_1471"> <rect width="64" height="64" fill="white" transform="translate(0 0.5)"/> </clipPath> </defs> </svg></span>
+          <div class="cont_footer">
+            <span>Need help ? Call Us</span><br>
+            <a href="tel:856-531-1100">856-531-1100</a>
+          </div>
+        </li>
+    
+    
+         <li>
+          <span class="svg_icon"><svg width="64" height="65" viewBox="0 0 64 65" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_12392_1500)"> <path d="M5.98125 18.7773L30.6399 3.99331C31.0544 3.74464 31.5286 3.61328 32.0119 3.61328C32.4952 3.61328 32.9695 3.74464 33.3839 3.99331L58.0186 18.78C58.2162 18.8984 58.3798 19.0661 58.4934 19.2665C58.607 19.467 58.6666 19.6935 58.6666 19.924V53.8333C58.6666 54.5406 58.3856 55.2188 57.8855 55.7189C57.3854 56.219 56.7072 56.5 55.9999 56.5H7.99992C7.29267 56.5 6.6144 56.219 6.1143 55.7189C5.6142 55.2188 5.33325 54.5406 5.33325 53.8333V19.9213C5.3332 19.6909 5.39287 19.4644 5.50644 19.2639C5.62001 19.0634 5.7836 18.8957 5.98125 18.7773ZM10.6666 22.188V51.1666H53.3333V22.1853L32.0106 9.38531L10.6666 22.1853V22.188ZM32.1599 37.028L46.2826 25.1266L49.7173 29.2066L32.1973 43.972L14.3039 29.2253L17.6959 25.108L32.1599 37.028Z" fill="#EAEAEA"/> </g> <defs> <clipPath id="clip0_12392_1500"> <rect width="64" height="64" fill="white" transform="translate(0 0.5)"/> </clipPath> </defs> </svg></span>
+          <div class="cont_footer">
+            <span>Need help ? Call Us</span><br>
+            <a href="tel:856-531-1100">support@DesignerT’s.com</a>
+          </div>
+        </li>
+    
+    
+        <li>
+          <span class="svg_icon"><svg width="64" height="65" viewBox="0 0 64 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_12392_1495)">
+    <path d="M19.4426 56.0308L5.33328 59.1668L8.46928 45.0575C6.40403 41.1945 5.32669 36.8806 5.33328 32.5002C5.33328 17.7722 17.2719 5.8335 32 5.8335C46.728 5.8335 58.6666 17.7722 58.6666 32.5002C58.6666 47.2282 46.728 59.1668 32 59.1668C27.6196 59.1734 23.3056 58.0961 19.4426 56.0308ZM20.2159 50.3962L21.9573 51.3295C25.0468 52.9805 28.497 53.8408 32 53.8335C36.2193 53.8335 40.3439 52.5823 43.8521 50.2382C47.3604 47.894 50.0947 44.5622 51.7094 40.6641C53.3241 36.7659 53.7465 32.4765 52.9234 28.3382C52.1002 24.2 50.0684 20.3987 47.0849 17.4152C44.1014 14.4317 40.3001 12.3999 36.1619 11.5767C32.0236 10.7536 27.7342 11.1761 23.836 12.7907C19.9379 14.4054 16.6061 17.1397 14.2619 20.648C11.9178 24.1562 10.6666 28.2808 10.6666 32.5002C10.6666 36.0575 11.5333 39.4815 13.1733 42.5428L14.1039 44.2842L12.3573 52.1428L20.2159 50.3962ZM18.6666 32.5002H24C24 34.6219 24.8428 36.6567 26.3431 38.157C27.8434 39.6573 29.8782 40.5002 32 40.5002C34.1217 40.5002 36.1565 39.6573 37.6568 38.157C39.1571 36.6567 40 34.6219 40 32.5002H45.3333C45.3333 36.0364 43.9285 39.4278 41.428 41.9283C38.9276 44.4287 35.5362 45.8335 32 45.8335C28.4637 45.8335 25.0723 44.4287 22.5719 41.9283C20.0714 39.4278 18.6666 36.0364 18.6666 32.5002Z" fill="#EAEAEA"/>
+    </g>
+    <defs>
+    <clipPath id="clip0_12392_1495">
+    <rect width="64" height="64" fill="white" transform="translate(0 0.5)"/>
+    </clipPath>
+    </defs>
+    </svg>
+    </span>
+          <div class="cont_footer">
+            <span>Send us a message</span><br>
+            <a class="last-footer-section" href="tel:856-531-1100">Contact our agents about your booking, and we'll reply as soon as possible.</a>
+          </div>
+        </li>
+            
+      </ul>
+    </div>
+    {% endcomment %}
+    <div class="copyright lg:col-span-12">© {{ "now" | date: "%Y"}} Designer T’s. All rights reserved.<a class="footer-terms-copyright" target="_blank" href="https://designerts.com/policies/privacy-policy">Privacy Policy</a></div>
+      {%- if section.settings.show_payment_icons -%}
+  
+    <div class="text-scheme-text md:flex justify-between section-content-top-margin">
+      {%- if section.settings.show_payment_icons or country_selector or locale_selector -%}
+        {% unless shop.enabled_payment_types == empty %}
+          <div class="mt-10 lg:mt-0  {% if country_selector or locale_selector %}lg:w-1/3{% endif %}">
+            <h2 class="visually-hidden">{{ 'layout.footer.accepted_payments' | t }}</h2>
+            <ul class="payment-icons -mx-2 {% if country_selector or locale_selector %}lg:text-center{% endif %}">
+              {% for type in shop.enabled_payment_types %}
+                <li class="inline-block mx-2 w-8">
+                  {{ type | payment_type_svg_tag: class: 'icon payment-icon' }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endunless %}
+      {%- endif -%}
+
+      {%- if country_selector or locale_selector -%}
+        <div class="mt-10 lg:mt-0 flex flex-wrap items-center justify-between lg:justify-end lg:w-1/3 mb-4 lg:mb-0">
+          {%- form 'localization', data-disclosure-form: '' -%}
+            {%- if country_selector -%}
+              <div class="inline-block {% if country_selector and locale_selector %}mr-5 lg:mr-10{% endif %}">
+                <h2 class="visually-hidden" id="country-heading">
+                  {{ 'general.country.dropdown_label' | t }}
+                </h2>
+                <div class="relative" data-disclosure-country>
+                  <button type="button" class="disclosure-btn text-sm border-b-text border-scheme-text py-1 flex items-center" aria-expanded="false" aria-controls="country-list" aria-describedby="country-heading" data-disclosure-toggle>
+                    <span>{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</span>
+                    <span class="chevron-down inline-block ml-2 w-3 fill-current">
+                      {% render 'icon-chevron-down' %}
+                    </span>
+                    <span class="chevron-up inline-block ml-2 w-3 fill-current transform rotate-180">
+                      {% render 'icon-chevron-down' %}
+                    </span>
+                  </button>
+                  <ul id="country-list" class="disclosure-list absolute bg-scheme-card top-0 left-0 lg:left-auto lg:right-0 transform transition-opacity py-2" data-disclosure-list inert>
+                    {% for country in localization.available_countries %}
+                      <li class="text-sm w-40">
+                        <a class="block p-2" href="#" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %} data-value="{{ country.iso_code }}" data-disclosure-option>
+                          <span class="{% if country.iso_code == localization.country.iso_code %}border-scheme-text border-b-text{% else %}border-transparent border-b-text{% endif %}">{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  <input type="hidden" name="country_code" id="CountrySelector" value="{{ localization.country.iso_code }}" data-disclosure-input/>
+                </div>
+              </div>
+            {%- endif -%}
+            {%- if locale_selector -%}
+              <div class="inline-block">
+                <h2 class="visually-hidden" id="lang-heading">
+                  {{ 'general.language.dropdown_label' | t }}
+                </h2>
+                <div class="relative" data-disclosure-locale>
+                  <button type="button" class="disclosure-btn text-sm border-b-text border-scheme-text py-1 flex items-center" aria-expanded="false" aria-controls="lang-list" aria-describedby="lang-heading" data-disclosure-toggle>
+                    {{ form.current_locale.endonym_name }}
+                    <span class="chevron-down inline-block ml-2 w-3 fill-current">
+                      {% render 'icon-chevron-down' %}
+                    </span>
+                    <span class="chevron-up inline-block ml-2 w-3 fill-current transform rotate-180">
+                      {% render 'icon-chevron-down' %}
+                    </span>
+                  </button>
+                  <ul id="lang-List" class="disclosure-list absolute bg-scheme-background top-0 lg:left-auto lg:right-0 transform transition-opacity border-text border-theme-color py-2" data-disclosure-list inert>
+                    {% for locale in form.available_locales %}
+                      <li class="text-sm">
+                        <a class="block p-2" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
+                          <span class="{% if locale.iso_code == form.current_locale.iso_code %}border-scheme-text border-b-text{% else %}border-transparent border-b-text{% endif %}">{{ locale.endonym_name }}</span>
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+    </div>
+      {%- endif -%}
+
+  </div>
+
+</footer>
+</div>
+{% unless request.design_mode %}
+  <script src="{{ 'sections-footer.bundle.min.js' | asset_url }}" type="module"></script>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "class": "mt-auto",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.footer.settings.logo.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 20,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "label": "t:common.settings.logo_max_width.label",
+      "default": 120
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "t:sections.footer.settings.show_payment_icons.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_countryregion_selector",
+      "info": "To add a country/region, go to your [payment settings.](/admin/settings/payments)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_selector",
+      "label": "t:sections.footer.settings.show_country_selector.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_language_selector",
+      "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale_selector",
+      "label": "t:sections.footer.settings.show_locale_selector.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:common.settings.header_color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:common.settings.color_scheme.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:common.options.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:common.options.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:common.options.tertiary.label"
+        },
+        {
+          "value": "quaternary",
+          "label": "t:common.options.quaternary.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "t:common.settings.use_gradient_background.label"
+    }
+  ],
+  "blocks": [
+     {
+      "type": "map",
+      "name": "Direction",
+      "limit": 1,
+      "settings": [
+         {
+          "type": "html",
+          "id": "map",
+          "label": "Embed Map"
+        },
+      ]
+    },
+    {
+      "type": "custom_logos",
+      "name": "Logos",
+      "settings": [
+         {
+          "type": "text",
+          "id": "logo_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_1",
+          "label": "Logo Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_2",
+          "label": "Logo Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_3",
+          "label": "Logo Image 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_4",
+          "label": "Logo Image 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_5",
+          "label": "Logo Image 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_6",
+          "label": "Logo Image 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_7",
+          "label": "Logo Image 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_8",
+          "label": "Logo Image 8"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_9",
+          "label": "Logo Image 9"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_10",
+          "label": "Logo Image 10"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_11",
+          "label": "Logo Image 11"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image_12",
+          "label": "Logo Image 12"
+        }
+      ]
+    },
+    {
+      "type": "social_icon",
+      "name": "Social Icon",
+      "limit": 1,
+      "settings": [
+         {
+          "type": "checkbox",
+          "id": "show_social_icons",
+          "label": "t:sections.footer.blocks.tagline_and_social_links.settings.show_social_icons.label"
+        },
+      ]
+    },
+    {
+      "type": "tagline_and_social_links",
+      "name": "t:sections.footer.blocks.tagline_and_social_links.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "tagline",
+          "label": "t:sections.footer.blocks.tagline_and_social_links.settings.tagline.label",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.footer.blocks.tagline_and_social_links.settings.header_social_media_icons"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.footer.blocks.tagline_and_social_links.settings.paragraph_to_display_your"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social_icons",
+          "label": "t:sections.footer.blocks.tagline_and_social_links.settings.show_social_icons.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "t:common.settings.logo.label",
+          "info": "t:common.settings.logo.info"
+        },
+        {
+          "type": "range",
+          "id": "logo_max_width",
+          "min": 20,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "label": "t:sections.header.settings.logo_max_width.label",
+          "default": 100
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "t:sections.footer.blocks.newsletter.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:sections.footer.blocks.newsletter.settings.header_email_signup"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:common.settings.paragraph_customers_who_subscribe"
+        },
+        {
+          "type": "text",
+          "id": "newsletter_heading",
+          "label": "t:sections.footer.blocks.newsletter.settings.newsletter_heading.label",
+          "default": "Sign up to our newsletter"
+        },
+        {
+          "type": "text",
+          "id": "newsletter_text",
+          "label": "Additional text copy"
+        }
+      ]
+    },
+    {
+      "type": "menus",
+      "name": "t:sections.footer.blocks.menus.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_menu_headings",
+          "label": "t:sections.footer.blocks.menus.settings.show_menu_headings.label",
+          "default": false
+        },
+        {
+           "type": "text",
+           "id": "menu_heading_one",
+           "label": "Menu heading"
+        },
+        {
+          "type": "link_list",
+          "id": "linklist_1",
+          "label": "t:sections.footer.blocks.menus.settings.linklist_1.label",
+          "default": "footer",
+          "info": "t:sections.footer.blocks.menus.settings.linklist_1.info"
+        },
+        {
+           "type": "text",
+           "id": "menu_heading_two",
+           "label": "Menu heading two"
+        },
+        {
+          "type": "link_list",
+          "id": "linklist_2",
+          "label": "t:sections.footer.blocks.menus.settings.linklist_2.label",
+          "info": "t:sections.footer.blocks.menus.settings.linklist_2.info"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

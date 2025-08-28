@@ -1,0 +1,209 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div.stockists-page",
+  "sections": {
+    "2a965b21-2548-45f1-bba1-91726311162e": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        "h2 {padding-bottom: 8rem;}",
+        ".handsugar-block {height: 100% !important;}",
+        "@media (max-width: 990px) {h2 {padding-top: 6rem; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Stockist_banner_8b7b0617-0407-4023-bf30-79ac79241b45.png",
+        "image_mobile": "shopify://shop_images/mobile_stockists_banner.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "natural",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Find us in store",
+        "heading_size": "heading-standard",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": false,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "b572be2d-7026-4907-bdc5-3a3f876201f2": {
+      "type": "shape-slideshow",
+      "blocks": {
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Ampol.webp",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/9e7173a0471812adba18de89fe007815.png",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Harris_Farm.webp",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WHS.webp",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/9e7173a0471812adba18de89fe007815.png",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Woolworth.webp",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "b32a2d1d-b02f-427e-a4e5-80b43e70a23c": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Coles_Express.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-1",
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-2",
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-3",
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-4",
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-5",
+        "template--15937657405636__b572be2d-7026-4907-bdc5-3a3f876201f2-image-6",
+        "b32a2d1d-b02f-427e-a4e5-80b43e70a23c"
+      ],
+      "custom_css": [
+        "img {width: 100%;}",
+        ".splide__arrows {display: none;}",
+        "h2 {font-size: 35px; text-align: left;}",
+        "@media (max-width: 768px) {h2 {font-size: 28px; text-align: center; }}"
+      ],
+      "settings": {
+        "title": "Our stockists",
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 15,
+        "autoscroll_mode": "1",
+        "crop": "",
+        "button_style": "push-btn-surface",
+        "show_buttons_on_mobile": false,
+        "only_show_button_on_hover": false,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "29bf409e-c7da-4987-92be-a356afa5479e": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "h2 {font-size: 35px; text-align: left;}",
+        ".stockist-map-google {max-width: 100% !important; max-height: 900px !important; direction: ltr !important; left: 40% !important; right: 0 !important; margin-right: 5%;}",
+        ".stockist-side-panel {direction: ltr !important; left: 0 !important; right: 70% !important;}",
+        "@media screen and (min-width: 768px) {.stockist-query-entry {width: 35%; }}",
+        ".stockist-map {border-radius: 5%;}",
+        ".stockist-map-inner {border-radius: 5%;}",
+        ".stockist-icon stockist-icon-search {}"
+      ],
+      "settings": {
+        "title": "Find our lollies",
+        "custom_liquid": "<!-- Start Stockist.co widget -->\n<div data-stockist-widget-tag=\"u9239\">Loading store locator\nfrom <a href=\"https://stockist.co\">Stockist store locator</a>...</div>\n<script>\n  (function(s,t,o,c,k){c=s.createElement(t);c.src=o;c.async=1;\n  k=s.getElementsByTagName(t)[0];k.parentNode.insertBefore(c,k);\n  })(document,'script','//stockist.co/embed/v1/widget.min.js');\n</script>\n<!-- End Stockist.co widget -->\n\n     <script>\n    window.addEventListener(\"DOMContentLoaded\", function() {\n        setTimeout(function() {\n            let arrow = document.querySelector('span.stockist-icon.stockist-icon-search');\n            \n            console.log(arrow)\n        })\n    }, 1000)\n    \n    </script>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    },
+    "3bb819d1-93d7-4462-85e8-272ddb7f2431": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "custom_css": [
+        ".py-section-vertical-spacing {background-color: #ffe6b1cc;}"
+      ],
+      "settings": {
+        "title": "",
+        "custom_liquid": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<body>\n<style>\n\t.displayy{\n\t\tdisplay: flex;\n\t\tmargin-top: 35px;\n\t\tmargin-bottom: 35px;\n\n\n\t}\n\t.left{\n\t\tmargin-left: 15%;\n\t}\n\t.right{\n\t\tdisplay:inline-block; !important;\n\t\tmargin-left: 5%;\n\t\tcontent: justify;\n\t\t\n\t}\n\t.letuss{\nfont-size: 35px;\nfont-weight: 700 !important;\nfont-family: Brevia !important;\n\n}\n.letus{\n\t\tfont-size: 35px;\nfont-weight: 700 !important;\n\t\tfont-family: Brevia !important;\n\n\n\t}\n\t.spacing{\n\t\tmargin-bottom: 20px;\n\t}\ninput[type=text], select {\n  width: 60%;\n  padding: 12px 20px;\n  margin: 8px 0;\n  display: inline-block;\n  border: none !important;\n  outline: none !important;\n  border-radius: 25px;\n  box-sizing: border-box;\n  box-shadow:none;\n}\n\ninput[type=submit] {\n  width: 40%;\n  background-color: #000;\n  color: white;\n  padding: 14px 20px;\n  margin: 8px 0;\n  border: none;\n  border-radius: 25px;\n  cursor: pointer;\n}\n\ninput[type=submit]:hover {\n  background-color: #000;\n</style>\n\n<div class=\"displayy\">\n\t<div class=\"left\">\n\t\t<h2 class=\"letus\">Can't find FUNDAY </h2>\n<h2 class=\"letuss\">at your local store?</h2>\n\t\t<p>Let us know what store you'd like to see FUNDAY in !</p>\n\t</div>\n\n\t<div class=\"right\">\n\t\t<form>\n\t\t\t\n\t\t\t<input class=\"spacing\" type=\"text\" id=\"fname\" name=\"firstname\" placeholder=\"Name of supermarket/retailer*\">\n\t\t\t\n\t\t\t<input class=\"spacing\" type=\"text\" id=\"fname\" name=\"firstname\" placeholder=\"Suburb/PostCode*\">\n\t\t\t\n\t\t\t<input class=\"spacing\" type=\"text\" id=\"fname\" name=\"firstname\" placeholder=\"Your email address*\">\n\t\t\t<input type=\"submit\" value=\"Submit\">\n\t\t</form>\n\t\t\n\t</div>\n\t\t\n</div>\n\n\n\n</body>\n</html>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    },
+    "810f086a-76ed-4fc0-bf77-303f37ddf4ed": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".py-section-vertical-spacing {background-color: #ffe6b1cc; max-width: unset;}",
+        "@media screen and (min-width: 1200px) {.displayy {padding-bottom: 5rem; }}"
+      ],
+      "settings": {
+        "title": "",
+        "custom_liquid": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<body>\n<style>\n\t.displayy{\n\t\tdisplay: flex;\n\t\tmargin-top: 35px;\n\t\tmargin-bottom: 35px;\n    justify-content: space-between;\n\t}\n\t.right{\n\t\tdisplay:inline-block !important;\n\t\tmargin-left: 5%;\n\t\tcontent: justify;\n\t}\n\t.letuss{\n    font-size: 35px;\n    font-weight: 700 !important;\n    font-family: Brevia !important;\n  }\n  .letus{\n    font-size: 35px;\n    font-weight: 700 !important;\n    font-family: Brevia !important;\n  }\n\t.spacing{\n\t\tmargin-bottom: 20px;\n\t}\n  input {\n    border-radius: 25px !important;\n  }\n  input[type=text], select {\n    width: 60%;\n    padding: 12px 20px;\n    margin: 8px 0;\n    display: inline-block;\n    border: none !important;\n    outline: none !important;\n    border-radius: 25px;\n    box-sizing: border-box;\n    box-shadow:none;\n  }\n  input[type=submit] {\n    width: 40%;\n    background-color: #000;\n    color: white;\n    padding: 14px 20px;\n    margin: 8px 0;\n    border: none;\n    border-radius: 25px;\n    cursor: pointer;\n  }\n  .shape-divider-stroke {\n    stroke: rgb(var(--color-border));\n    stroke-width: var(--section-border-thickness);\n  }\n\n  input[type=submit]:hover {\n    background-color: #000;\n  }\n  .klaviyo-form-TpLHty.klaviyo-form.form-version-cid-1 {\n    width: 50%;\n  }\n  button.needsclick.go1836112351.kl-private-reset-css-Xuajs1 {\n    padding: 0 80px !important;\n    border-radius: 25px !important;\n  }\n  input::placeholder {\n    color: gray !important;\n  }\n  @media screen and (max-width: 767px) {\n    .displayy {\n      flex-direction: column;\n    }\n    .klaviyo-form-TpLHty.klaviyo-form.form-version-cid-1 {\n      width: 100%;\n    }\n    form.needsclick.klaviyo-form.klaviyo-form-version-cid_1.kl-private-reset-css-Xuajs1 {\n      padding: 10px 0 !important;\n    }\n  }\n</style>\n\n<div class=\"displayy\">\n\t<div>\n\t\t<h2 class=\"letus\">Can't find FUNDAY </h2>\n    <h2 class=\"letuss\">at your local store?</h2>\n\t\t<p>Let us know what store you'd like to see FUNDAY in !</p>\n\t</div>\n\n\t<div class=\"klaviyo-form-TpLHty\"></div>\n</div>\n\n<div id=\"shape-divider-07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87\" class=\"shape-divider w-full   pointer-events-none z-20 absolute bottom-0 left-0 w-full\" data-shopify-editor-block=\"{&quot;id&quot;:&quot;07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87&quot;,&quot;type&quot;:&quot;shape_divider&quot;}\">\n  <div class=\"shape-divider-transform-reset\">\n    <div x-ref=\"animation-container\" class=\"shape-divider-svg-container flex relative left-0 min-w-full  -mb-shape-divider\" style=\"padding-top: 7.0%;\"><div class=\" z-0 absolute top-0 left-0 right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background\">\n        <svg class=\"z-0 absolute top-0 left-0  right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background  \" data-color-scheme=\"quaternary\" width=\"100%\" height=\"100%\" viewBox=\"0 0 1200.0 84.0\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M600 39.1293C800 84.6351 1000 84.6351 1200 39.1294V84.0001H0L3.48561e-06 39.1293C200 -6.37645 400 -6.37643 600 39.1293Z\" fill=\"currentColor\"></path>\n          <path class=\"shape-divider-stroke\" vector-effect=\"non-scaling-stroke\" d=\"M1201 39.1294C1001 84.6351 801 84.6351 601 39.1293C401 -6.37643 201 -6.37645 1 39.1293\" stroke=\"black\"></path>\n        </svg>\n    </div>\n  </div>\n</div>\n\n</body>\n</html>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    },
+    "1692876777537fb43e": {
+      "type": "apps",
+      "settings": {}
+    }
+  },
+  "order": [
+    "2a965b21-2548-45f1-bba1-91726311162e",
+    "main",
+    "b572be2d-7026-4907-bdc5-3a3f876201f2",
+    "29bf409e-c7da-4987-92be-a356afa5479e",
+    "3bb819d1-93d7-4462-85e8-272ddb7f2431",
+    "810f086a-76ed-4fc0-bf77-303f37ddf4ed",
+    "1692876777537fb43e"
+  ]
+}

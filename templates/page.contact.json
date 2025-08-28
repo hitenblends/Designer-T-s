@@ -1,0 +1,94 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div.contact-page",
+  "sections": {
+    "image_with_text_overlay_aTVcpj": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        ".banner-section {margin-bottom: 32px;}"
+      ],
+      "settings": {
+        "container": false,
+        "image": "shopify://shop_images/background-new-one.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "extrasmall",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "CONTACT US",
+        "heading_tag": "h1",
+        "heading_size": "heading-standard",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "",
+        "color_scheme": "secondary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "custom_liquid_nD3wje": {
+      "type": "custom-liquid",
+      "settings": {
+        "title": "",
+        "custom_liquid": "<script charset=\"utf-8\" type=\"text/javascript\" src=\"//js.hsforms.net/forms/embed/v2.js\"></script>\n<script>\n  hbspt.forms.create({\n    portalId: \"48542212\",\n    formId: \"9bf91a1e-3e98-4e20-8e7a-a672bd0fadfc\",\n    region: \"na1\"\n  });\n</script>",
+        "full_width": false,
+        "color_scheme": "tertiary"
+      }
+    },
+    "our_map_store_Wzh7Bc": {
+      "type": "our-map-store",
+      "settings": {
+        "bg_color": "#000000",
+        "heading": "OUR STORE",
+        "embended_map": "<iframe style=\"width: 100%;height: 100%;\" src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.984834834397!2d-75.12072239999999!3d39.8741808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6cb504433efb7%3A0x23bd6d680847daae!2sDesigner%20T's!5e1!3m2!1sen!2sin!4v1740573812023!5m2!1sen!2sin\" width=\"600\" height=\"450\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+        "title": "Designer T's",
+        "text": "20 Creek Rd, Brooklawn, NJ 08030, United States",
+        "time": "<p>Hours of Operation :</p><p>Mon - Fri : 7 am–4:30 pm</p><p>Sat & Sunday : Closed</p>",
+        "button": "Get directions",
+        "link": "shopify://collections"
+      }
+    },
+    "main": {
+      "type": "main-page-contact",
+      "blocks": {
+        "2e658a04-9954-40a6-a014-257b53cfcea3": {
+          "type": "shape_divider",
+          "disabled": true,
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "quaternary",
+            "style": "large-waves_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "2e658a04-9954-40a6-a014-257b53cfcea3"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_aTVcpj",
+    "custom_liquid_nD3wje",
+    "our_map_store_Wzh7Bc",
+    "main"
+  ]
+}

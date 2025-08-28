@@ -1,0 +1,1135 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_slideshow_AzfbFM": {
+      "type": "hero-slideshow",
+      "blocks": {
+        "slide_8qHYYV": {
+          "type": "slide",
+          "settings": {
+            "title": "Hero slideshow",
+            "richtext": "",
+            "cta_url": "",
+            "cta_text": "Shop Now",
+            "place_content": "inherit",
+            "text_align": "inherit",
+            "text_overlay_color": "same_as_section"
+          }
+        },
+        "slide_JNjaLQ": {
+          "type": "slide",
+          "settings": {
+            "title": "Hero slideshow",
+            "richtext": "",
+            "cta_url": "",
+            "cta_text": "Shop Now",
+            "place_content": "inherit",
+            "text_align": "inherit",
+            "text_overlay_color": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "slide_8qHYYV",
+        "slide_JNjaLQ"
+      ],
+      "disabled": true,
+      "settings": {
+        "style": "full",
+        "height": "natural",
+        "display_on_card": true,
+        "display_content_below_image_on_mobile": true,
+        "auto_rotate": false,
+        "slide_speed": "5000",
+        "place_content": "place-content-center-start",
+        "text_align": "text-center",
+        "heading_size": "heading-standard",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "video_with_text_overlay_UXJga9": {
+      "type": "video-with-text-overlay",
+      "blocks": {
+        "content_iUk88g": {
+          "type": "content",
+          "settings": {
+            "title": "New and Existing Clients:",
+            "richtext": "<p>Explore our full range of custom printed apparel solutions, from screen printing, Blends DTF, to embroidery.</p>",
+            "button_link": "shopify://pages/services",
+            "button_label": "Services"
+          }
+        },
+        "content_YFxtMV": {
+          "type": "content",
+          "settings": {
+            "title": "Want to partner with us?",
+            "richtext": "<p>Learn how we've been supporting contract partners for decades with reliable bulk production and custom orders.</p>",
+            "button_link": "shopify://pages/contract-partners",
+            "button_label": "Contract Partners"
+          }
+        }
+      },
+      "block_order": [
+        "content_iUk88g",
+        "content_YFxtMV"
+      ],
+      "custom_css": [
+        ".banner-section {margin-bottom: 0px;}"
+      ],
+      "settings": {
+        "video": "shopify://files/videos/screenprint2.mov",
+        "video_url": "",
+        "crop": "natural",
+        "crop_desktop": "cinematic",
+        "display_on_card": false,
+        "style": "full",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Your Brand’s Creative Partner in Custom Print Apparel",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Expert Decoration, Premium Screen Printing, Blends DTF Transfers, & Embroidery Since 1985</p>",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": true,
+        "text_overlay_color": "white"
+      }
+    },
+    "video_with_text_qbBNPz": {
+      "type": "video-with-text",
+      "blocks": {
+        "content_aTBbiy": {
+          "type": "content",
+          "settings": {
+            "title": "New and Existing Clients:",
+            "richtext": "<p>Explore our full range of custom printed apparel solutions, from screen printing, Blends DTF, to embroidery.</p>",
+            "button_link": "shopify://pages/screen-printing",
+            "button_label": "Services"
+          }
+        },
+        "content_DK7Xkd": {
+          "type": "content",
+          "settings": {
+            "title": "Want to partner with us?",
+            "richtext": "<p>Learn how we've been supporting contract partners for decades with reliable bulk production and custom orders.</p>",
+            "button_link": "shopify://pages/contact",
+            "button_label": "Contract Partners"
+          }
+        }
+      },
+      "block_order": [
+        "content_aTBbiy",
+        "content_DK7Xkd"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "video": "shopify://files/videos/AdobeStock_308284061_Video_HD_Preview.mov",
+        "image1": "shopify://shop_images/Pattern.png",
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "controls": true,
+        "crop": "",
+        "video_shape": "default",
+        "blob_type": 1,
+        "rotate_video": 0,
+        "video_position": "right",
+        "video_size": "half",
+        "disable_media_style": false,
+        "title": "Your Brand’s Creative Partner in Custom Print Apparel",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Expert Decoration, Premium Screen Printing, Blends DTF Transfers, & Embroidery Since 1985</p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_XmDbwk": {
+      "type": "image-with-text",
+      "blocks": {
+        "content_wa63Wp": {
+          "type": "content",
+          "settings": {
+            "title": "New and Existing Clients:",
+            "richtext": "<p>Explore our full range of custom printed apparel solutions, from screen printing, Blends DTF, to embroidery.</p>",
+            "button_link": "shopify://pages/dtf-transfers",
+            "button_label": "Services"
+          }
+        },
+        "content_7kmrta": {
+          "type": "content",
+          "settings": {
+            "title": "Want to partner with us?",
+            "richtext": "<p>Learn how we've been supporting contract partners for decades with reliable bulk production and custom orders.</p>",
+            "button_link": "shopify://pages/get-a-quote",
+            "button_label": "Contract Partners"
+          }
+        }
+      },
+      "block_order": [
+        "content_wa63Wp",
+        "content_7kmrta"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "image": "shopify://shop_images/DSC_7993_043380ab-17fe-4cc4-ba2d-1baaa2bddf7a.jpg",
+        "image1": "shopify://shop_images/Pattern.png",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "right",
+        "image_size": "half",
+        "disable_media_style": true,
+        "enable_logo": false,
+        "title": "Your Brand’s Creative Partner in Custom Print Apparel",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Expert Decoration, Premium Screen Printing, Blends DTF Transfers, & Embroidery Since 1985</p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_qErnWJ": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Partnering with Clients and Businesses",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>For decades, we’ve been a trusted production partner for contract decorators and businesses nationwide. Whether you’re looking for reliable bulk production or custom one-off pieces, our expertise and commitment to quality ensure you get the best results every time.</p><p>Our state-of-the-art technology enables Designer T's to offer consistent quality, efficiency, and detail. Combining traditional craftsmanship with modern techniques.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "tertiary",
+        "background_override": "rgba(0,0,0,0)",
+        "use_gradient_background": false
+      }
+    },
+    "text_columns_with_images_eyFrPt": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "column_dfERyy": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1.png",
+            "enable_logo": false,
+            "title": "Experienced Team",
+            "text": "<p>40+ years of expertise in the printing industry. With best in class Customer Service.</p>",
+            "newtab": false,
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_eAwqkM": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_1.png",
+            "enable_logo": false,
+            "title": "Fast, Reliable Production",
+            "text": "<p>Efficient processes lead to faster conversions for our Contract Partners. </p>",
+            "newtab": false,
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_tfmHhT": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_2.png",
+            "enable_logo": false,
+            "title": "Custom Creations, Crafted for You",
+            "text": "<p>Tailored solutions designed to meet your jobs unique needs.</p>",
+            "newtab": false,
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_QUbYiA": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_3.png",
+            "enable_logo": false,
+            "title": "Preferred Contract Partner",
+            "text": "<p>Trusted by PPD's Nationwide for consistent and professional printing services.</p>",
+            "newtab": false,
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "column_dfERyy",
+        "column_eAwqkM",
+        "column_tfmHhT",
+        "column_QUbYiA"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "slideshow_on_mobile": true,
+        "title": "",
+        "subtitle": "",
+        "crop": "",
+        "image_shape": "default_pill",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_KaFjdH": {
+      "type": "rich-text",
+      "settings": {
+        "title": "40 Years - our Impact",
+        "heading_size": "heading-standard",
+        "rich_text": "",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "tertiary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "feature_text_columns_agnWdR": {
+      "type": "feature-text-columns",
+      "blocks": {
+        "column_Bk8qTd": {
+          "type": "column",
+          "settings": {
+            "title": "3 Million+",
+            "subheading": "<p>impressions per year</p>"
+          }
+        },
+        "column_xiLjGn": {
+          "type": "column",
+          "settings": {
+            "title": "75",
+            "subheading": "<p>hard working Staff</p>"
+          }
+        },
+        "column_bM8wzK": {
+          "type": "column",
+          "settings": {
+            "title": "600",
+            "subheading": "<p>Projects Delivered Weekly </p>"
+          }
+        },
+        "column_nE43Fc": {
+          "type": "column",
+          "settings": {
+            "title": "250+",
+            "subheading": "<p>Trusted Local and National Distributor Partner's</p>"
+          }
+        },
+        "column_6afPx4": {
+          "type": "column",
+          "settings": {
+            "title": "1",
+            "subheading": "<p>Family of creators </p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_Bk8qTd",
+        "column_xiLjGn",
+        "column_bM8wzK",
+        "column_nE43Fc",
+        "column_6afPx4"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "title": "",
+        "heading_size": "heading-secondary",
+        "subheading_font": "body",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "custom_partnering_with_clients_iCrdQi": {
+      "type": "custom-partnering-with-clients",
+      "blocks": {
+        "column_JJHGF7": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Family_shot.jpg",
+            "enable_logo": false,
+            "title": "Our Journey and Legacy",
+            "text": "<p>Three Generations of gratitude to our Clients and Team. </p>",
+            "cta_link": "shopify://pages/about",
+            "cta_text": "Our Story",
+            "color_scheme": "primary"
+          }
+        },
+        "column_wpcTYr": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/DSC_7709.jpg",
+            "enable_logo": false,
+            "title": "Join Us as a Trusted Broker Partner",
+            "text": "<p>Discover our history, core values, and decades-long commitment to delivering quality and innovation in the printing industry.</p>",
+            "cta_link": "shopify://pages/contract-partners",
+            "cta_text": "Contract Partners",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "column_JJHGF7",
+        "column_wpcTYr"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "slideshow_on_mobile": false,
+        "title": "",
+        "subtitle": "",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "custom_banner_with_image_A9xJF8": {
+      "type": "custom-banner-with-image",
+      "name": "Custom Banner with image",
+      "settings": {
+        "heading": "Since 1985, we've been exceeding expectations every time.",
+        "subtext": "",
+        "bg_color": "#000000",
+        "font_color": "#ffffff",
+        "image": "shopify://shop_images/Screenshot_2.png",
+        "maxwidth": 650
+      }
+    },
+    "image_with_text_overlay_RTDRcj": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "custom_css": [
+        ".max-w-site.py-5.mx-auto {padding-inline: 40px;}"
+      ],
+      "settings": {
+        "container": false,
+        "image": "shopify://shop_images/Banner_50e802a6-3aba-42c9-bf35-c9e189838e58.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "style": "inset",
+        "height": "natural",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "",
+        "heading_tag": "h2",
+        "heading_size": "heading-standard",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "custom_banner_with_image_eaBiej": {
+      "type": "custom-banner-with-image",
+      "disabled": true,
+      "name": "Custom Banner with image",
+      "settings": {
+        "heading": "Since 1985",
+        "subtext": "",
+        "bg_color": "#000000",
+        "font_color": "#ffffff",
+        "image": "shopify://shop_images/Screenshot_2.png",
+        "maxwidth": 900
+      }
+    },
+    "rich_text_3AdyTQ": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Local & Nationwide Brands Trust Designer T’s",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>Trusted by local small businesses, sports teams, universities, and corporations nationwide.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "quaternary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "shape_slideshow_hPqzkE": {
+      "type": "shape-slideshow",
+      "blocks": {
+        "image_BjAmYm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_1.png",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_xdXigz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_2.png",
+            "image_shape": "diamond",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_PiEpw3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_3.png",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_W4aPpj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_7.png",
+            "image_shape": "hexagon",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_LzbyKh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_10.png",
+            "image_shape": "zig_zag_tear",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_V9YQxV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_4.png",
+            "image_shape": "parallelogram",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_PUQGLF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Component_5.png",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_BjAmYm",
+        "image_xdXigz",
+        "image_PiEpw3",
+        "image_W4aPpj",
+        "image_LzbyKh",
+        "image_V9YQxV",
+        "image_PUQGLF"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 10,
+        "autoscroll_mode": "1",
+        "crop": "",
+        "button_style": "push-btn-surface",
+        "show_buttons_on_mobile": false,
+        "only_show_button_on_hover": false,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "logo_list_RbP9Yn": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_B3T3g8": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/sei.png",
+            "link": ""
+          }
+        },
+        "logo_nMtXhi": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Scrub_Daddy_Logo_SVG.png",
+            "link": ""
+          }
+        },
+        "logo_UUpfYK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/wb_lanes.png",
+            "link": ""
+          }
+        },
+        "logo_r6tFMA": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/URBN.png",
+            "link": ""
+          }
+        },
+        "logo_hfUfpm": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/229078_KyleWrighhtLawnCareChest.png",
+            "link": ""
+          }
+        },
+        "logo_YgfgrB": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_2.png",
+            "link": ""
+          }
+        },
+        "logo_AY4npd": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_3.png",
+            "link": ""
+          }
+        },
+        "logo_NXc9pj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_7.png",
+            "link": ""
+          }
+        },
+        "logo_b4wHYE": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_10.png",
+            "link": ""
+          }
+        },
+        "logo_AidHhi": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_4.png",
+            "link": ""
+          }
+        },
+        "logo_bKxnkn": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_1.png",
+            "link": ""
+          }
+        },
+        "logo_mikt4C": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_8.png",
+            "link": ""
+          }
+        },
+        "logo_4EVQay": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_5.png",
+            "link": ""
+          }
+        },
+        "logo_pmHmfY": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_11.png",
+            "link": ""
+          }
+        },
+        "logo_8VH8f4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_6.png",
+            "link": ""
+          }
+        },
+        "logo_Bk9iLd": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Custom_Size_9.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_B3T3g8",
+        "logo_nMtXhi",
+        "logo_UUpfYK",
+        "logo_r6tFMA",
+        "logo_hfUfpm",
+        "logo_YgfgrB",
+        "logo_AY4npd",
+        "logo_NXc9pj",
+        "logo_b4wHYE",
+        "logo_AidHhi",
+        "logo_bKxnkn",
+        "logo_mikt4C",
+        "logo_4EVQay",
+        "logo_pmHmfY",
+        "logo_8VH8f4",
+        "logo_Bk9iLd"
+      ],
+      "settings": {
+        "enableslider": true,
+        "title": "",
+        "max_width": 100,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "text_columns_with_images_TfUKfn": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "column_dzj4dT": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/t-shirt1.png",
+            "enable_logo": false,
+            "title": "Screen Printing",
+            "text": "<p>High-quality, durable prints for any order size.</p>",
+            "newtab": false,
+            "cta_link": "shopify://pages/services",
+            "cta_text": "Learn More",
+            "color_scheme": "primary"
+          }
+        },
+        "column_Aibmcb": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/print1.png",
+            "enable_logo": true,
+            "title": "DTF Transfers",
+            "text": "<p>Vibrant, full-color transfers for unique designs.<br/></p>",
+            "newtab": false,
+            "cta_link": "https://hubs.ly/Q03kll2l0",
+            "cta_text": "Learn More",
+            "color_scheme": "primary"
+          }
+        },
+        "column_E3CA3M": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/embroidery1.png",
+            "enable_logo": false,
+            "title": "Embroidery",
+            "text": "<p>Precision stitching for a premium, lasting finish.</p>",
+            "newtab": false,
+            "cta_link": "shopify://pages/services",
+            "cta_text": "Learn More",
+            "color_scheme": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "column_dzj4dT",
+        "column_Aibmcb",
+        "column_E3CA3M"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "slideshow_on_mobile": false,
+        "title": "Your Custom Crafted Decoration Services",
+        "subtitle": "Every piece we create is uniquely made",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_qhHbai": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Our Community & Legacy",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>Woman-Owned, Family Operated | Building Community Through Creativity</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "quaternary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_FE9Q3U": {
+      "type": "image-with-text",
+      "custom_css": [
+        ".image-with-text .media-content img {height: 100%; object-fit: cover; border-radius: 25px 25px 25px 25px;}"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "image": "shopify://shop_images/tim5.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "left",
+        "image_size": "half",
+        "disable_media_style": true,
+        "enable_logo": false,
+        "title": "",
+        "heading_size": "heading-standard",
+        "richtext": "<p>From the very beginning, our family and this business have been inseparable. Forty years ago, as we were starting our Family, we were also nurturing a vision for a business built on creativity, craftsmanship, and connection. What started as a passion for design has grown into a legacy of innovation, dedication, and local support. Through hard work, perseverance, and the strength of our partnerships, we’ve built something that goes beyond business—it’s family. As the next generation Takes over, we’re honored to see our legacy continue, evolving with the times while staying true to the values that brought us here.</p><h3>Jim & Sharon Kelly</h3><p>Leadership Team & Founders of Designer T’s</p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "testimonials_3DAC9G": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_7NwQ8b": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/tim5.jpg",
+            "rating": "none",
+            "quote": "<p>From the very beginning, our family and this business have been inseparable. Forty years ago, as we were welcoming our son into the world—who now a proud leader at this company—we were also nurturing a vision for a business built on creativity, craftsmanship, and connection. What started as a passion for design has grown into a legacy of innovation, dedication, and local support. Through hard work, perseverance, and the strength of our partnerships, we’ve built something that goes beyond business—it’s family. We’re honored to see our legacy continue, evolving with the times while staying true to the values that brought us here.</p>",
+            "source": "Jim & Sharon Kelly",
+            "source1": "Leadership Team & Founders of Designer T’s"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_7NwQ8b"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "show_slider": true,
+        "title": "",
+        "max_width": 500,
+        "disable_media_style": false,
+        "crop": "",
+        "image_shape": "default",
+        "desktop_slide_width": 100,
+        "autoscroll_mode": "0",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_QCxHTJ": {
+      "type": "image-with-text",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "image": "shopify://shop_images/Images.png",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "left",
+        "image_size": "third",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "",
+        "heading_size": "heading-feature",
+        "richtext": "<p>As a graphic artist, I’ve always believed in the power of design to tell a story and connect people. Forty years ago, as I was giving birth to my son who now leads this company I was reviewing artwork. This brand has been woven into our family’s journey from the start. With the support of my husband and family, I worked to break barriers as a woman in a male-dominated field, building a company rooted in creativity and meaningful impact. I’m proud of how far we’ve come and excited to see our legacy continue providing quality, local support while expanding our reach and innovation.\"</p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "our_process_qmjJrg": {
+      "type": "our-process",
+      "blocks": {
+        "column_PCyETg": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/DSC_8134.jpg",
+            "enable_logo": false,
+            "title": "",
+            "text": "<p>Provide your artwork and order details along with your specific requirements. Whether you have a company logo, a custom illustration, or a completely unique concept in mind, our team is ready to transform your ideas into high-quality custom apparel. No matter the complexity of your design, we ensure a seamless process to bring your vision to life with precision and creativity.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_CFF8nf": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/IMG_5351.heic",
+            "enable_logo": false,
+            "title": "",
+            "text": "<p>Our skilled team meticulously reviews and enhances your design, ensuring it aligns perfectly with your vision. We work closely with you throughout the process, refining every detail, including color accuracy, design placement, fabric selection, and overall fit. Whether you need adjustments to improve clarity, sizing, or aesthetics, we can provide you with expert guidance and support.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_7tg883": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/DSC_8065.jpg",
+            "enable_logo": false,
+            "title": "",
+            "text": "<p>Once your design is finalized, our team brings it to life with expert craftsmanship and precision. Using high-quality materials and advanced techniques, we ensure perfect color accuracy, stitching, and overall quality. After a thorough quality check, we carefully package and deliver your custom apparel on time, exactly as you envisioned. Your satisfaction is our top priority.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "column_PCyETg",
+        "column_CFF8nf",
+        "column_7tg883"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "slideshow_on_mobile": true,
+        "title": "Our Process",
+        "subtitle": "",
+        "crop": "aspect-w-1 aspect-h-1",
+        "image_shape": "default",
+        "show_index_on_blocks": true,
+        "index_shape": "scalloped_circle_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "our_expert_XNHiPU": {
+      "type": "our-expert",
+      "settings": {
+        "bg_color": "#000000",
+        "heading": "Why Partner With Us?",
+        "text": "We believe in long-term relationships, not just quick transactions. We’re committed to working with industry professionals who value quality and consistency as much as we do. Partner with us for high-quality results delivered on time, every time.",
+        "button": "Personalized Process",
+        "link": "shopify://pages/contract-partners"
+      }
+    },
+    "google_reviews_section_QCxHTX": {
+      "type": "google-reviews-section",
+      "settings": {}
+    },
+    "testimonials_DpntDY": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_pk694C": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>This company is awesome, I have worked with a lot of different companies for shirts and different marketing apparel, and I have to say these guys are head and shoulders above everyone else. They made the process very easy, and made the perfect recommendation of shirt to use. On top of everything else they were the best priced!!!! Tim and his team will be getting all my business going forward. Keep up the great work guys!</p>",
+            "source": "Adam Huesser",
+            "source1": ""
+          }
+        },
+        "testimonial_MPGxpB": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>What a wonderful experience from start to finish! I love Designer T's early start @ 7 am. They were always quick to answer the phone + my emails. My daughter's uniforms for school turned out perfect 🤌 In fact, I think their uniforms are better than the uniforms presented for purchase by the school !! Thank you Designer T's, we will be back again.</p>",
+            "source": "Jessie Jordan",
+            "source1": ""
+          }
+        },
+        "testimonial_pGQDAL": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Amazing quality and service, would absolutely recommend to friends and family!</p>",
+            "source": "Lori Ann McCarthy",
+            "source1": ""
+          }
+        },
+        "testimonial_LnbFCA": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>They are an amazing printer. They handle my regular orders and rushes with ease. I can't say enough about them. Highly recommend!</p>",
+            "source": "Kelly D'Amico",
+            "source1": ""
+          }
+        },
+        "testimonial_JPgLfL": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Best of the best, Jim and his team always deliver on time with amazing flexibility. Their in house design team never disappointed. I have used Designer T's since 1993 for more than 2 dozen events.</p>",
+            "source": "Richard Cobb",
+            "source1": ""
+          }
+        },
+        "testimonial_hKw9Qe": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Extremely professional & easy to work with. I highly recommend working with Designer T’s.</p>",
+            "source": "Francis Longo",
+            "source1": ""
+          }
+        },
+        "testimonial_4AXKNp": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Great shirt vendor. I always go here for all my shirt orders 👍</p>",
+            "source": "Clint Sarion",
+            "source1": ""
+          }
+        },
+        "testimonial_T3Qz8e": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Great merchandise, at awesome prices.</p>",
+            "source": "something2Do",
+            "source1": ""
+          }
+        },
+        "testimonial_MUxDHe": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "4_stars",
+            "quote": "<p>Great place for the money</p>",
+            "source": "hal james",
+            "source1": ""
+          }
+        },
+        "testimonial_kmMCcm": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Do awesome screen printing</p>",
+            "source": "Bernadett Phillips",
+            "source1": ""
+          }
+        },
+        "testimonial_UpANF6": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Great company</p>",
+            "source": "Sherre Knable",
+            "source1": ""
+          }
+        },
+        "testimonial_kpaG3H": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Excellent place</p>",
+            "source": "Sandry Lezzer",
+            "source1": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_pk694C",
+        "testimonial_MPGxpB",
+        "testimonial_pGQDAL",
+        "testimonial_LnbFCA",
+        "testimonial_JPgLfL",
+        "testimonial_hKw9Qe",
+        "testimonial_4AXKNp",
+        "testimonial_T3Qz8e",
+        "testimonial_MUxDHe",
+        "testimonial_kmMCcm",
+        "testimonial_UpANF6",
+        "testimonial_kpaG3H"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "show_slider": true,
+        "title": "WHAT OUR PARTNERS SAY",
+        "max_width": 160,
+        "disable_media_style": true,
+        "crop": "",
+        "image_shape": "default",
+        "desktop_slide_width": 30,
+        "autoscroll_mode": "0",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "hero_slideshow_AzfbFM",
+    "video_with_text_overlay_UXJga9",
+    "video_with_text_qbBNPz",
+    "image_with_text_XmDbwk",
+    "rich_text_qErnWJ",
+    "text_columns_with_images_eyFrPt",
+    "rich_text_KaFjdH",
+    "feature_text_columns_agnWdR",
+    "custom_partnering_with_clients_iCrdQi",
+    "custom_banner_with_image_A9xJF8",
+    "image_with_text_overlay_RTDRcj",
+    "custom_banner_with_image_eaBiej",
+    "rich_text_3AdyTQ",
+    "shape_slideshow_hPqzkE",
+    "logo_list_RbP9Yn",
+    "text_columns_with_images_TfUKfn",
+    "rich_text_qhHbai",
+    "image_with_text_FE9Q3U",
+    "testimonials_3DAC9G",
+    "image_with_text_QCxHTJ",
+    "our_process_qmjJrg",
+    "our_expert_XNHiPU",
+    "google_reviews_section_QCxHTX",
+    "testimonials_DpntDY"
+  ]
+}

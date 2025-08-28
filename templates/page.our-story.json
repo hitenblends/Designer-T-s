@@ -1,0 +1,174 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "wrapper": "div.our-story",
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "43ebd215-2f01-4103-b04d-6e3ad0e734a1": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        "p {padding-bottom: 8rem !important;}",
+        ".handsugar-block {height: 100% !important;}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/hero_banner.png",
+        "image_mobile": "shopify:\/\/shop_images\/Group_187_1.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "style": "full",
+        "height": "natural",
+        "place_content": "place-content-center-start",
+        "text_align": "text-left",
+        "title": "Our story",
+        "heading_size": "heading-standard",
+        "richtext": "<p>This is the journey we’re on. <\/p>",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "4110bc11-8520-4681-81f2-0230cd322d13": {
+      "type": "custom-liquid",
+      "settings": {
+        "title": "How it started",
+        "custom_liquid": "<section class=\"story-section\">\n    <div class=\"line\"><\/div>\n    <div>\n        <div class=\"story-image\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/eliminate_sweets.png?v=1694140384\" alt=\"candies\"><\/div>\n        <div class=\"story-content\">\n            <h3 class=\"year\">2005<\/h3>\n            <p>It all started with a transformation story. Daniel - the guy who started all this - had an unhealthy relationship with food. He felt out of control around sugar! Something had to change.<\/p>\n        <\/div>\n    <\/div>\n    <div>\n        <div class=\"story-image\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/sad_exsistence.png?v=1694140384\" alt=\"veggies\"><\/div>\n        <div class=\"story-content\">\n            <h3 class=\"year\">2006<\/h3>\n            <p>Eliminating sweets from his life was a lonely and sad existence...<\/p>\n        <\/div>\n    <\/div>\n    <div>\n        <div class=\"story-image\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/travelled_globe.png?v=1694140384\" alt=\"travel the world\"><\/div>\n        <div class=\"story-content\">\n            <h3 class=\"year\">2018<\/h3>\n            <p>Daniel had his Eat. Pray. Love moment. Fed up with the lack luster sweets section of the supermarket, he travelled the globe in search of something better.<\/p>\n        <\/div>\n    <\/div>\n    <div>\n        <div class=\"story-image\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/Chef.png?v=1694140384\" alt=\"chef\"><\/div>\n        <div class=\"story-content\">\n            <h3 class=\"year\">2018<\/h3>\n            <p>Daniel had his Eat. Pray. Love moment. Fed up with the lack luster sweets section of the supermarket, he travelled the globe in search of something better.<\/p>\n        <\/div>\n    <\/div>\n    <div>\n        <div class=\"story-image\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/Lolly_Mould_can_use_in_place_of_chef.png?v=1694140384\" alt=\"candy mould\"><\/div>\n        <div class=\"story-content\">\n            <h3 class=\"year\">2019<\/h3>\n            <p>Inspired, he returned home and started to create his own delicious sweets with no added sugar and no sugar alcohols in his kitchen.<\/p>\n        <\/div>\n    <\/div>\n    <div>\n        <div class=\"story-image\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/birth_of_funday.png?v=1694140383\" alt=\"funday candy\"><\/div>\n        <div class=\"story-content\">\n            <h3 class=\"year\">2020<\/h3>\n            <p>After hundreds of attempts to perfect the recipe and enlisting the help of some of Australia’s top Food scientists, nutritionists and chefs - FUNDAY was born. <\/p>\n        <\/div>\n    <\/div>\n<\/section>\n\n<style>\n    .story-section {\n        display: grid;\n        row-gap: 3rem;\n        position: relative;\n    }\n\n    section.story-section > div {\n        padding: 1.5rem;\n    }\n\n    .story-image img {\n        width: 60%;\n        margin: auto;\n    }\n\n    .story-content {\n        text-align: center;\n    }\n\n    .story-content h3 {\n        font-size: 28px;\n        font-weight: bold;\n        margin: 0.5rem auto;\n        font-family: 'brevia';\n    }\n\n    .story-content p {\n        font-family: 'sofia-pro';\n        font-size: 14px;\n    }\n\n    \/* .line::after {\n        content: url(\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/Group_187_2.png?v=1694239320\");\n        position: absolute;\n        left: 45%;\n        transform: translate(-55%);\n    } *\/\n\n    \/* .line {\n        background-image: url(\"https:\/\/cdn.shopify.com\/s\/files\/1\/0525\/8287\/5332\/files\/Group_187_2.png?v=1694239320\");\n        position: absolute;\n        left: 45%;\n        transform: translate(-55%);\n    } *\/\n\n    @media screen and (min-width: 768px) {\n        section.story-section > div {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n        }\n\n        .story-image img {\n            width: 50%;\n        }\n\n        .story-content h3 {\n            font-size: 30px;\n        }\n\n        .story-content p {\n            font-size: 22px;\n        }\n    }\n<\/style>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    },
+    "56b8bdcc-ccf8-413c-aac6-100867d9673d": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "template--15946328572100__56b8bdcc-ccf8-413c-aac6-100867d9673d-column-1": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/1.png",
+            "title": "Real food, real talk",
+            "text": "<p>We won’t sugar coat it, a healthy dose of realness comin’ up. Real food ingredients, real tasty and real good for you.<\/p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "template--15946328572100__56b8bdcc-ccf8-413c-aac6-100867d9673d-column-2": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/2.png",
+            "title": "Permission to press pause",
+            "text": "<p>Adulting is hardcore. We’re here to inject some cheeky childlike fun into your day. Take a moment on us, you deserve it.<\/p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "template--15946328572100__56b8bdcc-ccf8-413c-aac6-100867d9673d-column-3": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/3.png",
+            "title": "Sweet moments together",
+            "text": "<p>We make lollies you’ll fall in love with. We think your mates will love ‘em too! So, share the love and stick it to sugar together.<\/p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "template--15946328572100__56b8bdcc-ccf8-413c-aac6-100867d9673d-column-1",
+        "template--15946328572100__56b8bdcc-ccf8-413c-aac6-100867d9673d-column-2",
+        "template--15946328572100__56b8bdcc-ccf8-413c-aac6-100867d9673d-column-3"
+      ],
+      "custom_css": [
+        "h2 {text-align: left !important; font-size: 50px; color: #000; letter-spacing: -1.5px;}",
+        "h3 {font-size: 22px; font-family: \"Sofia Pro\" !important; color: #000;}",
+        "p {font-size: 15px;}",
+        ".media-style-container {width: 90%; margin-left: auto; margin-right: auto;}",
+        "@media (max-width: 768px) {h2 {text-align: center !important; font-size: 28px; } h3 {font-size: 18px !important; font-family: \"Sofia Pro\" !important; color: #000; } p {font-size: 14px; }}"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "slideshow_on_mobile": false,
+        "title": "Our values",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "c5dc1a2e-bdda-489b-b386-df47a2cf8199": {
+      "type": "featured-collection",
+      "custom_css": [
+        "ul li.splide__slide {margin-right: 1.2rem !important;}",
+        "a.inline-block.push-btn.mx-5.mx-5.mt-1.lg\\:mt-0 {width: 194px;}",
+        "h3.font-body.text-base {font-size: 26px;}",
+        "select {display: none;}",
+        ".media-style-container img {object-fit: cover;}",
+        ".push-btn-surface {width: 100%;}",
+        "h3 {min-height: 60px;}",
+        "button span.push-btn-surface {line-height: 28px;}",
+        "@media (min-width: 990px) {.media-style-container, .media-style-container img {min-height: 389px; }}",
+        "@media (max-width: 990px) {.media-style-container {min-height: 200px; }}"
+      ],
+      "settings": {
+        "title": "Shop our range",
+        "subheading": "",
+        "collection": "all",
+        "no_products": 4,
+        "show_view_all": true,
+        "enable_quick_buy": true,
+        "display_on_card": false,
+        "layout": "carousel",
+        "view_all_position": "top",
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "slideshow_focus": "left",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 40,
+        "autoscroll_mode": "1",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "de806d79-d24a-4aba-8e4f-c4c1fd72656f": {
+      "type": "custom-liquid",
+      "settings": {
+        "title": "",
+        "custom_liquid": "<\/div>\n<div id=\"shape-divider-07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87\" class=\"shape-divider w-full   pointer-events-none z-20 absolute bottom-0 left-0 w-full\" data-shopify-editor-block=\"{&quot;id&quot;:&quot;07d7b0c5-4b5b-4f2f-89ff-df1ca6587b87&quot;,&quot;type&quot;:&quot;shape_divider&quot;}\">\n  <div class=\"shape-divider-transform-reset\">\n    <div x-ref=\"animation-container\" class=\"shape-divider-svg-container flex relative left-0 min-w-full  -mb-shape-divider\" style=\"padding-top: 7.0%;\"><div class=\" z-0 absolute top-0 left-0 right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background\">\n        <svg class=\"z-0 absolute top-0 left-0  right-0 bottom-0 text-scheme-background h-full w-full text-scheme-background  \" data-color-scheme=\"quaternary\" width=\"100%\" height=\"100%\" viewBox=\"0 0 1200.0 84.0\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path d=\"M600 39.1293C800 84.6351 1000 84.6351 1200 39.1294V84.0001H0L3.48561e-06 39.1293C200 -6.37645 400 -6.37643 600 39.1293Z\" fill=\"currentColor\"><\/path>\n          <path class=\"shape-divider-stroke\" vector-effect=\"non-scaling-stroke\" d=\"M1201 39.1294C1001 84.6351 801 84.6351 601 39.1293C401 -6.37643 201 -6.37645 1 39.1293\" stroke=\"none\"><\/path><\/svg>\n      <\/div><\/div>\n  <\/div>",
+        "full_width": false,
+        "color_scheme": "primary"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "43ebd215-2f01-4103-b04d-6e3ad0e734a1",
+    "4110bc11-8520-4681-81f2-0230cd322d13",
+    "56b8bdcc-ccf8-413c-aac6-100867d9673d",
+    "c5dc1a2e-bdda-489b-b386-df47a2cf8199",
+    "de806d79-d24a-4aba-8e4f-c4c1fd72656f"
+  ]
+}

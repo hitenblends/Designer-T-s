@@ -1,0 +1,228 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_overlay_xUHKD8": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "image": "shopify://shop_images/About_Card.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "pt-600",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Custom Apparel Made Easy – The Perfect Mix of Quality & Expertise",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Looking for high-quality custom apparel? We’ve partnered with the best in the industry to offer a variety of styles, materials, and customization options. With our trusted apparel partners’ top-notch products and our decoration experts’ precision and creativity, you get the perfect mix for apparel that stands out.</p>",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "logo_list_RbP9Yn": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_YgfgrB": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Component_2.png",
+            "link": ""
+          }
+        },
+        "logo_AY4npd": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Component_9.png",
+            "link": ""
+          }
+        },
+        "logo_NXc9pj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Component_4.png",
+            "link": ""
+          }
+        },
+        "logo_b4wHYE": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Component_5.png",
+            "link": ""
+          }
+        },
+        "logo_AidHhi": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Component_6.png",
+            "link": ""
+          }
+        },
+        "logo_bKxnkn": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Component_7.png",
+            "link": ""
+          }
+        },
+        "logo_mikt4C": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Component_8.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_YgfgrB",
+        "logo_AY4npd",
+        "logo_NXc9pj",
+        "logo_b4wHYE",
+        "logo_AidHhi",
+        "logo_bKxnkn",
+        "logo_mikt4C"
+      ],
+      "settings": {
+        "enableslider": true,
+        "title": "",
+        "max_width": 200,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "text_columns_with_images_eyFrPt": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "column_dfERyy": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1.png",
+            "title": "Explore Options",
+            "text": "<p>Browse our list of trusted apparel providers.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_eAwqkM": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_1.png",
+            "title": "Select Your Style",
+            "text": "<p>Choose from T-shirts, hoodies, polos, and more.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_tfmHhT": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_2.png",
+            "title": "Customize",
+            "text": "<p>Our decoration experts bring your vision to life with professional printing and embroidery.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        },
+        "column_QUbYiA": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "image": "shopify://shop_images/Frame_1_3.png",
+            "title": "Order & Enjoy",
+            "text": "<p>Get high-quality, custom apparel delivered to you.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "same_as_section"
+          }
+        }
+      },
+      "block_order": [
+        "column_dfERyy",
+        "column_eAwqkM",
+        "column_tfmHhT",
+        "column_QUbYiA"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "slideshow_on_mobile": true,
+        "title": "How It Works",
+        "subtitle": "",
+        "crop": "",
+        "image_shape": "default_pill",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "logo_list_RbP9Yen": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_aVDTX3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/001-nike-logos-swoosh-black.webp",
+            "link": "https://www.nike.com/"
+          }
+        },
+        "logo_n3njDa": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/images_947a8a2a-3cd7-4a12-bbbb-75790e30042d.png",
+            "link": "https://www.adidas.com/"
+          }
+        },
+        "logo_aFE4fr": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/peter-millar-logo_50fddbcdf1bc5728890207d304f83f3a.webp",
+            "link": "https://www.petermillar.com/"
+          }
+        }
+      },
+      "block_order": [
+        "logo_aVDTX3",
+        "logo_n3njDa",
+        "logo_aFE4fr"
+      ],
+      "settings": {
+        "enableslider": false,
+        "title": "Our Trusted Apparel Partners",
+        "max_width": 200,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_xUHKD8",
+    "logo_list_RbP9Yn",
+    "text_columns_with_images_eyFrPt",
+    "logo_list_RbP9Yen"
+  ]
+}

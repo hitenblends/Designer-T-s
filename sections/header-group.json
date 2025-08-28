@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "disabled": true,
+      "settings": {
+        "home_page_only": true,
+        "display": "static",
+        "text": "Experience the Difference: We're More Than Just a Screen Printing Shop.",
+        "link": "",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false,
+        "repeat_text": true,
+        "shape_between_text": "circle",
+        "animate_shape_between_text": true,
+        "speed": 70,
+        "direction": ""
+      }
+    },
+    "tab_section_J8yB79": {
+      "type": "tab-section",
+      "blocks": {
+        "title_8cYdm6": {
+          "type": "Title",
+          "settings": {
+            "heading": "shopify://shop_images/Designer_T_s-2_no_border-02.png",
+            "url": ""
+          }
+        },
+        "title_dkGXn3": {
+          "type": "Title",
+          "settings": {
+            "heading": "shopify://shop_images/blends_logo.png",
+            "url": "https://www.blendsdtf.com/"
+          }
+        }
+      },
+      "block_order": [
+        "title_8cYdm6",
+        "title_dkGXn3"
+      ],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "custom_css": [],
+      "settings": {
+        "cta_link1": "shopify://pages/get-a-quote",
+        "cta_text1": "Request Quote",
+        "cta_link": "shopify://pages/broker-order-portal",
+        "cta_text": "Broker Order Portal",
+        "bg_color": "#29ace2",
+        "text_color": "#ffffff",
+        "logo": "shopify://shop_images/Dt_logo_new.jpg",
+        "logo_max_width": 160,
+        "main_linklist": "new-menu",
+        "show_all_navigation_links": true,
+        "showcase_second_level_links": true,
+        "showcase_first_level_collections": false,
+        "show_collection_images": false,
+        "crop": "",
+        "header_layout": "navigation_left_logo_center",
+        "header_show_search": false,
+        "hide_menu_arrow_desktop": true,
+        "remove_menu_first_level_background": true,
+        "change_menu_background_when_active": true,
+        "sticky_header": true,
+        "show_icons": true,
+        "enable_overlay_on_homepage": false,
+        "enable_overlay_on_collection_pages": false,
+        "enable_overlay_on_product_pages": false,
+        "overlay_text_color": "text-white",
+        "transparent_when_overlaid_and_stuck": false,
+        "overlay_show_separator_border": false,
+        "overlay_first_section_padding_top_desktop": 3,
+        "overlay_first_section_padding_top_mobile": 3,
+        "color_scheme": "quaternary",
+        "use_gradient_background": false,
+        "dropdown_bg": "card",
+        "sidebar_show_footer_menu": false,
+        "sidebar_show_social_icons": true
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "tab_section_J8yB79",
+    "header"
+  ]
+}

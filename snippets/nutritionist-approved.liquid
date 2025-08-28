@@ -1,0 +1,46 @@
+<div class="nutritionist-card table lg:flex lg:flex-row py-5 px-6 text-white {{ class }}">
+    <div class="w-full lg:w-[320px] table-footer-group">
+        <div class="w-full flex flex-row lg:flex-col mt-4 lg:mt-0">
+            {% if avatar != blank %}
+                {{
+                avatar
+                | image_url: width: 2000
+                | image_tag: sizes: '100vw', class: "w-1/3 lg:w-2/3 mr-4 lg:mr-0 mb-1 max-w-[82px]", loading: 'lazy'
+                }}
+            {% endif %}
+            <span class="text-[0.75rem] w-full mx-auto my-1 lg:my-0 flex flex-col justify-center">
+                <span class="whitespace-nowrap">{{ name }}{% if position != blank %},{% endif %}</span>
+                {% if position != blank %}
+                    <span class="whitespace-nowrap mt-1">{{ position }}</span>
+                {% endif %}
+                {% if companies != blank %}
+                <p class="flex flex-col text-[8px] mt-4 lg:mt-1">
+                    {% for item in companies.value %}
+                        <span>{{ item }}</span>
+                    {% endfor %}
+                </p>
+                {% endif %}
+
+            </span>
+        </div>
+
+    </div>
+    <div class="w-full table-header-group lg:flex flex-col justify-center">
+        <h2 class="text-[18px] lg:text-5.5 flex flex-row items-center mb-2">
+            <span class="font-bold">Nutritionist approved</span>
+            <svg class="mx-3.25" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="13.5" cy="13.5" r="13.5" fill="#74B744"/>
+                <path d="M10.9627 17.5677L7.66146 14.2665L6.53729 15.3827L10.9627 19.8081L20.4627 10.3081L19.3465 9.19189L10.9627 17.5677Z"
+                      fill="white"/>
+            </svg>
+        </h2>
+        <p class="text-base text-[18px]">{{ remarks }}</p>
+    </div>
+</div>
+
+<style>
+    .nutritionist-card {
+        background-color: {{ card_color }} !important;
+        border-radius: 26px;
+    }
+</style>

@@ -1,0 +1,208 @@
+{% liquid
+    assign metafields = product.metafields.funday
+
+    assign tint = 'white'
+    if metafields.product_tint_color != blank
+        assign tint = metafields.product_tint_color
+    else
+
+    endif
+
+    assign default_color = 'black'
+    if metafields.product_tint_color != blank
+        assign default_color = metafields.product_default_color
+    endif
+
+    if metafields.about_this_product != blank
+        assign about_product = metafields.about_this_product.value
+    endif
+
+    assign product_main_collection = metafields.primary_collection.value
+    if product_main_collection == blank
+        for collection in product.collections
+            if collection.title != 'All' or collection.title != 'all'
+                assign product_main_collection = collection
+                break
+            endif
+        endfor
+    endif
+
+    assign cta_color = default_color
+    if metafields.secondary_color != blank
+        assign cta_color = metafields.secondary_color
+    endif
+%}
+
+{% if about_product != blank %}
+<section class="product-nutrition-details text-scheme-text bg-scheme-background relative overflow-hidden section-tint">
+    <div class="section-content relative z-10 py-section-vertical-spacing">
+        <div class="px-section relative z-10 max-w-site mx-auto">
+            <div class="">
+                <div class="section-content mx-auto relative z-10 text_alignment">
+                    <h1 class="font-heading mb-9.75 text-xl lg:text-10.5">
+                        About this product
+                    </h1>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 grid-flow-row-dense gap-10 mb-8">
+                        <div class="col-span-full lg:col-span-8">
+                            {% if about_product.flavours != blank %}
+                                <p class="font-heading mb-4 text-5.5">Flavour</p>
+                                {% assign flavours = about_product.flavours.value %}
+                                <div class="flex flex-row">
+                                    {% for item in flavours %}
+                                        <div class="flex flex-col mr-6 text-center">
+                                            {% if item.icon %}
+                                                <img
+                                                        src="{{ item.icon.value | image_url: height: 45 }}"
+                                                        alt="{{ item.flavour.value }}"
+                                                        class="w-[5.125rem] h-[5.125rem] mx-auto mb-4"
+                                                />
+                                            {% endif %}
+                                            <span>{{ item.flavour.value }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            {% if about_product.additional_description != blank %}
+                                <p class="font-heading mb-4 mt-14 text-5.5">Description</p>
+                                <p class="rte text-theme-basic">
+                                    {{ about_product.additional_description | metafield_tag | newline_to_br }}
+                                </p>
+                            {% endif %}
+
+                            {% if about_product.taste_profile != blank %}
+                            <p class="font-heading mb-4 mt-14 text-5.5">Taste profile</p>
+                            <div class="flex w-full lg:10/12">
+                                {% assign profilecount = 0 %}
+                                {% assign profiles = about_product.taste_profile.value %}
+                                <div class="flex flex-col xlg:flex-row w-full">
+                                    {% for item in profiles %}
+                                        {% assign profileCount = profilecount | plus: 1 %}
+                                        {% assign mod = profileCount | modulo: 2 %}
+                                        <div class="w-full xlg:w-5/12 lg:pr-4">
+                                            {% if item.full_image_override != blank %}
+                                                <img
+                                                        src="{{ item.full_image_override.value | image_url: height: 50 }}"
+                                                        alt="{{ item.name.value }}"
+                                                        class="w-auto h-auto"
+                                                />
+                                            {% else %}
+                                                <div class="relative range-bar-wrapper">
+                                                    <div class="range-bar"></div>
+                                                    {% if item.percentage.value != blank %}
+                                                        {% assign leftPosition = 'left: calc( ' | append : item.percentage.value | append : '% - 50px);'  %}
+                                                    {% else %}
+                                                        {% assign leftPosition = ''  %}
+                                                    {% endif %}
+                                                    {% if item.icon %}
+                                                        <img
+                                                                src="{{ item.icon.value | image_url: height: 50 }}"
+                                                                alt="{{ item.percentage.value }}"
+                                                                class="w-11.25 h-11.25"
+                                                                style="{{ leftPosition }}"
+                                                        />
+                                                    {% else %}
+                                                        {% render 'icon-bear',
+                                                            style: leftPosition
+                                                        %}
+                                                    {% endif %}
+
+                                                </div>
+                                                <div class="flex">
+                                                    <span class="text-tint w-1/2">{{ item.left_label.value }}</span>
+                                                    <span class="w-1/2 text-right">{{ item.right_label.value }}</span>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        {% if mod and item.full_image_override == blank  %}
+                                            <div class="hidden lg:inline lg:w-2/12"></div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% assign nutritionist = about_product.nutritionist.value %}
+                            {% render 'nutritionist-approved',
+                                    card_color: cta_color,
+                                    avatar: nutritionist.avatar,
+                                    name: nutritionist.name,
+                                    position: nutritionist.position,
+                                    companies: nutritionist.companies,
+                                    remarks: about_product.remarks,
+                                    class: 'mt-14'
+                            %}
+                        </div>
+                        <div class="col-span-full lg:col-span-4">
+                            {% if about_product.nutritional_information != blank %}
+                                {{
+                                about_product.nutritional_information
+                                | image_url: width: 2000
+                                | image_tag: sizes: '100vw', class: "w-11/12 lg:w-full mx-auto max-w-xs", loading: 'lazy'
+                                }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <a class="inline-block push-btn w-full lg:w-auto" href="{{ product_main_collection.url }}" target="_blank">
+                            <span class="push-btn-surface w-full">Shop {{ product_main_collection.title }}</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .section-tint {
+        background-color: {{ tint }} !important;
+    }
+
+    .text-tint {
+        color: {{ default_color }} !important;
+    }
+
+    .range-bar-wrapper {
+        padding: 25px 0px;
+    }
+
+    .range-bar-wrapper svg path {
+        fill: {{ default_color }} !important;
+    }
+
+    .range-bar {
+        background-color: {{ default_color }} !important;
+        opacity: 20%;
+    }
+
+    .range-bar-wrapper svg,
+    .range-bar-wrapper img{
+        height: 50px;
+        position: absolute;
+        top: 0px;
+    }
+</style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product Nutrition Details",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Nutrition Details",
+      "category": "ADVANCED LAYOUT"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "aside"
+    ]
+  }
+}
+{% endschema %}

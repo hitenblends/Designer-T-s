@@ -1,0 +1,53 @@
+{%- liquid
+  assign label_class = 'sr-only'
+  if block.settings.show_label
+  assign label_class = 'block font-secondary text-scheme-text text-sm'
+  endif
+-%}
+{%  comment %}
+<div
+
+  class="{{ block_base_classes }}"
+  x-data="ThemeComponent_Quantity()"
+  {{ block.shopify_attributes }}
+>
+  <div class="lg:flex lg:items-center lg:justify-start">
+    <label class="{{ label_class }}  lg:w-1/4 xl:w-1/5 lg:shrink-0 pr-2.5" for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+    <div class="lg:mt-0 lg:flex-1 product-block-quantity">
+      <div class="flex flex-nowrap justify-start items-center quantity-fields">
+        <button
+          class="w-1/3"
+          aria-label="&minus;"
+          @click.prevent.stop="decreaseQuantity"
+        >
+          <div class="push-btn-surface push-btn-surface--secondary align-bottom p-2">
+            <div class="w-4 h-4 m-auto">{% render 'icon-subtract' %}</div>
+          </div>
+        </button>
+        <input
+          type="number"
+          class="input--no-border block appearance-none text-center border-0 bg-transparent text-base p-2 text-scheme-text w-1/3"
+          form="{{ product_form_id }}"
+          id="Quantity-{{ section.id }}"
+          name="quantity"
+          x-model="quantity"
+          x-ref="quantityInput"
+        >
+        <button
+          class="w-1/3"
+          aria-label="&plus;"
+          @click.prevent.stop="increaseQuantity"
+        >
+          <div class="push-btn-surface push-btn-surface--secondary align-bottom p-2">
+            <div class="w-4 h-4 m-auto">{% render 'icon-add' %}</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% unless request.design_mode %}
+  <script src="{{ 'modules-quantity.bundle.min.js' | asset_url }}" type="module"></script>
+{% endunless %}
+ {% endcomment %}

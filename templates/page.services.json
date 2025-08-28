@@ -1,0 +1,359 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_overlay_9bf9K6": {
+      "type": "image-with-overlay",
+      "blocks": {
+        "image_rfBgVa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/About_Card_d754e8bd-48ac-46d4-a052-fff618481872.png",
+            "image_overlay": 20,
+            "heading": "Order a Gang sheet",
+            "button": "All Collections",
+            "link": "shopify://collections"
+          }
+        },
+        "image_Vw9LWQ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/custom_sports_printing_shop_nj5.jpg",
+            "image_overlay": 20,
+            "heading": "Order a Gang sheet",
+            "button": "All Collections",
+            "link": "shopify://collections"
+          }
+        },
+        "image_8w3BF7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/screen-printed-tshirts-nationwide.jpg",
+            "image_overlay": 20,
+            "heading": "Gang Sheet Builder",
+            "button": "All Collections",
+            "link": "shopify://collections"
+          }
+        }
+      },
+      "block_order": [
+        "image_rfBgVa",
+        "image_Vw9LWQ",
+        "image_8w3BF7"
+      ],
+      "disabled": true,
+      "settings": {}
+    },
+    "image_with_text_overlay_UpJUtU": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        ".banner-section {margin-bottom: 35px;}"
+      ],
+      "settings": {
+        "container": false,
+        "image": "shopify://shop_images/background-new-one.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": false,
+        "style": "full",
+        "height": "pt-600",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Our Services",
+        "heading_tag": "h1",
+        "heading_size": "heading-standard",
+        "richtext": "<p>At Designer T's, we specialize in high-quality screen printing, DTF transfers, and custom embroidery. </p><p>Whether you're outfitting a team, building your brand, or creating custom apparel, we deliver precision, durability, and standout design EVERY TIME</p>",
+        "cta_url": "shopify://pages/get-a-quote",
+        "cta_text": "Get Started",
+        "color_scheme": "secondary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "image_with_text_mkJDEb": {
+      "type": "image-with-text",
+      "settings": {
+        "display_on_card": false,
+        "image": "shopify://shop_images/DSC_7879.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "right",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "Screen Printing",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Experience the vibrant colors and exceptional durability of our high-quality screen printing services. </p><p>With a fleet of 7 automatic presses capable of printing up to 14 colors, we’re built for efficiency and precision. But it’s our team of skilled artisans—known for their expertise, creativity, and flexibility—that truly sets us apart, bringing even the most complex full-color designs to life.</p><ul><li>Trusted by leading brands across industries.</li><li>Expertise across a wide range of garments, including fashion basics, performance wear, outerwear, and accessories.</li><li>4+ million impressions annually, with a strong track record in high-volume and quick-turn production.</li><li>Specialists in complex work, including full-color designs, specialty inks, and multi-location prints</li></ul>",
+        "text_alignment": "text-left",
+        "button_link": "shopify://pages/get-a-quote",
+        "button_label": "Get Started",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_TFyyhT": {
+      "type": "image-with-text",
+      "settings": {
+        "display_on_card": false,
+        "image": "shopify://shop_images/AdobeStock_257392697.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "left",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": false,
+        "title": "Embroidery",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Elevate your brand with exquisite embroidery. Our artists use the latest embroidery technology and premium threads to produce stunning, long-lasting designs.</p><ul><li>Intricate designs and detailed patterns</li><li>Wide range of thread colors and styles</li><li>Luxurious and durable finishes</li><li>Ideal for logos, monograms, and custom artwork</li><li>Polos, shirts, jackets, hats, uniforms, workwear, and more</li></ul>",
+        "text_alignment": "text-left",
+        "button_link": "shopify://pages/get-a-quote",
+        "button_label": "Get Started",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_ARrMUE": {
+      "type": "image-with-text",
+      "settings": {
+        "display_on_card": false,
+        "image": "shopify://shop_images/DSC_7961_f8dad354-6aa3-47aa-8c47-0964e3dac622.jpg",
+        "crop": "",
+        "image_shape": "default",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "right",
+        "image_size": "half",
+        "disable_media_style": false,
+        "enable_logo": true,
+        "title": "DTF Transfers",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Take your designs to the next level with our Blends Direct-to-Film (DTF) transfer technology. Blends DTF offers vibrant, full-color prints with intricate detail and a smooth finish, suitable for a variety of fabrics.</p><ul><li>Vibrant, full-color prints with exceptional detail</li><li>Fast turnaround times</li><li>T-shirts, polos, hoodies, and more</li><li>Promotional items, bags, and accessories</li><li>Custom sportswear and activewear</li></ul>",
+        "text_alignment": "text-left",
+        "button_link": "https://www.blendsdtf.com/pages/dtf",
+        "button_label": "Blends Services",
+        "button_link1": "",
+        "button_label1": "Shop Now",
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_W4FtrJ": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Why Choose Us",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>With years of hands-on experience and a passion for quality, we turn your ideas into premium apparel. From vibrant screen prints to detailed embroidery and hassle-free DTF transfers, our expert team ensures every piece is crafted with care and delivered on time.</p>",
+        "display_on_card": true,
+        "content_width_desktop": "lg:w-2/3",
+        "button_link": "shopify://pages/get-a-quote",
+        "button_label": "Get Started",
+        "color_scheme": "secondary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_overlay_JTXUwa": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "settings": {
+        "container": false,
+        "image": "shopify://shop_images/About_Card.png",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "style": "full",
+        "height": "natural",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "Blends DTF Transfers",
+        "heading_tag": "h2",
+        "heading_size": "heading-standard",
+        "richtext": "<p>Take your designs to the next level with our Blends Direct-to-Film (DTF) transfer technology. Blends DTF offers vibrant, full-color prints with intricate detail and a smooth finish, suitable for a variety of fabrics.</p><ul><li>Vibrant, full-color prints with exceptional detail</li><li>Fast turnaround times</li><li>T-shirts, polos, hoodies, and more</li><li>Promotional items, bags, and accessories</li><li>Custom sportswear and activewear</li></ul>",
+        "cta_url": "shopify://collections/all",
+        "cta_text": "Shop Now",
+        "color_scheme": "secondary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "testimonials_DpntDY": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_pk694C": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>This company is awesome, I have worked with a lot of different companies for shirts and different marketing apparel, and I have to say these guys are head and shoulders above everyone else. They made the process very easy, and made the perfect recommendation of shirt to use. On top of everything else they were the best priced!!!! Tim and his team will be getting all my business going forward. Keep up the great work guys!</p>",
+            "source": "Adam Huesser",
+            "source1": ""
+          }
+        },
+        "testimonial_MPGxpB": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>What a wonderful experience from start to finish! I love Designer T's early start @ 7 am. They were always quick to answer the phone + my emails. My daughter's uniforms for school turned out perfect 🤌 In fact, I think their uniforms are better than the uniforms presented for purchase by the school !! Thank you Designer T's, we will be back again.</p>",
+            "source": "Jessie Jordan",
+            "source1": ""
+          }
+        },
+        "testimonial_pGQDAL": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Amazing quality and service, would absolutely recommend to friends and family!</p>",
+            "source": "Lori Ann McCarthy",
+            "source1": ""
+          }
+        },
+        "testimonial_LnbFCA": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>They are an amazing printer. They handle my regular orders and rushes with ease. I can't say enough about them. Highly recommend!</p>",
+            "source": "Kelly D'Amico",
+            "source1": ""
+          }
+        },
+        "testimonial_JPgLfL": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Best of the best, Jim and his team always deliver on time with amazing flexibility. Their in house design team never disappointed. I have used Designer T's since 1993 for more than 2 dozen events.</p>",
+            "source": "Richard Cobb",
+            "source1": ""
+          }
+        },
+        "testimonial_hKw9Qe": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Extremely professional & easy to work with. I highly recommend working with Designer T’s.</p>",
+            "source": "Francis Longo",
+            "source1": ""
+          }
+        },
+        "testimonial_4AXKNp": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Great shirt vendor. I always go here for all my shirt orders 👍</p>",
+            "source": "Clint Sarion",
+            "source1": ""
+          }
+        },
+        "testimonial_T3Qz8e": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Great merchandise, at awesome prices.</p>",
+            "source": "something2Do",
+            "source1": ""
+          }
+        },
+        "testimonial_MUxDHe": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "4_stars",
+            "quote": "<p>Great place for the money</p>",
+            "source": "hal james",
+            "source1": ""
+          }
+        },
+        "testimonial_kmMCcm": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Do awesome screen printing</p>",
+            "source": "Bernadett Phillips",
+            "source1": ""
+          }
+        },
+        "testimonial_UpANF6": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Great company</p>",
+            "source": "Sherre Knable",
+            "source1": ""
+          }
+        },
+        "testimonial_kpaG3H": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "<p>Excellent place</p>",
+            "source": "Sandry Lezzer",
+            "source1": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_pk694C",
+        "testimonial_MPGxpB",
+        "testimonial_pGQDAL",
+        "testimonial_LnbFCA",
+        "testimonial_JPgLfL",
+        "testimonial_hKw9Qe",
+        "testimonial_4AXKNp",
+        "testimonial_T3Qz8e",
+        "testimonial_MUxDHe",
+        "testimonial_kmMCcm",
+        "testimonial_UpANF6",
+        "testimonial_kpaG3H"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "show_slider": true,
+        "title": "WHAT OUR PARTNERS SAY",
+        "max_width": 160,
+        "disable_media_style": true,
+        "crop": "",
+        "image_shape": "default",
+        "desktop_slide_width": 30,
+        "autoscroll_mode": "0",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "google_reviews_section_QCxHTX": {
+      "type": "google-reviews-section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "image_with_overlay_9bf9K6",
+    "image_with_text_overlay_UpJUtU",
+    "image_with_text_mkJDEb",
+    "image_with_text_TFyyhT",
+    "image_with_text_ARrMUE",
+    "rich_text_W4FtrJ",
+    "image_with_text_overlay_JTXUwa",
+    "testimonials_DpntDY",
+    "google_reviews_section_QCxHTX"
+  ]
+}

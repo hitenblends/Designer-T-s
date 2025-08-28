@@ -1,0 +1,83 @@
+{% comment %}
+  Custom Logo Section
+{% endcomment %}
+
+<div class="brand-container py-section-vertical-spacing">
+    <div class="px-section relative z-10 max-w-site mx-auto">
+    <ul>
+        {% for block in section.blocks %}
+            <li class="{% if block.type == 'large_logo' %}large-item{% endif %}">
+              {% if block.settings.logo_link %}<a href="{{ block.settings.logo_link }}" target="_blank">{% endif %}
+                {% if block.settings.logo != blank %}
+                    <img src="{{ block.settings.logo | img_url: 'medium' }}" alt="{{ block.settings.logo.alt }}">
+                {% else %}
+                    <span>No Logo</span>
+                {% endif %}
+              {% if block.settings.logo_link %}</a>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Custom Logo Section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Upload Logo"
+        },
+         {
+          "type": "url",
+          "id": "logo_link",
+          "label": "Logo URL"
+        }
+      ]
+    },
+    {
+      "type": "large_logo",
+      "name": "Large Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Upload Large Logo"
+        },
+         {
+          "type": "url",
+          "id": "logo_link",
+          "label": "Logo URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Logo Section",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "large_logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

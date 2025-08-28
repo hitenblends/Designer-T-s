@@ -1,0 +1,142 @@
+<section class="text-columns-with-images relative text-scheme-text    relative overflow-hidden" data-color-scheme="primary">
+
+  <div class="section-content relative z-10 py-section-vertical-spacing bg-scheme-background px-section    max-w-site mx-auto">
+    <div class="content_box_outer">
+      <h3 class="font-heading  heading-standard heading-style break-words none">{{ section.settings.heading }}</h3>
+      <div class="content_box_inner">
+      {{ section.settings.content }}
+      </div>
+      
+    </div>
+      
+{% assign image = section.settings.image  %}
+{% assign image2 = section.settings.image1  %}
+    <div class="image_boxes">
+         {%- if image != blank -%}
+      <div class="left_box left-image">
+            {%- render 'media-image',
+              media: image
+            -%}
+        <div class="image_content">
+        <div class="image_content_inner">
+          
+          <h2>{{ section.settings.heading1 }}</h2>
+            {% if section.settings.cta_link %}
+                  <a href="{{ section.settings.cta_link }}" class="inline-block push-btn">
+                    <span class="push-btn-surface">{{ section.settings.cta_text }}</span>
+                  </a>
+                {% endif %}
+        </div>
+        </div>
+      </div>
+        
+          {%- endif -%}
+
+          {%- if image2 != blank -%}
+      <div class="left_box right-image">
+           
+            {%- render 'media-image',
+              media: image2
+            -%}
+        <div class="image_content">
+        <div class="image_content_inner">
+          <div class="inner_content">
+          <h2>{{ section.settings.heading2 }}</h2>
+            {{ section.settings.subcontent }}
+          </div>
+            {% if section.settings.cta_link2 %}
+                  <a href="{{ section.settings.cta_link2 }}" class="inline-block push-btn">
+                    <span class="push-btn-surface">{{ section.settings.cta_text2 }}</span>
+                  </a>
+                {% endif %}
+        </div>
+        </div>
+      </div>
+        
+          {%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Partnering Section",
+    "settings": [
+       {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+       {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "t:common.settings.image.label"
+      },
+      {
+        "type": "text",
+        "id": "heading1",
+        "label": "Heading"
+      },
+       {
+          "type": "header",
+          "content": "t:common.settings.header_call_to_action"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "t:sections.text_columns_with_images.blocks.column.settings.cta_link.label"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "t:sections.text_columns_with_images.blocks.column.settings.cta_text.label"
+        },
+      {
+        "type": "header",
+        "content": "Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "t:common.settings.image.label"
+      },
+      {
+        "type": "text",
+        "id": "heading2",
+        "label": "Heading"
+      },
+       {
+        "type": "richtext",
+        "id": "subcontent",
+        "label": "Subcontent"
+      },
+       {
+          "type": "header",
+          "content": "t:common.settings.header_call_to_action"
+        },
+        {
+          "type": "url",
+          "id": "cta_link2",
+          "label": "t:sections.text_columns_with_images.blocks.column.settings.cta_link.label"
+        },
+        {
+          "type": "text",
+          "id": "cta_text2",
+          "label": "t:sections.text_columns_with_images.blocks.column.settings.cta_text.label"
+        },
+    ],
+  "presets": [
+    {
+      "name": "Partnering Section"
+    }
+  ]
+  }
+{% endschema %}

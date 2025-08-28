@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": false,
+  "sections": {
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "custom_css": [
+        "h3.font-body.text-base {\/* min-height: 65px; *\/ font-size: 26px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;}",
+        "ul.grid.gap-theme.grid-cols-1.lg\\:grid-cols-4 {column-gap: 1rem; row-gap: 2.5rem;}",
+        "button.push-btn.theme-button {height: 55px;}",
+        "button.push-btn.theme-button span {font-size: 20px; line-height: 28px;}",
+        ".active-filters {padding-bottom: 50px;}",
+        ".active-filters .push-btn-surface {margin-left: 16px;}"
+      ],
+      "settings": {
+        "no_products": 24,
+        "display_on_card": false,
+        "enable_quick_buy": true,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "enable_filtering": true,
+        "show_filtered": true,
+        "enable_sorting": false,
+        "expand_filters": true,
+        "show_filter_count": false,
+        "enable_color_swatch_filters": false,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "product-grid"
+  ]
+}

@@ -1,0 +1,324 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "color_scheme": "primary",
+        "use_gradient_background": false
+      }
+    },
+    "image_with_text_overlay_Gyd68x": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "image": "shopify://shop_images/AdobeStock_367005237.jpg",
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "style": "inset",
+        "height": "pt-half-screen-height",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "DTF Transfers",
+        "heading_size": "heading-feature",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "primary",
+        "use_gradient_background": false,
+        "text_overlay_color": "same_as_section"
+      }
+    },
+    "rich_text_JJYAid": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Unlocking Vibrant Color and Intricate Detail",
+        "heading_size": "heading-standard",
+        "rich_text": "<h4><strong>Experience the brilliance of our cutting-edge Direct-to-Film (DTF) transfer services.</strong></h4><p><br/>At Designer T's, we embrace the latest advancements in apparel decoration technology, and our DTF transfer services are a testament to that commitment. We utilize the most advanced DTF equipment available, allowing us to deliver vibrant, high-resolution prints with exceptional detail and precision.</p><p>Our DTF process involves printing your artwork onto a special film using high-definition inks. This film is then coated with a special adhesive powder and cured, creating a durable and flexible transfer that seamlessly adheres to a wide range of fabrics.</p><h4><strong>Why Choose Designer T's for DTF Transfers?</strong></h4><p><strong>Unmatched Quality:</strong> Experience vibrant, full-color prints with exceptional color accuracy and intricate detail.</p><p><strong>Advanced Technology:</strong> We utilize the most advanced DTF equipment available, ensuring consistent quality, efficiency, and fast turnaround times.</p><p><strong>Versatile Applications:</strong> DTF transfers are suitable for a wide range of fabrics, including cotton, polyester, blends, and even performance wear.</p><p><strong>Durable and Long-Lasting:</strong> Our DTF transfers are designed to withstand multiple washes and maintain their vibrant colors for years to come.</p><p><strong>Fast Turnaround Times:</strong> Our efficient processes and advanced technology ensure quick turnaround times, so you can get your products to market faster.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "primary",
+        "background_override": "rgba(0,0,0,0)",
+        "use_gradient_background": false
+      }
+    },
+    "curved_text_eDw8i8": {
+      "type": "curved-text",
+      "settings": {
+        "text": "Your Vision, Screen Printed to Perfection",
+        "link": "",
+        "wave_height": 200,
+        "wave_width": 250,
+        "speed": 1,
+        "mobile_text_scale": 2,
+        "desktop_text_scale": 4,
+        "font": "font-heading",
+        "enable_animation": true,
+        "pause_on_hover": false,
+        "direction": "rtl",
+        "color_scheme": "tertiary",
+        "use_gradient_background": false
+      }
+    },
+    "shape_slideshow_hXUhY9": {
+      "type": "shape-slideshow",
+      "blocks": {
+        "image_Vnmdj9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_367005237_6c87524e-2900-4e8d-b261-d6e9b1373fec.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_4zjwKU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_307451527.jpg",
+            "image_shape": "diamond",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_9L86QK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_1108966511.jpg",
+            "image_shape": "hexagon",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_e8meJ7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_483908319.jpg",
+            "image_shape": "default",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_xzW66J": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_552139015.jpg",
+            "image_shape": "zig_zag_tear",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "image_dMeFVa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/AdobeStock_246987969.jpg",
+            "image_shape": "parallelogram",
+            "rotate_image": 0,
+            "button_text": "",
+            "url": ""
+          }
+        },
+        "shape_divider_wpgPRt": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "secondary",
+            "style": "small-waves_1200x20",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        },
+        "shape_divider_GpBKGj": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "secondary",
+            "style": "small-waves_1200x20",
+            "flip_horizontal": true,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_Vnmdj9",
+        "image_4zjwKU",
+        "image_9L86QK",
+        "image_e8meJ7",
+        "image_xzW66J",
+        "image_dMeFVa",
+        "shape_divider_wpgPRt",
+        "shape_divider_GpBKGj"
+      ],
+      "custom_css": [
+        ".splide__arrows.flex.justify-between.items-center.mt-5.px-section.splide__arrows--ltr {display: none;}"
+      ],
+      "settings": {
+        "title": "",
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 15,
+        "autoscroll_mode": "1",
+        "crop": "aspect-w-4 aspect-h-3",
+        "button_style": "push-btn-surface",
+        "show_buttons_on_mobile": false,
+        "only_show_button_on_hover": true,
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "feature_text_THAMYg": {
+      "type": "feature-text",
+      "blocks": {
+        "shape_divider_jRwnBd": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "secondary",
+            "style": "tilt-1-asymmetrical_1440x101",
+            "flip_horizontal": false,
+            "enable_animation": true,
+            "animation_direction": ""
+          }
+        },
+        "shape_divider_JmDGKY": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "secondary",
+            "style": "tilt-1-asymmetrical_1440x101",
+            "flip_horizontal": true,
+            "enable_animation": true,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "shape_divider_jRwnBd",
+        "shape_divider_JmDGKY"
+      ],
+      "disabled": true,
+      "settings": {
+        "rich_text": "<p>Extreme Screen Prints specializes in high-end screen printing, renowned for its soft-hand printing, simulated process photorealistic prints, and rapid turnaround times. We deliver premium screen printing services that elevate your brand.</p>",
+        "mobile_text_scale": 3,
+        "desktop_text_scale": 3,
+        "desktop_text_size": "lg:text-5xl",
+        "display_on_card": false,
+        "apply_effects": true,
+        "content_width_desktop": "lg:w-2/3",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    },
+    "rich_text_wnNBjE": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Experience the Designer T's Difference",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>Contact us today for a free consultation. Our team will work closely with you to bring your creative vision to life with stunning DTF transfers that exceed your expectations.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-full",
+        "button_link": "shopify://pages/get-a-quote",
+        "button_label": "Get a Free Quote",
+        "color_scheme": "tertiary",
+        "background_override": "",
+        "use_gradient_background": false
+      }
+    },
+    "text_columns_with_images_eTPkRV": {
+      "type": "text-columns-with-images",
+      "blocks": {
+        "shape_divider_764Kq7": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "secondary",
+            "style": "medium-waves_1200x43",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        },
+        "column_xVgNde": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "title": "T-shirts & Apparel",
+            "text": "<p>Customize t-shirts, polos, hoodies, and other garments with stunning full-color prints.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "primary"
+          }
+        },
+        "column_GtfgmE": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "title": "Promotional Items",
+            "text": "<p>Enhance your brand with vibrant and eye-catching DTF transfers on bags, tote bags, and other promotional items.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "primary"
+          }
+        },
+        "column_bUXEDV": {
+          "type": "column",
+          "settings": {
+            "show_image": true,
+            "title": "Sportswear & Activewear",
+            "text": "<p>Create unique and stylish sportswear and activewear with DTF transfers that are both vibrant and durable.</p>",
+            "cta_link": "",
+            "cta_text": "",
+            "color_scheme": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "shape_divider_764Kq7",
+        "column_xVgNde",
+        "column_GtfgmE",
+        "column_bUXEDV"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "slideshow_on_mobile": false,
+        "title": "Our Printing and Ink Options",
+        "crop": "",
+        "image_shape": "default",
+        "show_index_on_blocks": false,
+        "index_shape": "star_1",
+        "color_scheme": "quaternary",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_Gyd68x",
+    "rich_text_JJYAid",
+    "curved_text_eDw8i8",
+    "shape_slideshow_hXUhY9",
+    "feature_text_THAMYg",
+    "rich_text_wnNBjE",
+    "text_columns_with_images_eTPkRV"
+  ]
+}
