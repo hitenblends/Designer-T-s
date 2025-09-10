@@ -1,0 +1,848 @@
+<!-- Pricing Integration Snippet -->
+<!-- This file handles all pricing-related functionality following the exact user flow -->
+
+<script>
+// Pricing Integration System - Following User's Step-by-Step Process
+(function() {
+  'use strict';
+  
+  // Pricing state management
+  const pricingState = {
+    baseProductPrice: 0,
+    quantity: 24,
+    positions: [],
+    totalPrice: 0,
+    isCalculating: false,
+    lastCalculation: null
+  };
+  
+  // API configuration
+  const API_CONFIG = {
+    baseUrl: 'http://localhost:8000',
+    endpoints: {
+      calculatePricing: '/pricing/calculate-dynamic-pricing'
+    }
+  };
+  
+  // Initialize pricing system
+  function initializePricingSystem() {
+    console.log('💰 Initializing pricing system');
+    
+    // Get base product price from Shopify
+    try {
+      pricingState.baseProductPrice = getShopifyProductPrice();
+      console.log('💰 Base product price:', pricingState.baseProductPrice);
+    } catch (error) {
+      console.error('❌ Error getting product price:', error);
+      throw error;
+    }
+    
+    // Create pricing display section
+    createPricingDisplay();
+    
+    // Set up event listeners
+    setupPricingEventListeners();
+    
+    console.log('✅ Pricing system initialized');
+  }
+  
+  // Get Shopify product price
+  function getShopifyProductPrice() {
+    // Try to get price from Shopify product object
+    if (typeof product !== 'undefined' && product.price) {
+      return product.price / 100; // Convert from cents to dollars
+    }
+    
+    // Try to get price from product block
+    const productBlockPrice = document.querySelector('.product-block.product-block-price');
+    if (productBlockPrice) {
+      const priceSpan = productBlockPrice.querySelector('[data-product-price]');
+      if (priceSpan) {
+        const priceText = priceSpan.textContent || priceSpan.innerText;
+        const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+        if (!isNaN(price) && price > 0) {
+          return price;
+        }
+      }
+    }
+    
+    // Look for price in common Shopify selectors
+    const priceSelectors = [
+      '.product-price .money',
+      '.price .money',
+      '[data-product-price]',
+      '.product-single__price .money',
+      '.product__price .money'
+    ];
+    
+    for (const selector of priceSelectors) {
+      const priceElement = document.querySelector(selector);
+      if (priceElement) {
+        const priceText = priceElement.textContent || priceElement.innerText;
+        const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+        if (!isNaN(price) && price > 0) {
+          return price;
+        }
+      }
+    }
+    
+    throw new Error('Could not find Shopify product price');
+  }
+  
+  // Create pricing display section
+  function createPricingDisplay() {
+    // Check if pricing section already exists
+    if (document.getElementById('pricing-integration-section')) {
+      return;
+    }
+    
+    // Find where to insert the pricing section (after position blocks)
+    const positionsContainer = document.getElementById('sp-positions-container');
+    if (!positionsContainer) {
+      console.error('❌ Position container not found, cannot create pricing section');
+      return;
+    }
+    
+    // Create pricing section HTML
+    const pricingHTML = `
+      <div id="pricing-integration-section" class="pricing-integration-section">
+        <div class="pricing-header">
+          <h3><i class="fas fa-calculator"></i> Pricing Breakdown</h3>
+          <div class="pricing-status" id="pricing-status">
+            <i class="fas fa-info-circle"></i> Select positions to see pricing
+          </div>
+        </div>
+        
+        <div class="pricing-content">
+          <!-- Quantity Selector - Hidden initially -->
+          <div class="pricing-quantity-control" id="pricing-quantity-section" style="display: none;">
+            <label for="pricing-quantity-input">
+              <i class="fas fa-shopping-cart"></i> Quantity:
+            </label>
+            <input type="number" id="pricing-quantity-input" min="1" value="24" step="1">
+            <span class="pricing-quantity-note" id="pricing-quantity-note">1-23 pieces = 12-23 pricing</span>
+          </div>
+          
+          <!-- Calculate Pricing Button - Hidden initially -->
+          <div class="pricing-calculate-section" id="pricing-calculate-section" style="display: none;">
+            <button id="pricing-calculate-btn" class="pricing-calculate-btn">
+              <i class="fas fa-calculator"></i> Calculate Pricing
+            </button>
+          </div>
+          
+          <!-- Pricing Results -->
+          <div class="pricing-results" id="pricing-results">
+            <div class="pricing-placeholder">
+              <i class="fas fa-info-circle"></i>
+              <span>Select positions and upload designs to see pricing</span>
+            </div>
+          </div>
+          
+          <!-- Add to Cart Button -->
+          <div class="pricing-actions">
+            <button id="pricing-add-to-cart" class="pricing-add-to-cart-btn" disabled>
+              <i class="fas fa-shopping-cart"></i>
+              Add to Cart - <span id="pricing-cart-total">$0.00</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    // Insert after position container
+    positionsContainer.insertAdjacentHTML('afterend', pricingHTML);
+    
+    console.log('✅ Pricing display section created');
+  }
+  
+  // Set up pricing event listeners
+  function setupPricingEventListeners() {
+    // Quantity input listener
+    const quantityInput = document.getElementById('pricing-quantity-input');
+    if (quantityInput) {
+      quantityInput.addEventListener('input', handleQuantityChange);
+      quantityInput.addEventListener('change', handleQuantityChange);
+    }
+    
+    // Calculate pricing button listener
+    const calculateBtn = document.getElementById('pricing-calculate-btn');
+    if (calculateBtn) {
+      calculateBtn.addEventListener('click', handleCalculatePricing);
+    }
+    
+    // Add to cart button listener
+    const addToCartBtn = document.getElementById('pricing-add-to-cart');
+    if (addToCartBtn) {
+      addToCartBtn.addEventListener('click', handleAddToCart);
+    }
+    
+    console.log('✅ Pricing event listeners set up');
+  }
+  
+  // Handle quantity change
+  function handleQuantityChange(event) {
+    const newQuantity = parseInt(event.target.value);
+    
+    if (newQuantity < 1) {
+      event.target.value = 1;
+      pricingState.quantity = 1;
+    } else {
+      pricingState.quantity = newQuantity;
+    }
+    
+    // Update quantity note
+    updateQuantityNote(pricingState.quantity);
+  }
+  
+  // Handle calculate pricing button click
+  function handleCalculatePricing() {
+    console.log('💰 Calculate pricing button clicked');
+    
+    // Validate that all positions have designs
+    const positionsWithDesigns = pricingState.positions.filter(pos => pos.design_file_url && pos.color_count > 0);
+    if (positionsWithDesigns.length !== pricingState.positions.length) {
+      alert('Please customize all selected positions before calculating pricing.');
+      return;
+    }
+    
+    // Validate quantity
+    if (pricingState.quantity < 1) {
+      alert('Please enter a valid quantity.');
+      return;
+    }
+    
+    // Calculate pricing
+    calculatePricing();
+  }
+  
+  // Update quantity note
+  function updateQuantityNote(quantity) {
+    const quantityNote = document.getElementById('pricing-quantity-note');
+    if (quantityNote) {
+      if (quantity >= 1 && quantity <= 23) {
+        quantityNote.textContent = `${quantity} pieces = 12-23 pricing tier`;
+        quantityNote.style.color = '#5a6fd8';
+      } else if (quantity >= 24 && quantity <= 47) {
+        quantityNote.textContent = `${quantity} pieces = 24-47 pricing tier`;
+        quantityNote.style.color = '#28a745';
+      } else if (quantity >= 48) {
+        quantityNote.textContent = `${quantity} pieces = 48+ pricing tier`;
+        quantityNote.style.color = '#28a745';
+      }
+    }
+  }
+  
+  // Step 1-3: Update positions from popup selection
+  function updatePositionsFromPopup(selectedPositions) {
+    console.log('💰 Step 1-3: Updating positions from popup selection:', selectedPositions);
+    
+    // Ensure pricing section exists
+    if (!document.getElementById('pricing-integration-section')) {
+      createPricingDisplay();
+    }
+    
+    // Clear existing positions
+    pricingState.positions = [];
+    
+    // Add selected positions (Step 2: positions show up)
+    selectedPositions.forEach(positionName => {
+      const position = {
+        position_id: generatePositionId(positionName),
+        position_name: positionName,
+        design_file_url: '',
+        color_count: 0,
+        design_hash: '',
+        is_new_design: false,
+        width: null,
+        height: null,
+        timestamp: new Date().toISOString(),
+        status: 'active'
+      };
+      
+      pricingState.positions.push(position);
+    });
+    
+    // Update pricing display
+    updatePricingDisplay();
+    
+    console.log('✅ Step 1-3 completed: Positions updated');
+  }
+  
+  // Step 4: Update position with design data (when user customizes)
+  function updatePositionWithDesign(positionName, designData) {
+    console.log('💰 Step 4: Updating position with design data:', positionName, designData);
+    
+    const position = pricingState.positions.find(p => p.position_name === positionName);
+    if (position) {
+      // Save all position data as requested
+      position.design_file_url = designData.fileUrl || '';
+      position.color_count = designData.colorCount || 0;
+      position.design_hash = generateDesignHash(positionName, position.color_count);
+      position.is_new_design = designData.isNewDesign || false;
+      position.width = designData.width || null;
+      position.height = designData.height || null;
+      position.timestamp = new Date().toISOString();
+      
+      console.log('✅ Step 4 completed: Position customized with design data');
+      
+      // Step 5: Check if all positions are customized and show quantity input
+      checkAndShowQuantityInput();
+      
+      // Update pricing display
+      updatePricingDisplay();
+    } else {
+      console.error('❌ Position not found in pricing state:', positionName);
+    }
+  }
+  
+  // Step 5: Check if all positions are customized and show quantity input
+  function checkAndShowQuantityInput() {
+    console.log('💰 Step 5: Checking if all positions are customized');
+    
+    // Get all selected positions from the main customizer
+    const selectedPositions = window.selectedPositions || [];
+    
+    if (selectedPositions.length === 0) {
+      console.log('💰 No selected positions');
+      return;
+    }
+    
+    // Check if all selected positions have designs
+    const positionsWithDesigns = pricingState.positions.filter(pos => pos.design_file_url && pos.color_count > 0);
+    const allPositionsCustomized = positionsWithDesigns.length === selectedPositions.length;
+    
+    console.log('💰 Selected positions:', selectedPositions);
+    console.log('💰 Positions with designs:', positionsWithDesigns.length);
+    console.log('💰 All positions customized:', allPositionsCustomized);
+    
+    // Show/hide quantity section based on whether all positions are customized
+    const quantitySection = document.getElementById('pricing-quantity-section');
+    const calculateSection = document.getElementById('pricing-calculate-section');
+    
+    if (allPositionsCustomized && selectedPositions.length > 0) {
+      // Step 5: Show quantity input and calculate button
+      console.log('✅ Step 5 completed: Showing quantity input and calculate button');
+      if (quantitySection) quantitySection.style.display = 'block';
+      if (calculateSection) calculateSection.style.display = 'block';
+    } else {
+      // Hide quantity input and calculate button
+      if (quantitySection) quantitySection.style.display = 'none';
+      if (calculateSection) calculateSection.style.display = 'none';
+    }
+  }
+  
+  // Step 6-7: Calculate pricing using API
+  async function calculatePricing() {
+    console.log('💰 Step 6-7: Calculating pricing with API');
+    
+    if (pricingState.isCalculating) {
+      console.log('💰 Already calculating, skipping...');
+      return;
+    }
+    
+    if (pricingState.positions.length === 0) {
+      console.log('💰 No positions to calculate pricing for');
+      updatePricingDisplay();
+      return;
+    }
+    
+    pricingState.isCalculating = true;
+    updatePricingStatus('loading', 'Calculating pricing...');
+    
+    try {
+      const requestData = {
+        base_product_price: pricingState.baseProductPrice,
+        positions: pricingState.positions,
+        quantity: pricingState.quantity,
+        customer_email: 'customer@example.com'
+      };
+      
+      console.log('💰 Sending pricing request:', requestData);
+      
+      const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.calculatePricing}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      console.log('💰 Pricing API response:', result);
+      
+      if (result.success) {
+        // Step 8: Store API response
+        pricingState.lastCalculation = result.pricing_breakdown;
+        pricingState.totalPrice = result.pricing_breakdown.total_cost;
+        updatePricingStatus('success', 'Pricing calculated');
+        
+        // Step 9: Update pricing display
+        updatePricingDisplay(result.pricing_breakdown);
+        
+        console.log('✅ Step 6-8 completed: Pricing calculated and stored');
+      } else {
+        throw new Error(result.error || 'Pricing calculation failed');
+      }
+      
+    } catch (error) {
+      console.error('❌ Error calculating pricing:', error);
+      updatePricingStatus('error', 'Pricing calculation failed');
+      showPricingError(error.message);
+    } finally {
+      pricingState.isCalculating = false;
+    }
+  }
+  
+  // Step 9: Update pricing display with API response
+  function updatePricingDisplay(pricingBreakdown = null) {
+    console.log('💰 Step 9: Updating pricing display');
+    
+    const resultsContainer = document.getElementById('pricing-results');
+    const addToCartBtn = document.getElementById('pricing-add-to-cart');
+    const cartTotal = document.getElementById('pricing-cart-total');
+    
+    if (!resultsContainer) {
+      console.error('❌ pricing-results container not found!');
+      return;
+    }
+    
+    if (!pricingBreakdown) {
+      // Show placeholder
+      resultsContainer.innerHTML = `
+        <div class="pricing-placeholder">
+          <i class="fas fa-info-circle"></i>
+          <span>Select positions and upload designs to see pricing</span>
+        </div>
+      `;
+      addToCartBtn.disabled = true;
+      cartTotal.textContent = '$0.00';
+      return;
+    }
+    
+    // Show pricing breakdown
+    let html = '';
+    
+    // Step 10: Base product price from Shopify
+    const baseProductTotal = pricingState.baseProductPrice * pricingState.quantity;
+    html += `
+      <div class="pricing-item">
+        <span class="pricing-label">Base Product Price:</span>
+        <span class="pricing-value">$${baseProductTotal.toFixed(2)}</span>
+        <div class="pricing-item-breakdown">
+          ${pricingState.quantity} pieces × $${pricingState.baseProductPrice.toFixed(2)} per piece
+        </div>
+      </div>
+    `;
+    
+    // Position costs with per-piece and total pricing
+    if (pricingBreakdown.position_costs && pricingBreakdown.position_costs.length > 0) {
+      html += '<div class="pricing-positions">';
+      pricingBreakdown.position_costs.forEach(position => {
+        const perPieceCost = position.color_cost / pricingState.quantity;
+        const setupText = position.setup_cost > 0 ? ` + $${position.setup_cost.toFixed(2)} setup` : '';
+        
+        html += `
+          <div class="pricing-position">
+            <div class="pricing-position-info">
+              <div class="pricing-position-name">${position.position_name}</div>
+              <div class="pricing-position-details">
+                ${position.color_count} colors${position.is_new_design ? ' • New Design' : ' • Existing Design'}
+              </div>
+              <div class="pricing-position-quantity">
+                ${pricingState.quantity} pieces × $${perPieceCost.toFixed(2)} per piece
+              </div>
+            </div>
+            <div class="pricing-position-cost">
+              <div class="pricing-position-amount">$${position.color_cost.toFixed(2)}</div>
+              <div class="pricing-position-breakdown">
+                $${perPieceCost.toFixed(2)} per piece${setupText}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      html += '</div>';
+    }
+    
+    // Totals
+    html += `
+      <div class="pricing-totals">
+        <div class="pricing-total-row">
+          <span class="pricing-total-label">Design Printing Total:</span>
+          <span class="pricing-total-amount">$${pricingBreakdown.design_printing_total_cost.toFixed(2)}</span>
+        </div>
+        <div class="pricing-total-row final">
+          <span class="pricing-total-label">Total Cost:</span>
+          <span class="pricing-total-amount">$${pricingBreakdown.total_cost.toFixed(2)}</span>
+        </div>
+      </div>
+    `;
+    
+    resultsContainer.innerHTML = html;
+    
+    // Update add to cart button
+    addToCartBtn.disabled = false;
+    cartTotal.textContent = `$${pricingBreakdown.total_cost.toFixed(2)}`;
+    
+    console.log('✅ Step 9 completed: Pricing display updated');
+  }
+  
+  // Update pricing status
+  function updatePricingStatus(status, message) {
+    const statusElement = document.getElementById('pricing-status');
+    if (statusElement) {
+      if (status === 'loading') {
+        statusElement.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${message}`;
+      } else if (status === 'success') {
+        statusElement.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+      } else if (status === 'error') {
+        statusElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+      } else {
+        statusElement.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+      }
+    }
+  }
+  
+  // Show pricing error
+  function showPricingError(message) {
+    const resultsContainer = document.getElementById('pricing-results');
+    if (resultsContainer) {
+      resultsContainer.innerHTML = `
+        <div class="pricing-error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>${message}</span>
+        </div>
+      `;
+    }
+  }
+  
+  // Handle add to cart
+  function handleAddToCart() {
+    console.log('🛒 Add to cart clicked');
+    // This would integrate with Shopify's cart system
+    alert('Add to cart functionality will be implemented with Shopify integration');
+  }
+  
+  // Utility functions
+  function generatePositionId(positionName) {
+    return `pos_${positionName.toLowerCase()}_${Date.now()}`;
+  }
+  
+  function generateDesignHash(positionName, colorCount) {
+    const data = `${positionName}-${colorCount}-${Date.now()}`;
+    return btoa(data).replace(/[^a-zA-Z0-9]/g, '').substring(0, 16);
+  }
+  
+  // Public API
+  window.PricingIntegration = {
+    initialize: initializePricingSystem,
+    updatePositions: updatePositionsFromPopup,
+    updatePositionDesign: updatePositionWithDesign,
+    calculatePricing: calculatePricing,
+    getState: () => pricingState
+  };
+  
+  // Auto-initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePricingSystem);
+  } else {
+    initializePricingSystem();
+  }
+  
+})();
+</script>
+
+<style>
+/* Pricing Integration Styles */
+.pricing-integration-section {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 16px;
+  margin: 25px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.pricing-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px 25px;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pricing-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pricing-status {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.pricing-content {
+  padding: 25px;
+}
+
+.pricing-quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.pricing-quantity-control label {
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pricing-quantity-control input {
+  width: 80px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.pricing-quantity-note {
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+}
+
+.pricing-calculate-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.pricing-calculate-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.pricing-calculate-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+.pricing-calculate-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.pricing-calculate-btn i {
+  margin-right: 8px;
+}
+
+.pricing-results {
+  margin-bottom: 20px;
+}
+
+.pricing-placeholder {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #dee2e6;
+}
+
+.pricing-placeholder i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: block;
+  color: #adb5bd;
+}
+
+.pricing-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pricing-item:last-child {
+  border-bottom: none;
+}
+
+.pricing-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.pricing-value {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.pricing-positions {
+  margin: 15px 0;
+}
+
+.pricing-position {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pricing-position:last-child {
+  border-bottom: none;
+}
+
+.pricing-position-info {
+  flex: 1;
+}
+
+.pricing-position-name {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.pricing-position-details {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.pricing-position-cost {
+  text-align: right;
+}
+
+.pricing-position-amount {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.pricing-position-breakdown {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+.pricing-position-quantity {
+  font-size: 0.8rem;
+  color: #28a745;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.pricing-item-breakdown {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+.pricing-totals {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.pricing-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.pricing-total-row.final {
+  border-top: 2px solid #667eea;
+  margin-top: 10px;
+  padding-top: 15px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #667eea;
+}
+
+.pricing-total-label {
+  color: #333;
+}
+
+.pricing-total-amount {
+  font-weight: 600;
+}
+
+.pricing-actions {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #eee;
+}
+
+.pricing-add-to-cart-btn {
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pricing-add-to-cart-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.pricing-add-to-cart-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pricing-error {
+  text-align: center;
+  color: #dc3545;
+  padding: 20px;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+}
+
+.pricing-error i {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  display: block;
+}
+</style>
