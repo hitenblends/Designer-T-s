@@ -637,6 +637,19 @@ async function extractColorsWithPalette(img) {
                 console.log('🔄 Synced colorMatches to window.state:', window.state.colorMatches.length, 'colors');
             }
             
+            // Store pixel coordinates for each detected color
+            console.log('📝 Storing pixel coordinates for detected colors...');
+            for (const colorMatch of state.colorMatches) {
+                if (colorMatch.detected_rgb) {
+                    const success = await storeColorPixels(colorMatch.detected_rgb, colorMatch.uniqueId);
+                    if (success) {
+                        console.log(`✅ Stored pixels for color ${colorMatch.uniqueId}`);
+                    } else {
+                        console.warn(`⚠️ Failed to store pixels for color ${colorMatch.uniqueId}`);
+                    }
+                }
+            }
+            
             updateColorPalette();
             updateDetectedColors(merged.length, result.total_colors_detected);
             if (reducedBy > 0) {
@@ -719,6 +732,19 @@ async function extractColorsFrontendFallback(img) {
     if (window.state) {
         window.state.colorMatches = state.colorMatches;
         console.log('🔄 Synced colorMatches to window.state (fallback):', window.state.colorMatches.length, 'colors');
+    }
+    
+    // Store pixel coordinates for each detected color (fallback)
+    console.log('📝 Storing pixel coordinates for detected colors (fallback)...');
+    for (const colorMatch of state.colorMatches) {
+        if (colorMatch.detected_rgb) {
+            const success = await storeColorPixels(colorMatch.detected_rgb, colorMatch.uniqueId);
+            if (success) {
+                console.log(`✅ Stored pixels for color ${colorMatch.uniqueId} (fallback)`);
+            } else {
+                console.warn(`⚠️ Failed to store pixels for color ${colorMatch.uniqueId} (fallback)`);
+            }
+        }
     }
     
     updateColorPalette();
@@ -1871,6 +1897,57 @@ async function debugPixelOwnership() {
 // Make debug functions globally available
 window.debugPixelOwnership = debugPixelOwnership;
 window.resetPixelOwnership = resetPixelOwnership;
+
+// Store pixel coordinates for a color when first detected
+async function storeColorPixels(rgb, colorId) {
+    console.log('🎨 storeColorPixels called with:', { rgb, colorId });
+    
+    if (!state.image) {
+        console.log('❌ No image to store pixels for');
+        return false;
+    }
+    
+    try {
+        // Convert current image to blob
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = state.image.width;
+        canvas.height = state.image.height;
+        ctx.drawImage(state.image, 0, 0);
+        
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        
+        // Create form data
+        const formData = new FormData();
+        formData.append('file', blob, 'image.png');
+        formData.append('color_r', rgb[0]);
+        formData.append('color_g', rgb[1]);
+        formData.append('color_b', rgb[2]);
+        formData.append('color_id', colorId);
+        formData.append('tolerance', 30);
+        
+        // Call backend to store pixels
+        const backendUrl = getBackendUrl();
+        const response = await fetch(`${backendUrl}/store-color-pixels`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Backend error storing pixels:', errorText);
+            return false;
+        }
+        
+        const result = await response.json();
+        console.log('✅ Pixels stored successfully:', result);
+        return result.success;
+        
+    } catch (error) {
+        console.error('❌ Error storing color pixels:', error);
+        return false;
+    }
+}
 
 // Replace color using Python backend
 async function replaceColorViaBackend(oldRgb, newRgb) {
