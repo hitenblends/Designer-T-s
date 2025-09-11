@@ -19,241 +19,10 @@ const state = {
     useLocalBackend: true // Default to local backend
 };
 
-// Fresh Pricing System - Position Tracking
-const positionTracker = {
-    front: {
-        id: 'front',
-        colorCount: 0,
-        isNewDesign: false,
-        dimensions: null,
-        finalImage: null,
-        quantity: 1,
-        calculatedPrice: 0
-    },
-    back: {
-        id: 'back',
-        colorCount: 0,
-        isNewDesign: false,
-        dimensions: null,
-        finalImage: null,
-        quantity: 1,
-        calculatedPrice: 0
-    },
-    left_sleeve: {
-        id: 'left_sleeve',
-        colorCount: 0,
-        isNewDesign: false,
-        dimensions: null,
-        finalImage: null,
-        quantity: 1,
-        calculatedPrice: 0
-    },
-    right_sleeve: {
-        id: 'right_sleeve',
-        colorCount: 0,
-        isNewDesign: false,
-        dimensions: null,
-        finalImage: null,
-        quantity: 1,
-        calculatedPrice: 0
-    }
-};
-
-// Product base price (from Shopify)
-let productBasePrice = 0;
-
-// Fresh Pricing System Functions - Using Backend API
-async function calculatePositionPrice(position) {
-    if (position.colorCount === 0) return 0;
-    
-    try {
-        // Call backend API for real pricing calculation
-        const response = await fetch(`${getBackendUrl()}/calculate-pricing`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                base_product_price: productBasePrice,
-                positions: [{
-                    position_id: position.id,
-                    position_name: position.positionName || position.id,
-                    design_file_url: position.finalImage || '',
-                    color_count: position.colorCount,
-                    design_hash: generateDesignHash(position.id, position.colorCount),
-                    is_new_design: position.isNewDesign,
-                    width: position.dimensions?.width || null,
-                    height: position.dimensions?.height || null
-                }],
-                quantity: position.quantity || 1
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        console.log(`💰 Backend pricing result for ${position.id}:`, result);
-        
-        // Return the total cost for this position
-        if (result.position_costs && result.position_costs.length > 0) {
-            return result.position_costs[0].total_cost;
-        }
-        
-        return 0;
-        
-    } catch (error) {
-        console.error(`❌ Failed to calculate price for ${position.id}:`, error);
-        // Fallback to simple calculation
-        return calculatePositionPriceFallback(position);
-    }
-}
-
-function calculatePositionPriceFallback(position) {
-    // Fallback pricing if backend is unavailable
-    const colorPricing = {
-        1: 8.00,
-        2: 12.00,
-        3: 16.00,
-        4: 20.00,
-        5: 24.00,
-        6: 28.00,
-        7: 32.00,
-        8: 36.00
-    };
-    
-    const basePrice = colorPricing[position.colorCount] || (position.colorCount * 4);
-    const newDesignFee = position.isNewDesign ? 25 : 0;
-    const totalPrice = (basePrice + newDesignFee) * (position.quantity || 1);
-    
-    console.log(`💰 Fallback pricing for ${position.id}:`, {
-        colorCount: position.colorCount,
-        basePrice: basePrice,
-        isNewDesign: position.isNewDesign,
-        newDesignFee: newDesignFee,
-        quantity: position.quantity,
-        totalPrice: totalPrice
-    });
-    
-    return totalPrice;
-}
-
-function generateDesignHash(positionName, colorCount) {
-    const data = `${positionName}-${colorCount}-${Date.now()}`;
-    return btoa(data).replace(/[^a-zA-Z0-9]/g, '').substring(0, 16);
-}
-
-async function updatePositionData(positionId, data) {
-    if (positionTracker[positionId]) {
-        Object.assign(positionTracker[positionId], data);
-        
-        // Calculate price asynchronously
-        try {
-            positionTracker[positionId].calculatedPrice = await calculatePositionPrice(positionTracker[positionId]);
-            console.log(`✅ Updated position ${positionId}:`, positionTracker[positionId]);
-            updatePriceBreakdown();
-        } catch (error) {
-            console.error(`❌ Failed to update position ${positionId}:`, error);
-        }
-    }
-}
-
-function getCurrentPosition() {
-    return window.currentEditingPosition || null;
-}
-
-async function updatePriceBreakdown() {
-    console.log('🔄 Updating price breakdown...');
-    
-    // Get positions with designs
-    const positionsWithDesigns = Object.values(positionTracker).filter(pos => pos.colorCount > 0);
-    console.log('📊 Positions with designs:', positionsWithDesigns);
-    
-    if (positionsWithDesigns.length === 0) {
-        console.log('⚠️ No positions with designs found');
-        return;
-    }
-    
-    // Calculate total position costs
-    let totalPositionCost = 0;
-    let positionBreakdown = '';
-    
-    for (const position of positionsWithDesigns) {
-        const price = position.calculatedPrice || 0;
-        totalPositionCost += price;
-        
-        const newDesignText = position.isNewDesign ? ' + $25 (new)' : '';
-        const positionName = position.positionName || position.id;
-        positionBreakdown += `├── ${positionName.charAt(0).toUpperCase() + positionName.slice(1)}: $${price.toFixed(2)} (${position.colorCount} colors × ${position.quantity || 1})${newDesignText}\n`;
-    }
-    
-    // Calculate total
-    const grandTotal = productBasePrice + totalPositionCost;
-    
-    // Update UI
-    const priceBreakdownElement = document.getElementById('sp-pricing-positions');
-    if (priceBreakdownElement) {
-        const breakdownHTML = `
-            <div class="price-breakdown">
-                <div class="product-price">
-                    <strong>Product Title: $${productBasePrice.toFixed(2)}</strong>
-                </div>
-                <div class="position-prices">
-                    <pre>${positionBreakdown}</pre>
-                </div>
-                <div class="total-price">
-                    <strong>Total: $${grandTotal.toFixed(2)}</strong>
-                </div>
-            </div>
-        `;
-        priceBreakdownElement.innerHTML = breakdownHTML;
-    }
-    
-    console.log('💰 Price breakdown updated:', {
-        productBasePrice: productBasePrice,
-        totalPositionCost: totalPositionCost,
-        grandTotal: grandTotal
-    });
-}
-
-// Set product base price (from Shopify)
-function setProductBasePrice(price) {
-    productBasePrice = price;
-    console.log(`💰 Product base price set to: $${price}`);
-    updatePriceBreakdown();
-}
-
-// Initialize product base price from Shopify data
-function initializeProductPrice() {
-    // Try to get product price from Shopify
-    if (window.Shopify && window.Shopify.theme && window.Shopify.theme.product) {
-        const product = window.Shopify.theme.product;
-        if (product.price) {
-            setProductBasePrice(product.price / 100); // Convert from cents
-        }
-    } else {
-        // Fallback: try to get from meta tags or other sources
-        const priceMeta = document.querySelector('meta[property="product:price:amount"]');
-        if (priceMeta) {
-            setProductBasePrice(parseFloat(priceMeta.content));
-        } else {
-            // Default fallback price
-            setProductBasePrice(25.00);
-        }
-    }
-}
-
 // Test if JavaScript is running
 console.log('🚀 DTF Customizer JavaScript loaded!');
 console.log('🔧 Backend Configuration:', BACKEND_CONFIG);
 console.log('🌐 Current Backend URL:', getBackendUrl());
-
-// Initialize the fresh pricing system
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎯 Initializing fresh pricing system...');
-    initializeProductPrice();
-});
 
 // Helper function to get current backend URL
 function getBackendUrl() {
@@ -784,6 +553,9 @@ async function handleFileUpload(event) {
             updatePreview();
             updatePrintSize(img);
             
+            // Reset pixel ownership tracking for new image
+            await resetPixelOwnership();
+            
             // Extract colors using palette matching
             await extractColorsWithPalette(img);
             
@@ -858,6 +630,13 @@ async function extractColorsWithPalette(img) {
                 uniqueId: `color_${Date.now()}_${index}`,
                 originalRgb: match.detected_rgb ? [...match.detected_rgb] : null
             }));
+            
+            // Sync with global window.state for pricing system
+            if (window.state) {
+                window.state.colorMatches = state.colorMatches;
+                console.log('🔄 Synced colorMatches to window.state:', window.state.colorMatches.length, 'colors');
+            }
+            
             updateColorPalette();
             updateDetectedColors(merged.length, result.total_colors_detected);
             if (reducedBy > 0) {
@@ -866,8 +645,6 @@ async function extractColorsWithPalette(img) {
                 showMessage(`✅ Found ${merged.length} colors!`, 'success');
             }
             
-            // Update pricing when colors are extracted
-            await updatePricingAfterColorExtraction();
         } else {
             throw new Error(result.error || 'Unknown error');
         }
@@ -937,12 +714,17 @@ async function extractColorsFrontendFallback(img) {
         uniqueId: `color_${Date.now()}_${index}`,
         originalRgb: match.detected_rgb ? [...match.detected_rgb] : null
     }));
+    
+    // Sync with global window.state for pricing system
+    if (window.state) {
+        window.state.colorMatches = state.colorMatches;
+        console.log('🔄 Synced colorMatches to window.state (fallback):', window.state.colorMatches.length, 'colors');
+    }
+    
     updateColorPalette();
     updateDetectedColors(0, state.colorMatches.length);
     showMessage('⚠️ Using basic frontend color detection', 'warning');
     
-    // Update pricing when colors are extracted
-    await updatePricingAfterColorExtraction();
 }
 
 // Update color palette display with new layout
@@ -1296,19 +1078,161 @@ function updatePrintSize(img) {
     const widthMm = (widthInch * 25.4).toFixed(1);
     const heightMm = (heightInch * 25.4).toFixed(1);
     
-    // Update display
+    // Update display with new beautified structure
     const dimensionsElement = document.getElementById('dtf-dimensions');
     if (dimensionsElement) {
         dimensionsElement.innerHTML = `
-            <div class="dtf-dimension-item">
-                <span class="dtf-label">Pixels:</span>
-                <span class="dtf-value">${img.width} × ${img.height} px</span>
+            <div class="dtf-dimensions-header">
+                <h4><i class="fas fa-ruler-combined"></i> Image Dimensions</h4>
+                <div class="dtf-dimensions-controls">
+                    <button class="dtf-unit-toggle" id="dtf-unit-toggle" title="Switch units">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    <button class="dtf-lock-aspect" id="dtf-lock-aspect" title="Lock aspect ratio">
+                        <i class="fas fa-lock"></i>
+                    </button>
+                </div>
             </div>
-            <div class="dtf-dimension-item">
-                <span class="dtf-label">Print Size:</span>
-                <span class="dtf-value">${widthInch}" × ${heightInch}" (${widthMm} × ${heightMm} mm)</span>
+            <div class="dimensions-content">
+                <div class="dimension-item" style="animation-delay: 0.1s;">
+                    <div class="dimension-label">
+                        <i class="fas fa-arrows-alt-h"></i>
+                        Width
+                    </div>
+                    <div class="dimension-inputs">
+                        <div class="dimension-input-group">
+                            <div class="dimension-input-label">Pixels</div>
+                            <input type="number" class="dimension-input" id="width-px" value="${img.width}" min="1" max="10000">
+                            <span class="dimension-unit">px</span>
+                        </div>
+                        <div class="dimension-input-group">
+                            <div class="dimension-input-label">Inches</div>
+                            <input type="number" class="dimension-input" id="width-in" value="${widthInch}" min="0.1" max="50" step="0.1">
+                            <span class="dimension-unit">in</span>
+                        </div>
+                        <div class="dimension-input-group">
+                            <div class="dimension-input-label">Millimeters</div>
+                            <input type="number" class="dimension-input" id="width-mm" value="${widthMm}" min="1" max="1000" step="0.1">
+                            <span class="dimension-unit">mm</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dimension-item" style="animation-delay: 0.2s;">
+                    <div class="dimension-label">
+                        <i class="fas fa-arrows-alt-v"></i>
+                        Height
+                    </div>
+                    <div class="dimension-inputs">
+                        <div class="dimension-input-group">
+                            <div class="dimension-input-label">Pixels</div>
+                            <input type="number" class="dimension-input" id="height-px" value="${img.height}" min="1" max="10000">
+                            <span class="dimension-unit">px</span>
+                        </div>
+                        <div class="dimension-input-group">
+                            <div class="dimension-input-label">Inches</div>
+                            <input type="number" class="dimension-input" id="height-in" value="${heightInch}" min="0.1" max="50" step="0.1">
+                            <span class="dimension-unit">in</span>
+                        </div>
+                        <div class="dimension-input-group">
+                            <div class="dimension-input-label">Millimeters</div>
+                            <input type="number" class="dimension-input" id="height-mm" value="${heightMm}" min="1" max="1000" step="0.1">
+                            <span class="dimension-unit">mm</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dimension-item" style="animation-delay: 0.3s;">
+                    <div class="dimension-label">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        Aspect Ratio
+                    </div>
+                    <div class="dimension-value">${(img.width / img.height).toFixed(2)}:1</div>
+                </div>
+                
+                <div class="dimension-item" style="animation-delay: 0.4s;">
+                    <div class="dimension-label">
+                        <i class="fas fa-th"></i>
+                        Total Pixels
+                    </div>
+                    <div class="dimension-value">${(img.width * img.height).toLocaleString()}</div>
+                </div>
             </div>
         `;
+        
+        // Setup dimension input listeners for real-time conversion
+        setupDimensionInputListeners();
+    }
+    
+    // Function to setup dimension input listeners for real-time conversion
+    function setupDimensionInputListeners() {
+        console.log('🔄 Setting up dimension input listeners');
+        
+        // Width inputs
+        const widthPx = document.getElementById('width-px');
+        const widthIn = document.getElementById('width-in');
+        const widthMm = document.getElementById('width-mm');
+        
+        // Height inputs
+        const heightPx = document.getElementById('height-px');
+        const heightIn = document.getElementById('height-in');
+        const heightMm = document.getElementById('height-mm');
+        
+        if (widthPx && widthIn && widthMm && heightPx && heightIn && heightMm) {
+            // Width conversions
+            widthPx.addEventListener('input', function() {
+                const px = parseFloat(this.value) || 0;
+                const inches = (px / 300).toFixed(2);
+                const mm = (inches * 25.4).toFixed(1);
+                widthIn.value = inches;
+                widthMm.value = mm;
+            });
+            
+            widthIn.addEventListener('input', function() {
+                const inches = parseFloat(this.value) || 0;
+                const px = Math.round(inches * 300);
+                const mm = (inches * 25.4).toFixed(1);
+                widthPx.value = px;
+                widthMm.value = mm;
+            });
+            
+            widthMm.addEventListener('input', function() {
+                const mm = parseFloat(this.value) || 0;
+                const inches = (mm / 25.4).toFixed(2);
+                const px = Math.round(inches * 300);
+                widthIn.value = inches;
+                widthPx.value = px;
+            });
+            
+            // Height conversions
+            heightPx.addEventListener('input', function() {
+                const px = parseFloat(this.value) || 0;
+                const inches = (px / 300).toFixed(2);
+                const mm = (inches * 25.4).toFixed(1);
+                heightIn.value = inches;
+                heightMm.value = mm;
+            });
+            
+            heightIn.addEventListener('input', function() {
+                const inches = parseFloat(this.value) || 0;
+                const px = Math.round(inches * 300);
+                const mm = (inches * 25.4).toFixed(1);
+                heightPx.value = px;
+                heightMm.value = mm;
+            });
+            
+            heightMm.addEventListener('input', function() {
+                const mm = parseFloat(this.value) || 0;
+                const inches = (mm / 25.4).toFixed(2);
+                const px = Math.round(inches * 300);
+                heightIn.value = inches;
+                heightPx.value = px;
+            });
+            
+            console.log('✅ Dimension input listeners setup complete');
+        } else {
+            console.warn('⚠️ Some dimension input elements not found');
+        }
     }
     
     // Update resize inputs
@@ -1316,8 +1240,126 @@ function updatePrintSize(img) {
     const heightInput = document.getElementById('dtf-resize-height');
     if (widthInput) widthInput.value = widthInch;
     if (heightInput) heightInput.value = heightInch;
+    
+    // Update size controls with detected dimensions
+    updateSizeControls(widthInch, heightInch, img.width, img.height);
     // Cache aspect ratio
     state.originalAspect = img.width / img.height;
+}
+
+// Function to update size controls with detected dimensions
+function updateSizeControls(widthIn, heightIn, widthPx, heightPx, retryCount = 0) {
+    console.log('🔄 Updating size controls with detected dimensions:', { widthIn, heightIn, widthPx, heightPx, retryCount });
+    
+    // Update width and height inputs
+    const widthInput = document.getElementById('dtf-size-width');
+    const heightInput = document.getElementById('dtf-size-height');
+    const unitsSelect = document.getElementById('dtf-size-units');
+    
+    console.log('🔍 Size control elements found:', {
+        widthInput: !!widthInput,
+        heightInput: !!heightInput,
+        unitsSelect: !!unitsSelect,
+        widthInputElement: widthInput,
+        heightInputElement: heightInput,
+        unitsSelectElement: unitsSelect
+    });
+    
+    if (widthInput && heightInput && unitsSelect) {
+        // Set default units to inches
+        unitsSelect.value = 'in';
+        
+        // Update width and height with inches (most common for printing)
+        widthInput.value = widthIn;
+        heightInput.value = heightIn;
+        
+        console.log('✅ Size controls updated:', {
+            width: widthIn + ' in',
+            height: heightIn + ' in',
+            units: 'in'
+        });
+        
+        // Trigger any existing event listeners
+        widthInput.dispatchEvent(new Event('input', { bubbles: true }));
+        heightInput.dispatchEvent(new Event('input', { bubbles: true }));
+        
+        // Setup unit change listener if not already set
+        if (!unitsSelect.hasAttribute('data-listener-added')) {
+            unitsSelect.addEventListener('change', handleSizeUnitChange);
+            unitsSelect.setAttribute('data-listener-added', 'true');
+            console.log('✅ Added unit change listener to size controls');
+        }
+        
+    } else {
+        console.warn('⚠️ Size control elements not found:', {
+            widthInput: !!widthInput,
+            heightInput: !!heightInput,
+            unitsSelect: !!unitsSelect
+        });
+        
+        // Retry up to 3 times with increasing delays
+        if (retryCount < 3) {
+            const delay = (retryCount + 1) * 200; // 200ms, 400ms, 600ms
+            console.log(`🔄 Retrying in ${delay}ms (attempt ${retryCount + 1}/3)`);
+            setTimeout(() => {
+                updateSizeControls(widthIn, heightIn, widthPx, heightPx, retryCount + 1);
+            }, delay);
+        } else {
+            console.error('❌ Failed to find size control elements after 3 retries');
+        }
+    }
+}
+
+// Function to handle size unit changes
+function handleSizeUnitChange() {
+    const unitsSelect = document.getElementById('dtf-size-units');
+    const widthInput = document.getElementById('dtf-size-width');
+    const heightInput = document.getElementById('dtf-size-height');
+    
+    if (!unitsSelect || !widthInput || !heightInput) return;
+    
+    const newUnit = unitsSelect.value;
+    const currentWidth = parseFloat(widthInput.value) || 0;
+    const currentHeight = parseFloat(heightInput.value) || 0;
+    
+    console.log('🔄 Converting size units to:', newUnit, 'from current values:', { currentWidth, currentHeight });
+    
+    // Convert from inches to the new unit
+    let newWidth, newHeight;
+    
+    switch (newUnit) {
+        case 'in':
+            // Already in inches, no conversion needed
+            newWidth = currentWidth;
+            newHeight = currentHeight;
+            break;
+            
+        case 'mm':
+            // Convert inches to millimeters
+            newWidth = (currentWidth * 25.4).toFixed(1);
+            newHeight = (currentHeight * 25.4).toFixed(1);
+            break;
+            
+        case 'px':
+            // Convert inches to pixels (assuming 300 DPI)
+            newWidth = Math.round(currentWidth * 300);
+            newHeight = Math.round(currentHeight * 300);
+            break;
+            
+        default:
+            console.warn('⚠️ Unknown unit:', newUnit);
+            return;
+    }
+    
+    // Update the input values
+    widthInput.value = newWidth;
+    heightInput.value = newHeight;
+    
+    console.log('✅ Size units converted:', {
+        unit: newUnit,
+        width: newWidth,
+        height: newHeight
+    });
 }
 
 // Handle PPI change
@@ -1781,6 +1823,32 @@ function applyColorChange() {
     closeColorEditor();
 }
 
+// Generate a robust unique color ID
+function generateUniqueColorId() {
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substr(2, 9);
+    return `color_${timestamp}_${random}`;
+}
+
+// Reset pixel ownership tracking when loading new image
+async function resetPixelOwnership() {
+    try {
+        console.log('🔄 Resetting pixel ownership tracking...');
+        const backendUrl = getBackendUrl();
+        const response = await fetch(`${backendUrl}/reset-pixel-ownership`, {
+            method: 'POST'
+        });
+        
+        if (response.ok) {
+            console.log('✅ Pixel ownership tracking reset successfully');
+        } else {
+            console.warn('⚠️ Failed to reset pixel ownership tracking');
+        }
+    } catch (error) {
+        console.error('❌ Error resetting pixel ownership:', error);
+    }
+}
+
 // Replace color using Python backend
 async function replaceColorViaBackend(oldRgb, newRgb) {
     console.log('🎨 replaceColorViaBackend called with:', {
@@ -1821,8 +1889,8 @@ async function replaceColorViaBackend(oldRgb, newRgb) {
         formData.append('new_g', newRgb.g);
         formData.append('new_b', newRgb.b);
         formData.append('tolerance', 50);
-        // Send unique color ID
-        const colorId = state.selectedFetchedColor?.match?.uniqueId || '';
+        // Send unique color ID - ensure it's robust
+        const colorId = state.selectedFetchedColor?.match?.uniqueId || generateUniqueColorId();
         formData.append('color_id', colorId);
         console.log('🆔 Sending color ID to backend:', colorId);
         console.log('✅ Form data created with values:', {
@@ -2687,1128 +2755,20 @@ function downloadEditedImage() {
 //     }
 // });
 
-// ============================================================================
-// DYNAMIC PRICING SYSTEM
-// ============================================================================
 
-// Global pricing state
-const pricingState = {
-    baseProductPrice: 0.00, // Will be set from Shopify product price
-    quantity: 24,
-    positions: [], // Each position will have unique ID, colorCount, isNewDesign, etc.
-    totalPrice: 0.00,
-    isCalculating: false
-};
 
-// Duplicate functions removed - using fresh pricing system
 
-async function updatePositionData(positionId, data) {
-    if (positionTracker[positionId]) {
-        Object.assign(positionTracker[positionId], data);
-        
-        // Calculate price asynchronously
-        try {
-            positionTracker[positionId].calculatedPrice = await calculatePositionPrice(positionTracker[positionId]);
-            console.log(`✅ Updated position ${positionId}:`, positionTracker[positionId]);
-            updatePriceBreakdown();
-        } catch (error) {
-            console.error(`❌ Failed to update position ${positionId}:`, error);
-        }
-    }
-}
 
-// Duplicate functions removed - using fresh pricing system
 
-// Update positions pricing with tracker data
-async function updatePositionsPricingWithTracker() {
-    console.log('🔄 updatePositionsPricingWithTracker called');
-    const positionsContainer = document.getElementById('sp-pricing-positions');
-    if (!positionsContainer) {
-        console.log('❌ sp-pricing-positions container not found');
-        return;
-    }
-    
-    const activePositions = positionTracker.getPositionsByStatus('active');
-    const positionsWithDesigns = activePositions.filter(pos => pos.colorCount > 0);
-    console.log('📊 Active positions from tracker:', activePositions.length, activePositions);
-    console.log('📊 Positions with designs:', positionsWithDesigns.length, positionsWithDesigns);
-    
-    if (positionsWithDesigns.length === 0) {
-        console.log('⚠️ No positions with designs found, showing placeholder message');
-        positionsContainer.innerHTML = '<div class="dtf-pricing-note">Upload designs to your selected positions to see pricing</div>';
-        return;
-    }
-    
-    // Show loading state
-    positionsContainer.innerHTML = '<div class="dtf-pricing-note"><i class="fas fa-spinner fa-spin"></i> Calculating prices...</div>';
-    
-    let positionsHTML = '';
-    let totalDesignCost = 0;
-    let totalSetupCost = 0;
-    
-    // Calculate prices for all positions with designs
-    for (const position of positionsWithDesigns) {
-        try {
-            const positionPrice = await calculatePositionPriceFromTracker(position);
-            const setupCost = position.isNewDesign ? 25.0 : 0.0;
-            
-            totalDesignCost += positionPrice;
-            totalSetupCost += setupCost;
-            
-            positionsHTML += `
-                <div class="dtf-position-pricing" data-position-id="${position.id}">
-                    <div class="dtf-position-name">${position.positionName}</div>
-                    <div class="dtf-position-details">
-                        <span class="dtf-position-colors">${position.colorCount} colors</span>
-                        <span class="dtf-position-price">$${positionPrice.toFixed(2)}</span>
-                        ${setupCost > 0 ? `<span class="dtf-setup-cost">+ $${setupCost.toFixed(2)} setup</span>` : ''}
-                    </div>
-                    <div class="dtf-position-actions">
-                        <button onclick="editPositionById('${position.id}')" class="dtf-edit-btn">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button onclick="removePositionById('${position.id}')" class="dtf-remove-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-        } catch (error) {
-            console.error(`❌ Error calculating price for ${position.positionName}:`, error);
-            // Add position with error state
-            positionsHTML += `
-                <div class="dtf-position-pricing" data-position-id="${position.id}">
-                    <div class="dtf-position-name">${position.positionName}</div>
-                    <div class="dtf-position-details">
-                        <span class="dtf-position-colors">${position.colorCount} colors</span>
-                        <span class="dtf-position-price" style="color: #dc3545;">Error calculating price</span>
-                    </div>
-                    <div class="dtf-position-actions">
-                        <button onclick="editPositionById('${position.id}')" class="dtf-edit-btn">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button onclick="removePositionById('${position.id}')" class="dtf-remove-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-    }
-    
-    // Add summary row
-    if (totalDesignCost > 0) {
-        positionsHTML += `
-            <div class="dtf-pricing-summary">
-                <div class="dtf-summary-row">
-                    <span class="dtf-summary-label">Design Printing Total:</span>
-                    <span class="dtf-summary-value">$${totalDesignCost.toFixed(2)}</span>
-                </div>
-                ${totalSetupCost > 0 ? `
-                <div class="dtf-summary-row">
-                    <span class="dtf-summary-label">Setup Charges:</span>
-                    <span class="dtf-summary-value">$${totalSetupCost.toFixed(2)}</span>
-                </div>
-                ` : ''}
-            </div>
-        `;
-    }
-    
-    positionsContainer.innerHTML = positionsHTML;
-    pricingState.totalPositionPrice = totalDesignCost + totalSetupCost;
-}
 
-// Calculate position price from tracker data
-async function calculatePositionPriceFromTracker(position) {
-    try {
-        // Call the real backend pricing API for this single position
-        const response = await fetch(`${getBackendUrl()}/pricing/calculate-dynamic-pricing`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                base_product_price: pricingState.baseProductPrice,
-                positions: [{
-                    position_id: position.id,
-                    position_name: position.positionName,
-                    design_file_url: position.designFileUrl || '',
-                    color_count: position.colorCount,
-                    design_hash: position.designHash,
-                    is_new_design: position.isNewDesign,
-                    timestamp: position.timestamp,
-                    status: position.status
-                }],
-                quantity: pricingState.quantity,
-                customer_email: 'test@example.com'
-            })
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            if (data.success && data.pricing_breakdown.position_costs.length > 0) {
-                const positionCost = data.pricing_breakdown.position_costs[0];
-                return positionCost.color_cost; // Return only the color cost, setup handled separately
-            }
-        }
-        
-        console.warn(`⚠️ Backend pricing failed for ${position.positionName}, using fallback`);
-        // Fallback calculation
-        const basePricePerColor = 2.22; // From Excel data
-        return position.colorCount * basePricePerColor * pricingState.quantity;
-        
-    } catch (error) {
-        console.error(`❌ Error calculating price for ${position.positionName}:`, error);
-        // Fallback calculation
-        const basePricePerColor = 2.22; // From Excel data
-        return position.colorCount * basePricePerColor * pricingState.quantity;
-    }
-}
-
-// Edit position by ID
-function editPositionById(positionId) {
-    const position = positionTracker.getPosition(positionId);
-    if (position) {
-        console.log(`✏️ Editing position: ${position.positionName} (${positionId})`);
-        // Open customizer for this position
-        // This will be implemented based on your customizer system
-    }
-}
-
-// Remove position by ID
-async function removePositionById(positionId) {
-    const position = positionTracker.getPosition(positionId);
-    if (position) {
-        console.log(`🗑️ Removing position: ${position.positionName} (${positionId})`);
-        positionTracker.removePosition(positionId);
-        syncPricingStateWithTracker();
-        await updatePricingDisplayWithTracker();
-    }
-}
-
-// Debug function to find price elements
-function debugPriceElements() {
-    console.log('🔍 Debugging Shopify Price Elements:');
-    
-    // Check global product object
-    if (typeof product !== 'undefined') {
-        console.log('✅ Global product object found:', product);
-        if (product.price) {
-            console.log('💰 Product price from object:', product.price / 100);
-        }
-    } else {
-        console.log('❌ No global product object found');
-    }
-    
-    // Check common price selectors (prioritizing Shopify product block)
-    const selectors = [
-        '.product-block.product-block-price [data-product-price]',  // Primary target - specific span
-        '.product-block.product-block-price',  // Secondary target - container
-        '.product-block-price',
-        '[data-product-price]',  // Direct data attribute
-        '.product-price',
-        '.price',
-        '.variant-price',
-        '.selected-variant-price',
-        '.product-single__price',
-        '.product__price',
-        '.price-item',
-        '.money'
-    ];
-    
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        if (elements.length > 0) {
-            console.log(`✅ Found ${elements.length} element(s) with selector: ${selector}`);
-            elements.forEach((el, index) => {
-                console.log(`  [${index}] Text: "${el.textContent}" | HTML: ${el.outerHTML}`);
-            });
-        }
-    });
-    
-    // Look for any element containing price-like text
-    const allElements = document.querySelectorAll('*');
-    const priceElements = Array.from(allElements).filter(el => {
-        const text = el.textContent || '';
-        return /^\$?\d+\.?\d*$/.test(text.trim()) && 
-               parseFloat(text.replace(/[^0-9.]/g, '')) > 0 && 
-               parseFloat(text.replace(/[^0-9.]/g, '')) < 10000;
-    });
-    
-    console.log(`🔍 Found ${priceElements.length} elements with price-like text:`);
-    priceElements.forEach((el, index) => {
-        console.log(`  [${index}] "${el.textContent}" | Class: "${el.className}" | Tag: ${el.tagName}`);
-    });
-}
-
-// Get product price from Shopify
-function getShopifyProductPrice() {
-    try {
-        console.log('🔍 getShopifyProductPrice called');
-        
-        // Debug mode - uncomment to see what elements are available
-        // debugPriceElements();
-        
-        // Try to get price from Shopify product object
-        if (typeof product !== 'undefined' && product.price) {
-            console.log('💰 Using product object price:', product.price / 100);
-            return product.price / 100; // Convert from cents to dollars
-        }
-        
-        // Try to get price from Shopify product block (primary method)
-        const productBlockPrice = document.querySelector('.product-block.product-block-price');
-        if (productBlockPrice) {
-            console.log('✅ Found product-block-price element:', productBlockPrice);
-            console.log('✅ Product block innerHTML:', productBlockPrice.innerHTML);
-            
-            // Look for the specific price span with data-product-price attribute
-            const priceSpan = productBlockPrice.querySelector('[data-product-price]');
-            if (priceSpan) {
-                const priceText = priceSpan.textContent || priceSpan.innerText;
-                const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-                console.log('💰 Price span found - text:', priceText, 'parsed:', price);
-                if (!isNaN(price) && price > 0) {
-                    console.log('💰 Found price in data-product-price span:', price, 'from text:', priceText);
-                    return price;
-                }
-            } else {
-                console.log('⚠️ No data-product-price span found in product block');
-            }
-            
-            // Fallback: Look for price in any child elements
-            const childElements = productBlockPrice.querySelectorAll('*');
-            console.log('🔍 Checking', childElements.length, 'child elements for price');
-            for (const child of childElements) {
-                const priceText = child.textContent || child.innerText;
-                const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-                if (!isNaN(price) && price > 0 && price < 10000) {
-                    console.log('💰 Found price in child element:', price, 'from text:', priceText, 'element:', child);
-                    return price;
-                }
-            }
-            console.log('⚠️ No price found in any child elements');
-            
-            // If no child elements have price, check the main element
-            const priceText = productBlockPrice.textContent || productBlockPrice.innerText;
-            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-            console.log('🔍 Checking main element - text:', priceText, 'parsed:', price);
-            if (!isNaN(price) && price > 0) {
-                console.log('💰 Found price in main element:', price, 'from text:', priceText);
-                return price;
-            }
-            console.log('⚠️ No price found in main element');
-        }
-        
-        // Fallback: Try to get price from data-product-price attribute directly
-        const dataPriceElement = document.querySelector('[data-product-price]');
-        if (dataPriceElement) {
-            const priceText = dataPriceElement.textContent || dataPriceElement.innerText;
-            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-            console.log('🔍 Found data-product-price element - text:', priceText, 'parsed:', price);
-            if (!isNaN(price) && price > 0) {
-                console.log('💰 Found price from data-product-price attribute:', price, 'from text:', priceText);
-                return price;
-            }
-        } else {
-            console.log('⚠️ No data-product-price element found');
-        }
-        
-        // Fallback: Try to get price from other common selectors
-        const priceElement = document.querySelector('.product-price, .price');
-        if (priceElement) {
-            const priceText = priceElement.textContent || priceElement.innerText;
-            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-            console.log('🔍 Found fallback price element - text:', priceText, 'parsed:', price);
-            if (!isNaN(price)) {
-                console.log('💰 Found price from fallback selector:', price);
-                return price;
-            }
-        } else {
-            console.log('⚠️ No fallback price element found');
-        }
-        
-        // Try to get price from variant selector
-        const variantPriceElement = document.querySelector('.variant-price, .selected-variant-price');
-        if (variantPriceElement) {
-            const priceText = variantPriceElement.textContent || variantPriceElement.innerText;
-            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-            if (!isNaN(price)) {
-                return price;
-            }
-        }
-        
-        // Fallback: look for any element with price-like content
-        const priceElements = document.querySelectorAll('[class*="price"], [class*="cost"], [class*="amount"]');
-        for (const element of priceElements) {
-            const priceText = element.textContent || element.innerText;
-            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-            if (!isNaN(price) && price > 0 && price < 10000) { // Reasonable price range
-                return price;
-            }
-        }
-        
-        console.warn('⚠️ Could not find product price, using default $15.00');
-        console.log('💰 All price detection methods failed, returning default');
-        return 15.00; // Default fallback
-        
-    } catch (error) {
-        console.error('❌ Error getting product price:', error);
-        console.log('💰 Returning default fallback price: 15.00');
-        return 15.00; // Default fallback
-    }
-}
-
-// Make getShopifyProductPrice available globally
-window.getShopifyProductPrice = getShopifyProductPrice;
 
 // Make DTF customizer functions available globally
-window.initializeDTFCustomizerMain = initializeDTFCustomizer;
-window.setupEventListeners = setupEventListeners;
+window.initializeDTFCustomizerMain = initDTFCustomizer;
+window.setupDTFEventListeners = setupDTFEventListeners;
 window.handleFileUpload = handleFileUpload;
+window.removeBackground = removeBackground;
 
-// Make position tracker functions available globally
-// Missing functions that Shopify snippet needs
-async function updatePricingDisplayWithTracker() {
-    console.log('🔄 updatePricingDisplayWithTracker called');
-    await updatePositionsPricingWithTracker();
-}
 
-function syncPricingStateWithTracker() {
-    console.log('🔄 syncPricingStateWithTracker called');
-    // Sync the old pricingState with the new positionTracker
-    if (window.pricingState && positionTracker) {
-        const allPositions = positionTracker.getAllPositions();
-        window.pricingState.positions = allPositions.map(pos => ({
-            positionName: pos.positionName,
-            colorCount: pos.colorCount,
-            isNewDesign: pos.isNewDesign,
-            designHash: pos.designHash
-        }));
-        console.log('✅ Synced pricingState with tracker:', window.pricingState.positions.length, 'positions');
-    }
-}
 
-// Make functions globally available
-window.positionTracker = positionTracker;
-window.addPositionToPricing = addPositionToPricing;
-window.removePositionFromPricing = removePositionFromPricing;
-window.editPositionById = editPositionById;
-window.removePositionById = removePositionById;
-window.updatePricingDisplayWithTracker = updatePricingDisplayWithTracker;
-window.syncPricingStateWithTracker = syncPricingStateWithTracker;
-window.calculateRealPricing = calculateRealPricing;
-window.getShopifyProductPrice = getShopifyProductPrice;
-window.updatePricingDisplay = updatePricingDisplay;
-window.generateDesignHash = generateDesignHash;
 
-// Initialize pricing system
-function initializePricing() {
-    console.log('💰 Initializing Dynamic Pricing System');
-    console.log('💰 Initial pricingState.positions:', pricingState.positions);
-    console.log('💰 Initial pricingState.positions.length:', pricingState.positions.length);
-    
-    // Get product price from Shopify
-    pricingState.baseProductPrice = getShopifyProductPrice();
-    console.log('💰 Product price from Shopify:', pricingState.baseProductPrice);
-    
-    // Set up quantity input listener
-    const quantityInput = document.getElementById('sp-quantity-input');
-    if (quantityInput) {
-        quantityInput.addEventListener('input', handleQuantityChange);
-        quantityInput.addEventListener('change', handleQuantityChange);
-    }
-    
-    // Note: New design checkboxes are now in the customizer popup, not position popup
-    
-    // Initialize quantity note
-    updateQuantityNote(pricingState.quantity);
-    
-    // Initial pricing calculation
-    updatePricingDisplay();
-    
-    // Force show the old price breakdown section
-    const oldPriceBreakdown = document.getElementById('sp-price-breakdown');
-    if (oldPriceBreakdown) {
-        oldPriceBreakdown.style.display = 'block';
-        console.log('💰 Forced old price breakdown section to be visible');
-    }
-}
 
-// Handle quantity change
-function handleQuantityChange(event) {
-    const newQuantity = parseInt(event.target.value);
-    if (newQuantity < 1) {
-        event.target.value = 1;
-        pricingState.quantity = 1;
-    } else {
-        pricingState.quantity = newQuantity;
-    }
-    
-    console.log('📊 Quantity changed to:', pricingState.quantity);
-    
-    // Update quantity note to show pricing tier
-    updateQuantityNote(pricingState.quantity);
-    
-    // Recalculate pricing with real-time updates
-    calculateRealPricing();
-}
-
-// Update quantity note to show current pricing tier
-function updateQuantityNote(quantity) {
-    const quantityNote = document.getElementById('sp-quantity-note');
-    if (quantityNote) {
-        if (quantity >= 1 && quantity <= 23) {
-            quantityNote.textContent = `${quantity} pieces = 12-23 pricing tier`;
-            quantityNote.style.color = '#5a6fd8';
-            quantityNote.style.fontWeight = '600';
-        } else if (quantity >= 24 && quantity <= 47) {
-            quantityNote.textContent = `${quantity} pieces = 24-47 pricing tier`;
-            quantityNote.style.color = '#28a745';
-            quantityNote.style.fontWeight = '600';
-        } else if (quantity >= 48 && quantity <= 95) {
-            quantityNote.textContent = `${quantity} pieces = 48-95 pricing tier`;
-            quantityNote.style.color = '#28a745';
-            quantityNote.style.fontWeight = '600';
-        } else if (quantity >= 96) {
-            quantityNote.textContent = `${quantity} pieces = 96+ pricing tier`;
-            quantityNote.style.color = '#28a745';
-            quantityNote.style.fontWeight = '600';
-        } else {
-            quantityNote.textContent = '1-23 pieces = 12-23 pricing';
-            quantityNote.style.color = '#666';
-            quantityNote.style.fontWeight = '500';
-        }
-    }
-}
-
-// Handle new design checkbox change
-function handleNewDesignCheckboxChange(event) {
-    const checkbox = event.target;
-    const position = checkbox.getAttribute('data-position');
-    const isNewDesign = checkbox.checked;
-    
-    console.log(`🆕 New design checkbox changed for ${position}:`, isNewDesign);
-    
-    // Update pricing state for the current position
-    if (pricingState.positions && pricingState.positions.length > 0) {
-        // Find the position that matches the current editing position
-        const currentPosition = getCurrentPosition();
-        if (currentPosition) {
-            const positionIndex = pricingState.positions.findIndex(p => p.positionName === currentPosition);
-            if (positionIndex !== -1) {
-                pricingState.positions[positionIndex].isNewDesign = isNewDesign;
-                console.log(`🆕 Updated pricing state for ${currentPosition}:`, isNewDesign);
-            }
-        }
-    }
-    
-    // Recalculate pricing
-    calculateRealPricing();
-}
-
-// Update pricing display
-function updatePricingDisplay() {
-    console.log('💰 Updating pricing display');
-    console.log('💰 pricingState.positions.length:', pricingState.positions.length);
-    
-    // Update base price
-    const basePriceElement = document.getElementById('sp-base-price');
-    if (basePriceElement) {
-        // If base price is 0, try to fetch it from Shopify
-        if (pricingState.baseProductPrice === 0) {
-            const shopifyPrice = getShopifyProductPrice();
-            if (shopifyPrice > 0) {
-                pricingState.baseProductPrice = shopifyPrice;
-            }
-        }
-        basePriceElement.textContent = `$${pricingState.baseProductPrice.toFixed(2)}`;
-        console.log('💰 Updated base price:', pricingState.baseProductPrice);
-    } else {
-        console.log('⚠️ Base price element not found');
-    }
-    
-    // Update positions pricing (consolidated view)
-    updatePositionsPricing();
-    
-    // Update total price
-    updateTotalPrice();
-    
-    // Always show pricing section
-    const pricingSection = document.getElementById('sp-price-breakdown');
-    if (pricingSection) {
-        pricingSection.style.display = 'block';
-        console.log('💰 Showing old price breakdown section');
-    } else {
-        console.log('⚠️ Old price breakdown section not found');
-    }
-    
-    // Trigger real-time pricing calculation if positions exist
-    if (pricingState.positions.length > 0) {
-        calculateRealPricing();
-    } else {
-        // If no positions, show empty state
-        const positionsContainer = document.getElementById('sp-pricing-positions');
-        if (positionsContainer) {
-            positionsContainer.innerHTML = '<div class="dtf-pricing-note">Select positions and upload designs to see pricing</div>';
-        }
-    }
-}
-
-// Duplicate function removed - using fresh pricing system
-
-// Duplicate function removed - using fresh pricing system
-
-// Make calculatePositionPrice available globally
-window.calculatePositionPrice = calculatePositionPrice;
-
-// Update total price
-function updateTotalPrice() {
-    const totalPriceElement = document.getElementById('sp-total-price');
-    if (!totalPriceElement) return;
-    
-    const totalPositionPrice = pricingState.totalPositionPrice || 0;
-    const totalPrice = pricingState.baseProductPrice + totalPositionPrice;
-    
-    totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
-    pricingState.totalPrice = totalPrice;
-    
-    console.log('💰 Total price updated:', totalPrice);
-}
-
-// Add position to pricing calculation using position tracker
-function addPositionToPricing(positionName, colorCount, isNewDesign = false, designFileUrl = '') {
-    console.log('➕ Adding position to pricing:', positionName, colorCount, isNewDesign);
-    
-    // Get the actual new design checkbox state from the customizer
-    const newDesignCheckbox = document.querySelector('#dtf-new-design-checkbox');
-    console.log('🔍 Looking for checkbox:', newDesignCheckbox);
-    
-    if (newDesignCheckbox) {
-        isNewDesign = newDesignCheckbox.checked;
-        console.log(`🆕 New design checkbox found and checked: ${isNewDesign} for ${positionName}`);
-    } else {
-        // If checkbox doesn't exist (customizer not open), default to false
-        isNewDesign = false;
-        console.log(`🆕 No checkbox found, defaulting to false for ${positionName}`);
-    }
-    
-    // Remove existing position with same name from both systems
-    pricingState.positions = pricingState.positions.filter(p => p.positionName !== positionName);
-    
-    // Remove from position tracker
-    const existingPositions = positionTracker.getAllPositions();
-    existingPositions.forEach(pos => {
-        if (pos.positionName === positionName) {
-            positionTracker.removePosition(pos.id);
-        }
-    });
-    
-    // Add new position to tracker
-    const positionId = positionTracker.addPosition(positionName, colorCount, isNewDesign, designFileUrl);
-    const position = positionTracker.getPosition(positionId);
-    
-    // Add to pricing state for backward compatibility
-    pricingState.positions.push(position);
-    
-    // Update pricing display
-    updatePricingDisplay();
-    
-    return positionId;
-}
-
-// Remove position from pricing calculation
-function removePositionFromPricing(positionName) {
-    console.log('➖ Removing position from pricing:', positionName);
-    
-    // Remove from pricing state
-    pricingState.positions = pricingState.positions.filter(p => p.positionName !== positionName);
-    
-    // Remove from position tracker
-    const existingPositions = positionTracker.getAllPositions();
-    existingPositions.forEach(pos => {
-        if (pos.positionName === positionName) {
-            positionTracker.removePosition(pos.id);
-        }
-    });
-    
-    // Update new design checkboxes
-    updateNewDesignCheckboxes();
-    
-    // Update pricing display
-    updatePricingDisplay();
-}
-
-// Update new design checkboxes
-function updateNewDesignCheckboxes() {
-    const newDesignSection = document.getElementById('dtf-new-design-section');
-    const newDesignOptions = document.getElementById('dtf-new-design-options');
-    
-    if (!newDesignSection || !newDesignOptions) return;
-    
-    if (pricingState.positions.length === 0) {
-        newDesignSection.style.display = 'none';
-        return;
-    }
-    
-    newDesignSection.style.display = 'block';
-    
-    let checkboxesHTML = '';
-    pricingState.positions.forEach((position, index) => {
-        checkboxesHTML += `
-            <div class="dtf-new-design-option">
-                <input type="checkbox" 
-                       id="new-design-${index}" 
-                       ${position.isNewDesign ? 'checked' : ''}
-                       onchange="toggleNewDesign(${index}, this.checked)">
-                <label for="new-design-${index}">
-                    ${position.positionName} - $25 setup charge
-                </label>
-            </div>
-        `;
-    });
-    
-    newDesignOptions.innerHTML = checkboxesHTML;
-}
-
-// Toggle new design status
-function toggleNewDesign(index, isNewDesign) {
-    if (pricingState.positions[index]) {
-        pricingState.positions[index].isNewDesign = isNewDesign;
-        console.log('🔄 Toggled new design for:', pricingState.positions[index].positionName, isNewDesign);
-        updatePricingDisplay();
-    }
-}
-
-// Duplicate function removed - using fresh pricing system
-
-// Update pricing after color extraction - Fresh Pricing System
-async function updatePricingAfterColorExtraction() {
-    console.log('🔄 Updating pricing after color extraction');
-    
-    // Get the current position from the customizer
-    const currentPosition = getCurrentPosition();
-    if (!currentPosition) {
-        console.log('⚠️ No position selected, skipping pricing update');
-        return;
-    }
-    
-    // Get color count from extracted colors
-    const colorCount = state.colorMatches ? state.colorMatches.length : 0;
-    console.log(`🎨 Color count for pricing: ${colorCount}`);
-    
-    if (colorCount > 0) {
-        // Check if this is a new design
-        const newDesignCheckbox = document.getElementById('dtf-new-design-checkbox');
-        const isNewDesign = newDesignCheckbox ? newDesignCheckbox.checked : false;
-        console.log(`🎨 New design status: ${isNewDesign}`);
-        
-        // Update position data with new pricing system
-        await updatePositionData(currentPosition, {
-            colorCount: colorCount,
-            isNewDesign: isNewDesign,
-            finalImage: state.image ? state.image.src : null,
-            positionName: currentPosition
-        });
-        
-        console.log(`✅ Updated position ${currentPosition} with ${colorCount} colors, new design: ${isNewDesign}`);
-    }
-}
-
-// Get current position from the customizer
-function getCurrentPosition() {
-    // Check if we're in a position-specific customizer using the global variable
-    if (window.currentEditingPosition) {
-        console.log('🎯 Found current editing position:', window.currentEditingPosition);
-        return window.currentEditingPosition;
-    }
-    
-    // Fallback: Check if we're in a position-specific customizer using DOM
-    const positionElement = document.querySelector('.sp-position-option.selected');
-    if (positionElement) {
-        console.log('🎯 Found position element:', positionElement.dataset.position);
-        return positionElement.dataset.position;
-    }
-    
-    console.log('⚠️ No current editing position found');
-    return null;
-}
-
-// Call backend API for real pricing calculation
-async function calculateRealPricing() {
-    if (pricingState.isCalculating) return;
-    
-    pricingState.isCalculating = true;
-    console.log('🔄 Calculating real pricing via backend API');
-    
-    try {
-        const allPositions = positionTracker.getAllPositions();
-        console.log('🔄 calculateRealPricing - All positions from tracker:', allPositions.length, allPositions);
-        
-        const currentPricingState = window.pricingState || pricingState;
-        const requestData = {
-            base_product_price: currentPricingState.baseProductPrice,
-            positions: allPositions.map(pos => ({
-                position_id: pos.id,
-                position_name: pos.positionName,
-                design_file_url: pos.designFileUrl || '',
-                color_count: pos.colorCount,
-                design_hash: pos.designHash,
-                is_new_design: pos.isNewDesign,
-                timestamp: pos.timestamp,
-                status: pos.status
-            })),
-            quantity: currentPricingState.quantity,
-            customer_email: 'test@example.com'
-        };
-        
-        console.log('🔄 calculateRealPricing - Request data:', requestData);
-        
-        const response = await fetch(`${getBackendUrl()}/pricing/calculate-dynamic-pricing`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('🔄 calculateRealPricing - Backend response:', data);
-        
-        if (data.success) {
-            console.log('✅ Real pricing calculated:', data.pricing_breakdown);
-            console.log('✅ Position costs received:', data.pricing_breakdown.position_costs.length);
-            await updatePricingWithBackendData(data.pricing_breakdown);
-        } else {
-            console.error('❌ Pricing calculation failed:', data);
-            showMessage('Failed to calculate pricing. Using estimated pricing.', 'warning');
-        }
-        
-    } catch (error) {
-        console.error('❌ Error calculating real pricing:', error);
-        showMessage('Using estimated pricing. Backend unavailable.', 'warning');
-    } finally {
-        pricingState.isCalculating = false;
-    }
-}
-
-// Update pricing with backend data
-async function updatePricingWithBackendData(pricingBreakdown) {
-    console.log('🔄 updatePricingWithBackendData called with:', pricingBreakdown);
-    console.log('🔄 pricingState.positions:', pricingState.positions.length, pricingState.positions);
-    console.log('🔄 positionTracker.getAllPositions():', positionTracker.getAllPositions().length, positionTracker.getAllPositions());
-    console.log('🔄 window.pricingState:', window.pricingState);
-    console.log('🔄 window.pricingState.positions:', window.pricingState ? window.pricingState.positions.length : 'undefined');
-    
-    // Update total price
-    const totalPriceElement = document.getElementById('sp-total-price');
-    if (totalPriceElement) {
-        totalPriceElement.textContent = `$${pricingBreakdown.total_after_tax.toFixed(2)}`;
-    }
-    
-    // Update cart total
-    const cartTotalElement = document.getElementById('sp-cart-total');
-    if (cartTotalElement) {
-        cartTotalElement.textContent = `$${pricingBreakdown.total_after_tax.toFixed(2)}`;
-    }
-    
-    // Update positions pricing - show all selected positions
-    const positionsContainer = document.getElementById('sp-pricing-positions');
-    if (positionsContainer) {
-        let positionsHTML = '';
-        let totalDesignCost = 0;
-        let totalSetupCost = 0;
-        
-        // Show only positions that have been updated with designs (color count > 0)
-        const currentPricingState = window.pricingState || pricingState;
-        console.log('🔄 Current pricing state positions:', currentPricingState.positions);
-        const positionsWithDesigns = currentPricingState.positions.filter(pos => pos.colorCount > 0);
-        console.log('🔄 Positions with designs:', positionsWithDesigns);
-        
-        if (positionsWithDesigns && positionsWithDesigns.length > 0) {
-            console.log('🔄 Using positions with designs for display:', positionsWithDesigns.length);
-            
-            // Process positions sequentially to handle async calculatePositionPrice
-            for (let index = 0; index < positionsWithDesigns.length; index++) {
-                const position = positionsWithDesigns[index];
-                
-                // Find corresponding backend data if available
-                const backendData = pricingBreakdown.position_costs.find(p => p.position_name === position.positionName);
-                
-                let positionPrice = 0;
-                let setupCost = 0;
-                let colorCount = position.colorCount;
-                let isNewDesign = position.isNewDesign;
-                
-                if (backendData) {
-                    // Use backend calculated data
-                    positionPrice = backendData.color_cost;
-                    setupCost = backendData.is_new_design ? 25.0 : 0.0;
-                    colorCount = backendData.color_count;
-                    isNewDesign = backendData.is_new_design;
-                } else {
-                    // Use frontend estimated data
-                    positionPrice = await calculatePositionPrice(position);
-                    setupCost = position.isNewDesign ? 25.0 : 0.0;
-                }
-                
-                totalDesignCost += positionPrice;
-                totalSetupCost += setupCost;
-                
-                positionsHTML += `
-                    <div class="dtf-position-pricing">
-                        <div class="dtf-position-name">${position.positionName}</div>
-                        <div class="dtf-position-details">
-                            <span class="dtf-position-colors">${colorCount} colors</span>
-                            <span class="dtf-position-price">$${positionPrice.toFixed(2)}</span>
-                            ${setupCost > 0 ? `<span class="dtf-setup-cost">+ $${setupCost.toFixed(2)} setup</span>` : ''}
-                        </div>
-                    </div>
-                `;
-            }
-            
-            // Add summary row
-            if (totalDesignCost > 0) {
-                positionsHTML += `
-                    <div class="dtf-pricing-summary">
-                        <div class="dtf-summary-row">
-                            <span class="dtf-summary-label">Design Printing Total:</span>
-                            <span class="dtf-summary-value">$${totalDesignCost.toFixed(2)}</span>
-                        </div>
-                        ${totalSetupCost > 0 ? `
-                        <div class="dtf-summary-row">
-                            <span class="dtf-summary-label">Setup Charges:</span>
-                            <span class="dtf-summary-value">$${totalSetupCost.toFixed(2)}</span>
-                        </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-        } else {
-            console.log('⚠️ No positions with designs found, showing placeholder');
-            console.log('⚠️ Total positions:', currentPricingState.positions ? currentPricingState.positions.length : 0);
-            console.log('⚠️ Positions with designs:', positionsWithDesigns ? positionsWithDesigns.length : 0);
-            positionsHTML = '<div class="dtf-pricing-note">Upload designs to your selected positions to see pricing</div>';
-        }
-        
-        positionsContainer.innerHTML = positionsHTML;
-    }
-    
-    pricingState.totalPrice = pricingBreakdown.total_after_tax;
-    
-}
-
-// Update price breakdown with backend data
-function updatePriceBreakdownWithBackendData(pricingBreakdown) {
-    const summary = document.getElementById('sp-order-summary');
-    const summaryContent = document.getElementById('sp-summary-content');
-    
-    if (!summary || !summaryContent) return;
-    
-    // Get pricing state
-    const pricingState = window.pricingState || {
-        baseProductPrice: 0,
-        quantity: 24,
-        positions: [],
-        totalPositionPrice: 0,
-        totalPrice: 0
-    };
-    
-    let summaryHTML = '';
-    
-    // Add quantity input
-    summaryHTML += `
-      <div class="sp-quantity-section">
-        <label for="sp-quantity-input" style="font-weight: 600; margin-bottom: 8px; display: block;">Quantity:</label>
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-          <input type="number" id="sp-quantity-input" value="${pricingState.quantity}" min="1" 
-                 style="width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
-          <span id="sp-quantity-note" style="font-size: 0.9rem; color: #6c757d;">1-23 pieces = 12-23 pricing</span>
-        </div>
-      </div>
-    `;
-    
-    // Add base product price
-    summaryHTML += `
-      <div class="sp-summary-item">
-        <span>Base Product Price</span>
-        <span>$${pricingBreakdown.base_product_price.toFixed(2)}</span>
-      </div>
-    `;
-    
-    let totalDesignCost = 0;
-    let totalSetupCost = 0;
-    
-    // Add each position with real pricing data
-    pricingBreakdown.position_costs.forEach((posCost, index) => {
-        const positionName = posCost.position_name;
-        const position = window.POSITION_LABELS ? window.POSITION_LABELS[positionName] : { name: positionName };
-        const data = window.positionData ? window.positionData[positionName] : null;
-        const hasDesign = data && data.completed;
-        
-        totalDesignCost += posCost.color_cost;
-        totalSetupCost += posCost.is_new_design ? 25.0 : 0.0;
-        
-        summaryHTML += `
-            <div class="sp-summary-item">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <div class="sp-summary-thumbnail">
-                        ${hasDesign ? `
-                            <img src="${data.thumbnail}" alt="${position.name} preview" class="sp-summary-thumbnail-img">
-                            <div class="sp-summary-thumbnail-overlay">
-                                <button onclick="viewFullImage('${positionName}')" title="View full image">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        ` : `
-                            <div style="width: 100%; height: 100%; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #6c757d;">
-                                <i class="fas fa-upload"></i>
-                            </div>
-                        `}
-                    </div>
-                    <div class="sp-summary-details">
-                        <div style="font-weight: 600; font-size: 1.1rem;">${position.name} Design</div>
-                        <div style="font-size: 0.8rem; color: #6c757d; margin: 2px 0;">
-                            ${posCost.color_count} colors - $${posCost.color_cost.toFixed(2)}
-                        </div>
-                        ${hasDesign ? `
-                            <div style="font-size: 0.7rem; color: #999;">Saved: ${new Date(data.timestamp).toLocaleDateString()}</div>
-                        ` : `
-                            <div style="font-size: 0.7rem; color: #999;">Click to customize</div>
-                        `}
-                    </div>
-                </div>
-                <div class="sp-summary-price">
-                    <span style="font-size: 1.2rem; font-weight: 600;">$${posCost.total_cost.toFixed(2)}</span>
-                    ${posCost.is_new_design ? `<div style="font-size: 0.7rem; color: #28a745;">+ $25.00 setup</div>` : ''}
-                </div>
-            </div>
-        `;
-    });
-    
-    // Add design printing total
-    if (totalDesignCost > 0) {
-        summaryHTML += `
-            <div class="sp-summary-item" style="border-top: 1px solid #e9ecef; padding-top: 10px; margin-top: 10px;">
-                <span>Design Printing Total</span>
-                <span>$${totalDesignCost.toFixed(2)}</span>
-            </div>
-        `;
-    }
-    
-    // Add setup charges
-    if (totalSetupCost > 0) {
-        summaryHTML += `
-            <div class="sp-summary-item">
-                <span>Setup Charges</span>
-                <span>$${totalSetupCost.toFixed(2)}</span>
-            </div>
-        `;
-    }
-    
-    // Add total
-    summaryHTML += `
-        <div class="sp-summary-item" style="border-top: 2px solid #007bff; padding-top: 15px; margin-top: 15px; font-weight: 600; font-size: 1.2rem;">
-            <span>Total</span>
-            <span>$${pricingBreakdown.total_after_tax.toFixed(2)}</span>
-        </div>
-    `;
-    
-    // Add order info button if there are completed positions
-    const completedPositions = window.positionData ? Object.keys(window.positionData).filter(pos => window.positionData[pos].completed) : [];
-    if (completedPositions.length > 0) {
-        summaryHTML += `
-            <div class="sp-order-actions">
-                <button class="sp-order-info-btn" onclick="showOrderInfo()">
-                    <i class="fas fa-info-circle"></i> View Order Details
-                </button>
-            </div>
-        `;
-    }
-    
-    summaryContent.innerHTML = summaryHTML;
-    
-    // Set up quantity input listener
-    const quantityInput = document.getElementById('sp-quantity-input');
-    if (quantityInput) {
-        quantityInput.addEventListener('input', handleQuantityChange);
-        quantityInput.addEventListener('change', handleQuantityChange);
-    }
-}
-
-// Initialize pricing when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait a bit for the customizer to be fully loaded
-    setTimeout(() => {
-        initializePricing();
-    }, 1000);
-});
-
-// Add to Cart functionality
-async function addToCart() {
-    console.log('🛒 Adding to cart...');
-    
-    if (pricingState.isCalculating) {
-        showMessage('Please wait for pricing calculation to complete', 'warning');
-        return;
-    }
-    
-    if (pricingState.positions.length === 0) {
-        showMessage('Please upload designs for at least one position', 'warning');
-        return;
-    }
-    
-    try {
-        showMessage('Adding to cart...', 'info');
-        
-        // Create dynamic product data
-        const productData = {
-            base_product_price: pricingState.baseProductPrice,
-            positions: pricingState.positions.map(pos => ({
-                position_name: pos.positionName,
-                design_file_url: pos.designFileUrl || '',
-                color_count: pos.colorCount,
-                design_hash: pos.designHash,
-                is_new_design: pos.isNewDesign
-            })),
-            quantity: pricingState.quantity,
-            total_price: pricingState.totalPrice,
-            customer_email: 'customer@example.com' // This should come from user input
-        };
-        
-        // Call backend to create dynamic product and add to cart
-        const response = await fetch(`${getBackendUrl()}/pricing/create-dynamic-product`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productData)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            showMessage('✅ Added to cart successfully!', 'success');
-            
-            // Redirect to cart or show success message
-            if (result.cart_url) {
-                window.location.href = result.cart_url;
-            } else {
-                showMessage('Product added to cart. Proceed to checkout.', 'success');
-            }
-        } else {
-            throw new Error(result.error || 'Failed to add to cart');
-        }
-        
-    } catch (error) {
-        console.error('❌ Error adding to cart:', error);
-        showMessage('Failed to add to cart. Please try again.', 'error');
-    }
-}
