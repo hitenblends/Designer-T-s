@@ -1890,7 +1890,24 @@ async function replaceColorViaBackend(oldRgb, newRgb) {
         formData.append('new_b', newRgb.b);
         formData.append('tolerance', 50);
         // Send unique color ID - ensure it's robust
-        const colorId = state.selectedFetchedColor?.match?.uniqueId || generateUniqueColorId();
+        let colorId = state.selectedFetchedColor?.match?.uniqueId;
+        
+        // If no color ID found, try to find it in the current color matches
+        if (!colorId && state.colorMatches) {
+            const currentColor = state.colorMatches.find(match => 
+                match.rgb[0] === oldRgb[0] && 
+                match.rgb[1] === oldRgb[1] && 
+                match.rgb[2] === oldRgb[2]
+            );
+            colorId = currentColor?.uniqueId;
+        }
+        
+        // If still no color ID, generate a new one
+        if (!colorId) {
+            colorId = generateUniqueColorId();
+            console.log('⚠️ No existing color ID found, generated new one:', colorId);
+        }
+        
         formData.append('color_id', colorId);
         console.log('🆔 Sending color ID to backend:', colorId);
         console.log('✅ Form data created with values:', {
