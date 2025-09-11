@@ -1849,6 +1849,29 @@ async function resetPixelOwnership() {
     }
 }
 
+// Debug pixel ownership state
+async function debugPixelOwnership() {
+    try {
+        console.log('🔍 Debugging pixel ownership state...');
+        const backendUrl = getBackendUrl();
+        const response = await fetch(`${backendUrl}/debug-pixel-ownership`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('📊 Pixel ownership state:', data);
+            return data;
+        } else {
+            console.warn('⚠️ Failed to get pixel ownership state');
+        }
+    } catch (error) {
+        console.error('❌ Error getting pixel ownership state:', error);
+    }
+}
+
+// Make debug functions globally available
+window.debugPixelOwnership = debugPixelOwnership;
+window.resetPixelOwnership = resetPixelOwnership;
+
 // Replace color using Python backend
 async function replaceColorViaBackend(oldRgb, newRgb) {
     console.log('🎨 replaceColorViaBackend called with:', {
@@ -1992,7 +2015,11 @@ async function replaceColorViaBackend(oldRgb, newRgb) {
                 if (currentColor && currentColor[0] === newRgb.r && currentColor[1] === newRgb.g && currentColor[2] === newRgb.b) {
                     showMessage(`ℹ️ No change needed - you selected the same color.`, 'info');
                 } else {
-                    showMessage(`⚠️ No pixels changed. The selected color might not match exactly. Try a different color or increase tolerance.`, 'warning');
+                    // Debug pixel ownership state to help diagnose the issue
+                    console.log('🔍 Debugging pixel ownership state...');
+                    await debugPixelOwnership();
+                    
+                    showMessage(`⚠️ No pixels changed. This might be because the color region was not found in the tracking system. Try refreshing the page and selecting the color again.`, 'warning');
                 }
             }
         } else {
