@@ -616,9 +616,6 @@ async function extractColorsWithPalette(img) {
         const result = await response.json();
         console.log('📥 Palette matching result:', result);
         
-        // Hide loading animation
-        hideColorExtractionAnimation();
-        
         if (result.success) {
             // Merge very similar detected colors (minor colors merge into the closest higher-percentage color)
             const merged = mergeSimilarDetectedColors(result.matches, 18); // threshold in RGB distance
@@ -639,6 +636,8 @@ async function extractColorsWithPalette(img) {
             
             // Store pixel coordinates for each detected color
             console.log('📝 Storing pixel coordinates for detected colors...');
+            updateColorExtractionMessage('Storing pixel coordinates...');
+            
             for (const colorMatch of state.colorMatches) {
                 if (colorMatch.detected_rgb) {
                     const success = await storeColorPixels(colorMatch.detected_rgb, colorMatch.uniqueId);
@@ -649,6 +648,9 @@ async function extractColorsWithPalette(img) {
                     }
                 }
             }
+            
+            // Hide loading animation AFTER pixel storage is complete
+            hideColorExtractionAnimation();
             
             updateColorPalette();
             updateDetectedColors(merged.length, result.total_colors_detected);
@@ -736,6 +738,8 @@ async function extractColorsFrontendFallback(img) {
     
     // Store pixel coordinates for each detected color (fallback)
     console.log('📝 Storing pixel coordinates for detected colors (fallback)...');
+    updateColorExtractionMessage('Storing pixel coordinates...');
+    
     for (const colorMatch of state.colorMatches) {
         if (colorMatch.detected_rgb) {
             const success = await storeColorPixels(colorMatch.detected_rgb, colorMatch.uniqueId);
@@ -746,6 +750,9 @@ async function extractColorsFrontendFallback(img) {
             }
         }
     }
+    
+    // Hide loading animation AFTER pixel storage is complete (fallback)
+    hideColorExtractionAnimation();
     
     updateColorPalette();
     updateDetectedColors(0, state.colorMatches.length);
@@ -2688,6 +2695,16 @@ function showColorExtractionAnimation() {
     // Show animation
     animationContainer.style.display = 'flex';
     animationContainer.style.opacity = '1';
+}
+
+function updateColorExtractionMessage(message) {
+    const animationContainer = document.querySelector('.color-extraction-animation');
+    if (animationContainer) {
+        const textElement = animationContainer.querySelector('.animation-text');
+        if (textElement) {
+            textElement.textContent = message;
+        }
+    }
 }
 
 function hideColorExtractionAnimation() {
