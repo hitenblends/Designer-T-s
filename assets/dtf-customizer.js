@@ -664,7 +664,7 @@ function showAnalysisProgress(message, type = 'info') {
         existingProgress.remove();
     }
     
-    // Create progress indicator with enhanced styling
+    // Create progress indicator with customizer theme styling
     const progressDiv = document.createElement('div');
     progressDiv.className = 'analysis-progress';
     progressDiv.style.cssText = `
@@ -672,34 +672,34 @@ function showAnalysisProgress(message, type = 'info') {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 30px 40px;
-        border-radius: 15px;
+        border-radius: 16px;
         text-align: center;
         z-index: 1000;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
         min-width: 350px;
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
     `;
     
-    // Add enhanced spinner animation
+    // Add enhanced spinner animation with customizer colors
     const spinner = document.createElement('div');
     spinner.style.cssText = `
         width: 50px;
         height: 50px;
         border: 4px solid rgba(255, 255, 255, 0.2);
-        border-top: 4px solid #4CAF50;
-        border-right: 4px solid #2196F3;
+        border-top: 4px solid #ffffff;
+        border-right: 4px solid #f8f9fa;
         border-radius: 50%;
         animation: spin 1.2s linear infinite;
         margin: 0 auto 20px auto;
         position: relative;
     `;
     
-    // Add pulsing dot in center
+    // Add pulsing dot in center with customizer theme
     const centerDot = document.createElement('div');
     centerDot.style.cssText = `
         position: absolute;
@@ -708,9 +708,10 @@ function showAnalysisProgress(message, type = 'info') {
         transform: translate(-50%, -50%);
         width: 8px;
         height: 8px;
-        background: #4CAF50;
+        background: #ffffff;
         border-radius: 50%;
         animation: pulse 1.5s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     `;
     spinner.appendChild(centerDot);
     
@@ -782,9 +783,10 @@ function showAnalysisProgress(message, type = 'info') {
     const progressBar = document.createElement('div');
     progressBar.style.cssText = `
         height: 100%;
-        background: linear-gradient(90deg, #4CAF50, #2196F3);
+        background: linear-gradient(90deg, #ffffff, #f8f9fa);
         border-radius: 2px;
         animation: progressBar 2s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     `;
     progressBarContainer.appendChild(progressBar);
     
@@ -873,42 +875,44 @@ function showAnalysisResults(analysis) {
     // Remove existing progress
     hideAnalysisProgress();
     
-    // Create results display
+    // Create results display with customizer theme
     const resultsDiv = document.createElement('div');
     resultsDiv.className = 'analysis-results';
     resultsDiv.style.cssText = `
         position: absolute;
         top: 20px;
         right: 20px;
-        background: rgba(0, 0, 0, 0.9);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 15px;
-        border-radius: 8px;
-        font-family: Arial, sans-serif;
+        padding: 20px;
+        border-radius: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         font-size: 14px;
         z-index: 1000;
-        max-width: 300px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        max-width: 320px;
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
     `;
     
     const qualityScore = Math.round(analysis.quality_score || 0);
     const gradientScore = Math.round(analysis.gradient_score || 0);
     
     let statusIcon = '✅';
-    let statusColor = '#4CAF50';
+    let statusColor = '#ffffff';
     let statusText = 'High Quality';
     
     if (analysis.decision === 'PROCESS') {
         statusIcon = '🎨';
-        statusColor = '#FF9800';
+        statusColor = '#FFB81C'; // Athletic Gold from customizer palette
         statusText = 'Needs Processing';
     } else if (analysis.decision === 'SKIP_GRADIENT') {
         statusIcon = '🌈';
-        statusColor = '#9C27B0';
+        statusColor = '#FF1493'; // Super Fuschia from customizer palette
         statusText = 'Gradient Image';
     } else if (analysis.decision === 'SKIP_HIGH_QUALITY') {
         statusIcon = '✨';
-        statusColor = '#4CAF50';
+        statusColor = '#87CEEB'; // Columbia Blue from customizer palette
         statusText = 'Perfect Quality';
     }
     
@@ -917,29 +921,32 @@ function showAnalysisResults(analysis) {
             <span style="font-size: 20px; margin-right: 8px;">${statusIcon}</span>
             <span style="font-weight: bold; color: ${statusColor};">${statusText}</span>
         </div>
-        <div style="margin-bottom: 8px;">
-            <div style="display: flex; justify-content: space-between;">
-                <span>Quality Score:</span>
-                <span style="color: ${qualityScore >= 70 ? '#4CAF50' : qualityScore >= 40 ? '#FF9800' : '#F44336'};">${qualityScore}/100</span>
+        <div style="margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-weight: 500;">Quality Score:</span>
+                <span style="color: ${qualityScore >= 70 ? '#87CEEB' : qualityScore >= 40 ? '#FFB81C' : '#FF6B35'}; font-weight: 600;">${qualityScore}/100</span>
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span>Gradient Score:</span>
-                <span style="color: ${gradientScore >= 40 ? '#F44336' : '#4CAF50'};">${gradientScore}/100</span>
+                <span style="font-weight: 500;">Gradient Score:</span>
+                <span style="color: ${gradientScore >= 40 ? '#FF6B35' : '#87CEEB'}; font-weight: 600;">${gradientScore}/100</span>
             </div>
         </div>
-        <div style="font-size: 12px; color: #ccc; margin-top: 10px; padding-top: 10px; border-top: 1px solid #333;">
+        <div style="font-size: 12px; color: rgba(255, 255, 255, 0.8); margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.2);">
             ${analysis.reason || 'Analysis completed'}
         </div>
-        <div style="text-align: center; margin-top: 10px;">
+        <div style="text-align: center; margin-top: 15px;">
             <button onclick="this.parentElement.parentElement.remove()" style="
-                background: #333;
+                background: rgba(255, 255, 255, 0.2);
                 color: white;
-                border: none;
-                padding: 5px 15px;
-                border-radius: 4px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                padding: 8px 20px;
+                border-radius: 8px;
                 cursor: pointer;
                 font-size: 12px;
-            ">Close</button>
+                font-weight: 500;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">Close</button>
         </div>
     `;
     
