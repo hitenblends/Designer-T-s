@@ -70,68 +70,66 @@ let originalImageData = null;
 let currentPopupColor = null;
 let selectedPaletteColor = null;
 
-// Color palette for popup
+// Designer T's Stock Ink Colors Palette
+const DESIGNER_T_COLORS = [
+    // Row 1: Yellows, Oranges, and a Red
+    { name: 'LEMON YELLOW', hex: '#FFE135', rgb: [255, 225, 53], pms: 'PMS 102 C' },
+    { name: 'ATHLETIC GOLD', hex: '#FFB81C', rgb: [255, 184, 28], pms: 'PMS 1235 C' },
+    { name: 'DOLPHIN ORANGE', hex: '#FF6B35', rgb: [255, 107, 53], pms: 'PMS 1585 C' },
+    { name: 'BRIGHT ORANGE', hex: '#FF4500', rgb: [255, 69, 0], pms: 'PMS 021 C' },
+    { name: 'TEXAS ORANGE', hex: '#FF8C00', rgb: [255, 140, 0], pms: 'PMS 158 C' },
+    { name: 'SUPER RED', hex: '#DC143C', rgb: [220, 20, 60], pms: 'PMS 485 C' },
+    
+    // Row 2: Reds, Fuschia, and Burgundies
+    { name: 'NATIONAL RED', hex: '#B22222', rgb: [178, 34, 34], pms: 'PMS 2035 C' },
+    { name: 'STOCK 186 RED', hex: '#C41E3A', rgb: [196, 30, 58], pms: 'PMS 186 C' },
+    { name: 'SCARLET RED', hex: '#B22222', rgb: [178, 34, 34], pms: 'PMS 187 C' },
+    { name: 'SUPER FUSCHIA', hex: '#FF1493', rgb: [255, 20, 147], pms: 'PMS 248 C' },
+    { name: 'BURGUNDY', hex: '#800020', rgb: [128, 0, 32], pms: 'PMS 209 C' },
+    { name: 'RUSSELL CARDINAL', hex: '#8B0000', rgb: [139, 0, 0], pms: 'PMS 207 C' },
+    
+    // Row 3: Pinks, Purples, and Blues
+    { name: 'RHODAMINE RED', hex: '#E6007E', rgb: [230, 0, 126], pms: 'PMS RHODAMINE RED' },
+    { name: 'EPIC PURPLE', hex: '#6A0DAD', rgb: [106, 13, 173], pms: 'PMS 2665 C' },
+    { name: 'STOCK VIOLET C', hex: '#4B0082', rgb: [75, 0, 130], pms: 'PMS VIOLET C' },
+    { name: 'RUSSELL PURPLE', hex: '#2E0854', rgb: [46, 8, 84], pms: 'PMS 2755 C' },
+    { name: 'NAVY', hex: '#000080', rgb: [0, 0, 128], pms: 'PMS 2766 C' },
+    { name: 'ROYAL BLUE', hex: '#0033A0', rgb: [0, 51, 160], pms: 'PMS 293 C' },
+    
+    // Row 4: Blues and Greens
+    { name: 'COLUMBIA BLUE', hex: '#87CEEB', rgb: [135, 206, 235], pms: 'PMS 646 C' },
+    { name: 'CONTACT BLUE', hex: '#0099CC', rgb: [0, 153, 204], pms: 'PMS 299 C' },
+    { name: 'AQUA', hex: '#00FFFF', rgb: [0, 255, 255], pms: 'PMS 326 C' },
+    { name: 'DALLAS GREEN', hex: '#228B22', rgb: [34, 139, 34], pms: 'PMS 356 C' },
+    { name: 'TRAFFIC GREEN', hex: '#00FF00', rgb: [0, 255, 0], pms: 'PMS 802 C' },
+    { name: 'DARK GREEN', hex: '#006400', rgb: [0, 100, 0], pms: 'PMS 3435 C' },
+    
+    // Row 5: Greys, Browns, and Shimmer Textures
+    { name: 'RUSSELL GREY', hex: '#808080', rgb: [128, 128, 128], pms: 'PMS 427 C' },
+    { name: 'DARK GREY', hex: '#696969', rgb: [105, 105, 105], pms: 'PMS 429 C' },
+    { name: 'TAN', hex: '#D2B48C', rgb: [210, 180, 140], pms: 'PMS 729 C' },
+    { name: 'DARK BROWN', hex: '#654321', rgb: [101, 67, 33], pms: 'PMS 4975 C' },
+    { name: 'SILVER SHIMMER', hex: '#C0C0C0', rgb: [192, 192, 192], pms: 'PMS 877 C', shimmer: true },
+    { name: 'GOLD SHIMMER', hex: '#FFD700', rgb: [255, 215, 0], pms: 'PMS 871 C', shimmer: true },
+    
+    // Row 6: Super FLO (Fluorescent) Colors
+    { name: 'ELECTRIC Pink', hex: '#FF1493', rgb: [255, 20, 147], pms: 'PMS 812 C', fluorescent: true },
+    { name: 'super FLO yellow', hex: '#FFFF00', rgb: [255, 255, 0], pms: 'PMS 803 C', fluorescent: true },
+    { name: 'super FLO Orange', hex: '#FF4500', rgb: [255, 69, 0], pms: 'PMS 805 C', fluorescent: true },
+    { name: 'super FLO Pink', hex: '#FF69B4', rgb: [255, 105, 180], pms: 'PMS 806 C', fluorescent: true },
+    { name: 'super FLO blue', hex: '#00BFFF', rgb: [0, 191, 255], pms: 'PMS 801 C', fluorescent: true }
+];
+
+// Color palette for popup (using Designer T's colors + custom option)
 const POPUP_COLOR_PALETTE = [
     // Special: Transparent
     { name: 'Transparent', hex: 'transparent', rgb: [0, 0, 0], isTransparent: true },
     
-    // Whites & Grays
-    { name: 'Pure White', hex: '#ffffff', rgb: [255, 255, 255] },
-    { name: 'White', hex: '#fefefe', rgb: [254, 254, 254] },
-    { name: 'Black', hex: '#000000', rgb: [0, 0, 0] },
-    { name: 'Charcoal', hex: '#646a69', rgb: [100, 106, 105] },
-    { name: 'Gray', hex: '#99999a', rgb: [153, 153, 154] },
-    { name: 'Ice Gray', hex: '#bdbbbb', rgb: [189, 187, 187] },
+    // Designer T's Stock Colors
+    ...DESIGNER_T_COLORS,
     
-    // Reds & Pinks
-    { name: 'Vibrant Red', hex: '#ef3340', rgb: [239, 51, 64] },
-    { name: 'Hot Pink', hex: '#ff0091', rgb: [255, 0, 145] },
-    { name: 'Pink', hex: '#ffafbe', rgb: [255, 175, 190] },
-    { name: 'Charity Pink', hex: '#ff8cbe', rgb: [255, 140, 190] },
-    { name: 'Magenta', hex: '#b4468c', rgb: [180, 70, 140] },
-    { name: 'Maroon', hex: '#7d2d3c', rgb: [125, 45, 60] },
-    
-    // Blues
-    { name: 'Vibrant Blue', hex: '#0047bb', rgb: [0, 71, 187] },
-    { name: 'Blue', hex: '#005fa0', rgb: [0, 95, 160] },
-    { name: 'Royal', hex: '#003c82', rgb: [0, 60, 130] },
-    { name: 'Navy', hex: '#00325a', rgb: [0, 50, 90] },
-    { name: 'Sky Blue', hex: '#23aff0', rgb: [35, 175, 240] },
-    { name: 'Baby Blue', hex: '#91beeb', rgb: [145, 190, 235] },
-    
-    // Greens
-    { name: 'Green', hex: '#3ca51e', rgb: [60, 165, 30] },
-    { name: 'Kelly', hex: '#006937', rgb: [0, 105, 55] },
-    { name: 'Forest', hex: '#2d5032', rgb: [45, 80, 50] },
-    { name: 'Vibrant Lime', hex: '#a5e100', rgb: [165, 225, 0] },
-    { name: 'Mint', hex: '#a2e4b8', rgb: [162, 228, 184] },
-    
-    // Yellows & Oranges
-    { name: 'Yellow', hex: '#ffdc00', rgb: [255, 220, 0] },
-    { name: 'Gold', hex: '#ffc828', rgb: [255, 200, 40] },
-    { name: 'Athletic Gold', hex: '#ffb419', rgb: [255, 180, 25] },
-    { name: 'Lemon', hex: '#faeb5f', rgb: [250, 235, 95] },
-    { name: 'Old Gold', hex: '#8c6923', rgb: [140, 105, 35] },
-    { name: 'Orange', hex: '#fa4b0f', rgb: [250, 75, 15] },
-    { name: 'Team Orange', hex: '#ff8200', rgb: [255, 130, 0] },
-    
-    // Purples & Violets
-    { name: 'Purple', hex: '#5a3287', rgb: [90, 50, 135] },
-    { name: 'Plum', hex: '#641e64', rgb: [100, 30, 100] },
-    { name: 'Grape', hex: '#bb29bb', rgb: [187, 41, 187] },
-    { name: 'Lavender', hex: '#aa7dc8', rgb: [170, 125, 200] },
-    
-    // Browns & Tans
-    { name: 'Deep Brown', hex: '#402d1c', rgb: [64, 45, 28] },
-    { name: 'Brown', hex: '#82502d', rgb: [130, 80, 45] },
-    { name: 'Bronze', hex: '#a66f41', rgb: [166, 111, 65] },
-    { name: 'Sand', hex: '#cda073', rgb: [205, 160, 115] },
-    { name: 'Apricot', hex: '#ffbe78', rgb: [255, 190, 120] },
-    { name: 'Warm Ivory', hex: '#eed8ac', rgb: [238, 216, 172] },
-    
-    // Teals & Cyans
-    { name: 'Teal', hex: '#007378', rgb: [0, 115, 120] },
-    { name: 'Turquoise', hex: '#009bb4', rgb: [0, 155, 180] }
+    // Custom Color Placeholder (will be added dynamically)
+    { name: 'Custom Color', hex: '#000000', rgb: [0, 0, 0], isCustom: true }
 ];
 
 // Initialize the application
@@ -398,13 +396,7 @@ function setupEventListeners() {
         });
     }
     
-    // Download button
-    const downloadBtn = document.getElementById('dtf-download-btn');
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', () => {
-            downloadEditedImage();
-        });
-    }
+    // Download button removed - no longer needed
     
     // Edge sensitivity slider
     const sensitivitySlider = document.getElementById('dtf-edge-sensitivity');
@@ -533,6 +525,152 @@ function updateBackendStatus(available, data = null) {
     }
 }
 
+// =============================================================================
+// IMAGE PROCESSOR INTEGRATION FUNCTIONS
+// =============================================================================
+
+// Analyze image quality and get processing recommendation
+async function analyzeImageQuality(file) {
+    try {
+        console.log('🔍 [QUALITY ANALYSIS] Analyzing image quality...');
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        const backendUrl = getBackendUrl();
+        const response = await fetch(`${backendUrl}/analyze-image-quality`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Quality analysis failed: ${response.status} - ${errorText}`);
+        }
+        
+        const result = await response.json();
+        console.log('📊 [QUALITY ANALYSIS] Result:', result);
+        
+        return result;
+        
+    } catch (error) {
+        console.error('❌ [QUALITY ANALYSIS] Error:', error);
+        throw error;
+    }
+}
+
+// Preprocess image if needed
+async function preprocessImageIfNeeded(file) {
+    try {
+        console.log('🎨 [PREPROCESSING] Applying intelligent preprocessing...');
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        const backendUrl = getBackendUrl();
+        const response = await fetch(`${backendUrl}/preprocess-image`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Preprocessing failed: ${response.status} - ${errorText}`);
+        }
+        
+        const result = await response.json();
+        console.log('🎨 [PREPROCESSING] Result:', result);
+        
+        if (result.success && result.image_base64) {
+            // Convert base64 back to file
+            const byteCharacters = atob(result.image_base64);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            return new File([byteArray], file.name, { type: file.type });
+        }
+        
+        return file; // Return original if processing failed
+        
+    } catch (error) {
+        console.error('❌ [PREPROCESSING] Error:', error);
+        return file; // Return original file if preprocessing fails
+    }
+}
+
+// Get processing recommendation without processing
+async function getProcessingRecommendation(file) {
+    try {
+        console.log('🔍 [RECOMMENDATION] Getting processing recommendation...');
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        const backendUrl = getBackendUrl();
+        const response = await fetch(`${backendUrl}/get-processing-recommendation`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Recommendation failed: ${response.status} - ${errorText}`);
+        }
+        
+        const result = await response.json();
+        console.log('📋 [RECOMMENDATION] Result:', result);
+        
+        return result;
+        
+    } catch (error) {
+        console.error('❌ [RECOMMENDATION] Error:', error);
+        throw error;
+    }
+}
+
+// Show processing status to user
+function showProcessingStatus(analysis) {
+    const statusMessages = {
+        'SKIP_PROFESSIONAL_WATER_TEXTURE': {
+            icon: '✅',
+            message: 'Professional water texture image detected - no processing needed',
+            type: 'success'
+        },
+        'SKIP_GRADIENT': {
+            icon: '⚠️',
+            message: 'Gradient image detected - skipping color separation processing',
+            type: 'warning'
+        },
+        'SKIP_HIGH_QUALITY': {
+            icon: '✅',
+            message: 'High-quality image detected - no processing needed',
+            type: 'success'
+        },
+        'PROCESS': {
+            icon: '🎨',
+            message: 'Image will be optimized for better color extraction',
+            type: 'info'
+        }
+    };
+    
+    const status = statusMessages[analysis.decision] || {
+        icon: '❓',
+        message: 'Processing status unknown',
+        type: 'info'
+    };
+    
+    showMessage(`${status.icon} ${status.message}`, status.type);
+    
+    // Show detailed analysis in console
+    console.log('📊 [PROCESSING STATUS] Detailed Analysis:');
+    console.log(`   Quality Score: ${analysis.quality_score}/100`);
+    console.log(`   Gradient Score: ${analysis.gradient_score}/100`);
+    console.log(`   Decision: ${analysis.decision}`);
+    console.log(`   Reason: ${analysis.reason}`);
+}
+
 // Handle file upload
 async function handleFileUpload(event) {
     const file = event.target.files[0];
@@ -541,8 +679,26 @@ async function handleFileUpload(event) {
     console.log('📁 File selected:', file.name, file.type);
     
     try {
-        // Load image
-        const imageUrl = URL.createObjectURL(file);
+        // Step 1: Analyze image quality and get processing recommendation
+        console.log('🔍 [STEP 1] Analyzing image quality...');
+        showMessage('🔍 Analyzing image quality...', 'info');
+        
+        const analysis = await getProcessingRecommendation(file);
+        showProcessingStatus(analysis);
+        
+        // Step 2: Apply preprocessing if needed
+        let processedFile = file;
+        if (analysis.decision === 'PROCESS') {
+            console.log('🎨 [STEP 2] Applying preprocessing...');
+            showMessage('🎨 Optimizing image for better color extraction...', 'info');
+            processedFile = await preprocessImageIfNeeded(file);
+        } else {
+            console.log('⏭️ [STEP 2] Skipping preprocessing - using original image');
+        }
+        
+        // Step 3: Load image (original or processed)
+        console.log('📸 [STEP 3] Loading image...');
+        const imageUrl = URL.createObjectURL(processedFile);
         const img = new Image();
         
         img.onload = async () => {
@@ -556,8 +712,14 @@ async function handleFileUpload(event) {
             // Reset pixel ownership tracking for new image
             await resetPixelOwnership();
             
-            // Extract colors using palette matching
+            // Step 4: Extract colors using palette matching
+            console.log('🎨 [STEP 4] Extracting colors...');
             await extractColorsWithPalette(img);
+            
+            // Show permanent download button since we have an image
+            if (typeof window.showPermanentDownloadButton === 'function') {
+                window.showPermanentDownloadButton();
+            }
             
             // Background removal is now optional - user must click the button manually
         };
@@ -565,8 +727,8 @@ async function handleFileUpload(event) {
         img.src = imageUrl;
         
     } catch (error) {
-        console.error('❌ Error loading image:', error);
-        showMessage('Error loading image. Please try again.', 'error');
+        console.error('❌ Error in image processing workflow:', error);
+        showMessage('Error processing image. Please try again.', 'error');
     }
 }
 
@@ -1124,7 +1286,7 @@ function updatePrintSize(img) {
                     <button class="dtf-lock-aspect" id="dtf-lock-aspect" title="Lock aspect ratio">
                         <i class="fas fa-lock"></i>
                     </button>
-                </div>
+            </div>
             </div>
             <div class="dimensions-content">
                 <div class="dimension-item" style="animation-delay: 0.1s;">
@@ -1476,6 +1638,13 @@ async function applyNewSizeToImage() {
     const newImg = new Image();
     await new Promise(res => { newImg.onload = () => res(); newImg.src = dataUrl; });
     state.image = newImg;
+    
+    // Also update global DTF_STATE if it exists
+    if (typeof window.DTF_STATE !== 'undefined') {
+        window.DTF_STATE.image = newImg;
+        console.log('✅ Updated window.DTF_STATE.image with resized image:', newImg.width, 'x', newImg.height);
+    }
+    
     state.zoom = 1; state.pan = { x: 0, y: 0 };
     updatePreview();
     updatePrintSize(newImg);
@@ -1612,17 +1781,178 @@ function showMessage(message, type = 'info') {
     
     const messageElement = document.createElement('div');
     messageElement.className = `dtf-message dtf-${type}`;
+    
+    // Check if this is a success message related to design changes
+    const isDesignChange = type === 'success' && (
+        message.includes('Color changed') || 
+        message.includes('Color replaced') || 
+        message.includes('Size updated') ||
+        message.includes('Background removed') ||
+        message.includes('pixels changed')
+    );
+    
+    if (isDesignChange) {
+        messageElement.innerHTML = `
+            <div class="dtf-message-content">
+                <span class="dtf-message-text">${message}</span>
+            </div>
+            <button class="dtf-preview-download-btn" onclick="downloadPreviewImage()">
+                <i class="fas fa-download"></i> Preview
+            </button>
+        `;
+        
+        // Also show the permanent download button
+        if (typeof window.showPermanentDownloadButton === 'function') {
+            window.showPermanentDownloadButton();
+        }
+    } else {
     messageElement.textContent = message;
+    }
     
     messageContainer.appendChild(messageElement);
     
-    // Auto-remove after 5 seconds
+    // Auto-remove after 8 seconds for design changes (longer to allow download), 5 seconds for others
+    const timeout = isDesignChange ? 8000 : 5000;
     setTimeout(() => {
         if (messageElement.parentNode) {
             messageElement.parentNode.removeChild(messageElement);
         }
-    }, 5000);
+    }, timeout);
 }
+
+// Download preview image function
+function downloadPreviewImage() {
+    console.log('💾 Download preview button clicked');
+    
+    // Priority order: DTF_STATE (most up-to-date) > local state > canvas
+    let image = null;
+    let source = '';
+    
+    // First try global DTF_STATE (this gets updated with resized images)
+    if (typeof window.DTF_STATE !== 'undefined' && window.DTF_STATE.image) {
+        image = window.DTF_STATE.image;
+        source = 'DTF_STATE';
+    } 
+    // Then try local state
+    else if (state.image) {
+        image = state.image;
+        source = 'local state';
+    }
+    // Then try to get from canvas (for processed images)
+    else {
+        const canvas = document.getElementById('dtf-preview-canvas');
+        if (canvas && canvas.width > 0 && canvas.height > 0) {
+            console.log('🎨 Using canvas as image source, dimensions:', canvas.width, 'x', canvas.height);
+            downloadCanvasAsFile(canvas, 'dtf-preview');
+            return;
+        }
+    }
+    
+    if (!image) {
+        console.log('❌ No image to download');
+        showMessage('Please upload an image first!', 'error');
+        return;
+    }
+    
+    console.log('✅ Using image from', source, 'dimensions:', image.width, 'x', image.height);
+    
+    try {
+        // Create a canvas to draw the image
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size to match the image
+        canvas.width = image.width;
+        canvas.height = image.height;
+        
+        // Draw the image on the canvas
+        ctx.drawImage(image, 0, 0);
+        
+        // Convert canvas to blob and download
+        canvas.toBlob((blob) => {
+            if (!blob) {
+                console.error('❌ Failed to create blob from canvas');
+                showMessage('Failed to prepare image for download', 'error');
+                return;
+            }
+            
+            // Create download link
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            
+            // Generate filename with timestamp
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+            const filename = `dtf-preview-${timestamp}.png`;
+            link.download = filename;
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up
+            URL.revokeObjectURL(url);
+            
+            console.log('✅ Preview image downloaded successfully:', filename);
+            showMessage(`✅ Preview downloaded as ${filename}`, 'success');
+        }, 'image/png', 1.0); // High quality PNG
+        
+    } catch (error) {
+        console.error('❌ Download error:', error);
+        showMessage('Download failed. Please try again.', 'error');
+    }
+}
+
+// Helper function to download canvas as file
+function downloadCanvasAsFile(canvas, prefix = 'canvas') {
+    try {
+        // Convert canvas to blob and download
+        canvas.toBlob((blob) => {
+            if (!blob) {
+                console.error('❌ Failed to create blob from canvas');
+                showMessage('Failed to prepare image for download', 'error');
+                return;
+            }
+            
+            // Create download link
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            
+            // Generate filename with timestamp
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+            const filename = `${prefix}-${timestamp}.png`;
+            link.download = filename;
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up
+            URL.revokeObjectURL(url);
+            
+            console.log('✅ Preview image downloaded successfully:', filename);
+            showMessage(`✅ Preview downloaded as ${filename}`, 'success');
+        }, 'image/png', 1.0); // High quality PNG
+        
+    } catch (error) {
+        console.error('❌ Download error:', error);
+        showMessage('Download failed. Please try again.', 'error');
+    }
+}
+
+// Make downloadPreviewImage globally available
+window.downloadPreviewImage = downloadPreviewImage;
+
+// Make custom color picker functions globally available
+window.openCustomColorPicker = openCustomColorPicker;
+window.closeCustomColorPicker = closeCustomColorPicker;
+window.updateCustomColorFromRGB = updateCustomColorFromRGB;
+window.updateCustomColorFromHex = updateCustomColorFromHex;
+window.updateCustomColorFromPicker = updateCustomColorFromPicker;
+window.applyCustomColor = applyCustomColor;
 
 // Utility functions
 function rgbToHex(r, g, b) {
@@ -2369,8 +2699,20 @@ function createPopupColorPalette() {
         const colorElement = document.createElement('div');
         colorElement.className = 'palette-color';
         
+        // Handle custom color button specially
+        if (color.isCustom) {
+            colorElement.innerHTML = '<i class="fas fa-plus"></i>';
+            colorElement.style.backgroundColor = '#f8f9fa';
+            colorElement.style.border = '2px dashed #6c757d';
+            colorElement.style.color = '#6c757d';
+            colorElement.style.display = 'flex';
+            colorElement.style.alignItems = 'center';
+            colorElement.style.justifyContent = 'center';
+            colorElement.style.fontSize = '16px';
+            colorElement.title = 'Add Custom Color';
+        }
         // Handle transparent color specially
-        if (color.isTransparent) {
+        else if (color.isTransparent) {
             colorElement.style.background = 'linear-gradient(45deg, #f0f0f0 25%, transparent 25%), linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f0f0f0 75%), linear-gradient(-45deg, transparent 75%, #f0f0f0 75%)';
             colorElement.style.backgroundSize = '10px 10px';
             colorElement.style.backgroundPosition = '0 0, 0 5px, 5px -5px, -5px 0px';
@@ -2389,7 +2731,11 @@ function createPopupColorPalette() {
         }
         
         colorElement.addEventListener('click', () => {
-            selectPopupPaletteColor(color, index);
+            if (color.isCustom) {
+                openCustomColorPicker();
+            } else {
+                selectPopupPaletteColor(color, index);
+            }
         });
         
         paletteGrid.appendChild(colorElement);
@@ -2423,6 +2769,397 @@ function selectPopupPaletteColor(color, index) {
     
     // Update preview
     updatePopupPreview(color);
+}
+
+// Custom Color Picker Functions
+function openCustomColorPicker() {
+    console.log('🎨 Opening custom color picker');
+    
+    // Create custom color picker popup
+    const customColorPopup = document.createElement('div');
+    customColorPopup.id = 'custom-color-picker-popup';
+    customColorPopup.className = 'custom-color-picker-popup';
+    customColorPopup.innerHTML = `
+        <div class="custom-color-picker-content">
+            <div class="custom-color-picker-header">
+                <h3><i class="fas fa-palette"></i> Custom Color</h3>
+                <button class="custom-color-picker-close" onclick="closeCustomColorPicker()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="custom-color-picker-body">
+                <!-- Color Preview -->
+                <div class="custom-color-preview-section">
+                    <div class="custom-color-preview-box" id="custom-color-preview-box"></div>
+                    <div class="custom-color-preview-info">
+                        <div class="custom-color-preview-hex" id="custom-color-hex-display">#000000</div>
+                        <div class="custom-color-preview-rgb" id="custom-color-rgb-display">RGB(0, 0, 0)</div>
+                    </div>
+                </div>
+                
+                <!-- Color Input Methods -->
+                <div class="custom-color-inputs">
+                    <!-- RGB Inputs -->
+                    <div class="color-input-group">
+                        <label>RGB Values:</label>
+                        <div class="rgb-inputs">
+                            <div class="rgb-input-item">
+                                <label>R:</label>
+                                <input type="number" id="custom-color-r" min="0" max="255" value="0" onchange="updateCustomColorFromRGB()">
+                            </div>
+                            <div class="rgb-input-item">
+                                <label>G:</label>
+                                <input type="number" id="custom-color-g" min="0" max="255" value="0" onchange="updateCustomColorFromRGB()">
+                            </div>
+                            <div class="rgb-input-item">
+                                <label>B:</label>
+                                <input type="number" id="custom-color-b" min="0" max="255" value="0" onchange="updateCustomColorFromRGB()">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hex Input -->
+                    <div class="color-input-group">
+                        <label>Hex Value:</label>
+                        <input type="text" id="custom-color-hex" value="#000000" placeholder="#000000" onchange="updateCustomColorFromHex()">
+                    </div>
+                    
+                    <!-- Color Picker -->
+                    <div class="color-input-group">
+                        <label>Color Picker:</label>
+                        <input type="color" id="custom-color-picker" value="#000000" onchange="updateCustomColorFromPicker()">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="custom-color-picker-actions">
+                <button class="custom-color-picker-cancel" onclick="closeCustomColorPicker()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button class="custom-color-picker-apply" onclick="applyCustomColor()">
+                    <i class="fas fa-check"></i> Apply Color
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Add to page
+    document.body.appendChild(customColorPopup);
+    
+    // Add CSS styles
+    addCustomColorPickerStyles();
+    
+    // Initialize with current color if available
+    if (currentPopupColor) {
+        const rgb = currentPopupColor.detected_rgb || [0, 0, 0];
+        document.getElementById('custom-color-r').value = rgb[0];
+        document.getElementById('custom-color-g').value = rgb[1];
+        document.getElementById('custom-color-b').value = rgb[2];
+        updateCustomColorFromRGB();
+    }
+}
+
+function closeCustomColorPicker() {
+    const popup = document.getElementById('custom-color-picker-popup');
+    if (popup) {
+        popup.remove();
+    }
+}
+
+function updateCustomColorFromRGB() {
+    const r = parseInt(document.getElementById('custom-color-r').value) || 0;
+    const g = parseInt(document.getElementById('custom-color-g').value) || 0;
+    const b = parseInt(document.getElementById('custom-color-b').value) || 0;
+    
+    const hex = rgbToHex(r, g, b);
+    document.getElementById('custom-color-hex').value = hex;
+    document.getElementById('custom-color-picker').value = hex;
+    
+    updateCustomColorPreview(r, g, b, hex);
+}
+
+function updateCustomColorFromHex() {
+    const hex = document.getElementById('custom-color-hex').value;
+    if (hex.match(/^#[0-9A-Fa-f]{6}$/)) {
+        const rgb = hexToRgb(hex);
+        document.getElementById('custom-color-r').value = rgb.r;
+        document.getElementById('custom-color-g').value = rgb.g;
+        document.getElementById('custom-color-b').value = rgb.b;
+        document.getElementById('custom-color-picker').value = hex;
+        
+        updateCustomColorPreview(rgb.r, rgb.g, rgb.b, hex);
+    }
+}
+
+function updateCustomColorFromPicker() {
+    const hex = document.getElementById('custom-color-picker').value;
+    document.getElementById('custom-color-hex').value = hex;
+    
+    const rgb = hexToRgb(hex);
+    document.getElementById('custom-color-r').value = rgb.r;
+    document.getElementById('custom-color-g').value = rgb.g;
+    document.getElementById('custom-color-b').value = rgb.b;
+    
+    updateCustomColorPreview(rgb.r, rgb.g, rgb.b, hex);
+}
+
+function updateCustomColorPreview(r, g, b, hex) {
+    document.getElementById('custom-color-preview-box').style.backgroundColor = hex;
+    document.getElementById('custom-color-hex-display').textContent = hex.toUpperCase();
+    document.getElementById('custom-color-rgb-display').textContent = `RGB(${r}, ${g}, ${b})`;
+}
+
+function applyCustomColor() {
+    const r = parseInt(document.getElementById('custom-color-r').value) || 0;
+    const g = parseInt(document.getElementById('custom-color-g').value) || 0;
+    const b = parseInt(document.getElementById('custom-color-b').value) || 0;
+    const hex = rgbToHex(r, g, b);
+    
+    const customColor = {
+        name: 'Custom Color',
+        hex: hex,
+        rgb: [r, g, b],
+        isCustom: true
+    };
+    
+    console.log('🎨 Custom color applied:', customColor);
+    
+    // Select the custom color
+    selectedPaletteColor = customColor;
+    
+    // Update preview
+    updatePopupPreview(customColor);
+    
+    // Close popup
+    closeCustomColorPicker();
+}
+
+// Helper functions for color conversion
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+}
+
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+function addCustomColorPickerStyles() {
+    if (document.getElementById('custom-color-picker-styles')) return;
+    
+    const styles = document.createElement('style');
+    styles.id = 'custom-color-picker-styles';
+    styles.textContent = `
+        .custom-color-picker-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        
+        .custom-color-picker-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .custom-color-picker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .custom-color-picker-header h3 {
+            margin: 0;
+            color: #495057;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .custom-color-picker-header h3 i {
+            margin-right: 8px;
+            color: #6c757d;
+        }
+        
+        .custom-color-picker-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #6c757d;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .custom-color-picker-close:hover {
+            background: #f8f9fa;
+            color: #495057;
+        }
+        
+        .custom-color-picker-body {
+            padding: 25px;
+        }
+        
+        .custom-color-preview-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .custom-color-preview-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            margin-right: 15px;
+            background: #000000;
+        }
+        
+        .custom-color-preview-info {
+            flex: 1;
+        }
+        
+        .custom-color-preview-hex {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+        
+        .custom-color-preview-rgb {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .custom-color-inputs {
+            margin-bottom: 25px;
+        }
+        
+        .color-input-group {
+            margin-bottom: 20px;
+        }
+        
+        .color-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+        
+        .rgb-inputs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .rgb-input-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .rgb-input-item label {
+            margin: 0;
+            font-weight: 500;
+            color: #6c757d;
+            font-size: 0.8rem;
+            min-width: 15px;
+        }
+        
+        .rgb-input-item input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .color-input-group input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: monospace;
+        }
+        
+        .color-input-group input[type="color"] {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .custom-color-picker-actions {
+            display: flex;
+            gap: 10px;
+            padding: 20px 25px;
+            border-top: 1px solid #e9ecef;
+            background: #f8f9fa;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .custom-color-picker-cancel,
+        .custom-color-picker-apply {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .custom-color-picker-cancel {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .custom-color-picker-cancel:hover {
+            background: #5a6268;
+        }
+        
+        .custom-color-picker-apply {
+            background: #007bff;
+            color: white;
+        }
+        
+        .custom-color-picker-apply:hover {
+            background: #0056b3;
+        }
+        
+        .custom-color-picker-cancel i,
+        .custom-color-picker-apply i {
+            margin-right: 8px;
+        }
+    `;
+    
+    document.head.appendChild(styles);
 }
 
 function updatePopupPreview(color) {
@@ -2809,77 +3546,10 @@ function updateZoomLevel() {
     }
 }
 
-function updateDownloadButton() {
-    const downloadBtn = document.getElementById('dtf-download-btn');
-    if (downloadBtn) {
-        if (state.image) {
-            downloadBtn.disabled = false;
-            downloadBtn.style.opacity = '1';
-        } else {
-            downloadBtn.disabled = true;
-            downloadBtn.style.opacity = '0.6';
-        }
-    }
-}
+// updateDownloadButton function removed - download button no longer needed
 
 // Download functionality
-function downloadEditedImage() {
-    console.log('💾 Download button clicked');
-    
-    if (!state.image) {
-        console.log('❌ No image to download');
-        showMessage('Please upload an image first!', 'error');
-        return;
-    }
-    
-    try {
-        // Create a canvas to draw the image
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Set canvas size to match the image
-        canvas.width = state.image.width;
-        canvas.height = state.image.height;
-        
-        // Draw the image on the canvas
-        ctx.drawImage(state.image, 0, 0);
-        
-        // Convert canvas to blob and download
-        canvas.toBlob((blob) => {
-            if (!blob) {
-                console.error('❌ Failed to create blob from canvas');
-                showMessage('Failed to prepare image for download', 'error');
-                return;
-            }
-            
-            // Create download link
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            
-            // Generate filename with timestamp
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-            const filename = `dtf-customized-${timestamp}.png`;
-            link.download = filename;
-            
-            // Trigger download
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Clean up
-            URL.revokeObjectURL(url);
-            
-            console.log('✅ Image downloaded successfully:', filename);
-            showMessage(`Image downloaded as ${filename}`, 'success');
-            
-        }, 'image/png', 1.0); // High quality PNG
-        
-    } catch (error) {
-        console.error('❌ Download failed:', error);
-        showMessage('Failed to download image. Please try again.', 'error');
-    }
-}
+// downloadEditedImage function removed - download button no longer needed
 
 // Mouse wheel zoom support - DISABLED
 // document.addEventListener('DOMContentLoaded', () => {
@@ -2900,11 +3570,120 @@ function downloadEditedImage() {
 
 
 
+// Set up dimension control buttons for DTF customizer
+function setupDTFDimensionControlButtons() {
+    console.log('🔧 Setting up DTF dimension control buttons...');
+    
+    // Unit toggle button
+    const unitToggleBtn = document.getElementById('dtf-unit-toggle');
+    if (unitToggleBtn) {
+        unitToggleBtn.addEventListener('click', function() {
+            console.log('🔄 DTF Unit toggle button clicked');
+            toggleDTFDimensionUnits();
+        });
+        console.log('✅ DTF Unit toggle button event listener added');
+    } else {
+        console.log('❌ DTF Unit toggle button not found');
+    }
+    
+    // Lock aspect ratio button
+    const lockAspectBtn = document.getElementById('dtf-lock-aspect');
+    if (lockAspectBtn) {
+        lockAspectBtn.addEventListener('click', function() {
+            console.log('🔒 DTF Lock aspect ratio button clicked');
+            toggleDTFAspectRatioLock();
+        });
+        console.log('✅ DTF Lock aspect ratio button event listener added');
+    } else {
+        console.log('❌ DTF Lock aspect ratio button not found');
+    }
+}
+
+// Toggle dimension units for DTF customizer
+function toggleDTFDimensionUnits() {
+    const unitsSelect = document.getElementById('dtf-size-units');
+    const widthInput = document.getElementById('dtf-size-width');
+    const heightInput = document.getElementById('dtf-size-height');
+    
+    if (!unitsSelect || !widthInput || !heightInput) {
+        console.log('❌ Required elements not found for DTF unit toggle');
+        return;
+    }
+    
+    const currentUnits = unitsSelect.value;
+    const newUnits = currentUnits === 'in' ? 'px' : 'in';
+    
+    console.log('🔄 DTF Switching units from', currentUnits, 'to', newUnits);
+    
+    // Update the select
+    unitsSelect.value = newUnits;
+    
+    // Convert values
+    const width = parseFloat(widthInput.value) || 0;
+    const height = parseFloat(heightInput.value) || 0;
+    
+    if (currentUnits === 'in' && newUnits === 'px') {
+        // Convert inches to pixels (assuming 300 PPI)
+        const ppi = parseFloat(document.getElementById('dtf-ppi-input')?.value) || 300;
+        widthInput.value = Math.round(width * ppi);
+        heightInput.value = Math.round(height * ppi);
+    } else if (currentUnits === 'px' && newUnits === 'in') {
+        // Convert pixels to inches
+        const ppi = parseFloat(document.getElementById('dtf-ppi-input')?.value) || 300;
+        widthInput.value = (width / ppi).toFixed(2);
+        heightInput.value = (height / ppi).toFixed(2);
+    }
+    
+    // Trigger the unit change handler
+    handleSizeUnitChange();
+    
+    console.log('✅ DTF Units switched successfully');
+}
+
+// Toggle aspect ratio lock for DTF customizer
+function toggleDTFAspectRatioLock() {
+    const lockBtn = document.getElementById('dtf-lock-aspect');
+    if (!lockBtn) {
+        console.log('❌ DTF Lock aspect ratio button not found');
+        return;
+    }
+    
+    const isLocked = lockBtn.classList.contains('locked');
+    
+    if (isLocked) {
+        // Unlock
+        lockBtn.classList.remove('locked');
+        lockBtn.innerHTML = '<i class="fas fa-lock-open"></i>';
+        lockBtn.title = 'Lock aspect ratio';
+        console.log('🔓 DTF Aspect ratio unlocked');
+    } else {
+        // Lock
+        lockBtn.classList.add('locked');
+        lockBtn.innerHTML = '<i class="fas fa-lock"></i>';
+        lockBtn.title = 'Unlock aspect ratio';
+        console.log('🔒 DTF Aspect ratio locked');
+    }
+    
+    // Update state
+    if (state) {
+        state.aspectLocked = !isLocked;
+    }
+}
+
 // Make DTF customizer functions available globally
 window.initializeDTFCustomizerMain = initDTFCustomizer;
 window.setupDTFEventListeners = setupDTFEventListeners;
 window.handleFileUpload = handleFileUpload;
 window.removeBackground = removeBackground;
+window.setupDTFDimensionControlButtons = setupDTFDimensionControlButtons;
+window.toggleDTFDimensionUnits = toggleDTFDimensionUnits;
+window.toggleDTFAspectRatioLock = toggleDTFAspectRatioLock;
+
+// Export Image Processor functions to global scope
+window.analyzeImageQuality = analyzeImageQuality;
+window.preprocessImageIfNeeded = preprocessImageIfNeeded;
+window.getProcessingRecommendation = getProcessingRecommendation;
+window.showProcessingStatus = showProcessingStatus;
 
 
 
