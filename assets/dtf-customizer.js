@@ -575,7 +575,9 @@ async function preprocessImageIfNeeded(file) {
         
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`Preprocessing failed: ${response.status} - ${errorText}`);
+            console.error('❌ [PREPROCESSING] Server error:', response.status, errorText);
+            console.log('⚠️ [PREPROCESSING] Using original image due to preprocessing error');
+            return file; // Return original file if preprocessing fails
         }
         
         const result = await response.json();
@@ -596,6 +598,7 @@ async function preprocessImageIfNeeded(file) {
         
     } catch (error) {
         console.error('❌ [PREPROCESSING] Error:', error);
+        console.log('⚠️ [PREPROCESSING] Using original image due to preprocessing error');
         return file; // Return original file if preprocessing fails
     }
 }
@@ -616,6 +619,7 @@ async function getProcessingRecommendation(file) {
         
         if (!response.ok) {
             const errorText = await response.text();
+            console.error('❌ [RECOMMENDATION] Server error:', response.status, errorText);
             throw new Error(`Recommendation failed: ${response.status} - ${errorText}`);
         }
         
@@ -626,7 +630,18 @@ async function getProcessingRecommendation(file) {
         
     } catch (error) {
         console.error('❌ [RECOMMENDATION] Error:', error);
-        throw error;
+        // Return a default recommendation if the service fails
+        return {
+            success: false,
+            decision: 'SKIP_HIGH_QUALITY',
+            reason: 'Image analysis service unavailable - using original image',
+            needs_processing: false,
+            quality_score: 50,
+            gradient_score: 0,
+            is_gradient: false,
+            has_water_texture: false,
+            analysis: null
+        };
     }
 }
 
@@ -684,7 +699,14 @@ async function handleFileUpload(event) {
         showMessage('🔍 Analyzing image quality...', 'info');
         
         const analysis = await getProcessingRecommendation(file);
-        showProcessingStatus(analysis);
+        
+        // Check if the analysis was successful
+        if (analysis.success !== false) {
+            showProcessingStatus(analysis);
+        } else {
+            console.log('⚠️ [STEP 1] Image analysis service unavailable, using original image');
+            showMessage('⚠️ Image analysis service unavailable - using original image', 'warning');
+        }
         
         // Step 2: Apply preprocessing if needed
         let processedFile = file;
