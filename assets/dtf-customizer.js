@@ -647,8 +647,16 @@ async function getProcessingRecommendation(file) {
 
 // Show visual analysis progress in the preview area
 function showAnalysisProgress(message, type = 'info') {
-    const previewContainer = document.getElementById('preview-container');
-    if (!previewContainer) return;
+    // Try multiple possible preview containers
+    const previewContainer = document.getElementById('preview-container') || 
+                           document.getElementById('dtf-preview') || 
+                           document.querySelector('.dtf-preview-container') ||
+                           document.querySelector('.preview-container');
+    
+    if (!previewContainer) {
+        console.log('⚠️ No preview container found for analysis progress');
+        return null;
+    }
     
     // Remove existing progress indicators
     const existingProgress = previewContainer.querySelector('.analysis-progress');
@@ -656,7 +664,7 @@ function showAnalysisProgress(message, type = 'info') {
         existingProgress.remove();
     }
     
-    // Create progress indicator
+    // Create progress indicator with enhanced styling
     const progressDiv = document.createElement('div');
     progressDiv.className = 'analysis-progress';
     progressDiv.style.cssText = `
@@ -664,37 +672,79 @@ function showAnalysisProgress(message, type = 'info') {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.8);
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
         color: white;
-        padding: 20px 30px;
-        border-radius: 10px;
+        padding: 30px 40px;
+        border-radius: 15px;
         text-align: center;
         z-index: 1000;
-        font-family: Arial, sans-serif;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        min-width: 300px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        min-width: 350px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     `;
     
-    // Add spinner animation
+    // Add enhanced spinner animation
     const spinner = document.createElement('div');
     spinner.style.cssText = `
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(255, 255, 255, 0.3);
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.2);
         border-top: 4px solid #4CAF50;
+        border-right: 4px solid #2196F3;
         border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 15px auto;
+        animation: spin 1.2s linear infinite;
+        margin: 0 auto 20px auto;
+        position: relative;
     `;
     
-    // Add CSS animation
-    if (!document.querySelector('#spinner-animation')) {
+    // Add pulsing dot in center
+    const centerDot = document.createElement('div');
+    centerDot.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        background: #4CAF50;
+        border-radius: 50%;
+        animation: pulse 1.5s ease-in-out infinite;
+    `;
+    spinner.appendChild(centerDot);
+    
+    // Add CSS animations
+    if (!document.querySelector('#enhanced-spinner-animation')) {
         const style = document.createElement('style');
-        style.id = 'spinner-animation';
+        style.id = 'enhanced-spinner-animation';
         style.textContent = `
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
+            }
+            @keyframes pulse {
+                0%, 100% { 
+                    opacity: 1; 
+                    transform: translate(-50%, -50%) scale(1);
+                }
+                50% { 
+                    opacity: 0.6; 
+                    transform: translate(-50%, -50%) scale(1.2);
+                }
+            }
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .analysis-progress {
+                animation: fadeInUp 0.5s ease-out;
             }
         `;
         document.head.appendChild(style);
@@ -703,21 +753,59 @@ function showAnalysisProgress(message, type = 'info') {
     const messageDiv = document.createElement('div');
     messageDiv.textContent = message;
     messageDiv.style.cssText = `
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     `;
     
     const statusDiv = document.createElement('div');
     statusDiv.textContent = 'Analyzing image quality...';
     statusDiv.style.cssText = `
         font-size: 14px;
-        color: #ccc;
+        color: #b0b0b0;
+        font-weight: 400;
     `;
+    
+    // Add progress bar
+    const progressBarContainer = document.createElement('div');
+    progressBarContainer.style.cssText = `
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        margin: 15px 0 10px 0;
+        overflow: hidden;
+    `;
+    
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+        height: 100%;
+        background: linear-gradient(90deg, #4CAF50, #2196F3);
+        border-radius: 2px;
+        animation: progressBar 2s ease-in-out infinite;
+    `;
+    progressBarContainer.appendChild(progressBar);
+    
+    // Add progress bar animation
+    if (!document.querySelector('#progress-bar-animation')) {
+        const progressStyle = document.createElement('style');
+        progressStyle.id = 'progress-bar-animation';
+        progressStyle.textContent = `
+            @keyframes progressBar {
+                0% { width: 0%; }
+                50% { width: 70%; }
+                100% { width: 100%; }
+            }
+        `;
+        document.head.appendChild(progressStyle);
+    }
     
     progressDiv.appendChild(spinner);
     progressDiv.appendChild(messageDiv);
     progressDiv.appendChild(statusDiv);
+    progressDiv.appendChild(progressBarContainer);
     
     previewContainer.appendChild(progressDiv);
     
@@ -728,25 +816,59 @@ function showAnalysisProgress(message, type = 'info') {
 function updateAnalysisProgress(progressDiv, message, status) {
     if (!progressDiv) return;
     
-    const messageDiv = progressDiv.querySelector('div');
-    const statusDiv = progressDiv.querySelector('div:last-child');
+    const messageDiv = progressDiv.querySelector('div:nth-child(2)');
+    const statusDiv = progressDiv.querySelector('div:nth-child(3)');
     
-    if (messageDiv) messageDiv.textContent = message;
-    if (statusDiv) statusDiv.textContent = status;
+    if (messageDiv) {
+        messageDiv.textContent = message;
+        // Add a subtle animation when updating
+        messageDiv.style.transition = 'all 0.3s ease';
+        messageDiv.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            messageDiv.style.transform = 'scale(1)';
+        }, 150);
+    }
+    if (statusDiv) {
+        statusDiv.textContent = status;
+        // Add fade effect
+        statusDiv.style.transition = 'opacity 0.3s ease';
+        statusDiv.style.opacity = '0.7';
+        setTimeout(() => {
+            statusDiv.style.opacity = '1';
+        }, 150);
+    }
 }
 
 // Hide analysis progress
 function hideAnalysisProgress() {
     const progressDiv = document.querySelector('.analysis-progress');
     if (progressDiv) {
-        progressDiv.remove();
+        // Add fade-out animation
+        progressDiv.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        progressDiv.style.opacity = '0';
+        progressDiv.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        
+        // Remove after animation completes
+        setTimeout(() => {
+            if (progressDiv.parentElement) {
+                progressDiv.remove();
+            }
+        }, 500);
     }
 }
 
 // Show analysis results
 function showAnalysisResults(analysis) {
-    const previewContainer = document.getElementById('preview-container');
-    if (!previewContainer) return;
+    // Try multiple possible preview containers
+    const previewContainer = document.getElementById('preview-container') || 
+                           document.getElementById('dtf-preview') || 
+                           document.querySelector('.dtf-preview-container') ||
+                           document.querySelector('.preview-container');
+    
+    if (!previewContainer) {
+        console.log('⚠️ No preview container found for analysis results');
+        return;
+    }
     
     // Remove existing progress
     hideAnalysisProgress();
@@ -834,20 +956,28 @@ function showAnalysisResults(analysis) {
 // Simulate image analysis with visual feedback
 async function simulateImageAnalysis(file) {
     return new Promise((resolve) => {
-        const progressDiv = showAnalysisProgress('🔍 Analyzing Image Quality', 'info');
+        // Get the existing progress div or create a new one
+        let progressDiv = document.querySelector('.analysis-progress');
+        if (!progressDiv) {
+            progressDiv = showAnalysisProgress('🔍 Analyzing Image Quality', 'info');
+        }
         
-        // Simulate analysis steps
+        // Simulate analysis steps with enhanced messages
         setTimeout(() => {
-            updateAnalysisProgress(progressDiv, '🎨 Checking Color Complexity', 'Analyzing color patterns...');
-        }, 1000);
+            updateAnalysisProgress(progressDiv, '🎨 Checking Color Complexity', 'Analyzing color patterns and contrast...');
+        }, 800);
         
         setTimeout(() => {
-            updateAnalysisProgress(progressDiv, '🌈 Detecting Gradients', 'Looking for gradient patterns...');
-        }, 2000);
+            updateAnalysisProgress(progressDiv, '🌈 Detecting Gradients', 'Looking for gradient patterns and smooth transitions...');
+        }, 1600);
         
         setTimeout(() => {
-            updateAnalysisProgress(progressDiv, '📊 Calculating Quality Score', 'Evaluating image sharpness...');
-        }, 3000);
+            updateAnalysisProgress(progressDiv, '📊 Calculating Quality Score', 'Evaluating image sharpness and resolution...');
+        }, 2400);
+        
+        setTimeout(() => {
+            updateAnalysisProgress(progressDiv, '🔍 Finalizing Analysis', 'Processing results and generating recommendations...');
+        }, 3200);
         
         setTimeout(() => {
             hideAnalysisProgress();
@@ -941,6 +1071,10 @@ async function handleFileUpload(event) {
     try {
         // Step 1: Analyze image quality and get processing recommendation
         console.log('🔍 [STEP 1] Analyzing image quality...');
+        
+        // Show enhanced loader immediately
+        const progressDiv = showAnalysisProgress('🔍 Analyzing Image Quality', 'info');
+        updateAnalysisProgress(progressDiv, '🔍 Starting Analysis', 'Preparing image for quality assessment...');
         
         // Use visual analysis instead of backend call
         const analysis = await simulateImageAnalysis(file);
