@@ -645,6 +645,207 @@ async function getProcessingRecommendation(file) {
     }
 }
 
+// Show unified upload progress (covers entire process)
+function showUnifiedUploadProgress(message, status) {
+    const previewContainer = document.getElementById('preview-container') || 
+                           document.getElementById('dtf-preview') || 
+                           document.querySelector('.dtf-preview-container') ||
+                           document.querySelector('.preview-container');
+    
+    if (!previewContainer) {
+        console.log('⚠️ No preview container found for unified progress');
+        return null;
+    }
+    
+    // Remove existing progress indicators
+    const existingProgress = previewContainer.querySelector('.unified-upload-progress');
+    if (existingProgress) {
+        existingProgress.remove();
+    }
+    
+    // Create unified progress indicator
+    const progressDiv = document.createElement('div');
+    progressDiv.className = 'unified-upload-progress';
+    progressDiv.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        text-align: center;
+        z-index: 1000;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+        min-width: 400px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        animation: fadeInUp 0.6s ease-out;
+    `;
+    
+    // Add enhanced spinner
+    const spinner = document.createElement('div');
+    spinner.style.cssText = `
+        width: 60px;
+        height: 60px;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        border-top: 5px solid #ffffff;
+        border-right: 5px solid #f8f9fa;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 25px auto;
+        position: relative;
+    `;
+    
+    // Add pulsing center dot
+    const centerDot = document.createElement('div');
+    centerDot.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        background: #ffffff;
+        border-radius: 50%;
+        animation: pulse 1.5s ease-in-out infinite;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    `;
+    spinner.appendChild(centerDot);
+    
+    // Main message
+    const messageDiv = document.createElement('div');
+    messageDiv.textContent = message;
+    messageDiv.style.cssText = `
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    `;
+    
+    // Status message
+    const statusDiv = document.createElement('div');
+    statusDiv.textContent = status;
+    statusDiv.style.cssText = `
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 400;
+        margin-bottom: 20px;
+    `;
+    
+    // Progress bar
+    const progressBarContainer = document.createElement('div');
+    progressBarContainer.style.cssText = `
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        margin: 20px 0;
+        overflow: hidden;
+    `;
+    
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+        height: 100%;
+        background: linear-gradient(90deg, #ffffff, #f8f9fa);
+        border-radius: 3px;
+        animation: progressBar 3s ease-in-out infinite;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    `;
+    progressBarContainer.appendChild(progressBar);
+    
+    // Add CSS animations
+    if (!document.querySelector('#unified-progress-animation')) {
+        const style = document.createElement('style');
+        style.id = 'unified-progress-animation';
+        style.textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            @keyframes pulse {
+                0%, 100% { 
+                    opacity: 1; 
+                    transform: translate(-50%, -50%) scale(1);
+                }
+                50% { 
+                    opacity: 0.7; 
+                    transform: translate(-50%, -50%) scale(1.3);
+                }
+            }
+            @keyframes progressBar {
+                0% { width: 0%; }
+                50% { width: 75%; }
+                100% { width: 100%; }
+            }
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -50%) translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    progressDiv.appendChild(spinner);
+    progressDiv.appendChild(messageDiv);
+    progressDiv.appendChild(statusDiv);
+    progressDiv.appendChild(progressBarContainer);
+    
+    previewContainer.appendChild(progressDiv);
+    
+    return progressDiv;
+}
+
+// Update unified progress
+function updateUnifiedProgress(progressDiv, message, status) {
+    if (!progressDiv) return;
+    
+    const messageDiv = progressDiv.querySelector('div:nth-child(2)');
+    const statusDiv = progressDiv.querySelector('div:nth-child(3)');
+    
+    if (messageDiv) {
+        messageDiv.textContent = message;
+        messageDiv.style.transition = 'all 0.4s ease';
+        messageDiv.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            messageDiv.style.transform = 'scale(1)';
+        }, 200);
+    }
+    if (statusDiv) {
+        statusDiv.textContent = status;
+        statusDiv.style.transition = 'opacity 0.4s ease';
+        statusDiv.style.opacity = '0.7';
+        setTimeout(() => {
+            statusDiv.style.opacity = '1';
+        }, 200);
+    }
+}
+
+// Hide unified progress
+function hideUnifiedProgress() {
+    const progressDiv = document.querySelector('.unified-upload-progress');
+    if (progressDiv) {
+        progressDiv.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        progressDiv.style.opacity = '0';
+        progressDiv.style.transform = 'translate(-50%, -50%) scale(0.9)';
+        
+        setTimeout(() => {
+            if (progressDiv.parentElement) {
+                progressDiv.remove();
+            }
+        }, 600);
+    }
+}
+
 // Show visual analysis progress in the preview area
 function showAnalysisProgress(message, type = 'info') {
     // Try multiple possible preview containers
@@ -960,35 +1161,11 @@ function showAnalysisResults(analysis) {
     }, 10000);
 }
 
-// Simulate image analysis with visual feedback
+// Simulate image analysis with visual feedback (background version)
 async function simulateImageAnalysis(file) {
     return new Promise((resolve) => {
-        // Get the existing progress div or create a new one
-        let progressDiv = document.querySelector('.analysis-progress');
-        if (!progressDiv) {
-            progressDiv = showAnalysisProgress('🔍 Analyzing Image Quality', 'info');
-        }
-        
-        // Simulate analysis steps with enhanced messages
+        // Simulate analysis steps without showing progress (unified progress handles this)
         setTimeout(() => {
-            updateAnalysisProgress(progressDiv, '🎨 Checking Color Complexity', 'Analyzing color patterns and contrast...');
-        }, 800);
-        
-        setTimeout(() => {
-            updateAnalysisProgress(progressDiv, '🌈 Detecting Gradients', 'Looking for gradient patterns and smooth transitions...');
-        }, 1600);
-        
-        setTimeout(() => {
-            updateAnalysisProgress(progressDiv, '📊 Calculating Quality Score', 'Evaluating image sharpness and resolution...');
-        }, 2400);
-        
-        setTimeout(() => {
-            updateAnalysisProgress(progressDiv, '🔍 Finalizing Analysis', 'Processing results and generating recommendations...');
-        }, 3200);
-        
-        setTimeout(() => {
-            hideAnalysisProgress();
-            
             // Generate realistic analysis results
             const qualityScore = Math.random() * 60 + 20; // 20-80 range
             const gradientScore = Math.random() * 50; // 0-50 range
@@ -1021,9 +1198,8 @@ async function simulateImageAnalysis(file) {
                 }
             };
             
-            showAnalysisResults(analysis);
             resolve(analysis);
-        }, 4000);
+        }, 1500); // Reduced time since we're showing unified progress
     });
 }
 
@@ -1068,7 +1244,7 @@ function showProcessingStatus(analysis) {
     console.log(`   Reason: ${analysis.reason}`);
 }
 
-// Handle file upload
+// Handle file upload with unified progress
 async function handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -1076,77 +1252,75 @@ async function handleFileUpload(event) {
     console.log('📁 File selected:', file.name, file.type);
     
     try {
-        // Step 1: Analyze image quality and get processing recommendation
+        // Show unified "File Uploading" progress from start to finish
+        const progressDiv = showUnifiedUploadProgress('📁 Uploading File', 'Preparing your image...');
+        
+        // Step 1: Analyze image quality (background)
         console.log('🔍 [STEP 1] Analyzing image quality...');
+        updateUnifiedProgress(progressDiv, '🔍 Analyzing Image Quality', 'Checking image quality and complexity...');
         
-        // Show enhanced loader immediately
-        const progressDiv = showAnalysisProgress('🔍 Analyzing Image Quality', 'info');
-        updateAnalysisProgress(progressDiv, '🔍 Starting Analysis', 'Preparing image for quality assessment...');
-        
-        // Use visual analysis instead of backend call
         const analysis = await simulateImageAnalysis(file);
         
-        // Check if the analysis was successful
-        if (analysis.success !== false) {
-            showProcessingStatus(analysis);
-        } else {
-            console.log('⚠️ [STEP 1] Image analysis service unavailable, using original image');
-            showMessage('⚠️ Image analysis service unavailable - using original image', 'warning');
-        }
-        
-        // Step 2: Apply preprocessing if needed
+        // Step 2: Apply preprocessing if needed (background)
         let processedFile = file;
         if (analysis.decision === 'PROCESS') {
             console.log('🎨 [STEP 2] Applying preprocessing...');
-            
-            // Show preprocessing progress
-            const progressDiv = showAnalysisProgress('🎨 Optimizing Image', 'info');
-            updateAnalysisProgress(progressDiv, '🎨 Applying Color Separation', 'Processing image for better color extraction...');
-            
-            // Simulate preprocessing delay
+            updateUnifiedProgress(progressDiv, '🎨 Optimizing Image', 'Enhancing image for better color extraction...');
             await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // For now, just use the original file (preprocessing would happen here)
             processedFile = file;
-            
-            hideAnalysisProgress();
-            showMessage('✅ Image optimization completed', 'success');
         } else {
             console.log('⏭️ [STEP 2] Skipping preprocessing - using original image');
         }
         
-        // Step 3: Load image (original or processed)
+        // Step 3: Load image (background)
         console.log('📸 [STEP 3] Loading image...');
+        updateUnifiedProgress(progressDiv, '📸 Loading Image', 'Preparing image for customization...');
+        
         const imageUrl = URL.createObjectURL(processedFile);
         const img = new Image();
         
         img.onload = async () => {
             state.image = img;
-            // Reset zoom and pan for new image
             state.zoom = 1;
             state.pan = { x: 0, y: 0 };
             updatePreview();
             updatePrintSize(img);
             
-            // Reset pixel ownership tracking for new image
-            await resetPixelOwnership();
-            
-            // Step 4: Extract colors using palette matching
+            // Step 4: Extract colors (background)
             console.log('🎨 [STEP 4] Extracting colors...');
+            updateUnifiedProgress(progressDiv, '🎨 Extracting Colors', 'Analyzing colors and matching to palette...');
+            
+            await resetPixelOwnership();
             await extractColorsWithPalette(img);
             
-            // Show permanent download button since we have an image
+            // Step 5: Store pixel data (background)
+            console.log('💾 [STEP 5] Storing pixel data...');
+            updateUnifiedProgress(progressDiv, '💾 Storing Pixel Data', 'Saving color information for editing...');
+            
+            // Simulate pixel storage delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Complete - hide progress and show results
+            hideUnifiedProgress();
+            
+            // Show analysis results if available
+            if (analysis.success !== false) {
+                showAnalysisResults(analysis);
+            }
+            
+            // Show permanent download button
             if (typeof window.showPermanentDownloadButton === 'function') {
                 window.showPermanentDownloadButton();
             }
             
-            // Background removal is now optional - user must click the button manually
+            showMessage('✅ File uploaded and processed successfully!', 'success');
         };
         
         img.src = imageUrl;
         
     } catch (error) {
         console.error('❌ Error in image processing workflow:', error);
+        hideUnifiedProgress();
         showMessage('Error processing image. Please try again.', 'error');
     }
 }
@@ -4108,6 +4282,9 @@ window.showAnalysisProgress = showAnalysisProgress;
 window.updateAnalysisProgress = updateAnalysisProgress;
 window.hideAnalysisProgress = hideAnalysisProgress;
 window.showAnalysisResults = showAnalysisResults;
+window.showUnifiedUploadProgress = showUnifiedUploadProgress;
+window.updateUnifiedProgress = updateUnifiedProgress;
+window.hideUnifiedProgress = hideUnifiedProgress;
 
 
 
