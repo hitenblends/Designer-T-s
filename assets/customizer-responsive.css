@@ -1,0 +1,201 @@
+/*
+ * customizer-responsive.css
+ * Extracted from shopify-multi-position-customizer.liquid
+ * Media queries and responsive styles
+ */
+
+@media (max-width: 768px) {
+  .sp-position-close-btn {
+    opacity: 1;
+    transform: scale(1);
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .screen-printing-customizer-container {
+    padding: 15px;
+  }
+  
+  .sp-positions-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .sp-position-selector {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .sp-position-selector-btn {
+    min-width: 100%;
+  }
+  
+  .sp-position-popup-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .sp-position-popup-body {
+    padding: 20px;
+    max-height: 400px;
+  }
+  
+  .sp-position-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .sp-checkbox-container {
+    padding: 16px;
+    gap: 8px;
+  }
+  
+  .sp-position-option {
+    min-height: 120px;
+  }
+  
+  .sp-position-icon {
+    font-size: 1.5rem;
+  }
+  
+  .sp-position-popup-footer {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .sp-popup-cancel,
+  .sp-popup-apply {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .sp-position-options {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .sp-position-option {
+    min-height: 100px;
+  }
+  
+  .sp-checkbox-container {
+    padding: 14px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .sp-position-info {
+    text-align: left;
+    align-items: flex-start;
+    padding-right: 0;
+  }
+  
+  .sp-checkmark {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-right: 0;
+  }
+  
+  .sp-position-icon {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sp-modal-body .dtf-customizer-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dtf-dimensions {
+    padding: 16px;
+    margin-top: 15px;
+  }
+  
+  .dtf-dimensions-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .dtf-dimensions-controls {
+    justify-content: center;
+  }
+  
+  .dtf-dimensions .dimension-item {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .dtf-dimensions .dimension-inputs {
+    justify-content: center;
+  }
+  
+  .dtf-dimensions .dimension-input {
+    width: 60px;
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+  
+  .dtf-dimensions .dimension-label {
+    font-size: 13px;
+  }
+  
+  .dtf-dimensions h4 {
+    font-size: 16px;
+  }
+  
+  .dtf-dimensions .dimension-input-label {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sp-modal-content {
+    max-width: 95vw;
+    margin: 10px;
+    border-radius: 15px;
+  }
+  
+  .sp-dtf-modal {
+    padding: 20px 10px;
+  }
+  
+  .sp-modal-body .dtf-customizer-container .dtf-main {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .sp-modal-body .dtf-customizer-container #dtf-preview {
+    height: 250px;
+  }
+  
+  .sp-modal-body .dtf-customizer-container .dtf-size-controls {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+  
+
+  
+  .sp-modal-body .dtf-customizer-container .dtf-block-header {
+    padding: 10px 12px;
+  }
+  
+  .sp-modal-body .dtf-customizer-container .dtf-block-content {
+    padding: 12px;
+  }
+}
