@@ -456,6 +456,9 @@
                                     block: block,
                                     block_base_classes: block_base_classes,
                             %}
+
+                                
+
                         {% when 'buy_buttons' %}
                             {% render 'product-block-buy-buttons',
                                     product: product,
@@ -481,6 +484,10 @@
                                 endif
                                 render 'product-block-variant-picker', product: product, block: block, label_class: label_class, block_base_classes: block_base_classes
                             -%}
+                        
+                        <!-- Multi-Position Screen Printing Customizer -->
+                        {% render 'customizer-main' %}
+
                         {% when 'quantity_selector' %}
                             {% render 'product-block-quantity',
                                     product_form_id: product_form_id,
