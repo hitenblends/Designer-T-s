@@ -1,0 +1,96 @@
+{% comment %}
+  Customizer Position Selection Popup
+  Modal popup for selecting which positions to customize
+{% endcomment %}
+
+<div id="sp-position-popup" class="sp-position-popup">
+  <div class="sp-position-popup-content">
+    <div class="sp-position-popup-header">
+      <h3><i class="fas fa-tshirt"></i> Select Design Positions</h3>
+      <button class="sp-popup-close" id="sp-popup-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="sp-position-popup-body">
+      <div class="sp-position-options">
+        <div class="sp-position-option" data-position="front">
+          <label class="sp-checkbox-container">
+            <input type="checkbox" id="pos-front" value="front">
+            <span class="sp-checkmark"></span>
+            <div class="sp-position-info">
+              <i class="fas fa-tshirt sp-position-icon"></i>
+              <span class="sp-position-name">Front</span>
+              <span class="sp-position-desc">Main chest area</span>
+            </div>
+          </label>
+        </div>
+        
+        <div class="sp-position-option" data-position="back">
+          <label class="sp-checkbox-container">
+            <input type="checkbox" id="pos-back" value="back">
+            <span class="sp-checkmark"></span>
+            <div class="sp-position-info">
+              <i class="fas fa-tshirt sp-position-icon"></i>
+              <span class="sp-position-name">Back</span>
+              <span class="sp-position-desc">Back area</span>
+            </div>
+          </label>
+        </div>
+        
+        <div class="sp-position-option" data-position="left-chest">
+          <label class="sp-checkbox-container">
+            <input type="checkbox" id="pos-left-chest" value="left-chest">
+            <span class="sp-checkmark"></span>
+            <div class="sp-position-info">
+              <i class="fas fa-heart sp-position-icon"></i>
+              <span class="sp-position-name">Left Chest</span>
+              <span class="sp-position-desc">Left chest pocket area</span>
+            </div>
+          </label>
+        </div>
+        
+        <div class="sp-position-option" data-position="right-chest">
+          <label class="sp-checkbox-container">
+            <input type="checkbox" id="pos-right-chest" value="right-chest">
+            <span class="sp-checkmark"></span>
+            <div class="sp-position-info">
+              <i class="fas fa-heart sp-position-icon"></i>
+              <span class="sp-position-name">Right Chest</span>
+              <span class="sp-position-desc">Right chest pocket area</span>
+            </div>
+          </label>
+        </div>
+        
+        <div class="sp-position-option" data-position="left-sleeve">
+          <label class="sp-checkbox-container">
+            <input type="checkbox" id="pos-left-sleeve" value="left-sleeve">
+            <span class="sp-checkmark"></span>
+            <div class="sp-position-info">
+              <i class="fas fa-hand-paper sp-position-icon"></i>
+              <span class="sp-position-name">Left Sleeve</span>
+              <span class="sp-position-desc">Left sleeve area</span>
+            </div>
+          </label>
+        </div>
+        
+        <div class="sp-position-option" data-position="right-sleeve">
+          <label class="sp-checkbox-container">
+            <input type="checkbox" id="pos-right-sleeve" value="right-sleeve">
+            <span class="sp-checkmark"></span>
+            <div class="sp-position-info">
+              <i class="fas fa-hand-paper sp-position-icon"></i>
+              <span class="sp-position-name">Right Sleeve</span>
+              <span class="sp-position-desc">Right sleeve area</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="sp-position-popup-footer">
+      <button class="sp-popup-cancel" id="sp-popup-cancel">Cancel</button>
+      <button class="sp-popup-apply" id="sp-popup-apply">
+        <i class="fas fa-check"></i> Apply Selection
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+{% comment %}
+  Multi-Position Screen Printing Customizer - Main Wrapper
+  This is the refactored main file that includes all component snippets
+{% endcomment %}
+
+<!-- Multi-Position Screen Printing Customizer -->
+<div class="screen-printing-customizer-container">
+  
+  <!-- Position Selector Button -->
+  {% render 'customizer-position-selector-btn' %}
+
+  <!-- Position Selection Popup -->
+  {% render 'customizer-position-popup' %}
+
+  <!-- Position Blocks Container -->
+  {% render 'customizer-position-container' %}
+
+</div>
+
+<!-- DTF Customizer Modal -->
+{% render 'customizer-modal' %}
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Load CSS -->
+{{ 'customizer-main.css' | asset_url | stylesheet_tag }}
+{{ 'customizer-modal.css' | asset_url | stylesheet_tag }}
+{{ 'customizer-animations.css' | asset_url | stylesheet_tag }}
+{{ 'customizer-responsive.css' | asset_url | stylesheet_tag }}
+
+<!-- Load DTF Customizer JavaScript -->
+<script src="{{ 'dtf-customizer.js' | asset_url }}" defer></script>
+
+<!-- Load Pricing System -->
+<script src="{{ 'pricing-engine.js' | asset_url }}" defer></script>
+<script src="{{ 'pricing-controller.js' | asset_url }}" defer></script>
+
+<!-- Load Customizer JavaScript -->
+<script src="{{ 'customizer-config.js' | asset_url }}" defer></script>
+<script src="{{ 'customizer-state.js' | asset_url }}" defer></script>
+<script src="{{ 'customizer-position-main.js' | asset_url }}" defer></script>
+
+<!-- Feature Extensions for additional functionality -->
+{% render 'feature-extensions' %}
+
+<!-- Pricing UI Components -->
+{% render 'pricing-ui' %}
