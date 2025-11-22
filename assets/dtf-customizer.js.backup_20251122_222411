@@ -2777,15 +2777,6 @@ function downloadEditedImage() {
 // });
 
 // Expose functions globally for Shopify integration
-// Wrap in DOMContentLoaded and use setTimeout to ensure we override the multi-position customizer's placeholder functions
-document.addEventListener('DOMContentLoaded', () => {
-    // Small delay to ensure multi-position customizer loads first
-    setTimeout(() => {
-        console.log('🎨 DTF Customizer: Exposing color change functions globally');
-        window.saveColorChange = saveColorChange;
-        window.closeColorPopup = closeColorPopup;
-        window.openColorPopup = openColorPopup;
-        window.applyColorChange = applyColorChange;
-        console.log('✅ DTF Customizer: Functions exposed and ready');
-    }, 100);
-});
+window.saveColorChange = saveColorChange;
+window.closeColorPopup = closeColorPopup;
+window.openColorPopup = openColorPopup;
