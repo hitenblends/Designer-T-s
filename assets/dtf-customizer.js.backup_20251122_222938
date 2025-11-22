@@ -1893,17 +1893,6 @@ async function replaceColorViaBackend(oldRgb, newRgb) {
         // Send unique color ID
         const colorId = state.selectedFetchedColor?.match?.uniqueId || '';
         formData.append('color_id', colorId);
-
-        // Validation and debugging
-        if (!colorId) {
-            console.warn('⚠️ WARNING: No color_id found! This may cause issues.');
-            console.log('📊 Debug info:', {
-                hasSelectedFetchedColor: !!state.selectedFetchedColor,
-                hasMatch: !!state.selectedFetchedColor?.match,
-                matchData: state.selectedFetchedColor?.match,
-                uniqueId: state.selectedFetchedColor?.match?.uniqueId
-            });
-        }
         console.log('🆔 Sending color ID to backend:', colorId);
         console.log('✅ Form data created with values:', {
             old_r: oldRgb[0],
