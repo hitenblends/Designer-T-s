@@ -1813,7 +1813,7 @@ function updateColorPreview(hex) {
     }
 }
 
-async function applyColorChange() {
+function applyColorChange() {
     if (!currentEditingColor || !state.image) {
         closeColorEditor();
         return;
@@ -1825,29 +1825,20 @@ async function applyColorChange() {
     const newHex = colorPicker.value;
     const newRgb = hexToRgb(newHex);
 
-    try {
-        // Show loading state
-        showMessage('🔄 Changing color...', 'info');
+    // Replace the color in the image
+    replaceColorInImage(currentEditingColor.rgb, newRgb);
 
-        // Replace color using backend API (same as saveColorChange)
-        await replaceColorViaBackend(currentEditingColor.rgb, newRgb);
+    // Update the color in the palette
+    updateColorInPalette(currentEditingColor, newHex, newRgb);
 
-        // Update the color in the palette
-        updateColorInPalette(currentEditingColor, newHex, newRgb);
+    // Update the image display
+    updateImageDisplay();
 
-        // Update the image display (already done in replaceColorViaBackend, but ensure it's updated)
-        updateImageDisplay();
+    // Show success message
+    showMessage(`✅ Color changed from ${currentEditingColor.hex} to ${newHex}`, 'success');
 
-        // Show success message
-        showMessage(`✅ Color changed from ${currentEditingColor.hex} to ${newHex}`, 'success');
-
-    } catch (error) {
-        console.error('❌ Error changing color:', error);
-        showMessage('Failed to change color. Please try again.', 'error');
-    } finally {
-        // Close the editor
-        closeColorEditor();
-    }
+    // Close the editor
+    closeColorEditor();
 }
 
 // Replace color using Python backend
