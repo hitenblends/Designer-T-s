@@ -1,6 +1,6 @@
 
 {%- unless section.settings.home_page_only and template != 'index' -%}
-  {%- render 'static-sticker-defs' with shape: section.settings.shape, id: section.id -%}
+  {%- render 'static-sticker-defs' with shape, shape: section.settings.shape, id: section.id -%}
   {% unless request.design_mode %}
     {%- if section.settings.animate_in -%}
     <script src="{{ 'call-to-action-sticker.js' | asset_url }}" type="module"></script>
@@ -437,3 +437,15 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'static-sticker-defs' with shape: section.settings.shape, id:
+    section.id -%}"
+  to: "{%- render 'static-sticker-defs' with shape, shape: section.settings.shape,
+    id: section.id -%}"
+  position: 74..168
+{% endcomment %}

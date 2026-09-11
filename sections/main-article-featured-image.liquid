@@ -28,10 +28,10 @@
   assign stickers = section.blocks | where: "type", "sticker"
   assign shape_dividers = section.blocks | where: "type", "shape_divider"
   for sticker in stickers
-    render 'block-sticker' with block: sticker, section: section
+    render 'block-sticker' with block, block: sticker, section: section
   endfor
   for shape_divider in shape_dividers
-    render 'block-shape-divider' with block: shape_divider, section: section
+    render 'block-shape-divider' with block, block: shape_divider, section: section
   endfor
 -%}
 
@@ -1147,3 +1147,17 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "    render 'block-sticker' with block: sticker, section: section"
+  to: "    render 'block-sticker' with block, block: sticker, section: section"
+  position: 1075..1146
+- from: "    render 'block-shape-divider' with block: shape_divider, section: section"
+  to: "    render 'block-shape-divider' with block, block: shape_divider, section:
+    section"
+  position: 1194..1277
+{% endcomment %}

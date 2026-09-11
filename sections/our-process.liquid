@@ -21,7 +21,7 @@
   item_count: columns.size
 -%}
 
-{%- render 'static-sticker-defs' with shape: section.settings.index_shape, id: index_id -%}
+{%- render 'static-sticker-defs' with shape, shape: section.settings.index_shape, id: index_id -%}
 <section class="our-process text-columns-with-images relative text-scheme-text   {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %} relative overflow-hidden" data-color-scheme="{{ section.settings.color_scheme | default: 'primary' }}" >
 
   <div class="section-content relative z-10 py-section-vertical-spacing bg-scheme-background {% if slideshow_on_mobile %}lg:px-section lg:max-w-site lg:mx-auto{% else %}px-section{% endif %}    max-w-site mx-auto">
@@ -147,9 +147,9 @@
     for block in section.blocks
       case block.type
         when 'background_shape'
-          render 'block-background-shape' with block: block, section: section
+          render 'block-background-shape' with block, block: block, section: section
         when 'background_pattern'
-          render 'block-background-pattern' with block: block, section: section, scheme: section.settings.color_scheme
+          render 'block-background-pattern' with block, block: block, section: section, scheme: section.settings.color_scheme
       endcase
     endfor
   -%}
@@ -159,10 +159,10 @@
   assign stickers = section.blocks | where: "type", "sticker"
   assign shape_dividers = section.blocks | where: "type", "shape_divider"
   for sticker in stickers
-    render 'block-sticker' with block: sticker, section: section
+    render 'block-sticker' with block, block: sticker, section: section
   endfor
   for shape_divider in shape_dividers
-    render 'block-shape-divider' with block: shape_divider, section: section
+    render 'block-shape-divider' with block, block: shape_divider, section: section
   endfor
 -%}
 
@@ -1711,3 +1711,31 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'static-sticker-defs' with shape: section.settings.index_shape,
+    id: index_id -%}"
+  to: "{%- render 'static-sticker-defs' with shape, shape: section.settings.index_shape,
+    id: index_id -%}"
+  position: 701..799
+- from: "          render 'block-background-shape' with block: block, section: section"
+  to: "          render 'block-background-shape' with block, block: block, section:
+    section"
+  position: 7527..7611
+- from: "          render 'block-background-pattern' with block: block, section: section,
+    scheme: section.settings.color_scheme"
+  to: "          render 'block-background-pattern' with block, block: block, section:
+    section, scheme: section.settings.color_scheme"
+  position: 7646..7771
+- from: "    render 'block-sticker' with block: sticker, section: section"
+  to: "    render 'block-sticker' with block, block: sticker, section: section"
+  position: 7988..8059
+- from: "    render 'block-shape-divider' with block: shape_divider, section: section"
+  to: "    render 'block-shape-divider' with block, block: shape_divider, section:
+    section"
+  position: 8107..8190
+{% endcomment %}

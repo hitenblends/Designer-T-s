@@ -99,7 +99,7 @@
                       {%- capture link_tile -%}
                         <li class="text-base mobile-subnav">
                           <!-- {%- assign object = link.object -%}
-                          {% render 'showcase-tile' with object: object, crop: section.settings.crop %} -->
+                          {% render 'showcase-tile' with object, object: object, crop: section.settings.crop %} -->
                           <a class="shop-page" href="{{ link.url }}">
                             {{ link.title }}
                           </a>
@@ -195,3 +195,15 @@
       {%- endif -%}
   </div>
 </template>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'showcase-tile' with object: object, crop: section.settings.crop
+    %}"
+  to: "{% render 'showcase-tile' with object, object: object, crop: section.settings.crop
+    %}"
+  position: 4911..4996
+{% endcomment %}

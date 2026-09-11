@@ -72,9 +72,9 @@
       for block in section.blocks
         case block.type
           when 'background_shape'
-            render 'block-background-shape' with block: block, section: section
+            render 'block-background-shape' with block, block: block, section: section
           when 'background_pattern'
-            render 'block-background-pattern' with block: block, section: section, scheme: section.settings.color_scheme
+            render 'block-background-pattern' with block, block: block, section: section, scheme: section.settings.color_scheme
         endcase
       endfor
     -%}
@@ -84,10 +84,10 @@
     assign stickers = section.blocks | where: "type", "sticker"
     assign shape_dividers = section.blocks | where: "type", "shape_divider"
     for sticker in stickers
-      render 'block-sticker' with block: sticker, section: section
+      render 'block-sticker' with block, block: sticker, section: section
     endfor
     for shape_divider in shape_dividers
-      render 'block-shape-divider' with block: shape_divider, section: section
+      render 'block-shape-divider' with block, block: shape_divider, section: section
     endfor
   -%}
 
@@ -4347,3 +4347,26 @@
 }
 
 </script>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "            render 'block-background-shape' with block: block, section: section"
+  to: "            render 'block-background-shape' with block, block: block, section:
+    section"
+  position: 3456..3542
+- from: "            render 'block-background-pattern' with block: block, section:
+    section, scheme: section.settings.color_scheme"
+  to: "            render 'block-background-pattern' with block, block: block, section:
+    section, scheme: section.settings.color_scheme"
+  position: 3579..3706
+- from: "      render 'block-sticker' with block: sticker, section: section"
+  to: "      render 'block-sticker' with block, block: sticker, section: section"
+  position: 3939..4012
+- from: "      render 'block-shape-divider' with block: shape_divider, section: section"
+  to: "      render 'block-shape-divider' with block, block: shape_divider, section:
+    section"
+  position: 4064..4149
+{% endcomment %}

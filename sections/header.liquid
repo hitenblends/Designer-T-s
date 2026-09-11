@@ -271,7 +271,7 @@
                         {%- if child_link.type == 'collection_link' and show_collection_images -%}
                           <div class="-mt-2">
                             {%- assign object = child_link.object -%}
-                            {% render 'showcase-tile' with object: object, crop: crop, title: child_link.title %}
+                            {% render 'showcase-tile' with object, object: object, crop: crop, title: child_link.title %}
                           </div>
                         {%- endif -%}
                         <h2 class="py-1 mb-2">
@@ -292,11 +292,11 @@
                       {% else %}
                         {%- if child_link.type == 'collection_link' and show_collection_images -%}
                           {%- assign object = child_link.object -%}
-                          {% render 'showcase-tile' with object: object, crop: crop, title: child_link.title %}
+                          {% render 'showcase-tile' with object, object: object, crop: crop, title: child_link.title %}
                         {%- elsif child_link.type == 'page_link' or child_link.type == 'blog_link' -%}
                           {% comment %} For Page Submenu with image metafield  {% endcomment %}
                           {%- assign pageobject = child_link.object -%}
-                          {% render 'showcase-tile-page' with object: pageobject, crop: crop, title: child_link.title %}
+                          {% render 'showcase-tile-page' with object, object: pageobject, crop: crop, title: child_link.title %}
                         {%- else -%}
                           <a {% if child_link.active %}aria-current="page"{% endif %} href="{{ child_link.url }}" class="-mx-5 text-base {{ secondary_link_classes }} subnav-object">
                             {{ child_link.title }}
@@ -319,7 +319,7 @@
                         {% endif %}
                         <li class="lg:col-span-2 {% unless all_feature_links %}{{ cycle_class }}{% endunless %} -mt-2">
                           {%- assign object = child_link.object -%}
-                          {% render 'showcase-tile' with object: object, crop: crop, title: child_link.title %}
+                          {% render 'showcase-tile' with object, object: object, crop: crop, title: child_link.title %}
                         </li>
 
                       {%- endif -%}
@@ -742,7 +742,7 @@
     #shopify-section-{{ section.id }} {
       position: sticky;
       top: 0;
-      z-index: 40;
+      z-index: 10;
     }
   </style>
   {% endstyle %}
@@ -1234,4 +1234,30 @@ document.querySelectorAll('.togglemenu').forEach(btn => {
   });
 });
 
-</script>
+</script>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'showcase-tile' with object: object, crop: crop, title: child_link.title
+    %}"
+  to: "{% render 'showcase-tile' with object, object: object, crop: crop, title: child_link.title
+    %}"
+  position: 13981..14074
+- from: "{% render 'showcase-tile' with object: object, crop: crop, title: child_link.title
+    %}"
+  to: "{% render 'showcase-tile' with object, object: object, crop: crop, title: child_link.title
+    %}"
+  position: 15316..15409
+- from: "{% render 'showcase-tile-page' with object: pageobject, crop: crop, title:
+    child_link.title %}"
+  to: "{% render 'showcase-tile-page' with object, object: pageobject, crop: crop,
+    title: child_link.title %}"
+  position: 15707..15809
+- from: "{% render 'showcase-tile' with object: object, crop: crop, title: child_link.title
+    %}"
+  to: "{% render 'showcase-tile' with object, object: object, crop: crop, title: child_link.title
+    %}"
+  position: 17252..17345
+{%- endcomment -%}
