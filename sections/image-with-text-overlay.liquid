@@ -52,10 +52,10 @@
     assign no_padding = false
   endif
   for sticker in stickers
-    render 'block-sticker' with block: sticker, section: section
+    render 'block-sticker' with block, block: sticker, section: section
   endfor
   for shape_divider in shape_dividers
-    render 'block-shape-divider' with block: shape_divider, section: section, no_padding: no_padding
+    render 'block-shape-divider' with block, block: shape_divider, section: section, no_padding: no_padding
   endfor
 -%}
 
@@ -986,3 +986,18 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "    render 'block-sticker' with block: sticker, section: section"
+  to: "    render 'block-sticker' with block, block: sticker, section: section"
+  position: 2081..2152
+- from: "    render 'block-shape-divider' with block: shape_divider, section: section,
+    no_padding: no_padding"
+  to: "    render 'block-shape-divider' with block, block: shape_divider, section:
+    section, no_padding: no_padding"
+  position: 2200..2307
+{% endcomment %}

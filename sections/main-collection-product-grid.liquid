@@ -50,15 +50,7 @@
   x-data="ThemeSection_filterable('{{ section.id }}')">
 
   {%- if collection_banner_block.size > 0 -%}
-    {%- render 'collection-banner' with
-      show_collection_image: collection_banner.settings.show_collection_image,
-      collection_image_style: collection_banner.settings.collection_image_style,
-      crop: collection_banner.settings.crop,
-      display_on_card: collection_banner.settings.display_on_card,
-      show_collection_title: collection_banner.settings.show_collection_title,
-      show_collection_description: collection_banner.settings.show_collection_description,
-      linklist: collection_banner.settings.linklist
-    -%}
+    {%- render 'collection-banner' with show_collection_image, show_collection_image: collection_banner.settings.show_collection_image, collection_image_style: collection_banner.settings.collection_image_style, crop: collection_banner.settings.crop, display_on_card: collection_banner.settings.display_on_card, show_collection_title: collection_banner.settings.show_collection_title, show_collection_description: collection_banner.settings.show_collection_description, linklist: collection_banner.settings.linklist -%}
   {%- endif -%}
 
   <div class="section-content relative z-10 px-section w-full max-w-site mx-auto pt-half-section-vertical-spacing  pb-section-vertical-spacing overflow-hidden" id="facets-filterable">
@@ -263,7 +255,7 @@
       endif
      
       if section.settings.enable_sorting
-        render 'sort' with results: collection, sort_by: sort_by
+        render 'sort' with results, results: collection, sort_by: sort_by
       endif
     -%}
 
@@ -273,17 +265,17 @@
     for block in section.blocks
       case block.type
         when 'background_shape'
-          render 'block-background-shape' with block: block, section: section
+          render 'block-background-shape' with block, block: block, section: section
         when 'background_pattern'
-          render 'block-background-pattern' with block: block, section: section, scheme: section.settings.color_scheme
+          render 'block-background-pattern' with block, block: block, section: section, scheme: section.settings.color_scheme
         when 'shape_divider'
-          render 'block-shape-divider' with block: block, section: section
+          render 'block-shape-divider' with block, block: block, section: section
       endcase
     endfor
   -%}
 
     {% liquid
-  render 'collection-description' with title: collection.title, description: collection.description
+  render 'collection-description' with title, title: collection.title, description: collection.description
   %}
     
 </section>
@@ -292,7 +284,7 @@
 {%- assign stickers = section.blocks | where: "type", "sticker" -%}
 {%- liquid
   for sticker in stickers
-    render 'block-sticker' with block: sticker, section: section
+    render 'block-sticker' with block, block: sticker, section: section
   endfor
 -%}
 
@@ -1384,3 +1376,50 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- render 'collection-banner' with
+          show_collection_image: collection_banner.settings.show_collection_image,
+          collection_image_style: collection_banner.settings.collection_image_style,
+          crop: collection_banner.settings.crop,
+          display_on_card: collection_banner.settings.display_on_card,
+          show_collection_title: collection_banner.settings.show_collection_title,
+          show_collection_description: collection_banner.settings.show_collection_description,
+          linklist: collection_banner.settings.linklist
+        -%}
+  to: "{%- render 'collection-banner' with show_collection_image, show_collection_image:
+    collection_banner.settings.show_collection_image, collection_image_style: collection_banner.settings.collection_image_style,
+    crop: collection_banner.settings.crop, display_on_card: collection_banner.settings.display_on_card,
+    show_collection_title: collection_banner.settings.show_collection_title, show_collection_description:
+    collection_banner.settings.show_collection_description, linklist: collection_banner.settings.linklist
+    -%}"
+  position: 2147..2661
+- from: "        render 'sort' with results: collection, sort_by: sort_by"
+  to: "        render 'sort' with results, results: collection, sort_by: sort_by"
+  position: 11579..11652
+- from: "          render 'block-background-shape' with block: block, section: section"
+  to: "          render 'block-background-shape' with block, block: block, section:
+    section"
+  position: 11783..11867
+- from: "          render 'block-background-pattern' with block: block, section: section,
+    scheme: section.settings.color_scheme"
+  to: "          render 'block-background-pattern' with block, block: block, section:
+    section, scheme: section.settings.color_scheme"
+  position: 11902..12027
+- from: "          render 'block-shape-divider' with block: block, section: section"
+  to: "          render 'block-shape-divider' with block, block: block, section: section"
+  position: 12057..12138
+- from: 'render ''collection-description'' with title: collection.title, description:
+    collection.description'
+  to: 'render ''collection-description'' with title, title: collection.title, description:
+    collection.description'
+  position: 12187..12291
+- from: "    render 'block-sticker' with block: sticker, section: section"
+  to: "    render 'block-sticker' with block, block: sticker, section: section"
+  position: 12439..12510
+{% endcomment %}

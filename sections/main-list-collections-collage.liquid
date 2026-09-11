@@ -90,11 +90,11 @@
     for block in section.blocks
       case block.type
         when 'background_shape'
-          render 'block-background-shape' with block: block, section: section
+          render 'block-background-shape' with block, block: block, section: section
         when 'background_pattern'
-          render 'block-background-pattern' with block: block, section: section, scheme: section.settings.color_scheme
+          render 'block-background-pattern' with block, block: block, section: section, scheme: section.settings.color_scheme
         when 'shape_divider'
-          render 'block-shape-divider' with block: block, section: section
+          render 'block-shape-divider' with block, block: block, section: section
       endcase
     endfor
   -%}
@@ -104,7 +104,7 @@
 {%- assign stickers = section.blocks | where: "type", "sticker" -%}
 {%- liquid
   for sticker in stickers
-    render 'block-sticker' with block: sticker, section: section
+    render 'block-sticker' with block, block: sticker, section: section
   endfor
 -%}
 
@@ -1573,3 +1573,25 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "          render 'block-background-shape' with block: block, section: section"
+  to: "          render 'block-background-shape' with block, block: block, section:
+    section"
+  position: 3955..4039
+- from: "          render 'block-background-pattern' with block: block, section: section,
+    scheme: section.settings.color_scheme"
+  to: "          render 'block-background-pattern' with block, block: block, section:
+    section, scheme: section.settings.color_scheme"
+  position: 4074..4199
+- from: "          render 'block-shape-divider' with block: block, section: section"
+  to: "          render 'block-shape-divider' with block, block: block, section: section"
+  position: 4229..4310
+- from: "    render 'block-sticker' with block: sticker, section: section"
+  to: "    render 'block-sticker' with block, block: sticker, section: section"
+  position: 4479..4550
+{% endcomment %}
