@@ -1,25 +1,15 @@
 <section id="collection-banner" class="relative grid text-scheme-text bg-scheme-background overflow-hidden {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %} {% if collection.image != blank and section.settings.show_collection_image and section.settings.collection_image_style == 'full' %}full-bleed-section{% endif %}" data-color-scheme="{{ section.settings.color_scheme | default: 'primary' }}" >
-  {%- render 'collection-banner' with
-    show_collection_image: section.settings.show_collection_image,
-    collection_image_style: section.settings.collection_image_style,
-    crop: section.settings.crop,
-    display_on_card: section.settings.display_on_card,
-    show_collection_title: section.settings.show_collection_title,
-    show_collection_description: section.settings.show_collection_description,
-    linklist: section.settings.linklist,
-    overlay_text_to_image: overlay_text_to_image,
-    single_banner_for_all: section.settings.single_banner_for_all
-  -%}
+  {%- render 'collection-banner' with show_collection_image, show_collection_image: section.settings.show_collection_image, collection_image_style: section.settings.collection_image_style, crop: section.settings.crop, display_on_card: section.settings.display_on_card, show_collection_title: section.settings.show_collection_title, show_collection_description: section.settings.show_collection_description, linklist: section.settings.linklist, overlay_text_to_image: overlay_text_to_image, single_banner_for_all: section.settings.single_banner_for_all -%}
 
   {%- liquid
     for block in section.blocks
       case block.type
         when 'background_shape'
-          render 'block-background-shape' with block: block, section: section
+          render 'block-background-shape' with block, block: block, section: section
         when 'background_pattern'
-          render 'block-background-pattern' with block: block, section: section, scheme: section.settings.color_scheme
+          render 'block-background-pattern' with block, block: block, section: section, scheme: section.settings.color_scheme
         when 'shape_divider'
-          render 'block-shape-divider' with block: block, section: section, no_padding: true
+          render 'block-shape-divider' with block, block: block, section: section, no_padding: true
       endcase
     endfor
   -%}
@@ -28,7 +18,7 @@
 {%- assign stickers = section.blocks | where: "type", "sticker" -%}
 {%- liquid
   for sticker in stickers
-    render 'block-sticker' with block: sticker, section: section
+    render 'block-sticker' with block, block: sticker, section: section
   endfor
 -%}
 
@@ -1177,3 +1167,47 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- render 'collection-banner' with
+        show_collection_image: section.settings.show_collection_image,
+        collection_image_style: section.settings.collection_image_style,
+        crop: section.settings.crop,
+        display_on_card: section.settings.display_on_card,
+        show_collection_title: section.settings.show_collection_title,
+        show_collection_description: section.settings.show_collection_description,
+        linklist: section.settings.linklist,
+        overlay_text_to_image: overlay_text_to_image,
+        single_banner_for_all: section.settings.single_banner_for_all
+      -%}
+  to: "{%- render 'collection-banner' with show_collection_image, show_collection_image:
+    section.settings.show_collection_image, collection_image_style: section.settings.collection_image_style,
+    crop: section.settings.crop, display_on_card: section.settings.display_on_card,
+    show_collection_title: section.settings.show_collection_title, show_collection_description:
+    section.settings.show_collection_description, linklist: section.settings.linklist,
+    overlay_text_to_image: overlay_text_to_image, single_banner_for_all: section.settings.single_banner_for_all
+    -%}"
+  position: 429..982
+- from: "          render 'block-background-shape' with block: block, section: section"
+  to: "          render 'block-background-shape' with block, block: block, section:
+    section"
+  position: 1083..1167
+- from: "          render 'block-background-pattern' with block: block, section: section,
+    scheme: section.settings.color_scheme"
+  to: "          render 'block-background-pattern' with block, block: block, section:
+    section, scheme: section.settings.color_scheme"
+  position: 1202..1327
+- from: "          render 'block-shape-divider' with block: block, section: section,
+    no_padding: true"
+  to: "          render 'block-shape-divider' with block, block: block, section: section,
+    no_padding: true"
+  position: 1357..1456
+- from: "    render 'block-sticker' with block: sticker, section: section"
+  to: "    render 'block-sticker' with block, block: sticker, section: section"
+  position: 1605..1676
+{% endcomment %}

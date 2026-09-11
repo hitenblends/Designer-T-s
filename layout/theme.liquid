@@ -335,10 +335,10 @@
     {%- endif -%}
     {% comment %}theme-check-enable LiquidTag{% endcomment %}
     {%- if settings.show_on_sale_and_sold_out_badges -%}
-      {%- render 'static-sticker-defs' with shape: settings.on_sale_badge_shape, id: 'on-sale' -%}
-      {%- render 'static-sticker-defs' with shape: settings.sold_out_badge_shape, id: 'sold-out' -%}
+      {%- render 'static-sticker-defs' with shape, shape: settings.on_sale_badge_shape, id: 'on-sale' -%}
+      {%- render 'static-sticker-defs' with shape, shape: settings.sold_out_badge_shape, id: 'sold-out' -%}
     {%- endif -%}
-    {%- render 'static-sticker-defs' with shape: settings.metafield_badge_shape, id: 'metafield-badge' -%}
+    {%- render 'static-sticker-defs' with shape, shape: settings.metafield_badge_shape, id: 'metafield-badge' -%}
     {% comment %}theme-check-enable MissingTemplate{% endcomment %}
     <style>
       
@@ -353,3 +353,25 @@
   </body>
 </html>
 {{ shop.metaobjects.Badges['solube-fibre-from-tapioca'] }}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'static-sticker-defs' with shape: settings.on_sale_badge_shape,
+    id: 'on-sale' -%}"
+  to: "{%- render 'static-sticker-defs' with shape, shape: settings.on_sale_badge_shape,
+    id: 'on-sale' -%}"
+  position: 13409..13508
+- from: "{%- render 'static-sticker-defs' with shape: settings.sold_out_badge_shape,
+    id: 'sold-out' -%}"
+  to: "{%- render 'static-sticker-defs' with shape, shape: settings.sold_out_badge_shape,
+    id: 'sold-out' -%}"
+  position: 13515..13616
+- from: "{%- render 'static-sticker-defs' with shape: settings.metafield_badge_shape,
+    id: 'metafield-badge' -%}"
+  to: "{%- render 'static-sticker-defs' with shape, shape: settings.metafield_badge_shape,
+    id: 'metafield-badge' -%}"
+  position: 13639..13748
+{% endcomment %}

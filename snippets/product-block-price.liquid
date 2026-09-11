@@ -84,7 +84,7 @@
         assign id = 'on-sale-sticker-' | append: product.id
         assign shape = settings.on_sale_badge_shape
       -%}
-      {%- render 'static-sticker-defs' with shape: settings.on_sale_badge_shape, id: id -%}
+      {%- render 'static-sticker-defs' with shape, shape: settings.on_sale_badge_shape, id: id -%}
       {%- render 'static-sticker',
         static_id: id,
         shape: shape,
@@ -102,3 +102,15 @@
 </div>
 
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'static-sticker-defs' with shape: settings.on_sale_badge_shape,
+    id: id -%}"
+  to: "{%- render 'static-sticker-defs' with shape, shape: settings.on_sale_badge_shape,
+    id: id -%}"
+  position: 2924..3016
+{% endcomment %}

@@ -121,10 +121,10 @@
 
   {%- liquid
     for background_shape in background_shapes
-      render 'block-background-shape' with block: background_shape, section: section
+      render 'block-background-shape' with block, block: background_shape, section: section
     endfor
     for background_pattern in background_patterns
-      render 'block-background-pattern' with block: background_pattern, section: section, scheme: section.settings.color_scheme
+      render 'block-background-pattern' with block, block: background_pattern, section: section, scheme: section.settings.color_scheme
     endfor
   -%}
 
@@ -132,10 +132,10 @@
 
 {%- liquid
   for sticker in stickers
-    render 'block-sticker' with block: sticker, section: section
+    render 'block-sticker' with block, block: sticker, section: section
   endfor
   for shape_divider in shape_dividers
-    render 'block-shape-divider' with block: shape_divider, section: section, no_padding: true
+    render 'block-shape-divider' with block, block: shape_divider, section: section, no_padding: true
   endfor
 -%}
 
@@ -2354,3 +2354,28 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "      render 'block-background-shape' with block: background_shape, section:
+    section"
+  to: "      render 'block-background-shape' with block, block: background_shape,
+    section: section"
+  position: 5703..5794
+- from: "      render 'block-background-pattern' with block: background_pattern, section:
+    section, scheme: section.settings.color_scheme"
+  to: "      render 'block-background-pattern' with block, block: background_pattern,
+    section: section, scheme: section.settings.color_scheme"
+  position: 5856..5990
+- from: "    render 'block-sticker' with block: sticker, section: section"
+  to: "    render 'block-sticker' with block, block: sticker, section: section"
+  position: 6058..6129
+- from: "    render 'block-shape-divider' with block: shape_divider, section: section,
+    no_padding: true"
+  to: "    render 'block-shape-divider' with block, block: shape_divider, section:
+    section, no_padding: true"
+  position: 6177..6278
+{% endcomment %}
